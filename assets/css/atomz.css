@@ -735,6 +735,116 @@ ul { margin: 0; padding: 0; list-style: none; }
    15. FOOTER  (dark)
    -------------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------------
+   14b. ELEMENTS — the A·T·O·M·Z acronym as a compounding staircase
+   Tiles rise in height A→T→O→M→Z; Z (Zero Limits) is the tallest, in gold.
+   -------------------------------------------------------------------------- */
+
+.elements-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(6px, 1vw, 14px);
+  align-items: end;
+  margin-top: var(--s-6);
+}
+.el {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--s-4);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--surface-fg);
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+              box-shadow 0.35s var(--ease);
+}
+/* ascending heights = compounding */
+.el[data-i="1"] { min-height: clamp(150px, 30vw, 230px); }
+.el[data-i="2"] { min-height: clamp(172px, 34vw, 270px); }
+.el[data-i="3"] { min-height: clamp(194px, 38vw, 310px); }
+.el[data-i="4"] { min-height: clamp(216px, 42vw, 350px); }
+.el[data-i="5"] { min-height: clamp(240px, 47vw, 396px); }
+
+.el:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 26px 50px -30px var(--ink-20);
+}
+.el--z { border-color: var(--gold); }
+
+.el__idx {
+  position: absolute;
+  top: var(--s-4);
+  left: var(--s-4);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted-faint);
+}
+.el__letter {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+.el--z .el__letter { color: var(--gold); }
+.el__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  letter-spacing: -0.02em;
+  margin: 0.5rem 0 0.2rem;
+  line-height: 1;
+}
+.el__desc { color: var(--muted); font-size: var(--step--1); line-height: 1.4; margin: 0; max-width: none; }
+.el__orbit {
+  position: absolute;
+  top: -18px; right: -18px;
+  width: 72px; height: 72px;
+  color: var(--hairline);
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .elements-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .el, .el[data-i] { min-height: 150px; }
+  /* short cards: let content flow from the top so the index can't collide with the letter */
+  .el:not(.el--z) { justify-content: flex-start; }
+  .el:not(.el--z) .el__idx { position: static; margin-bottom: var(--s-2); }
+  .el--z { grid-column: 1 / -1; min-height: 128px; flex-direction: row; align-items: flex-end; gap: var(--s-3); }
+  .el--z .el__name { margin-top: 0; }
+}
+@media (max-width: 380px) {
+  .elements-grid { grid-template-columns: 1fr; }
+  .el--z { flex-direction: column; }
+}
+
+/* --------------------------------------------------------------------------
+   15. FOOTER  (dark)
+   -------------------------------------------------------------------------- */
+
+.footer__philosophy {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin: 0;
+}
+.footer__philosophy .accent { color: var(--accent); }
+.footer__acr {
+  font-size: var(--step--1);
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin: var(--s-3) 0 0;
+}
+
 .site-footer { background: var(--band-bg); color: var(--band-fg); --fg: var(--band-fg); --muted: #9A9AA0; --hairline: var(--paper-14); }
 .footer__top {
   display: grid;
@@ -853,5 +963,5 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
   .js-anim [data-reveal] { opacity: 1; transform: none; }
   .stair__bar::after { transition: none; }
-  .btn:hover, .card:hover { transform: none; }
+  .btn:hover, .card:hover, .el:hover { transform: none; }
 }
