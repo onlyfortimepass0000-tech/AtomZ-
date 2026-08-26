@@ -177,4 +177,236 @@
   /* ---- 7. Current year in footer ---------------------------------------- */
   var yr = document.querySelector("[data-year]");
   if (yr) yr.textContent = String(new Date().getFullYear());
+
+  /* ---- 8. Horizon Client Hub & Chart.js Integration --------------------- */
+  var viewsChartInst = null;
+  var interactionChartInst = null;
+  var erChartInst = null;
+
+  function initHorizonCharts() {
+    if (typeof Chart === "undefined") return;
+
+    if (typeof ChartDataLabels !== "undefined") {
+      try { Chart.register(ChartDataLabels); } catch (e) {}
+    }
+
+    Chart.defaults.color = '#888';
+    Chart.defaults.font.family = "'Open Sans', sans-serif";
+
+    var createGradient = function(ctx, color1, color2, isHorizontal) {
+      var gradient = isHorizontal 
+        ? ctx.createLinearGradient(0, 0, 800, 0)
+        : ctx.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, color1);
+      gradient.addColorStop(1, color2);
+      return gradient;
+    };
+
+    /* Chart 1: Views */
+    var canvasViews = document.getElementById('viewsChart');
+    if (canvasViews) {
+      if (viewsChartInst) viewsChartInst.destroy();
+      var ctxViews = canvasViews.getContext('2d');
+      var gradOrange = createGradient(ctxViews, '#FF4500', '#FFA500', true);
+      
+      viewsChartInst = new Chart(ctxViews, {
+        type: 'bar',
+        data: {
+          labels: ['₹10K Challenge', 'Hanging Crunches', 'Ayurveda vs Steroids', 'AI Avatar', 'PM Fitness'],
+          datasets: [{
+            label: 'Total Views',
+            data: [1308878, 191861, 148249, 47628, 41170],
+            backgroundColor: [gradOrange, '#333', '#333', '#333', '#333'],
+            borderRadius: 6,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { right: 60 } },
+          animation: { duration: 1800, easing: 'easeOutQuart' },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#111', titleColor: '#FFA500', bodyColor: '#fff',
+              callbacks: { label: function(ctx) { return ctx.raw.toLocaleString() + ' Views 👁️'; } }
+            },
+            datalabels: {
+              color: function(ctx) { return ctx.dataIndex === 0 ? '#FFA500' : '#888'; },
+              anchor: 'end', align: 'right', offset: 8,
+              font: { weight: 'bold', size: 12 },
+              formatter: function(val) { return val > 1000000 ? (val/1000000).toFixed(1) + 'M' : (val/1000).toFixed(0) + 'K'; }
+            }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)', borderDash: [5,5] } },
+            y: { grid: { display: false }, ticks: { color: '#ddd', font: { weight: '600' } } }
+          }
+        }
+      });
+    }
+
+    /* Chart 2: Likes vs Comments */
+    var canvasInteraction = document.getElementById('interactionChart');
+    if (canvasInteraction) {
+      if (interactionChartInst) interactionChartInst.destroy();
+      var ctxInteraction = canvasInteraction.getContext('2d');
+      
+      interactionChartInst = new Chart(ctxInteraction, {
+        type: 'bar',
+        data: {
+          labels: ['₹10K Chal.', 'Ayurveda', 'AI Avatar', 'Crunches', 'PM Fit.'],
+          datasets: [
+            {
+              label: 'Likes',
+              data: [30063, 2365, 778, 1808, 635],
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              borderColor: '#555',
+              borderWidth: 1,
+              borderRadius: 4
+            },
+            {
+              label: 'Comments',
+              data: [1343, 1031, 1422, 22, 2],
+              backgroundColor: createGradient(ctxInteraction, '#FF4500', '#FF8C00'),
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { delay: 300, duration: 1400 },
+          scales: {
+            y: {
+              type: 'logarithmic',
+              grid: { color: 'rgba(255,255,255,0.05)' },
+              ticks: { color: '#666', maxTicksLimit: 5 }
+            },
+            x: { grid: { display: false }, ticks: { color: '#aaa', font: { size: 10 } } }
+          },
+          plugins: {
+            legend: { labels: { color: '#ccc' } },
+            tooltip: { backgroundColor: '#111' },
+            datalabels: { display: false }
+          }
+        }
+      });
+    }
+
+    /* Chart 3: Engagement Rate */
+    var canvasER = document.getElementById('erChart');
+    if (canvasER) {
+      if (erChartInst) erChartInst.destroy();
+      var ctxER = canvasER.getContext('2d');
+      var goldGrad = createGradient(ctxER, '#FFD700', '#FF8C00', true);
+
+      erChartInst = new Chart(ctxER, {
+        type: 'bar',
+        data: {
+          labels: ['AI Avatar', '₹10K Chal.', 'Ayurveda', 'PM Fit.', 'Crunches'],
+          datasets: [{
+            label: 'Engagement Rate (%)',
+            data: [4.62, 2.40, 2.29, 1.55, 0.95],
+            backgroundColor: [goldGrad, '#663300', '#663300', '#442200', '#331100'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { right: 40 } },
+          animation: { delay: 600, duration: 1400, easing: 'easeOutBounce' },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#111', titleColor: '#FFD700',
+              callbacks: { label: function(ctx) { return ctx.raw + '% Interaction'; } }
+            },
+            datalabels: {
+              color: function(ctx) { return ctx.dataIndex === 0 ? '#FFD700' : '#888'; },
+              anchor: 'end', align: 'right', offset: 5,
+              font: { weight: 'bold', size: 11 },
+              formatter: function(val) { return val + '%'; }
+            }
+          },
+          scales: {
+            x: { display: false },
+            y: { grid: { display: false }, ticks: { color: '#aaa', font: { size: 11 } } }
+          }
+        }
+      });
+    }
+  }
+
+  /* Client Passcode Unlock Logic */
+  var accessForm = document.getElementById("horizonAccessForm");
+  var codeInput = document.getElementById("horizonCodeInput");
+  var statusMsg = document.getElementById("horizonStatusMsg");
+  var metaBadge = document.getElementById("clientMetaBadge");
+  var nameHolder = document.getElementById("clientNameHolder");
+  var codeChips = document.querySelectorAll(".code-chip");
+
+  var CLIENT_DATABASE = {
+    "atomz111": { name: "Rahul Jawatwala", format: "Rahul Jawatwala (atomz111)" },
+    "atomz112": { name: "Creator Partner #112", format: "Client Portal #112 (atomz112)" },
+    "atomz113": { name: "Creator Partner #113", format: "Client Portal #113 (atomz113)" }
+  };
+
+  function processCodeAccess(enteredCode) {
+    if (!enteredCode) return;
+    var cleanedCode = enteredCode.trim().toLowerCase();
+    
+    var client = CLIENT_DATABASE[cleanedCode];
+    if (!client && (cleanedCode.startsWith("atomz") || cleanedCode.startsWith("client") || cleanedCode.startsWith("rahul"))) {
+      client = {
+        name: cleanedCode.toUpperCase(),
+        format: "Client Portal (" + cleanedCode + ")"
+      };
+    }
+
+    if (client || cleanedCode.length >= 4) {
+      var clientInfo = client || { name: "Valued Creator", format: "Client Portal (" + cleanedCode + ")" };
+      if (statusMsg) {
+        statusMsg.textContent = "✓ Access Granted — Loading " + clientInfo.name + "'s Portal";
+        statusMsg.className = "horizon-status-msg success";
+      }
+      if (metaBadge) metaBadge.textContent = "Unlocked Format View: " + clientInfo.format;
+      if (nameHolder) nameHolder.textContent = clientInfo.name;
+
+      initHorizonCharts();
+
+      var reportWrap = document.getElementById("horizonReportWrapper");
+      if (reportWrap) {
+        reportWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      if (statusMsg) {
+        statusMsg.textContent = "❌ Invalid passcode. Try atomz111, atomz112, or atomz113.";
+        statusMsg.className = "horizon-status-msg error";
+      }
+    }
+  }
+
+  if (accessForm) {
+    accessForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (codeInput) processCodeAccess(codeInput.value);
+    });
+  }
+
+  codeChips.forEach(function(chip) {
+    chip.addEventListener("click", function() {
+      var code = this.getAttribute("data-code");
+      if (codeInput) codeInput.value = code;
+      processCodeAccess(code);
+    });
+  });
+
+  window.addEventListener("load", function() {
+    initHorizonCharts();
+  });
 })();

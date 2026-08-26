@@ -20,7 +20,11 @@
   <!-- Fonts: preconnect + swap for fast first paint -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" />
+
+  <!-- Chart.js and DataLabels plugin for Horizon Dashboard -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
   <link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
@@ -41,6 +45,10 @@
       <nav class="nav__links" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="#work">How we work</a>
+        <a href="#horizon" class="nav__horizon-link">
+          <span class="nav__horizon-title">Horizon</span>
+          <span class="nav__horizon-desc">Client Hub &amp; Stats</span>
+        </a>
         <a href="#writing">Writing</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -130,6 +138,126 @@
             <h3 class="card__title">AI Growth Systems</h3>
             <span class="tag">Coming as you scale</span>
           </article>
+    <!-- ======================================================= HORIZON (Client Intelligence & Stats Hub) -->
+    <section class="section horizon-section" id="horizon" aria-labelledby="horizon-title">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <p class="eyebrow">Client Intelligence</p>
+          <h2 id="horizon-title">Horizon</h2>
+          <p class="horizon-subtext">Client Performance Hub — Live virality analytics, audience retention metrics, and tailored creator blueprints.</p>
+        </div>
+
+        <!-- Access Yourself Code Verification Box -->
+        <div class="horizon-access-card" data-reveal style="--reveal-delay:.08s">
+          <div class="horizon-access-header">
+            <span class="horizon-access-tag">Exclusive Client Access</span>
+            <h3 class="horizon-access-title">Access Yourself</h3>
+            <p class="horizon-access-desc">Enter your unique ATOMZ client code to unlock your custom growth report and live analytics format.</p>
+          </div>
+          <form class="horizon-access-form" id="horizonAccessForm" onsubmit="return false;">
+            <div class="horizon-input-group">
+              <input type="text" id="horizonCodeInput" class="horizon-input" placeholder="Enter code (e.g. atomz111)" autocomplete="off" required />
+              <button type="submit" class="btn btn--horizon" id="horizonAccessBtn">
+                <span>Access Portal</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            <div class="horizon-codes-hint">
+              <span class="hint-label">Sample access codes:</span>
+              <button type="button" class="code-chip" data-code="atomz111">atomz111</button>
+              <button type="button" class="code-chip" data-code="atomz112">atomz112</button>
+              <button type="button" class="code-chip" data-code="atomz113">atomz113</button>
+            </div>
+            <div class="horizon-status-msg" id="horizonStatusMsg" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <!-- Skeleton Format / Client Stats Report -->
+        <div class="horizon-report-wrapper" id="horizonReportWrapper" data-reveal style="--reveal-delay:.16s">
+          <div class="report-container horizon-report">
+            <div class="watermark">ATOMZ</div>
+
+            <div class="header">
+              <h3>PRESENTED BY ATOMZ</h3>
+              <h1>YOUR PERFORMANCE <span id="clientStatusTag" class="text-orange">UNLOCKED</span></h1>
+              <div class="client-meta-badge" id="clientMetaBadge">Format View: Rahul Jawatwala (Code: atomz111)</div>
+            </div>
+            
+            <div class="section">
+              <p><strong id="clientNameHolder">Rahul</strong>, you have two massive superpowers right now: You have insane reach (hitting over 1.3 Million views), and you know how to get people to talk to you (getting 1,400+ comments on a single video).</p>
+              <p>But right now, those powers are scattered. Some videos get views but zero talk. Other videos get crazy talk but lower views. To hit <strong class="text-gradient">100,000 followers</strong> and lock in brand deals, we need to understand exactly what your audience is doing.</p>
+            </div>
+
+            <div class="section page-break">
+              <h2 class="section-title">The Data Reality Check</h2>
+              <p>Let's look at the actual numbers from your last 5 videos. The charts below aren't just for show—they expose exactly what makes your audience tick and where your money is hiding.</p>
+
+              <div class="dashboard-grid">
+                  
+                  <!-- Chart 1: The Virality Engine (Views) -->
+                  <div class="chart-card full-width">
+                      <h3>The Virality Engine (Total Views)</h3>
+                      <p class="subtitle">Shows your raw ability to capture attention on the algorithm.</p>
+                      <div class="canvas-container large">
+                          <canvas id="viewsChart"></canvas>
+                      </div>
+                  </div>
+
+                  <!-- Chart 2: True Fans vs Ego (Likes vs Comments) -->
+                  <div class="chart-card">
+                      <h3>Ego vs. True Fans</h3>
+                      <p class="subtitle">Likes feel good, but Comments get you paid. Look at AI Avatar.</p>
+                      <div class="canvas-container">
+                          <canvas id="interactionChart"></canvas>
+                      </div>
+                  </div>
+
+                  <!-- Chart 3: The Loyalty Score (Engagement Rate) -->
+                  <div class="chart-card">
+                      <h3>The "Who Actually Cares" Score</h3>
+                      <p class="subtitle">Percentage of viewers who actually interacted with the video.</p>
+                      <div class="canvas-container">
+                          <canvas id="erChart"></canvas>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
+
+            <div class="section page-break">
+              <h2 class="section-title">The 3-Video Blueprint</h2>
+              <p>Based on the data above, the AI Avatar video proves that giving away a "Free Trick" (like a PDF or list) gets you massive comments. The ₹10K Challenge proves high stakes get you views. Here is exactly what to shoot next to combine them.</p>
+
+              <div class="idea-grid">
+                  <div class="idea-box">
+                      <h3>1. The "Open Challenge"</h3>
+                      <p><strong>Goal:</strong> Get massive new eyeballs.</p>
+                      <p>Start with a wild dare or a small money wager at the gym. Play a character and make the dialogue funny.</p>
+                      <div class="crucial-ending">
+                          <strong>The Fix:</strong> Look directly into the lens and say, <em>"Follow me to see if anyone beats this tomorrow."</em> (Turns views into followers).
+                      </div>
+                  </div>
+
+                  <div class="idea-box">
+                      <h3>2. The "Free Trick"</h3>
+                      <p><strong>Goal:</strong> Force massive comments for brand proof.</p>
+                      <p>Sit in your car. Give 3 fast tips about a Desi diet, Ayurveda, or a cheap protein hack.</p>
+                      <div class="crucial-ending">
+                          <strong>The Fix:</strong> Say, <em>"Comment the word DESI and I will DM you my exact diet PDF."</em> (Creates the massive comment spikes brands love).
+                      </div>
+                  </div>
+
+                  <div class="idea-box">
+                      <h3>3. The "Actor Skit"</h3>
+                      <p><strong>Goal:</strong> High shareability.</p>
+                      <p>Act out a funny, relatable argument between a strict gym trainer and a lazy client. Play both roles.</p>
+                      <div class="crucial-ending">
+                          <strong>The Fix:</strong> Say, <em>"Tag your lazy gym partner in the comments right now."</em>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
