@@ -1044,20 +1044,25 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .horizon-input {
   flex: 1;
-  background: var(--bg);
-  color: var(--fg);
-  border: 1px solid var(--hairline);
+  background-color: #17171A !important;
+  color: #FFFFFF !important;
+  border: 1px solid #333336 !important;
   border-radius: var(--radius);
-  padding: 12px 16px;
+  padding: 14px 18px;
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1rem;
   outline: none;
   transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
+.horizon-input::placeholder {
+  color: #8A8A8E !important;
+  opacity: 1;
+}
+
 .horizon-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-12);
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-12) !important;
 }
 
 .btn--horizon {

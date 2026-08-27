@@ -360,32 +360,17 @@
     if (!enteredCode) return;
     var cleanedCode = enteredCode.trim().toLowerCase();
     
-    var client = CLIENT_DATABASE[cleanedCode];
-    if (!client && (cleanedCode.startsWith("atomz") || cleanedCode.startsWith("client") || cleanedCode.startsWith("rahul"))) {
-      client = {
-        name: cleanedCode.toUpperCase(),
-        format: "Client Portal (" + cleanedCode + ")"
-      };
-    }
-
-    if (client || cleanedCode.length >= 4) {
-      var clientInfo = client || { name: "Valued Creator", format: "Client Portal (" + cleanedCode + ")" };
+    if (cleanedCode.length >= 3) {
       if (statusMsg) {
-        statusMsg.textContent = "✓ Access Granted — Loading " + clientInfo.name + "'s Portal";
+        statusMsg.textContent = "✓ Access Granted — Redirecting to Horizon Client Portal...";
         statusMsg.className = "horizon-status-msg success";
       }
-      if (metaBadge) metaBadge.textContent = "Unlocked Format View: " + clientInfo.format;
-      if (nameHolder) nameHolder.textContent = clientInfo.name;
-
-      initHorizonCharts();
-
-      var reportWrap = document.getElementById("horizonReportWrapper");
-      if (reportWrap) {
-        reportWrap.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      setTimeout(function() {
+        window.location.href = "horizon.html?code=" + encodeURIComponent(cleanedCode);
+      }, 400);
     } else {
       if (statusMsg) {
-        statusMsg.textContent = "❌ Invalid passcode. Try atomz111, atomz112, or atomz113.";
+        statusMsg.textContent = "❌ Please enter a valid client passkey.";
         statusMsg.className = "horizon-status-msg error";
       }
     }
@@ -397,16 +382,4 @@
       if (codeInput) processCodeAccess(codeInput.value);
     });
   }
-
-  codeChips.forEach(function(chip) {
-    chip.addEventListener("click", function() {
-      var code = this.getAttribute("data-code");
-      if (codeInput) codeInput.value = code;
-      processCodeAccess(code);
-    });
-  });
-
-  window.addEventListener("load", function() {
-    initHorizonCharts();
-  });
 })();

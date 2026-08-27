@@ -239,247 +239,32 @@
             <h3 class="card__title">AI Growth Systems</h3>
             <span class="tag">Coming as you scale</span>
           </article>
-    <!-- ======================================================= HORIZON (Client Intelligence & Stats Hub) -->
+    <!-- ======================================================= HORIZON (Client Intelligence & Passcode Portal) -->
     <section class="section horizon-section" id="horizon" aria-labelledby="horizon-title">
       <div class="wrap">
         <div class="sec-head" data-reveal>
           <p class="eyebrow">Client Intelligence</p>
           <h2 id="horizon-title">Horizon</h2>
-          <p class="horizon-subtext">Client Performance Hub — Live virality analytics, audience retention metrics, and tailored creator blueprints.</p>
+          <p class="horizon-subtext">Client Performance Hub — Enter your passkey to access your live creator dossier and analytics portal.</p>
         </div>
 
-        <!-- Access Yourself Code Verification Box -->
+        <!-- Passkey Access Card -->
         <div class="horizon-access-card" data-reveal style="--reveal-delay:.08s">
           <div class="horizon-access-header">
-            <span class="horizon-access-tag">Exclusive Client Access</span>
+            <span class="horizon-access-tag">Exclusive Client Portal</span>
             <h3 class="horizon-access-title">Access Yourself</h3>
-            <p class="horizon-access-desc">Enter your unique ATOMZ client code to unlock your custom growth report and live analytics format.</p>
+            <p class="horizon-access-desc">Enter your assigned ATOMZ client passkey to view your personalized performance stats and creator dossier.</p>
           </div>
           <form class="horizon-access-form" id="horizonAccessForm" onsubmit="return false;">
             <div class="horizon-input-group">
-              <input type="text" id="horizonCodeInput" class="horizon-input" placeholder="Enter code (e.g. atomz111)" autocomplete="off" required />
+              <input type="text" id="horizonCodeInput" class="horizon-input" placeholder="Enter passkey..." autocomplete="off" required />
               <button type="submit" class="btn btn--horizon" id="horizonAccessBtn">
                 <span>Access Portal</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
             </div>
-            <div class="horizon-codes-hint">
-              <span class="hint-label">Sample access codes:</span>
-              <button type="button" class="code-chip" data-code="atomz111">atomz111</button>
-              <button type="button" class="code-chip" data-code="atomz112">atomz112</button>
-              <button type="button" class="code-chip" data-code="atomz113">atomz113</button>
-            </div>
             <div class="horizon-status-msg" id="horizonStatusMsg" aria-live="polite"></div>
           </form>
-        </div>
-
-        <!-- Skeleton Format / Creator Dossier Report -->
-        <div class="horizon-report-wrapper" id="horizonReportWrapper" data-reveal style="--reveal-delay:.16s">
-          <div class="bg-surface-deep text-text-primary rounded-xl overflow-hidden border border-outline-variant shadow-2xl relative">
-            <!-- Top Bar inside Dossier -->
-            <div class="bg-background text-primary font-headline-md text-headline-md border-b-2 border-surface-container-highest flex justify-between items-center px-6 md:px-margin-desktop h-16">
-              <div class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-3">
-                <span>ATONZ</span>
-                <span class="text-xs bg-primary-container text-surface-deep px-2 py-0.5 rounded font-label-sm uppercase" id="clientMetaBadge">Code: atomz111</span>
-              </div>
-              <div class="flex items-center gap-6">
-                <button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">_ SUBSCRIBE</button>
-                <span class="material-symbols-outlined text-primary scale-95 duration-100 hover:text-primary-container cursor-pointer" style="font-variation-settings: 'FILL' 0;">account_circle</span>
-              </div>
-            </div>
-
-            <!-- Main Content Container with Dossier Sidebar and Canvas -->
-            <div class="relative flex flex-col md:flex-row">
-              <!-- Internal SideNavBar -->
-              <nav class="w-full md:w-64 bg-surface-container-lowest text-primary font-label-md text-label-md p-6 border-b md:border-b-0 md:border-r border-outline-variant flex-shrink-0">
-                <div class="mb-8">
-                  <h2 class="font-headline-md text-headline-md text-primary tracking-tight">ATONZ</h2>
-                  <p class="font-label-sm text-label-sm text-text-secondary mt-1">CREATOR DOSSIER</p>
-                </div>
-                <ul class="flex flex-col w-full gap-2">
-                  <li><a class="flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase" href="#identity"><span class="material-symbols-outlined">fingerprint</span>Identity</a></li>
-                  <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#metrics"><span class="material-symbols-outlined">analytics</span>Metrics</a></li>
-                  <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#showcase"><span class="material-symbols-outlined">auto_awesome</span>Showcase</a></li>
-                  <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#revelations"><span class="material-symbols-outlined">visibility</span>Revelations</a></li>
-                </ul>
-                <div class="mt-8">
-                  <button class="w-full text-center border-2 border-surface-light hover:border-primary-container text-text-primary py-3 font-label-md text-label-md transition-colors uppercase">_ DOWNLOAD PDF</button>
-                </div>
-              </nav>
-
-              <!-- Main Dossier Content -->
-              <div class="flex-1 p-6 md:p-10 max-w-full overflow-x-hidden">
-                <!-- Section 1: Identity -->
-                <section class="py-12 border-b border-surface-light min-h-[50vh] flex flex-col justify-center" id="identity">
-                  <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-                    <div class="col-span-1 md:col-span-8 flex flex-col justify-center">
-                      <div class="inline-flex items-center gap-2 px-3 py-1 border border-surface-light mb-6 w-fit">
-                        <span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
-                        <span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Jaipur, India</span>
-                      </div>
-                      <h1 class="font-display-lg text-display-lg text-text-primary mb-4" id="clientNameHolder">Rahul Jawatwala</h1>
-                      <div class="flex items-center gap-4 mb-8">
-                        <span class="font-label-md text-label-md text-primary-container bg-surface-medium px-4 py-2 border border-surface-light">@rahuljawatwala</span>
-                        <span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Actor / Creator</span>
-                      </div>
-                      <p class="font-headline-md text-headline-md text-on-surface max-w-2xl border-l-2 border-primary-container pl-6 py-2">
-                        Helps brands grow through engaging Reels.
-                      </p>
-                    </div>
-                    <div class="col-span-1 md:col-span-4 relative h-64 md:h-auto min-h-[220px]">
-                      <div class="absolute inset-0 border border-surface-light bg-surface-medium overflow-hidden rounded">
-                        <img class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500 grayscale hover:grayscale-0" data-alt="Portrait of Rahul Jawatwala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACYU0z2LTJ-KjBbATs-hnAf4vxorq6xCk86S-Z3rXfR7USbj3zwFFb1wGEZt4UqTOPxsp8vW4pDJzHWJryi6RUF4m7Q-TnuyC8Qe1J7bIY93xHFxpB1CEvU07WN82g2HYf9c6pZZzl8QHBGJIUmda0OYW57PNEpHmmcdhjlE-GhP3YluqGiLMPi3diH8nbxyJaqwLKpC7inGEaYucmkLGE_umgZFvYuCG1eujm905Yw902LnwYgGol"/>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <!-- Section 2: Metrics -->
-                <section class="py-12 border-b border-surface-light" id="metrics">
-                  <div class="mb-8">
-                    <h2 class="font-headline-lg text-headline-lg mb-2">Performance Metrics</h2>
-                    <p class="font-label-md text-label-md text-text-secondary uppercase">Aggregated Data Canvas</p>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
-                    <div class="bg-surface-medium p-6 data-card">
-                      <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Views</span>
-                      <div class="font-display-lg text-display-lg text-primary-container">128K</div>
-                      <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">128,103 exact</span>
-                    </div>
-                    <div class="bg-surface-medium p-6 data-card">
-                      <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Likes</span>
-                      <div class="font-display-lg text-display-lg text-text-primary">6.0K</div>
-                      <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">6,004 exact</span>
-                    </div>
-                    <div class="bg-surface-medium p-6 data-card">
-                      <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Comments</span>
-                      <div class="font-display-lg text-display-lg text-text-primary">655</div>
-                      <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">High Interaction</span>
-                    </div>
-                    <div class="bg-surface-medium p-6 data-card relative overflow-hidden">
-                      <div class="absolute right-0 top-0 w-2 h-full bg-primary-container shadow-[0_0_15px_#ff6600]"></div>
-                      <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Avg Engagement</span>
-                      <div class="font-display-lg text-display-lg text-text-primary">7.86%</div>
-                      <span class="font-label-sm text-label-sm text-primary-container block mt-2 uppercase">Industry Leading</span>
-                    </div>
-                  </div>
-                  <div class="bg-surface-medium p-8 border border-surface-light">
-                    <div class="flex justify-between items-end mb-6 border-b border-surface-light pb-4">
-                      <h3 class="font-headline-md text-headline-md">Key Data (Recent 5)</h3>
-                      <span class="material-symbols-outlined text-primary-container">monitoring</span>
-                    </div>
-                    <div class="flex items-center gap-6">
-                      <div>
-                        <span class="font-label-sm text-label-sm text-text-secondary uppercase block mb-1">Total Views</span>
-                        <span class="font-headline-lg text-headline-lg text-text-primary">1,737,786</span>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <!-- Section 3: Showcase -->
-                <section class="py-12 border-b border-surface-light" id="showcase">
-                  <div class="mb-8 flex justify-between items-end">
-                    <div>
-                      <h2 class="font-headline-lg text-headline-lg mb-2">Content Showcase</h2>
-                      <p class="font-label-md text-label-md text-text-secondary uppercase">Recent Reels Index</p>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-                    <!-- Card 1 -->
-                    <div class="bg-surface-medium border border-surface-light group relative">
-                      <div class="h-48 bg-surface-deep overflow-hidden relative">
-                        <img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="₹10K Challenge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBnmH3lt70sFn0_mmNV5G5M8PG9S3m3N-CJv3RGfUkV6peeHhcFXkVvFW7KGAEi5lm2Ct0OfIVxGkeoJLA0W3UzF2qNa1B5AmC1ylJAGWn8OAEKh990mIuFFmODgJ4pNonDw9bX46g1JOFzReoxxBlhVjXHgZa_f2cZn0xxsj4L1Zl7V3Mdp7Ek_DBh7Dir-Cvq1Ac8Xc-1EaWSGENTRUp8I0rbrhmzUMciF61GvKRnytySIqILcmQ"/>
-                        <div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-                          <span class="font-label-sm text-label-sm text-primary-container">₹10,000 Challenge</span>
-                        </div>
-                      </div>
-                      <div class="p-6">
-                        <h4 class="font-headline-md text-headline-md mb-4 text-text-primary">₹10K Challenge</h4>
-                        <div class="flex justify-between items-center border-t border-surface-light pt-4">
-                          <span class="font-label-sm text-label-sm text-text-secondary uppercase">High Reach</span>
-                          <span class="material-symbols-outlined text-text-secondary text-sm">trending_up</span>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-surface-medium border border-surface-light group relative">
-                      <div class="h-48 bg-surface-deep overflow-hidden relative">
-                        <img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="Ayurveda vs Steroids" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJDoBFKT-FfrsJAQRYSsDkQ7gEAqRQADhQEDz4PKEy_4cpUDOPJdUh5HiVLFnxAm1BYRvppr7-Lc9skk-dnmCBrqVcED83UlXcX2DkDMbuBLJVH6BU2dB0gc6t9mZERGipuSnjB9lC7gjbrZ4bTDpaBWKLd_1RFdZoXs-Sk8qEJgrpiJdtspwsMIgoWjxqJ2-dsHWf1bSKmz64MaOSlnUJfEoIftB5pDVBTW55Nv9_Bu1EnWWIdYb-"/>
-                        <div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-                          <span class="font-label-sm text-label-sm text-primary-container">Ayurveda vs Steroids</span>
-                        </div>
-                      </div>
-                      <div class="p-6">
-                        <h4 class="font-headline-md text-headline-md mb-4 text-text-primary">Ayurveda vs Steroids</h4>
-                        <div class="flex justify-between items-center border-t border-surface-light pt-4">
-                          <span class="font-label-sm text-label-sm text-text-secondary uppercase">Debate</span>
-                          <span class="material-symbols-outlined text-text-secondary text-sm">balance</span>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-surface-medium border border-surface-light group relative">
-                      <div class="h-48 bg-surface-deep overflow-hidden relative">
-                        <img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="AI Avatar Videos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMy3pMK8rS2egWHRC8jHYGF-Hw8FcxBz55qWF_bhdgpnEYM7OcTQ6oTJQ211tx694TuCmwXCZt8DUyvKiA6U0S6ROP1zeOdyq82xVomF5hLjEcBrmQvH0cuUlxHFMC3PEr5aLtTjMe5vMQstpp0n8holWwom5NKP_OTiy3eNSek33viqwdl5PRHdGkknSx9ToPkVawS6GGHVao8T61_nGjk8SgjImfWyMAHQBbjGgHzNN55Y59Gghl"/>
-                        <div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-                          <span class="font-label-sm text-label-sm text-primary-container">AI Avatar Videos</span>
-                        </div>
-                      </div>
-                      <div class="p-6">
-                        <h4 class="font-headline-md text-headline-md mb-4 text-text-primary">AI Avatar Videos</h4>
-                        <div class="flex justify-between items-center border-t border-surface-light pt-4">
-                          <span class="font-label-sm text-label-sm text-text-secondary uppercase">High Engagement</span>
-                          <span class="material-symbols-outlined text-text-secondary text-sm">smart_toy</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Simple list for the remaining two -->
-                  <div class="mt-gutter flex flex-col gap-2">
-                    <div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
-                      <span class="font-label-md text-label-md text-text-primary">Hanging Crunches Challenge</span>
-                      <span class="material-symbols-outlined text-text-secondary">fitness_center</span>
-                    </div>
-                    <div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
-                      <span class="font-label-md text-label-md text-text-primary">PM Fitness Assessment</span>
-                      <span class="material-symbols-outlined text-text-secondary">health_and_safety</span>
-                    </div>
-                  </div>
-                </section>
-
-                <!-- Section 4: Revelations -->
-                <section class="py-12 mb-12" id="revelations">
-                  <div class="mb-8">
-                    <h2 class="font-headline-lg text-headline-lg mb-2">Strategic Revelations</h2>
-                    <p class="font-label-md text-label-md text-text-secondary uppercase">Actionable Insights</p>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                    <div class="col-span-1 md:col-span-4 flex flex-col gap-4">
-                      <div class="p-6 bg-primary-container text-surface-deep font-headline-md text-headline-md h-full flex flex-col justify-center relative overflow-hidden rounded">
-                        <span class="relative z-10">Data dictates direction.</span>
-                        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-20">lightbulb</span>
-                      </div>
-                    </div>
-                    <div class="col-span-1 md:col-span-8 flex flex-col gap-4">
-                      <div class="p-6 bg-surface-medium border-l-2 border-primary-container rounded-r">
-                        <h4 class="font-label-md text-label-md text-primary-container uppercase mb-2">Insight 01</h4>
-                        <p class="font-body-lg text-body-lg text-on-surface">The <strong>₹10K Challenge</strong> demonstrated exceptional viral reach, indicating a strong audience appetite for financial or high-stakes fitness challenges.</p>
-                      </div>
-                      <div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors rounded-r">
-                        <h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 02</h4>
-                        <p class="font-body-lg text-body-lg text-on-surface"><strong>AI Avatar</strong> content is a massive driver for comment generation. The novelty and uncanny nature of the tech prompt immediate audience discussion.</p>
-                      </div>
-                      <div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors rounded-r">
-                        <h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 03</h4>
-                        <p class="font-body-lg text-body-lg text-on-surface">Implementing <strong>Keyword + PDF CTAs</strong> in the reel captions significantly boosts active engagement rates, converting passive viewers into active leads.</p>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

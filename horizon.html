@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ATONZ - Creator Dossier - Rahul Jawatwala</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-primary-fixed-variant": "#7c2e00",
+                            "surface-container-highest": "#353534",
+                            "surface": "#131313",
+                            "on-tertiary-fixed-variant": "#00497b",
+                            "secondary": "#c6c6c7",
+                            "surface-variant": "#353534",
+                            "outline": "#aa8a7d",
+                            "primary": "#ffb596",
+                            "primary-container": "#ff6600",
+                            "on-secondary-container": "#b4b5b5",
+                            "on-primary-fixed": "#360f00",
+                            "on-primary-container": "#561d00",
+                            "primary-fixed-dim": "#ffb596",
+                            "secondary-container": "#454747",
+                            "error-container": "#93000a",
+                            "on-secondary-fixed": "#1a1c1c",
+                            "surface-dim": "#131313",
+                            "background": "#131313",
+                            "on-error-container": "#ffdad6",
+                            "surface-bright": "#393939",
+                            "surface-container-lowest": "#0e0e0e",
+                            "outline-variant": "#5a4136",
+                            "on-tertiary-fixed": "#001d35",
+                            "error": "#ffb4ab",
+                            "tertiary-fixed-dim": "#9ccaff",
+                            "text-secondary": "#A0A0A0",
+                            "tertiary-container": "#009cfc",
+                            "inverse-surface": "#e5e2e1",
+                            "surface-container-low": "#1c1b1b",
+                            "on-surface": "#e5e2e1",
+                            "inverse-on-surface": "#313030",
+                            "on-background": "#e5e2e1",
+                            "tertiary-fixed": "#d0e4ff",
+                            "secondary-fixed-dim": "#c6c6c7",
+                            "on-tertiary-container": "#003155",
+                            "on-error": "#690005",
+                            "surface-container-high": "#2a2a2a",
+                            "text-primary": "#FFFFFF",
+                            "surface-medium": "#121212",
+                            "on-secondary": "#2f3131",
+                            "on-secondary-fixed-variant": "#454747",
+                            "surface-tint": "#ffb596",
+                            "tertiary": "#9ccaff",
+                            "inverse-primary": "#a33e00",
+                            "surface-container": "#201f1f",
+                            "on-primary": "#581e00",
+                            "surface-deep": "#000000",
+                            "primary-fixed": "#ffdbcd",
+                            "on-surface-variant": "#e3bfb1",
+                            "surface-light": "#1C1C1C",
+                            "on-tertiary": "#003256",
+                            "secondary-fixed": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "margin-desktop": "64px",
+                            "unit": "8px",
+                            "margin-mobile": "20px",
+                            "container-max": "1280px",
+                            "gutter": "24px"
+                    },
+                    "fontFamily": {
+                            "label-md": ["JetBrains Mono"],
+                            "headline-md": ["Sora"],
+                            "display-lg": ["Sora"],
+                            "body-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-sm": ["JetBrains Mono"],
+                            "headline-lg-mobile": ["Sora"],
+                            "headline-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                            "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                            "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                            "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .data-card { border: 1px solid rgba(255, 255, 255, 0.1); }
+        .data-card:hover { border-color: #ff6600; transition: border-color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface-deep text-text-primary min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary font-headline-md text-headline-md fixed top-0 w-full z-50 border-b-2 border-surface-container-highest flex justify-between items-center px-margin-desktop h-20">
+<div class="flex items-center gap-4">
+    <a href="index.html" class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-2 hover:opacity-80 transition-opacity">
+        ATONZ <span class="text-xs bg-primary-container text-surface-deep px-2 py-0.5 rounded font-label-sm uppercase">HORIZON</span>
+    </a>
+</div>
+<div class="flex items-center gap-6">
+<a href="index.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">← HOME</a>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">_ SUBSCRIBE</button>
+<span class="material-symbols-outlined text-primary scale-95 duration-100 hover:text-primary-container cursor-pointer" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</div>
+</header>
+
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col pt-8 bg-surface-container-lowest dark:bg-surface-deep text-primary dark:text-primary font-label-md text-label-md fixed left-0 top-20 h-screen w-64 border-r border-outline-variant z-40">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">ATONZ</h2>
+<p class="font-label-sm text-label-sm text-text-secondary mt-1">CREATOR DOSSIER</p>
+</div>
+<ul class="flex flex-col w-full gap-2 px-2">
+<li><a class="flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase" href="#identity"><span class="material-symbols-outlined">fingerprint</span>Identity</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#metrics"><span class="material-symbols-outlined">analytics</span>Metrics</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#showcase"><span class="material-symbols-outlined">auto_awesome</span>Showcase</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#revelations"><span class="material-symbols-outlined">visibility</span>Revelations</a></li>
+</ul>
+<div class="mt-auto p-6 mb-20">
+<button class="w-full text-center border-2 border-surface-light hover:border-primary-container text-text-primary py-3 font-label-md text-label-md transition-colors uppercase">_ DOWNLOAD PDF</button>
+</div>
+</nav>
+
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Section 1: Identity -->
+<section class="py-24 border-b border-surface-light min-h-[70vh] flex flex-col justify-center" id="identity">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="col-span-1 md:col-span-8 flex flex-col justify-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 border border-surface-light mb-6 w-fit">
+<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Jaipur, India</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-text-primary mb-4" id="dossierClientName">Rahul Jawatwala</h1>
+<div class="flex items-center gap-4 mb-8">
+<span class="font-label-md text-label-md text-primary-container bg-surface-medium px-4 py-2 border border-surface-light">@rahuljawatwala</span>
+<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Actor / Creator</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface max-w-2xl border-l-2 border-primary-container pl-6 py-2">
+                        Helps brands grow through engaging Reels.
+                    </p>
+</div>
+<div class="col-span-1 md:col-span-4 relative h-64 md:h-auto">
+<div class="absolute inset-0 border border-surface-light bg-surface-medium overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500 grayscale hover:grayscale-0" data-alt="A high-contrast, editorial-style portrait of a male actor in a modern, dark studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACYU0z2LTJ-KjBbATs-hnAf4vxorq6xCk86S-Z3rXfR7USbj3zwFFb1wGEZt4UqTOPxsp8vW4pDJzHWJryi6RUF4m7Q-TnuyC8Qe1J7bIY93xHFxpB1CEvU07WN82g2HYf9c6pZZzl8QHBGJIUmda0OYW57PNEpHmmcdhjlE-GhP3YluqGiLMPi3diH8nbxyJaqwLKpC7inGEaYucmkLGE_umgZFvYuCG1eujm905Yw902LnwYgGol"/>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Section 2: Metrics -->
+<section class="py-24 border-b border-surface-light" id="metrics">
+<div class="mb-12">
+<h2 class="font-headline-lg text-headline-lg mb-2">Performance Metrics</h2>
+<p class="font-label-md text-label-md text-text-secondary uppercase">Aggregated Data Canvas</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
+<div class="bg-surface-medium p-6 data-card">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Views</span>
+<div class="font-display-lg text-display-lg text-primary-container">128K</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">128,103 exact</span>
+</div>
+<div class="bg-surface-medium p-6 data-card">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Likes</span>
+<div class="font-display-lg text-display-lg text-text-primary">6.0K</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">6,004 exact</span>
+</div>
+<div class="bg-surface-medium p-6 data-card">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Comments</span>
+<div class="font-display-lg text-display-lg text-text-primary">655</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">High Interaction</span>
+</div>
+<div class="bg-surface-medium p-6 data-card relative overflow-hidden">
+<div class="absolute right-0 top-0 w-2 h-full bg-primary-container shadow-[0_0_15px_#ff6600]"></div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Avg Engagement</span>
+<div class="font-display-lg text-display-lg text-text-primary">7.86%</div>
+<span class="font-label-sm text-label-sm text-primary-container block mt-2 uppercase">Industry Leading</span>
+</div>
+</div>
+<div class="bg-surface-medium p-8 border border-surface-light">
+<div class="flex justify-between items-end mb-6 border-b border-surface-light pb-4">
+<h3 class="font-headline-md text-headline-md">Key Data (Recent 5)</h3>
+<span class="material-symbols-outlined text-primary-container">monitoring</span>
+</div>
+<div class="flex items-center gap-6">
+<div>
+<span class="font-label-sm text-label-sm text-text-secondary uppercase block mb-1">Total Views</span>
+<span class="font-headline-lg text-headline-lg text-text-primary">1,737,786</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Section 3: Showcase -->
+<section class="py-24 border-b border-surface-light" id="showcase">
+<div class="mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Content Showcase</h2>
+<p class="font-label-md text-label-md text-text-secondary uppercase">Recent Reels Index</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-medium border border-surface-light group relative">
+<div class="h-48 bg-surface-deep overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="Rupees challenge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBnmH3lt70sFn0_mmNV5G5M8PG9S3m3N-CJv3RGfUkV6peeHhcFXkVvFW7KGAEi5lm2Ct0OfIVxGkeoJLA0W3UzF2qNa1B5AmC1ylJAGWn8OAEKh990mIuFFmODgJ4pNonDw9bX46g1JOFzReoxxBlhVjXHgZa_f2cZn0xxsj4L1Zl7V3Mdp7Ek_DBh7Dir-Cvq1Ac8Xc-1EaWSGENTRUp8I0rbrhmzUMciF61GvKRnytySIqILcmQ"/>
+<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
+<span class="font-label-sm text-label-sm text-primary-container">₹10,000 Challenge</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">₹10K Challenge</h4>
+<div class="flex justify-between items-center border-t border-surface-light pt-4">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">High Reach</span>
+<span class="material-symbols-outlined text-text-secondary text-sm">trending_up</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-medium border border-surface-light group relative">
+<div class="h-48 bg-surface-deep overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="Ayurveda vs Steroids" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJDoBFKT-FfrsJAQRYSsDkQ7gEAqRQADhQEDz4PKEy_4cpUDOPJdUh5HiVLFnxAm1BYRvppr7-Lc9skk-dnmCBrqVcED83UlXcX2DkDMbuBLJVH6BU2dB0gc6t9mZERGipuSnjB9lC7gjbrZ4bTDpaBWKLd_1RFdZoXs-Sk8qEJgrpiJdtspwsMIgoWjxqJ2-dsHWf1bSKmz64MaOSlnUJfEoIftB5pDVBTW55Nv9_Bu1EnWWIdYb-"/>
+<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
+<span class="font-label-sm text-label-sm text-primary-container">Ayurveda vs Steroids</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">Ayurveda vs Steroids</h4>
+<div class="flex justify-between items-center border-t border-surface-light pt-4">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Debate</span>
+<span class="material-symbols-outlined text-text-secondary text-sm">balance</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-medium border border-surface-light group relative">
+<div class="h-48 bg-surface-deep overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="AI Avatar Videos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMy3pMK8rS2egWHRC8jHYGF-Hw8FcxBz55qWF_bhdgpnEYM7OcTQ6oTJQ211tx694TuCmwXCZt8DUyvKiA6U0S6ROP1zeOdyq82xVomF5hLjEcBrmQvH0cuUlxHFMC3PEr5aLtTjMe5vMQstpp0n8holWwom5NKP_OTiy3eNSek33viqwdl5PRHdGkknSx9ToPkVawS6GGHVao8T61_nGjk8SgjImfWyMAHQBbjGgHzNN55Y59Gghl"/>
+<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
+<span class="font-label-sm text-label-sm text-primary-container">AI Avatar Videos</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">AI Avatar Videos</h4>
+<div class="flex justify-between items-center border-t border-surface-light pt-4">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">High Engagement</span>
+<span class="material-symbols-outlined text-text-secondary text-sm">smart_toy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Simple list -->
+<div class="mt-gutter flex flex-col gap-2">
+<div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
+<span class="font-label-md text-label-md text-text-primary">Hanging Crunches Challenge</span>
+<span class="material-symbols-outlined text-text-secondary">fitness_center</span>
+</div>
+<div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
+<span class="font-label-md text-label-md text-text-primary">PM Fitness Assessment</span>
+<span class="material-symbols-outlined text-text-secondary">health_and_safety</span>
+</div>
+</div>
+</section>
+
+<!-- Section 4: Revelations -->
+<section class="py-24 mb-24" id="revelations">
+<div class="mb-12">
+<h2 class="font-headline-lg text-headline-lg mb-2">Strategic Revelations</h2>
+<p class="font-label-md text-label-md text-text-secondary uppercase">Actionable Insights</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="col-span-1 md:col-span-4 flex flex-col gap-4">
+<div class="p-6 bg-primary-container text-surface-deep font-headline-md text-headline-md h-full flex flex-col justify-center relative overflow-hidden">
+<span class="relative z-10">Data dictates direction.</span>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-20">lightbulb</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-8 flex flex-col gap-4">
+<div class="p-6 bg-surface-medium border-l-2 border-primary-container">
+<h4 class="font-label-md text-label-md text-primary-container uppercase mb-2">Insight 01</h4>
+<p class="font-body-lg text-body-lg text-on-surface">The <strong>₹10K Challenge</strong> demonstrated exceptional viral reach, indicating a strong audience appetite for financial or high-stakes fitness challenges.</p>
+</div>
+<div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors">
+<h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 02</h4>
+<p class="font-body-lg text-body-lg text-on-surface"><strong>AI Avatar</strong> content is a massive driver for comment generation. The novelty and uncanny nature of the tech prompt immediate audience discussion.</p>
+</div>
+<div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors">
+<h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 03</h4>
+<p class="font-body-lg text-body-lg text-on-surface">Implementing <strong>Keyword + PDF CTAs</strong> in the reel captions significantly boosts active engagement rates, converting passive viewers into active leads.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+    // Active state toggle for sidebar navigation based on scrolling
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.className = 'flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase';
+            if (link.getAttribute('href').includes(current)) {
+                link.className = 'flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase';
+            }
+        });
+    });
+
+    // Code parameter check if opened via passkey
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+        const clientNameEl = document.getElementById('dossierClientName');
+        if (clientNameEl && (code.toLowerCase().includes('rahul') || code.toLowerCase() === 'atomz111')) {
+            clientNameEl.textContent = 'Rahul Jawatwala';
+        }
+    }
+</script>
+</body>
+</html>
