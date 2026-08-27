@@ -392,16 +392,31 @@ function runIntroLoader() {
   const loaderLogo = document.getElementById('introLoaderLogo');
   const targetLogo = document.querySelector('.brand__logo') || document.querySelector('.brand img') || document.querySelector('header img');
 
-  if (!overlay || !loaderLogo) return;
+  // Assign rapid stagger indexes to page elements for cascade intro
+  const items = document.querySelectorAll('.hero__copy > *, [data-reveal], .card, .data-card, .steps > li, section');
+  items.forEach((el, index) => {
+    el.style.setProperty('--stagger-index', index);
+  });
 
-  // Reveal text briefly
+  document.body.classList.add('page-intro-pending');
+
+  if (!overlay || !loaderLogo) {
+    document.body.classList.remove('page-intro-pending');
+    document.body.classList.add('page-intro-active');
+    return;
+  }
+
+  // Reveal brand text briefly
   setTimeout(() => {
     overlay.classList.add('show-text');
   }, 220);
 
-  // Calculate top-left header logo target position and shrink & glide to top-left
+  // Shrink & glide logo to top-left corner, trigger rapid staggered page entrance
   setTimeout(() => {
     overlay.classList.add('animating');
+    document.body.classList.remove('page-intro-pending');
+    document.body.classList.add('page-intro-active');
+
     if (targetLogo) {
       const loaderRect = loaderLogo.getBoundingClientRect();
       const targetRect = targetLogo.getBoundingClientRect();
@@ -414,12 +429,12 @@ function runIntroLoader() {
     } else {
       loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.15)`;
     }
-  }, 850);
+  }, 800);
 
   // Fade out loader overlay and unmount
   setTimeout(() => {
     overlay.classList.add('done');
-  }, 1700);
+  }, 1600);
 }
 
 if (document.readyState === 'loading') {
