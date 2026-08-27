@@ -302,6 +302,20 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: 0.15em;
 }
 .brand .brand__z { color: var(--accent); }
+.brand__logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 6px;
+}
+.footer__logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .nav__links {
   display: none;
