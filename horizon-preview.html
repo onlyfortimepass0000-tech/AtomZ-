@@ -3,25 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ATOMZ Horizon — Client Performance Portal</title>
+  <title>ATOMZ Horizon — Client Access Portal</title>
   <meta name="description" content="ATOMZ Horizon Client Intelligence Portal — Live virality analytics, audience engagement metrics, and creator blueprints." />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" />
-
-  <!-- Chart.js and DataLabels plugin -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&family=Sora:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" />
 
   <link rel="stylesheet" href="assets/css/atomz.css" />
   <style>
-    /* Horizon Preview Custom Styles */
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      overflow-x: hidden;
+      margin: 0;
+    }
     .preview-header {
-      background: var(--bg);
-      border-bottom: 1px solid var(--hairline);
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       padding: var(--s-3) 0;
       position: sticky;
       top: 0;
@@ -32,105 +35,172 @@
       justify-content: space-between;
       align-items: center;
     }
+    
+    /* Live Motion Graphics Background Canvas */
+    #liveMotionCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .portal-hero-container {
+      position: relative;
+      min-h-[85vh];
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--s-6) var(--s-3);
+      z-index: 10;
+    }
+
     .preview-hero {
-      padding: var(--s-6) 0 var(--s-4);
       text-align: center;
+      max-width: 680px;
+      margin: 0 auto var(--s-6);
+      position: relative;
+      z-index: 10;
     }
     .preview-title {
-      font-size: var(--step-3);
-      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       margin-bottom: var(--s-2);
+      background: linear-gradient(180deg, #FFFFFF 0%, #A0A0A0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .preview-sub {
-      color: var(--muted);
-      max-width: 58ch;
-      margin: 0 auto var(--s-5);
-      font-size: var(--step-0);
+      color: #A0A0A0;
+      max-width: 54ch;
+      margin: 0 auto;
+      font-size: 1.05rem;
     }
+
+    /* Floating Liquid Glass Passkey Card */
     .preview-passkey-card {
-      background: rgba(23, 23, 26, 0.75) !important;
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
-      border-left: 4px solid var(--accent) !important;
-      border-radius: var(--radius-lg);
-      padding: var(--s-6) var(--s-5);
-      max-width: 640px;
-      margin: 0 auto var(--s-7);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 20;
+      background: rgba(15, 15, 18, 0.82) !important;
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+      border-left: 4px solid #FF6600 !important;
+      border-radius: 24px;
+      padding: var(--s-6) var(--s-6);
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 102, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      animation: floatPortal 8s ease-in-out infinite alternate;
     }
+
+    @keyframes floatPortal {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
     .passkey-input-box {
       display: flex;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 20px;
     }
+
+    /* Pure Black & High Voltage Glowing Input Box */
     .passkey-input-box input {
       flex: 1;
-      background-color: #17171A !important;
+      background-color: #000000 !important;
       color: #FFFFFF !important;
-      border: 1px solid #333336 !important;
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      font-family: var(--font-body);
-      font-size: 1rem;
+      border: 2px solid #28282D !important;
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       outline: none;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .passkey-input-box input::placeholder {
-      color: #8A8A8E !important;
+      color: #66666B !important;
+      font-family: var(--font-body);
+      font-weight: 400;
+      letter-spacing: normal;
     }
     .passkey-input-box input:focus {
-      border-color: var(--accent) !important;
-      box-shadow: 0 0 0 3px var(--accent-12) !important;
+      border-color: #FF6600 !important;
+      box-shadow: 0 0 25px rgba(255, 102, 0, 0.6), inset 0 0 10px rgba(255, 102, 0, 0.3) !important;
+      background-color: #050507 !important;
     }
-    .preview-charts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+
+    .btn--horizon-glow {
+      background: #FF6600 !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      font-family: 'Sora', sans-serif;
+      padding: 16px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(255, 102, 0, 0.4);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    }
+    .btn--horizon-glow:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 14px 32px rgba(255, 102, 0, 0.6);
+    }
+    .btn--horizon-glow:active {
+      transform: scale(0.94);
+    }
+
+    /* Live Data Ticker Bar below Passkey Card */
+    .live-data-bar {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 24px;
-      margin-top: 30px;
-      margin-bottom: 60px;
-    }
-    .preview-chart-card {
-      background-color: rgba(20, 20, 20, 0.8) !important;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      border-top: 4px solid var(--accent) !important;
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease !important;
-    }
-    .preview-chart-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 15px rgba(255, 102, 0, 0.2);
-    }
-    .preview-chart-card.full-width {
-      grid-column: 1 / -1;
-    }
-    .preview-chart-card h3 {
-      font-size: 1.2rem;
-      color: #fff;
-      margin-bottom: 4px;
-      text-align: center;
-    }
-    .preview-chart-card p.sub {
-      font-size: 0.85rem;
-      color: #999;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .preview-canvas {
+      flex-wrap: wrap;
       position: relative;
-      height: 280px;
-      width: 100%;
+      z-index: 20;
     }
-    .preview-canvas.large {
-      height: 340px;
+    .live-badge {
+      background: rgba(255, 102, 0, 0.12);
+      border: 1px solid rgba(255, 102, 0, 0.4);
+      color: #FF6600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    @media (max-width: 768px) {
-      .preview-charts-grid { grid-template-columns: 1fr; }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #FF6600;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #FF6600;
+      animation: livePulse 1.5s infinite alternate;
+    }
+    @keyframes livePulse {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
       .passkey-input-box { flex-direction: column; }
+      .btn--horizon-glow { justify-content: center; width: 100%; }
     }
   </style>
 </head>
@@ -139,176 +209,151 @@
   <!-- Top Navigation Bar -->
   <header class="preview-header">
     <div class="wrap preview-nav">
-      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="ATOMZ Logo" class="brand__logo" />ATOM<span class="brand__z">Z</span> <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-left:6px;">HORIZON</span></a>
-      <a class="btn btn--ghost" href="index.html">← Back to Main Site</a>
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.png" alt="ATOMZ Logo" class="brand__logo" />
+        ATOM<span class="brand__z">Z</span>
+        <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-left:6px;">HORIZON</span>
+      </a>
+      <a class="btn btn--ghost" href="index.html">← Back to Home</a>
     </div>
   </header>
 
-  <main class="wrap">
-    <!-- Hero Section -->
-    <div class="preview-hero">
-      <p class="eyebrow">Client Intelligence Portal</p>
-      <h1 class="preview-title">Horizon Performance Display</h1>
-      <p class="preview-sub">Explore the interactive analytics and virality metrics available to ATOMZ clients, then enter your passkey to open your full Creator Dossier.</p>
-    </div>
+  <div style="position:relative; overflow:hidden;">
+    <!-- Live Motion Canvas (Surrounding background graph animations) -->
+    <canvas id="liveMotionCanvas"></canvas>
 
-    <!-- Passkey Access Card ("Access Yourself") -->
-    <div class="preview-passkey-card">
-      <span class="horizon-access-tag">Client Passkey Access</span>
-      <h2 style="font-size:1.6rem; font-family:var(--font-display); margin-top:8px; margin-bottom:4px;">Access Yourself</h2>
-      <p style="color:var(--muted); font-size:0.95rem;">Enter your assigned ATOMZ passkey to load your private stats report and creator dossier page.</p>
-      
-      <form id="passkeyForm" onsubmit="return false;">
-        <div class="passkey-input-box">
-          <input type="text" id="passkeyInput" placeholder="Enter passkey..." autocomplete="off" required />
-          <button type="submit" class="btn btn--horizon">
-            <span>Unlock Dossier</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-        <div id="passkeyStatus" class="horizon-status-msg" style="margin-top:12px;" aria-live="polite"></div>
-      </form>
-    </div>
-
-    <!-- Visual Display of Charts and Graphs -->
-    <section>
-      <div style="text-align:center; margin-bottom:20px;">
-        <p class="eyebrow">Visual Analytics Sample</p>
-        <h2 style="font-size:1.8rem; font-family:var(--font-display);">Sample Client Performance Charts</h2>
+    <main class="wrap portal-hero-container">
+      <!-- Hero Header -->
+      <div class="preview-hero" data-reveal>
+        <p class="eyebrow" style="color:#FF6600; font-family:'JetBrains Mono'; font-weight:600;">⚡ EXCLUSIVE CLIENT INTELLIGENCE</p>
+        <h1 class="preview-title">ATOMZ Horizon Portal</h1>
+        <p class="preview-sub">Enter your assigned ATOMZ passkey below to unlock real-time virality charts, audience retention analytics, and your private creator dossier.</p>
       </div>
 
-      <div class="preview-charts-grid">
-        <!-- Chart 1: Total Views Reach -->
-        <div class="preview-chart-card full-width">
-          <h3>The Virality Engine (Total Views)</h3>
-          <p class="sub">Raw attention capture and viral reach index across recent content.</p>
-          <div class="preview-canvas large">
-            <canvas id="viewsChart"></canvas>
+      <!-- Floating Passkey Access Card ("Access Yourself") -->
+      <div class="preview-passkey-card" data-reveal style="--reveal-delay:.12s">
+        <span class="live-badge" style="width:fit-content; margin-bottom:12px;">
+          <span class="live-dot"></span> LIVE CREATOR ENGINE
+        </span>
+        <h2 style="font-size:1.8rem; font-family:'Sora', sans-serif; font-weight:700; margin:0 0 6px 0; color:#FFFFFF;">Access Yourself</h2>
+        <p style="color:#A0A0A0; font-size:0.95rem; margin:0 0 20px 0;">Type your assigned client passkey to view your personalized performance stats report.</p>
+        
+        <form id="passkeyForm" onsubmit="return false;">
+          <div class="passkey-input-box">
+            <input type="text" id="passkeyInput" placeholder="Enter passkey..." autocomplete="off" required />
+            <button type="submit" class="btn--horizon-glow">
+              <span>Unlock Dossier</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
-        </div>
-
-        <!-- Chart 2: Likes vs Comments -->
-        <div class="preview-chart-card">
-          <h3>Ego vs. True Fans (Likes vs Comments)</h3>
-          <p class="sub">Logarithmic engagement distribution comparison.</p>
-          <div class="preview-canvas">
-            <canvas id="interactionChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Chart 3: Engagement Rate -->
-        <div class="preview-chart-card">
-          <h3>The "Who Actually Cares" Score</h3>
-          <p class="sub">Percentage of total audience actively converting into interactions.</p>
-          <div class="preview-canvas">
-            <canvas id="erChart"></canvas>
-          </div>
-        </div>
+          <div id="passkeyStatus" class="horizon-status-msg" style="margin-top:14px;" aria-live="polite"></div>
+        </form>
       </div>
-    </section>
-  </main>
+
+      <!-- Live Data Ticker Badges -->
+      <div class="live-data-bar" data-reveal style="--reveal-delay:.2s">
+        <div class="live-badge">📊 Live Virality Engine: Active</div>
+        <div class="live-badge">🔥 Engagement Retention: 7.86%</div>
+        <div class="live-badge">📈 Total Views Processed: 1.73M+</div>
+      </div>
+    </main>
+  </div>
 
   <script>
-    // Initialize Chart.js Display
-    if (typeof Chart !== "undefined") {
-      if (typeof ChartDataLabels !== "undefined") {
-        try { Chart.register(ChartDataLabels); } catch (e) {}
-      }
+    // Live Motion Graphics Canvas Script (Auto-animating Bar Graphs & Wave Motion Background)
+    const canvas = document.getElementById('liveMotionCanvas');
+    const ctx = canvas.getContext('2d');
 
-      Chart.defaults.color = '#888';
-      Chart.defaults.font.family = "'Open Sans', sans-serif";
+    let width, height;
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = Math.max(window.innerHeight, 750);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-      const createGradient = (ctx, color1, color2, isHorizontal = false) => {
-        const gradient = isHorizontal 
-          ? ctx.createLinearGradient(0, 0, 800, 0)
-          : ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, color1);
-        gradient.addColorStop(1, color2);
-        return gradient;
-      };
-
-      // Views Chart
-      const ctxViews = document.getElementById('viewsChart').getContext('2d');
-      const gradOrange = createGradient(ctxViews, '#FF4500', '#FFA500', true);
-      new Chart(ctxViews, {
-        type: 'bar',
-        data: {
-          labels: ['₹10K Challenge', 'Hanging Crunches', 'Ayurveda vs Steroids', 'AI Avatar', 'PM Fitness'],
-          datasets: [{
-            label: 'Total Views',
-            data: [1308878, 191861, 148249, 47628, 41170],
-            backgroundColor: [gradOrange, '#333', '#333', '#333', '#333'],
-            borderRadius: 6
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            datalabels: {
-              color: (ctx) => ctx.dataIndex === 0 ? '#FFA500' : '#888',
-              anchor: 'end', align: 'right', offset: 8,
-              font: { weight: 'bold' },
-              formatter: (val) => val > 1000000 ? (val/1000000).toFixed(1) + 'M' : (val/1000).toFixed(0) + 'K'
-            }
-          },
-          scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-            y: { grid: { display: false }, ticks: { color: '#ddd' } }
-          }
-        }
-      });
-
-      // Likes vs Comments
-      const ctxInteraction = document.getElementById('interactionChart').getContext('2d');
-      new Chart(ctxInteraction, {
-        type: 'bar',
-        data: {
-          labels: ['₹10K Chal.', 'Ayurveda', 'AI Avatar', 'Crunches', 'PM Fit.'],
-          datasets: [
-            { label: 'Likes', data: [30063, 2365, 778, 1808, 635], backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: 4 },
-            { label: 'Comments', data: [1343, 1031, 1422, 22, 2], backgroundColor: createGradient(ctxInteraction, '#FF4500', '#FF8C00'), borderRadius: 4 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666' } },
-            x: { grid: { display: false }, ticks: { color: '#aaa' } }
-          },
-          plugins: { legend: { labels: { color: '#ccc' } }, datalabels: { display: false } }
-        }
-      });
-
-      // Engagement Rate
-      const ctxER = document.getElementById('erChart').getContext('2d');
-      const goldGrad = createGradient(ctxER, '#FFD700', '#FF8C00', true);
-      new Chart(ctxER, {
-        type: 'bar',
-        data: {
-          labels: ['AI Avatar', '₹10K Chal.', 'Ayurveda', 'PM Fit.', 'Crunches'],
-          datasets: [{
-            label: 'Engagement Rate (%)',
-            data: [4.62, 2.40, 2.29, 1.55, 0.95],
-            backgroundColor: [goldGrad, '#663300', '#663300', '#442200', '#331100'],
-            borderRadius: 6
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            datalabels: { color: '#888', anchor: 'end', align: 'right', formatter: (val) => val + '%' }
-          },
-          scales: { x: { display: false }, y: { grid: { display: false }, ticks: { color: '#aaa' } } }
-        }
+    // Generate bar graph columns
+    const numBars = 28;
+    const bars = [];
+    for (let i = 0; i < numBars; i++) {
+      bars.push({
+        height: Math.random() * 0.5 + 0.2,
+        targetHeight: Math.random() * 0.5 + 0.2,
+        speed: 0.01 + Math.random() * 0.02,
+        phase: Math.random() * Math.PI * 2
       });
     }
+
+    let time = 0;
+
+    function renderMotionGraphics() {
+      ctx.clearRect(0, 0, width, height);
+
+      time += 0.02;
+
+      // Draw subtle background grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Draw Live Animated Background Bar Graph (Left and Right Flanks)
+      const barWidth = Math.max(12, width / (numBars * 1.8));
+      const startY = height * 0.85;
+
+      for (let i = 0; i < numBars; i++) {
+        const bar = bars[i];
+        // Oscillation equation for continuous smooth height variation
+        const currentH = (Math.sin(time * 0.8 + bar.phase) * 0.25 + 0.45) * (height * 0.45);
+        const x = (i * (barWidth + 18)) + (width * 0.05);
+
+        // Gradient for live orange bar
+        const grad = ctx.createLinearGradient(x, startY, x, startY - currentH);
+        grad.addColorStop(0, 'rgba(255, 102, 0, 0.02)');
+        grad.addColorStop(0.7, 'rgba(255, 102, 0, 0.15)');
+        grad.addColorStop(1, 'rgba(255, 102, 0, 0.45)');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, startY - currentH, barWidth, currentH);
+
+        // Top glowing bar head
+        ctx.fillStyle = '#FF6600';
+        ctx.shadowColor = '#FF6600';
+        ctx.shadowBlur = 10;
+        ctx.fillRect(x, startY - currentH - 3, barWidth, 3);
+        ctx.shadowBlur = 0;
+      }
+
+      // Draw Live Sine Wave Engagement Curve
+      ctx.beginPath();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = 'rgba(255, 102, 0, 0.35)';
+      ctx.shadowColor = '#FF6600';
+      ctx.shadowBlur = 12;
+
+      for (let x = 0; x < width; x += 10) {
+        const y = Math.sin(x * 0.005 + time) * 60 + Math.cos(x * 0.002 + time * 0.5) * 30 + (height * 0.48);
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      requestAnimationFrame(renderMotionGraphics);
+    }
+
+    renderMotionGraphics();
 
     // Passkey Submission Handler
     const passkeyForm = document.getElementById('passkeyForm');
@@ -319,14 +364,15 @@
       e.preventDefault();
       const code = passkeyInput.value.trim();
       if (code.length >= 3) {
-        passkeyStatus.textContent = '✓ Passkey Accepted — Loading Creator Dossier...';
-        passkeyStatus.className = 'horizon-status-msg success';
+        passkeyStatus.textContent = '✓ Passkey Accepted — Opening Creator Dossier...';
+        passkeyStatus.style.color = '#FF6600';
+        passkeyStatus.style.fontWeight = '600';
         setTimeout(() => {
           window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
         }, 450);
       } else {
         passkeyStatus.textContent = '❌ Please enter a valid passkey.';
-        passkeyStatus.className = 'horizon-status-msg error';
+        passkeyStatus.style.color = '#FF4500';
       }
     });
   </script>
