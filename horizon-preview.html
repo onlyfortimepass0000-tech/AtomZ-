@@ -232,8 +232,14 @@
       .btn-back-home .desktop-text { display: none; }
     }
   </style>
-</head>
 <body>
+  <!-- ======================================================= INTRO LOADING SCREEN -->
+  <div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+    <div class="intro-loader-content">
+      <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+      <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+    </div>
+  </div>
 
   <!-- Top Navigation Bar -->
   <header class="preview-header">
@@ -405,5 +411,6 @@
       }
     });
   </script>
+  <script src="assets/js/atomz.js" defer></script>
 </body>
 </html>

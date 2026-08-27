@@ -147,6 +147,13 @@
     </style>
 </head>
 <body class="bg-surface-deep text-text-primary min-h-screen pb-20 md:pb-0 selection:bg-primary-container selection:text-surface-deep">
+<!-- ======================================================= INTRO LOADING SCREEN -->
+<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+  <div class="intro-loader-content">
+    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+  </div>
+</div>
 
 <!-- TopAppBar Header (Responsive across Desktop & Mobile) -->
 <header class="bg-background/90 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-surface-light flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 md:h-20">
@@ -449,5 +456,6 @@
         }
     }
 </script>
+<script src="assets/js/atomz.js" defer></script>
 </body>
 </html>

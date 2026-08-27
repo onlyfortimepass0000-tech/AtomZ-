@@ -383,3 +383,47 @@
     });
   }
 })();
+
+/* ==========================================================================
+   INTRO LOADING ANIMATION (Center Logo Shrink & Fly to Top-Left)
+   ========================================================================== */
+function runIntroLoader() {
+  const overlay = document.getElementById('introLoaderOverlay');
+  const loaderLogo = document.getElementById('introLoaderLogo');
+  const targetLogo = document.querySelector('.brand__logo') || document.querySelector('.brand img') || document.querySelector('header img');
+
+  if (!overlay || !loaderLogo) return;
+
+  // Reveal text briefly
+  setTimeout(() => {
+    overlay.classList.add('show-text');
+  }, 200);
+
+  // Calculate top-left header logo target position and shrink & glide to top-left
+  setTimeout(() => {
+    overlay.classList.add('animating');
+    if (targetLogo) {
+      const loaderRect = loaderLogo.getBoundingClientRect();
+      const targetRect = targetLogo.getBoundingClientRect();
+
+      const dx = targetRect.left + (targetRect.width / 2) - (loaderRect.left + (loaderRect.width / 2));
+      const dy = targetRect.top + (targetRect.height / 2) - (loaderRect.top + (loaderRect.height / 2));
+      const scale = Math.max(0.2, targetRect.width / loaderRect.width);
+
+      loaderLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+    } else {
+      loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.24)`;
+    }
+  }, 750);
+
+  // Fade out loader overlay and unmount
+  setTimeout(() => {
+    overlay.classList.add('done');
+  }, 1500);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', runIntroLoader);
+} else {
+  runIntroLoader();
+}
