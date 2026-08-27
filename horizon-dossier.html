@@ -1,15 +1,16 @@
-<!DOCTYPE html><html class="dark scroll-smooth" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>ATOMZ - Creator Dossier - Rahul Jawatwala</title>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet">
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Rahul Jawatwala — ATOMZ Creator Dossier</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -105,242 +106,348 @@
             }
         }
     </script>
-<style>
-        body { font-family: 'Inter', sans-serif; }
+    <link rel="stylesheet" href="assets/css/atomz.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #FFFFFF; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .data-card { border: 1px solid rgba(255, 255, 255, 0.1); }
-        .data-card:hover { border-color: #ff6600; transition: border-color 0.3s ease; }
+        
+        /* Liquid Glass Panel Tokens */
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.75) !important;
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .glow-accent {
+            box-shadow: 0 0 20px 2px rgba(255, 102, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid #ff6600 !important;
+        }
+        .data-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .data-card:hover {
+            border-color: #ff6600;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(255, 102, 0, 0.25);
+        }
+        .liquid-btn {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease !important;
+        }
+        .liquid-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(255, 102, 0, 0.35);
+        }
+        .liquid-btn:active {
+            transform: scale(0.94) !important;
+        }
     </style>
 </head>
-<body class="bg-surface-deep text-text-primary min-h-screen">
-<!-- TopAppBar -->
-<header class="bg-background dark:bg-background text-primary dark:text-primary font-headline-md text-headline-md fixed top-0 w-full z-50 border-b-2 border-surface-container-highest flex justify-between items-center px-margin-desktop h-20">
-<div class="flex items-center gap-4">
-    <a href="index.html" class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-9 w-auto object-contain" />
-        <span>ATOMZ</span>
-        <span class="text-xs bg-primary-container text-surface-deep px-2 py-0.5 rounded font-label-sm uppercase">HORIZON DOSSIER</span>
-    </a>
-</div>
-<div class="flex items-center gap-6">
-<a href="horizon-preview.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">← PORTAL PREVIEW</a>
-<a href="index.html" class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">HOME</a>
-<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors uppercase">_ SUBSCRIBE</button>
-<span class="material-symbols-outlined text-primary scale-95 duration-100 hover:text-primary-container cursor-pointer" style="font-variation-settings: 'FILL' 0;">account_circle</span>
-</div>
+<body class="bg-surface-deep text-text-primary min-h-screen pb-20 md:pb-0 selection:bg-primary-container selection:text-surface-deep">
+
+<!-- TopAppBar Header (Responsive across Desktop & Mobile) -->
+<header class="bg-background/90 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-surface-light flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 md:h-20">
+    <div class="flex items-center gap-3">
+        <a href="index.html" class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(255,102,0,0.5)]" />
+            <span class="tracking-tight text-white">ATOMZ</span>
+            <span class="text-xs bg-primary-container text-surface-deep px-2 py-0.5 rounded font-label-sm uppercase font-semibold">DOSSIER</span>
+        </a>
+    </div>
+    <div class="flex items-center gap-4 md:gap-6">
+        <a href="horizon-preview.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase flex items-center gap-1">
+            <span class="hidden sm:inline">← PORTAL PREVIEW</span>
+            <span class="sm:hidden">← PREVIEW</span>
+        </a>
+        <a href="index.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase">HOME</a>
+    </div>
 </header>
-<!-- SideNavBar -->
-<nav class="hidden md:flex flex-col pt-8 bg-surface-container-lowest dark:bg-surface-deep text-primary dark:text-primary font-label-md text-label-md fixed left-0 top-20 h-screen w-64 border-r border-outline-variant z-40">
-<div class="px-6 mb-8 flex items-center gap-3">
-<img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 w-auto object-contain" />
-<div>
-<h2 class="font-headline-md text-headline-md text-primary tracking-tight">ATOMZ</h2>
-<p class="font-label-sm text-label-sm text-text-secondary mt-0.5">CREATOR DOSSIER</p>
-</div>
-</div>
-<ul class="flex flex-col w-full gap-2 px-2">
-<li class=""><a class="flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase" href="#identity"><span class="material-symbols-outlined">fingerprint</span>Identity</a></li>
-<li class=""><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#metrics"><span class="material-symbols-outlined">analytics</span>Metrics</a></li>
-<li class=""><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#showcase"><span class="material-symbols-outlined">auto_awesome</span>Showcase</a></li>
-<li class=""><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#revelations"><span class="material-symbols-outlined">visibility</span>Revelations</a></li>
-</ul>
-<div class="mt-auto p-6 mb-20">
-<button class="w-full text-center border-2 border-surface-light hover:border-primary-container text-text-primary py-3 font-label-md text-label-md transition-colors uppercase">_ DOWNLOAD PDF</button>
-</div>
+
+<!-- Desktop SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col pt-8 bg-surface-container-lowest dark:bg-surface-deep text-primary font-label-md text-label-md fixed left-0 top-20 h-screen w-64 border-r border-outline-variant z-40">
+    <div class="px-6 mb-8 flex items-center gap-3">
+        <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 w-auto object-contain" />
+        <div>
+            <h2 class="font-headline-md text-headline-md text-primary tracking-tight">ATOMZ</h2>
+            <p class="font-label-sm text-label-sm text-text-secondary mt-0.5">CREATOR DOSSIER</p>
+        </div>
+    </div>
+    <ul class="flex flex-col w-full gap-2 px-2">
+        <li><a class="flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase" href="#identity"><span class="material-symbols-outlined">fingerprint</span>Identity</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#metrics"><span class="material-symbols-outlined">analytics</span>Metrics</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#showcase"><span class="material-symbols-outlined">auto_awesome</span>Showcase</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#revelations"><span class="material-symbols-outlined">visibility</span>Revelations</a></li>
+    </ul>
+    <div class="mt-auto p-6 mb-20">
+        <button class="liquid-btn w-full text-center border-2 border-surface-light hover:border-primary-container text-text-primary py-3 font-label-md text-label-md transition-colors uppercase">_ DOWNLOAD PDF</button>
+    </div>
 </nav>
-<!-- Main Content Canvas -->
-<main class="md:ml-64 pt-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
-<!-- Section 1: Identity -->
-<section class="py-24 border-b border-surface-light min-h-[70vh] flex flex-col justify-center" id="identity">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-<div class="col-span-1 md:col-span-8 flex flex-col justify-center">
-<div class="inline-flex items-center gap-2 px-3 py-1 border border-surface-light mb-6 w-fit">
-<span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
-<span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Jaipur, India</span>
-</div>
-<h1 class="font-display-lg text-display-lg text-text-primary mb-4" id="dossierClientName">Rahul Jawatwala</h1>
-<div class="flex items-center gap-4 mb-8">
-<span class="font-label-md text-label-md text-primary-container bg-surface-medium px-4 py-2 border border-surface-light">@rahuljawatwala</span>
-<span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Actor / Creator</span>
-</div>
-<p class="font-headline-md text-headline-md text-on-surface max-w-2xl border-l-2 border-primary-container pl-6 py-2">
-                        Helps brands grow through engaging Reels.
-                    </p>
-</div>
 
-</div>
-</section>
-<!-- Section 2: Metrics -->
-<section class="py-24 border-b border-surface-light" id="metrics">
-<div class="mb-12">
-<h2 class="font-headline-lg text-headline-lg mb-2">Performance Metrics</h2>
-<p class="font-label-md text-label-md text-text-secondary uppercase">Aggregated Data Canvas</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
-<div class="bg-surface-medium p-6 data-card">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Views</span>
-<div class="font-display-lg text-display-lg text-primary-container">128K</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">128,103 exact</span>
-</div>
-<div class="bg-surface-medium p-6 data-card">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Likes</span>
-<div class="font-display-lg text-display-lg text-text-primary">6.0K</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">6,004 exact</span>
-</div>
-<div class="bg-surface-medium p-6 data-card">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Total Comments</span>
-<div class="font-display-lg text-display-lg text-text-primary">655</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">High Interaction</span>
-</div>
-<div class="bg-surface-medium p-6 data-card relative overflow-hidden">
-<div class="absolute right-0 top-0 w-2 h-full bg-primary-container shadow-[0_0_15px_#ff6600]"></div>
-<span class="font-label-sm text-label-sm text-text-secondary uppercase mb-4 block">Avg Engagement</span>
-<div class="font-display-lg text-display-lg text-text-primary">7.86%</div>
-<span class="font-label-sm text-label-sm text-primary-container block mt-2 uppercase">Industry Leading</span>
-</div>
-</div>
-<div class="bg-surface-medium p-8 border border-surface-light">
-<div class="flex justify-between items-end mb-6 border-b border-surface-light pb-4">
-<h3 class="font-headline-md text-headline-md">Key Data (Recent 5)</h3>
-<span class="material-symbols-outlined text-primary-container">monitoring</span>
-</div>
-<div class="flex items-center gap-6">
-<div>
-<span class="font-label-sm text-label-sm text-text-secondary uppercase block mb-1">Total Views</span>
-<span class="font-headline-lg text-headline-lg text-text-primary">1,737,786</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 3: Showcase -->
-<section class="py-24 border-b border-surface-light" id="showcase">
-<div class="mb-12 flex justify-between items-end">
-<div>
-<h2 class="font-headline-lg text-headline-lg mb-2">Content Showcase</h2>
-<p class="font-label-md text-label-md text-text-secondary uppercase">Recent Reels Index</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-<!-- Card 1 -->
-<div class="bg-surface-medium border border-surface-light group relative">
-<div class="h-48 bg-surface-deep overflow-hidden relative">
+<!-- Main Content Canvas (Automatically layouts for Mobile & Desktop) -->
+<main class="md:ml-64 pt-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full space-y-16 md:space-y-0">
 
-<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-<span class="font-label-sm text-label-sm text-primary-container">₹10,000 Challenge</span>
-</div>
-</div>
-<div class="p-6">
-<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">₹10K Challenge</h4>
-<div class="flex justify-between items-center border-t border-surface-light pt-4">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase">High Reach</span>
-<span class="material-symbols-outlined text-text-secondary text-sm">trending_up</span>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-surface-medium border border-surface-light group relative">
-<div class="h-48 bg-surface-deep overflow-hidden relative">
+    <!-- Section 1: Identity -->
+    <section class="py-12 md:py-24 border-b border-surface-light min-h-[50vh] md:min-h-[70vh] flex flex-col justify-center scanline" id="identity" data-reveal>
+        <div class="flex flex-col items-center text-center md:items-start md:text-left space-y-6">
+            <div class="w-24 h-24 md:w-32 md:h-32 relative mb-2 flex items-center justify-center">
+                <img alt="ATOMZ Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(255,102,0,0.6)]" src="assets/images/logo.png"/>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 border border-surface-light w-fit">
+                <span class="material-symbols-outlined text-primary-container text-sm">location_on</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Jaipur, India</span>
+            </div>
+            <h1 class="font-display-lg text-3xl sm:text-5xl md:text-display-lg text-text-primary uppercase tracking-tight" id="dossierClientName">Rahul Jawatwala</h1>
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-4">
+                <span class="font-label-md text-label-md text-primary-container bg-surface-medium px-4 py-2 border border-surface-light">@rahuljawatwala</span>
+                <span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Actor / Creator</span>
+            </div>
+            <p class="font-headline-md text-lg md:text-headline-md text-on-surface max-w-2xl border-l-2 border-primary-container pl-6 py-2">
+                Helps brands grow through engaging Reels.
+            </p>
+        </div>
+    </section>
 
-<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-<span class="font-label-sm text-label-sm text-primary-container">Ayurveda vs Steroids</span>
-</div>
-</div>
-<div class="p-6">
-<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">Ayurveda vs Steroids</h4>
-<div class="flex justify-between items-center border-t border-surface-light pt-4">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase">Debate</span>
-<span class="material-symbols-outlined text-text-secondary text-sm">balance</span>
-</div>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="bg-surface-medium border border-surface-light group relative">
-<div class="h-48 bg-surface-deep overflow-hidden relative">
-<img class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-105" data-alt="A futuristic, stylized 3D render of a digital human head composed of glowing orange wireframes and data nodes against a pitch-black background. The aesthetic is heavily inspired by cyberpunk and high-end artificial intelligence tech visuals. The rendering is ultra-crisp, with stark contrast and a sense of dynamic digital energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMy3pMK8rS2egWHRC8jHYGF-Hw8FcxBz55qWF_bhdgpnEYM7OcTQ6oTJQ211tx694TuCmwXCZt8DUyvKiA6U0S6ROP1zeOdyq82xVomF5hLjEcBrmQvH0cuUlxHFMC3PEr5aLtTjMe5vMQstpp0n8holWwom5NKP_OTiy3eNSek33viqwdl5PRHdGkknSx9ToPkVawS6GGHVao8T61_nGjk8SgjImfWyMAHQBbjGgHzNN55Y59Gghl">
-<div class="absolute bottom-2 right-2 bg-surface-deep px-2 py-1 border border-surface-light">
-<span class="font-label-sm text-label-sm text-primary-container">AI Avatar Videos</span>
-</div>
-</div>
-<div class="p-6">
-<h4 class="font-headline-md text-headline-md mb-4 text-text-primary">AI Avatar Videos</h4>
-<div class="flex justify-between items-center border-t border-surface-light pt-4">
-<span class="font-label-sm text-label-sm text-text-secondary uppercase">High Engagement</span>
-<span class="material-symbols-outlined text-text-secondary text-sm">smart_toy</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Simple list for the remaining two to show variation -->
-<div class="mt-gutter flex flex-col gap-2">
-<div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
-<span class="font-label-md text-label-md text-text-primary">Hanging Crunches Challenge</span>
-<span class="material-symbols-outlined text-text-secondary">fitness_center</span>
-</div>
-<div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light hover:border-primary-container transition-colors">
-<span class="font-label-md text-label-md text-text-primary">PM Fitness Assessment</span>
-<span class="material-symbols-outlined text-text-secondary">health_and_safety</span>
-</div>
-</div>
-</section>
-<!-- Section 4: Revelations -->
-<section class="py-24 mb-24" id="revelations">
-<div class="mb-12">
-<h2 class="font-headline-lg text-headline-lg mb-2">Strategic Revelations</h2>
-<p class="font-label-md text-label-md text-text-secondary uppercase">Actionable Insights</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-<div class="col-span-1 md:col-span-4 flex flex-col gap-4">
-<div class="p-6 bg-primary-container text-surface-deep font-headline-md text-headline-md h-full flex flex-col justify-center relative overflow-hidden">
-<span class="relative z-10">Data dictates direction.</span>
-<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-20">lightbulb</span>
-</div>
-</div>
-<div class="col-span-1 md:col-span-8 flex flex-col gap-4">
-<div class="p-6 bg-surface-medium border-l-2 border-primary-container">
-<h4 class="font-label-md text-label-md text-primary-container uppercase mb-2">Insight 01</h4>
-<p class="font-body-lg text-body-lg text-on-surface">The <strong>₹10K Challenge</strong> demonstrated exceptional viral reach, indicating a strong audience appetite for financial or high-stakes fitness challenges.</p>
-</div>
-<div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors">
-<h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 02</h4>
-<p class="font-body-lg text-body-lg text-on-surface"><strong>AI Avatar</strong> content is a massive driver for comment generation. The novelty and uncanny nature of the tech prompt immediate audience discussion.</p>
-</div>
-<div class="p-6 bg-surface-medium border-l-2 border-surface-light hover:border-primary-container transition-colors">
-<h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 03</h4>
-<p class="font-body-lg text-body-lg text-on-surface">Implementing <strong>Keyword + PDF CTAs</strong> in the reel captions significantly boosts active engagement rates, converting passive viewers into active leads.</p>
-</div>
-</div>
-</div>
-</section>
+    <!-- Section 2: Performance Metrics -->
+    <section class="py-12 md:py-24 border-b border-surface-light" id="metrics" data-reveal style="--reveal-delay:.08s">
+        <div class="mb-8 flex items-center justify-between border-b border-surface-light pb-3">
+            <div>
+                <h2 class="font-headline-md text-2xl md:text-headline-lg flex items-center gap-2 text-text-primary">
+                    <span class="material-symbols-outlined text-primary-container">analytics</span>
+                    PERFORMANCE METRICS
+                </h2>
+                <p class="font-label-md text-label-md text-text-secondary uppercase">Aggregated Data Canvas</p>
+            </div>
+            <span class="font-label-sm text-label-sm text-text-secondary uppercase hidden sm:inline">Last 30 Days</span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-gutter mb-gutter">
+            <!-- Metric Card 1 -->
+            <div class="bg-surface-medium p-5 md:p-6 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-3 block">Total Views</span>
+                <div class="font-display-lg text-3xl md:text-display-lg text-primary-container">128K</div>
+                <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">128,103 exact</span>
+            </div>
+            <!-- Metric Card 2 -->
+            <div class="bg-surface-medium p-5 md:p-6 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-3 block">Total Likes</span>
+                <div class="font-display-lg text-3xl md:text-display-lg text-text-primary">6.0K</div>
+                <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">6,004 exact</span>
+            </div>
+            <!-- Metric Card 3 -->
+            <div class="bg-surface-medium p-5 md:p-6 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-3 block">Total Comments</span>
+                <div class="font-display-lg text-3xl md:text-display-lg text-text-primary">655</div>
+                <span class="font-label-sm text-label-sm text-on-surface-variant block mt-2">High Interaction</span>
+            </div>
+            <!-- Metric Card 4 -->
+            <div class="bg-surface-medium p-5 md:p-6 data-card relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-2 h-full bg-primary-container shadow-[0_0_15px_#ff6600]"></div>
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-3 block">Avg Engagement</span>
+                <div class="font-display-lg text-3xl md:text-display-lg text-text-primary">7.86%</div>
+                <span class="font-label-sm text-label-sm text-primary-container block mt-2 uppercase">Industry Leading</span>
+            </div>
+        </div>
+
+        <!-- Featured 5 Recent Views Card -->
+        <div class="bg-surface-medium p-6 md:p-8 border border-primary-container/40 glow-accent rounded-lg">
+            <div class="flex justify-between items-end mb-4 border-b border-surface-light pb-4">
+                <h3 class="font-headline-md text-xl md:text-headline-md">Key Data (Recent 5 Reels)</h3>
+                <span class="material-symbols-outlined text-primary-container">monitoring</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <div>
+                    <span class="font-label-sm text-label-sm text-text-secondary uppercase block mb-1">Total Views</span>
+                    <span class="font-headline-lg text-2xl md:text-headline-lg text-primary-container font-bold">1,737,786</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Content Showcase -->
+    <section class="py-12 md:py-24 border-b border-surface-light" id="showcase" data-reveal style="--reveal-delay:.12s">
+        <div class="mb-8 flex justify-between items-end">
+            <div>
+                <h2 class="font-headline-md text-2xl md:text-headline-lg mb-1 text-text-primary flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary-container">auto_awesome</span>
+                    CONTENT SHOWCASE
+                </h2>
+                <p class="font-label-md text-label-md text-text-secondary uppercase">Recent Reels Index</p>
+            </div>
+            <button class="liquid-btn font-label-sm text-label-sm text-text-secondary uppercase hover:text-primary transition-colors">_ VIEW ALL</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-surface-medium border border-surface-light group relative rounded-lg overflow-hidden hover:border-primary-container transition-colors">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-label-sm text-label-sm text-primary-container uppercase bg-surface-deep px-2.5 py-1 border border-surface-light">₹10,000 Challenge</span>
+                        <span class="material-symbols-outlined text-text-secondary text-sm">trending_up</span>
+                    </div>
+                    <h4 class="font-headline-md text-xl text-text-primary mb-4">₹10K Challenge</h4>
+                    <div class="flex gap-4 border-t border-surface-light pt-3">
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">visibility</span> 1.2M
+                        </div>
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">favorite</span> 45K
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-surface-medium border border-surface-light group relative rounded-lg overflow-hidden hover:border-primary-container transition-colors">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-label-sm text-label-sm text-primary-container uppercase bg-surface-deep px-2.5 py-1 border border-surface-light">Ayurveda vs Steroids</span>
+                        <span class="material-symbols-outlined text-text-secondary text-sm">balance</span>
+                    </div>
+                    <h4 class="font-headline-md text-xl text-text-primary mb-4">Ayurveda vs Steroids</h4>
+                    <div class="flex gap-4 border-t border-surface-light pt-3">
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">visibility</span> 340K
+                        </div>
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">forum</span> 1.2K
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-surface-medium border border-surface-light group relative rounded-lg overflow-hidden hover:border-primary-container transition-colors">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-label-sm text-label-sm text-primary-container uppercase bg-surface-deep px-2.5 py-1 border border-surface-light">AI Avatar Videos</span>
+                        <span class="material-symbols-outlined text-text-secondary text-sm">smart_toy</span>
+                    </div>
+                    <h4 class="font-headline-md text-xl text-text-primary mb-4">AI Avatar Videos</h4>
+                    <div class="flex gap-4 border-t border-surface-light pt-3">
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">visibility</span> 180K
+                        </div>
+                        <div class="flex items-center gap-1 font-label-sm text-label-sm text-text-secondary">
+                            <span class="material-symbols-outlined text-[14px]">share</span> 890
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remaining Reels Index List -->
+        <div class="mt-6 flex flex-col gap-3">
+            <div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light rounded hover:border-primary-container transition-colors">
+                <span class="font-label-md text-label-md text-text-primary">Hanging Crunches Challenge</span>
+                <span class="material-symbols-outlined text-text-secondary">fitness_center</span>
+            </div>
+            <div class="flex justify-between items-center p-4 bg-surface-medium border border-surface-light rounded hover:border-primary-container transition-colors">
+                <span class="font-label-md text-label-md text-text-primary">PM Fitness Assessment</span>
+                <span class="material-symbols-outlined text-text-secondary">health_and_safety</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Strategic Revelations -->
+    <section class="py-12 md:py-24 mb-16" id="revelations" data-reveal style="--reveal-delay:.16s">
+        <div class="mb-8">
+            <h2 class="font-headline-md text-2xl md:text-headline-lg mb-1 text-text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">auto_stories</span>
+                STRATEGIC REVELATIONS
+            </h2>
+            <p class="font-label-md text-label-md text-text-secondary uppercase">Actionable Insights</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="col-span-1 md:col-span-4">
+                <div class="p-6 bg-primary-container text-surface-deep font-headline-md text-xl md:text-headline-md h-full flex flex-col justify-center relative overflow-hidden rounded-lg glow-accent">
+                    <span class="relative z-10 font-bold uppercase tracking-tight">Data dictates direction.</span>
+                    <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-20">lightbulb</span>
+                </div>
+            </div>
+            <div class="col-span-1 md:col-span-8 flex flex-col gap-4">
+                <div class="p-6 bg-surface-medium border-l-4 border-primary-container rounded-r-lg">
+                    <h4 class="font-label-md text-label-md text-primary-container uppercase mb-2">Insight 01</h4>
+                    <p class="font-body-lg text-body-lg text-on-surface">The <strong>₹10K Challenge</strong> demonstrated exceptional viral reach, indicating a strong audience appetite for financial or high-stakes fitness challenges.</p>
+                </div>
+                <div class="p-6 bg-surface-medium border-l-4 border-surface-light hover:border-primary-container transition-colors rounded-r-lg">
+                    <h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 02</h4>
+                    <p class="font-body-lg text-body-lg text-on-surface"><strong>AI Avatar</strong> content is a massive driver for comment generation. The novelty and uncanny nature of the tech prompt immediate audience discussion.</p>
+                </div>
+                <div class="p-6 bg-surface-medium border-l-4 border-surface-light hover:border-primary-container transition-colors rounded-r-lg">
+                    <h4 class="font-label-md text-label-md text-text-secondary uppercase mb-2">Insight 03</h4>
+                    <p class="font-body-lg text-body-lg text-on-surface">Implementing <strong>Keyword + PDF CTAs</strong> in the reel captions significantly boosts active engagement rates, converting passive viewers into active leads.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
+
+<!-- BottomNavBar (Mobile Only — Fixed Liquid Glass Navigation Bar) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-2 h-16 bg-surface glass-panel md:hidden border-t border-surface-light">
+    <a class="flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform" href="#identity">
+        <span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+        <span class="font-label-sm text-[10px]">Identity</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#metrics">
+        <span class="material-symbols-outlined mb-0.5">analytics</span>
+        <span class="font-label-sm text-[10px]">Metrics</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#showcase">
+        <span class="material-symbols-outlined mb-0.5">auto_awesome</span>
+        <span class="font-label-sm text-[10px]">Showcase</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#revelations">
+        <span class="material-symbols-outlined mb-0.5">auto_stories</span>
+        <span class="font-label-sm text-[10px]">Revelations</span>
+    </a>
+</nav>
+
 <script>
-        // Simple active state toggle for nav based on scrolling
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav ul li a');
+    // Smooth active state toggle for sidebar and mobile nav bar based on scroll position
+    const sections = document.querySelectorAll('section');
+    const sideNavLinks = document.querySelectorAll('nav.hidden ul li a');
+    const mobileNavLinks = document.querySelectorAll('nav.fixed a');
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.className = 'flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase';
-                if (link.getAttribute('href').includes(current)) {
-                    link.className = 'flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase';
-                }
-            });
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
         });
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        if (code) {
-            const clientNameEl = document.getElementById('dossierClientName');
-            if (clientNameEl && (code.toLowerCase().includes('rahul') || code.toLowerCase() === 'atomz111')) {
-                clientNameEl.textContent = 'Rahul Jawatwala';
+        // Update Desktop SideNavBar
+        sideNavLinks.forEach(link => {
+            link.className = 'flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase';
+            if (link.getAttribute('href').includes(current)) {
+                link.className = 'flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase';
             }
+        });
+
+        // Update Mobile BottomNavBar
+        mobileNavLinks.forEach(link => {
+            link.className = 'flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform';
+            if (link.getAttribute('href').includes(current)) {
+                link.className = 'flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform opacity-100';
+            }
+        });
+    });
+
+    // Code parameter check for dynamic name rendering
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+        const clientNameEl = document.getElementById('dossierClientName');
+        if (clientNameEl && (code.toLowerCase().includes('rahul') || code.toLowerCase() === 'atomz111')) {
+            clientNameEl.textContent = 'Rahul Jawatwala';
         }
-    </script>
-</body></html>
+    }
+</script>
+</body>
+</html>
