@@ -403,7 +403,11 @@
         passkeyStatus.style.color = '#FF6600';
         passkeyStatus.style.fontWeight = '600';
         setTimeout(() => {
-          window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
+          if (code.toLowerCase() === 'atomz112' || code.toLowerCase().includes('harsh')) {
+            window.location.href = 'horizon-harsh.html?code=' + encodeURIComponent(code);
+          } else {
+            window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
+          }
         }, 450);
       } else {
         passkeyStatus.textContent = '❌ Please enter a valid passkey.';

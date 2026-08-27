@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Harsh — ATOMZ Creator Dossier (atomz112)</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb596",
+                        "surface": "#131313",
+                        "surface-light": "#1C1C1C",
+                        "primary-container": "#ff6600",
+                        "surface-container": "#201f1f",
+                        "text-secondary": "#A0A0A0",
+                        "text-primary": "#FFFFFF",
+                        "surface-deep": "#000000",
+                        "surface-medium": "#121212"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/atomz.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #FFFFFF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.75) !important;
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .glow-accent {
+            box-shadow: 0 0 20px 2px rgba(255, 102, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid #ff6600 !important;
+        }
+        .data-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .data-card:hover {
+            border-color: #ff6600;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(255, 102, 0, 0.25);
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #A0A0A0;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .tab-btn.active {
+            background: #FF6600;
+            color: #000000;
+            border-color: #FF6600;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.4);
+        }
+        .interactive-box {
+            background: #121212;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .interactive-box:hover {
+            border-color: #FF6600;
+        }
+    </style>
+</head>
+<body class="bg-surface-deep text-text-primary min-h-screen pb-20 md:pb-0 selection:bg-primary-container selection:text-surface-deep">
+
+<!-- Intro Loading Overlay -->
+<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+  <div class="intro-loader-content">
+    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="bg-background/90 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-surface-light flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 md:h-20">
+    <div class="flex items-center gap-3">
+        <a href="index.html" class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(255,102,0,0.5)]" />
+            <span class="tracking-tight text-white">ATOMZ</span>
+            <span class="text-xs bg-primary-container text-surface-deep px-2 py-0.5 rounded font-label-sm uppercase font-semibold">DOSSIER: HARSH</span>
+        </a>
+    </div>
+    <div class="flex items-center gap-4 md:gap-6">
+        <span class="font-label-sm text-xs text-primary-container border border-primary-container/40 px-3 py-1 rounded-full uppercase bg-primary-container/10">CODE: ATOMZ112</span>
+        <a href="horizon-preview.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase hidden sm:inline">← PORTAL PREVIEW</a>
+        <a href="index.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase">HOME</a>
+    </div>
+</header>
+
+<!-- Desktop SideNavBar -->
+<nav class="hidden md:flex flex-col pt-8 bg-surface-container-lowest dark:bg-surface-deep text-primary font-label-md text-label-md fixed left-0 top-20 h-screen w-64 border-r border-outline-variant z-40">
+    <div class="px-6 mb-8 flex items-center gap-3">
+        <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 w-auto object-contain" />
+        <div>
+            <h2 class="font-headline-md text-headline-md text-primary tracking-tight">ATOMZ</h2>
+            <p class="font-label-sm text-label-sm text-text-secondary mt-0.5">DOSSIER: HARSH</p>
+        </div>
+    </div>
+    <ul class="flex flex-col w-full gap-2 px-2">
+        <li><a class="flex items-center gap-3 text-primary border-l-4 border-primary-container bg-surface-container px-4 py-3 transition-transform duration-200 uppercase" href="#identity"><span class="material-symbols-outlined">fingerprint</span>Identity</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#phase1"><span class="material-symbols-outlined">tune</span>Phase 1: Funnel</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#phase2"><span class="material-symbols-outlined">view_carousel</span>Phase 2: Pillars</a></li>
+        <li><a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-high transition-all uppercase" href="#phase3"><span class="material-symbols-outlined">insights</span>Phase 3: Data</a></li>
+    </ul>
+    <div class="mt-auto p-6 mb-20">
+        <button onclick="window.print()" class="btn w-full text-center border-2 border-surface-light hover:border-primary-container text-text-primary py-3 font-label-md text-label-md transition-colors uppercase">_ DOWNLOAD PDF</button>
+    </div>
+</nav>
+
+<!-- Main Canvas -->
+<main class="md:ml-64 pt-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full space-y-16 md:space-y-0">
+
+    <!-- Section 1: Client Identity & Diagnostic Overview -->
+    <section class="py-12 md:py-20 border-b border-surface-light scanline" id="identity" data-reveal>
+        <div class="flex flex-col items-center text-center md:items-start md:text-left space-y-6">
+            <div class="w-24 h-24 md:w-32 md:h-32 relative mb-2 flex items-center justify-center">
+                <img alt="ATOMZ Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(255,102,0,0.6)]" src="assets/images/logo.png"/>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 border border-surface-light w-fit">
+                <span class="material-symbols-outlined text-primary-container text-sm">fitness_center</span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-text-secondary">Marathi / Indian Fitness Creator</span>
+            </div>
+            <h1 class="font-display-lg text-4xl sm:text-6xl md:text-display-lg text-text-primary uppercase tracking-tight">Harsh</h1>
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-2">
+                <span class="font-label-md text-label-md text-primary-container bg-surface-medium px-4 py-2 border border-surface-light">@harsh_fitness • 390 Followers</span>
+                <span class="font-label-md text-label-md text-text-secondary uppercase tracking-wider">Bio: "Building my best version"</span>
+            </div>
+            <p class="font-headline-md text-lg md:text-headline-md text-on-surface max-w-3xl border-l-4 border-primary-container pl-6 py-2 bg-surface-medium/50 rounded-r-lg">
+                <strong>Diagnostic Summary:</strong> The traffic is here (hitting 5,894 views = 15.1× followers), but the conversion mechanism is broken. Transitioning from random hope to a data-backed growth engine.
+            </p>
+        </div>
+
+        <!-- 4 Key Diagnostic Metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-gutter mt-10">
+            <div class="bg-surface-medium p-5 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-2 block">Peak Reach</span>
+                <div class="font-display-lg text-3xl text-primary-container font-bold">5,894</div>
+                <span class="font-label-sm text-label-sm text-primary-container block mt-1">15.1× Follower Reach</span>
+            </div>
+            <div class="bg-surface-medium p-5 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-2 block">Follower Base</span>
+                <div class="font-display-lg text-3xl text-text-primary font-bold">390</div>
+                <span class="font-label-sm text-label-sm text-red-400 block mt-1">Funnel Broken</span>
+            </div>
+            <div class="bg-surface-medium p-5 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-2 block">Carousel ER</span>
+                <div class="font-display-lg text-3xl text-text-primary font-bold">68.59%</div>
+                <span class="font-label-sm text-label-sm text-primary-container block mt-1">3.7× Outlier Winner</span>
+            </div>
+            <div class="bg-surface-medium p-5 data-card">
+                <span class="font-label-sm text-label-sm text-text-secondary uppercase mb-2 block">Baseline Avg</span>
+                <div class="font-display-lg text-3xl text-text-primary font-bold">1,943</div>
+                <span class="font-label-sm text-label-sm text-text-secondary block mt-1">23.5% Slowdown</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Phase 1 - Fix the Conversion Funnel -->
+    <section class="py-12 md:py-20 border-b border-surface-light" id="phase1" data-reveal style="--reveal-delay:.08s">
+        <div class="mb-8 border-b border-surface-light pb-4">
+            <span class="font-label-sm text-label-sm text-primary-container uppercase bg-primary-container/10 px-3 py-1 border border-primary-container/30 rounded-full">Immediate Action</span>
+            <h2 class="font-headline-md text-2xl md:text-headline-lg mt-3 text-text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">tune</span>
+                PHASE 1: FIX THE CONVERSION FUNNEL
+            </h2>
+            <p class="font-body-md text-text-secondary mt-1">Implement psychological triggers and scale high-value carousel formats.</p>
+        </div>
+
+        <!-- Interactive CTA Tester -->
+        <div class="interactive-box mb-8">
+            <h3 class="font-headline-md text-xl text-primary-container mb-3 flex items-center gap-2">
+                <span class="material-symbols-outlined">psychology</span>
+                Interactive CTA Trigger Switcher
+            </h3>
+            <p class="font-body-md text-text-secondary mb-4">Click below to see how shifting from generic captions to high-intent psychological triggers trains the Instagram algorithm.</p>
+            
+            <div class="flex gap-3 mb-6">
+                <button id="ctaBeforeBtn" class="tab-btn" onclick="toggleCTA('before')">❌ Generic CTA (Before)</button>
+                <button id="ctaAfterBtn" class="tab-btn active" onclick="toggleCTA('after')">⚡ High-Intent Trigger (After)</button>
+            </div>
+
+            <div id="ctaDisplayBox" class="p-5 bg-surface-deep border border-surface-light rounded-lg">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+
+        <!-- Interactive 4-Slide Carousel Simulator -->
+        <div class="interactive-box">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="font-headline-md text-xl text-text-primary flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary-container">view_carousel</span>
+                        Scale Carousel Format (68.59% ER • 3.7× Outlier)
+                    </h3>
+                    <p class="font-body-md text-text-secondary">Carousels naturally drive "Saves" — the highest-valued metric for the Instagram algorithm.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6" id="carouselSlidesContainer">
+                <div class="p-4 bg-surface-medium border-t-4 border-primary-container rounded">
+                    <span class="font-label-sm text-xs text-primary-container block mb-1">SLIDE 1</span>
+                    <h4 class="font-headline-md text-lg text-white mb-2">The Hook / Before</h4>
+                    <p class="font-body-md text-sm text-text-secondary">"How I went from Skinny 😮💨 to 15.1× Reach in 90 Days"</p>
+                </div>
+                <div class="p-4 bg-surface-medium border-t-4 border-surface-light rounded">
+                    <span class="font-label-sm text-xs text-text-secondary block mb-1">SLIDE 2</span>
+                    <h4 class="font-headline-md text-lg text-white mb-2">Diet Changes</h4>
+                    <p class="font-body-md text-sm text-text-secondary">Exact daily calorie surplus & high-protein Indian diet plan.</p>
+                </div>
+                <div class="p-4 bg-surface-medium border-t-4 border-surface-light rounded">
+                    <span class="font-label-sm text-xs text-text-secondary block mb-1">SLIDE 3</span>
+                    <h4 class="font-headline-md text-lg text-white mb-2">Workout Split</h4>
+                    <p class="font-body-md text-sm text-text-secondary">Push/Pull/Legs progressive overload routine breakdown.</p>
+                </div>
+                <div class="p-4 bg-surface-medium border-t-4 border-primary-container rounded">
+                    <span class="font-label-sm text-xs text-primary-container block mb-1">SLIDE 4</span>
+                    <h4 class="font-headline-md text-lg text-white mb-2">The Result & Save CTA</h4>
+                    <p class="font-body-md text-sm text-text-secondary">Save this post for your next push day. Comment 'BULK' for DM.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Phase 2 - Systematize Content Pillars -->
+    <section class="py-12 md:py-20 border-b border-surface-light" id="phase2" data-reveal style="--reveal-delay:.12s">
+        <div class="mb-8 border-b border-surface-light pb-4">
+            <span class="font-label-sm text-label-sm text-primary-container uppercase bg-primary-container/10 px-3 py-1 border border-primary-container/30 rounded-full">Days 1–30</span>
+            <h2 class="font-headline-md text-2xl md:text-headline-lg mt-3 text-text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">dashboard_customize</span>
+                PHASE 2: SYSTEMATIZE THE CONTENT PILLARS
+            </h2>
+            <p class="font-body-md text-text-secondary mt-1">Reverse the 23.5% slowdown through "niche-stacking" — combining fitness with proven identifiers.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Pillar 1 -->
+            <div class="interactive-box border-l-4 border-primary-container">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="font-label-sm text-xs text-primary-container uppercase">Pillar 01 • 2.45× Moat</span>
+                    <span class="material-symbols-outlined text-primary-container">flag</span>
+                </div>
+                <h3 class="font-headline-md text-xl text-white mb-2">Cultural Identity Moat</h3>
+                <p class="font-body-md text-sm text-text-secondary mb-4">The Marathi/Indian fitness positioning (e.g., कोंडाजी फर्जंद 🚩) is his strongest competitive moat yielding a 2.45× outlier score.</p>
+                <div class="bg-surface-deep p-3 rounded text-xs font-label-md text-primary-container">
+                    Action: 1-2 posts/week blending Marathi audio, regional pride, and heavy lifts.
+                </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="interactive-box border-l-4 border-surface-light hover:border-primary-container">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="font-label-sm text-xs text-text-secondary uppercase">Pillar 02 • High Reach</span>
+                    <span class="material-symbols-outlined text-text-secondary">sentiment_very_satisfied</span>
+                </div>
+                <h3 class="font-headline-md text-xl text-white mb-2">Relatable Gym Humor</h3>
+                <p class="font-body-md text-sm text-text-secondary mb-4">AURA FARM (highest reach) and Okay 💀 (highest comments) prove entertainment scales faster than raw advice.</p>
+                <div class="bg-surface-deep p-3 rounded text-xs font-label-md text-text-secondary">
+                    Action: 5-7s meme formats on unspoken rules & struggles of an 18-yo in the gym.
+                </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="interactive-box border-l-4 border-surface-light hover:border-primary-container">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="font-label-sm text-xs text-text-secondary uppercase">Pillar 03 • 1.99× Outlier</span>
+                    <span class="material-symbols-outlined text-text-secondary">trending_up</span>
+                </div>
+                <h3 class="font-headline-md text-xl text-white mb-2">Transformation Series</h3>
+                <p class="font-body-md text-sm text-text-secondary mb-4">Transformation content generated direct evidence of outperforming baseline (1.99× outlier score).</p>
+                <div class="bg-surface-deep p-3 rounded text-xs font-label-md text-text-secondary">
+                    Action: Frame account around "Building my best version". Bi-weekly raw physique updates.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Phase 3 - Optimize Data & Distribution -->
+    <section class="py-12 md:py-20 mb-16" id="phase3" data-reveal style="--reveal-delay:.16s">
+        <div class="mb-8 border-b border-surface-light pb-4">
+            <span class="font-label-sm text-label-sm text-primary-container uppercase bg-primary-container/10 px-3 py-1 border border-primary-container/30 rounded-full">Days 30+</span>
+            <h2 class="font-headline-md text-2xl md:text-headline-lg mt-3 text-text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">insights</span>
+                PHASE 3: OPTIMIZE DATA & DISTRIBUTION
+            </h2>
+            <p class="font-body-md text-text-secondary mt-1">Tightening backend categorization to elevate baseline views above 1,943.</p>
+        </div>
+
+        <!-- Interactive Hashtag & Multiplier Audit Tool -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="interactive-box">
+                <h3 class="font-headline-md text-xl text-white mb-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-red-400">cancel</span>
+                    Purge Broad Hashtags (Before)
+                </h3>
+                <p class="font-body-md text-sm text-text-secondary mb-4">Broad tags confuse the algorithm by pushing content to random users, killing watch time.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-red-950/40 text-red-400 border border-red-800/40 rounded text-xs font-label-md">#viralreels</span>
+                    <span class="px-3 py-1 bg-red-950/40 text-red-400 border border-red-800/40 rounded text-xs font-label-md">#explorepage</span>
+                    <span class="px-3 py-1 bg-red-950/40 text-red-400 border border-red-800/40 rounded text-xs font-label-md">#fypppppp</span>
+                </div>
+                <span class="text-xs text-red-400 font-label-sm block">Result: Confuses classification → Low Watch Time</span>
+            </div>
+
+            <div class="interactive-box border-primary-container/60 glow-accent">
+                <h3 class="font-headline-md text-xl text-primary-container mb-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Targeted Niche Tags (After)
+                </h3>
+                <p class="font-body-md text-sm text-text-secondary mb-4">Exclusively combine format, identity, and action for hyper-targeted algorithmic reach.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-primary-container/20 text-primary-container border border-primary-container/40 rounded text-xs font-label-md">#marathifitness</span>
+                    <span class="px-3 py-1 bg-primary-container/20 text-primary-container border border-primary-container/40 rounded text-xs font-label-md">#indianfitnesscommunity</span>
+                    <span class="px-3 py-1 bg-primary-container/20 text-primary-container border border-primary-container/40 rounded text-xs font-label-md">#skinnytobulk</span>
+                    <span class="px-3 py-1 bg-primary-container/20 text-primary-container border border-primary-container/40 rounded text-xs font-label-md">#teenbodybuilding</span>
+                </div>
+                <span class="text-xs text-primary-container font-label-sm block">Result: High-Intent Reach → High Follower Conversion</span>
+            </div>
+        </div>
+
+        <!-- Outlier Multiplier Rule Box -->
+        <div class="mt-8 p-6 bg-surface-medium border-l-4 border-primary-container rounded-r-lg">
+            <h3 class="font-headline-md text-lg text-primary-container uppercase mb-2">The Outlier Multiplier Rule</h3>
+            <p class="font-body-md text-text-primary">
+                Treat content like a business balance sheet. When a post hits high return (like the emotional 🫂💪🏻 post hitting <strong>5% ER</strong>), immediately film <strong>3 variations</strong> of that exact concept. Cut losses quickly on generic posts falling below the <strong>0.8× median score</strong>.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<!-- BottomNavBar (Mobile Only — Floating Liquid Glass Capsule Bar) -->
+<nav class="fixed bottom-3 left-1/2 -translate-x-1/2 w-[90%] max-w-[380px] z-50 flex justify-around items-center py-1.5 h-14 glass-panel md:hidden border border-white/20 rounded-full shadow-2xl">
+    <a class="flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform" href="#identity">
+        <span class="material-symbols-outlined text-[20px] mb-0.5" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+        <span class="font-label-sm text-[10px]">Identity</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#phase1">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">tune</span>
+        <span class="font-label-sm text-[10px]">Phase 1</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#phase2">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">view_carousel</span>
+        <span class="font-label-sm text-[10px]">Phase 2</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="#phase3">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">insights</span>
+        <span class="font-label-sm text-[10px]">Phase 3</span>
+    </a>
+</nav>
+
+<script>
+    // Interactive CTA Switcher Logic
+    const ctaData = {
+        before: {
+            text: '"Follow for more."',
+            type: 'Generic Weak CTA',
+            score: '0.2× Conversion Multiplier',
+            effect: 'Ignores viewer psychological triggers. Audience scrolls past without taking action.',
+            color: 'text-red-400'
+        },
+        after: {
+            text: '"Save this split for your next push day," or "Comment \'BULK\' and I\'ll DM you my exact diet plan."',
+            type: 'High-Intent Psychological Trigger',
+            score: '3.7× Algorithm Saver Multiplier',
+            effect: 'Drives "Saves" and "Comments" — training the Instagram algorithm that the content drives direct action.',
+            color: 'text-primary-container'
+        }
+    };
+
+    function toggleCTA(mode) {
+        const btnBefore = document.getElementById('ctaBeforeBtn');
+        const btnAfter = document.getElementById('ctaAfterBtn');
+        const displayBox = document.getElementById('ctaDisplayBox');
+
+        if (mode === 'before') {
+            btnBefore.className = 'tab-btn active';
+            btnAfter.className = 'tab-btn';
+        } else {
+            btnAfter.className = 'tab-btn active';
+            btnBefore.className = 'tab-btn';
+        }
+
+        const item = ctaData[mode];
+        displayBox.innerHTML = `
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-label-sm text-xs ${item.color} uppercase font-bold">${item.type}</span>
+                <span class="font-label-sm text-xs text-text-secondary">${item.score}</span>
+            </div>
+            <h4 class="font-headline-md text-xl text-white mb-2">${item.text}</h4>
+            <p class="font-body-md text-sm text-text-secondary">${item.effect}</p>
+        `;
+    }
+
+    // Initialize with After mode
+    toggleCTA('after');
+</script>
+<script src="assets/js/atomz.js" defer></script>
+</body>
+</html>
