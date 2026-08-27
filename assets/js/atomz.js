@@ -392,30 +392,16 @@ function runIntroLoader() {
   const loaderLogo = document.getElementById('introLoaderLogo');
   const targetLogo = document.querySelector('.brand__logo') || document.querySelector('.brand img') || document.querySelector('header img');
 
-  // Assign rapid stagger indexes to page elements for cascade intro
-  const items = document.querySelectorAll('.hero__copy > *, [data-reveal], .card, .data-card, .steps > li, section');
-  items.forEach((el, index) => {
-    el.style.setProperty('--stagger-index', index);
-  });
+  if (!overlay || !loaderLogo) return;
 
-  document.body.classList.add('page-intro-pending');
-
-  if (!overlay || !loaderLogo) {
-    document.body.classList.remove('page-intro-pending');
-    document.body.classList.add('page-intro-active');
-    return;
-  }
-
-  // Reveal brand text briefly
+  // Reveal brand text in center loader briefly
   setTimeout(() => {
     overlay.classList.add('show-text');
-  }, 220);
+  }, 150);
 
-  // Shrink & glide logo to top-left corner, trigger rapid staggered page entrance
+  // Logo starts flying to top-left corner
   setTimeout(() => {
     overlay.classList.add('animating');
-    document.body.classList.remove('page-intro-pending');
-    document.body.classList.add('page-intro-active');
 
     if (targetLogo) {
       const loaderRect = loaderLogo.getBoundingClientRect();
@@ -429,12 +415,17 @@ function runIntroLoader() {
     } else {
       loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.15)`;
     }
-  }, 800);
+  }, 450);
 
-  // Fade out loader overlay and unmount
+  // As logo reaches top-left corner: fade out overlay and trigger brand text slide-in animation
   setTimeout(() => {
     overlay.classList.add('done');
-  }, 1600);
+
+    const brandEl = document.querySelector('.brand') || document.querySelector('header .font-headline-md');
+    if (brandEl) {
+      brandEl.classList.add('brand-text-reveal');
+    }
+  }, 1150);
 }
 
 if (document.readyState === 'loading') {
