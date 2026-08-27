@@ -1536,19 +1536,38 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
 }
 
+@keyframes logoPulseGlow {
+  0% {
+    filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.75)) drop-shadow(0 0 60px rgba(255, 102, 0, 0.35));
+    transform: scale(0.96);
+  }
+  50% {
+    filter: drop-shadow(0 0 75px rgba(255, 102, 0, 1)) drop-shadow(0 0 120px rgba(255, 102, 0, 0.7));
+    transform: scale(1.05);
+  }
+  100% {
+    filter: drop-shadow(0 0 35px rgba(255, 102, 0, 0.8)) drop-shadow(0 0 70px rgba(255, 102, 0, 0.4));
+    transform: scale(1);
+  }
+}
+
 .intro-loader-logo {
-  width: 140px;
-  height: 140px;
+  width: clamp(200px, 35vw, 260px);
+  height: clamp(200px, 35vw, 260px);
   object-fit: contain;
-  filter: drop-shadow(0 0 45px rgba(255, 102, 0, 0.95));
+  animation: logoPulseGlow 1.2s ease-in-out infinite alternate;
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
+}
+
+.intro-loader-overlay.animating .intro-loader-logo {
+  animation: none !important;
 }
 
 .intro-loader-brand-text {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   letter-spacing: -0.04em;
   color: #FFFFFF;
   opacity: 0;

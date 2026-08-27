@@ -397,7 +397,7 @@ function runIntroLoader() {
   // Reveal text briefly
   setTimeout(() => {
     overlay.classList.add('show-text');
-  }, 200);
+  }, 220);
 
   // Calculate top-left header logo target position and shrink & glide to top-left
   setTimeout(() => {
@@ -408,18 +408,18 @@ function runIntroLoader() {
 
       const dx = targetRect.left + (targetRect.width / 2) - (loaderRect.left + (loaderRect.width / 2));
       const dy = targetRect.top + (targetRect.height / 2) - (loaderRect.top + (loaderRect.height / 2));
-      const scale = Math.max(0.2, targetRect.width / loaderRect.width);
+      const scale = Math.max(0.12, targetRect.width / loaderRect.width);
 
       loaderLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
     } else {
-      loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.24)`;
+      loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.15)`;
     }
-  }, 750);
+  }, 850);
 
   // Fade out loader overlay and unmount
   setTimeout(() => {
     overlay.classList.add('done');
-  }, 1500);
+  }, 1700);
 }
 
 if (document.readyState === 'loading') {
