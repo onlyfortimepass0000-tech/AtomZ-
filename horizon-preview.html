@@ -220,9 +220,16 @@
       font-weight: 800;
     }
 
+    .btn-back-home .mobile-text { display: none; }
+    .btn-back-home .desktop-text { display: inline; }
+
     @media (max-width: 640px) {
       .passkey-input-box { flex-direction: column; }
       .btn--horizon-glow { justify-content: center; width: 100%; }
+      .brand-horizon-tag { display: none !important; }
+      .btn-back-home { padding: 6px 12px !important; font-size: 0.8rem !important; }
+      .btn-back-home .mobile-text { display: inline; }
+      .btn-back-home .desktop-text { display: none; }
     }
   </style>
 </head>
@@ -234,9 +241,12 @@
       <a class="brand" href="index.html" style="color:#FFFFFF !important;">
         <img src="assets/images/logo.png" alt="ATOMZ Logo" class="brand__logo" />
         <span class="brand-text">ATOM</span><span class="brand__z">Z</span>
-        <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-left:6px;">HORIZON</span>
+        <span class="brand-horizon-tag" style="font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-left:6px;">HORIZON</span>
       </a>
-      <a class="btn-back-home" href="index.html">← Back to Home</a>
+      <a class="btn-back-home" href="index.html">
+        <span class="desktop-text">← Back to Home</span>
+        <span class="mobile-text">← Home</span>
+      </a>
     </div>
   </header>
 
