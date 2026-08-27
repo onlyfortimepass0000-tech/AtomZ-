@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATOMZ Horizon — Client Performance Portal</title>
+  <meta name="description" content="ATOMZ Horizon Client Intelligence Portal — Live virality analytics, audience engagement metrics, and creator blueprints." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" />
+
+  <!-- Chart.js and DataLabels plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+  <link rel="stylesheet" href="assets/css/atomz.css" />
+  <style>
+    /* Horizon Preview Custom Styles */
+    .preview-header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--hairline);
+      padding: var(--s-3) 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .preview-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .preview-hero {
+      padding: var(--s-6) 0 var(--s-4);
+      text-align: center;
+    }
+    .preview-title {
+      font-size: var(--step-3);
+      font-family: var(--font-display);
+      margin-bottom: var(--s-2);
+    }
+    .preview-sub {
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0 auto var(--s-5);
+      font-size: var(--step-0);
+    }
+    .preview-passkey-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: var(--s-6) var(--s-5);
+      max-width: 640px;
+      margin: 0 auto var(--s-7);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    }
+    .passkey-input-box {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .passkey-input-box input {
+      flex: 1;
+      background-color: #17171A !important;
+      color: #FFFFFF !important;
+      border: 1px solid #333336 !important;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      outline: none;
+    }
+    .passkey-input-box input::placeholder {
+      color: #8A8A8E !important;
+    }
+    .passkey-input-box input:focus {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px var(--accent-12) !important;
+    }
+    .preview-charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+    .preview-chart-card {
+      background-color: #141414;
+      border: 1px solid #222222;
+      border-top: 4px solid var(--accent);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .preview-chart-card.full-width {
+      grid-column: 1 / -1;
+    }
+    .preview-chart-card h3 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .preview-chart-card p.sub {
+      font-size: 0.85rem;
+      color: #999;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .preview-canvas {
+      position: relative;
+      height: 280px;
+      width: 100%;
+    }
+    .preview-canvas.large {
+      height: 340px;
+    }
+    @media (max-width: 768px) {
+      .preview-charts-grid { grid-template-columns: 1fr; }
+      .passkey-input-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="preview-header">
+    <div class="wrap preview-nav">
+      <a class="brand" href="index.html">ATOM<span class="brand__z">Z</span> <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--accent); text-transform:uppercase; margin-left:6px;">HORIZON</span></a>
+      <a class="btn btn--ghost" href="index.html">← Back to Main Site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Hero Section -->
+    <div class="preview-hero">
+      <p class="eyebrow">Client Intelligence Portal</p>
+      <h1 class="preview-title">Horizon Performance Display</h1>
+      <p class="preview-sub">Explore the interactive analytics and virality metrics available to ATOMZ clients, then enter your passkey to open your full Creator Dossier.</p>
+    </div>
+
+    <!-- Passkey Access Card ("Access Yourself") -->
+    <div class="preview-passkey-card">
+      <span class="horizon-access-tag">Client Passkey Access</span>
+      <h2 style="font-size:1.6rem; font-family:var(--font-display); margin-top:8px; margin-bottom:4px;">Access Yourself</h2>
+      <p style="color:var(--muted); font-size:0.95rem;">Enter your assigned ATOMZ passkey to load your private stats report and creator dossier page.</p>
+      
+      <form id="passkeyForm" onsubmit="return false;">
+        <div class="passkey-input-box">
+          <input type="text" id="passkeyInput" placeholder="Enter passkey..." autocomplete="off" required />
+          <button type="submit" class="btn btn--horizon">
+            <span>Unlock Dossier</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <div id="passkeyStatus" class="horizon-status-msg" style="margin-top:12px;" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <!-- Visual Display of Charts and Graphs -->
+    <section>
+      <div style="text-align:center; margin-bottom:20px;">
+        <p class="eyebrow">Visual Analytics Sample</p>
+        <h2 style="font-size:1.8rem; font-family:var(--font-display);">Sample Client Performance Charts</h2>
+      </div>
+
+      <div class="preview-charts-grid">
+        <!-- Chart 1: Total Views Reach -->
+        <div class="preview-chart-card full-width">
+          <h3>The Virality Engine (Total Views)</h3>
+          <p class="sub">Raw attention capture and viral reach index across recent content.</p>
+          <div class="preview-canvas large">
+            <canvas id="viewsChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Likes vs Comments -->
+        <div class="preview-chart-card">
+          <h3>Ego vs. True Fans (Likes vs Comments)</h3>
+          <p class="sub">Logarithmic engagement distribution comparison.</p>
+          <div class="preview-canvas">
+            <canvas id="interactionChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3: Engagement Rate -->
+        <div class="preview-chart-card">
+          <h3>The "Who Actually Cares" Score</h3>
+          <p class="sub">Percentage of total audience actively converting into interactions.</p>
+          <div class="preview-canvas">
+            <canvas id="erChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Initialize Chart.js Display
+    if (typeof Chart !== "undefined") {
+      if (typeof ChartDataLabels !== "undefined") {
+        try { Chart.register(ChartDataLabels); } catch (e) {}
+      }
+
+      Chart.defaults.color = '#888';
+      Chart.defaults.font.family = "'Open Sans', sans-serif";
+
+      const createGradient = (ctx, color1, color2, isHorizontal = false) => {
+        const gradient = isHorizontal 
+          ? ctx.createLinearGradient(0, 0, 800, 0)
+          : ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
+        return gradient;
+      };
+
+      // Views Chart
+      const ctxViews = document.getElementById('viewsChart').getContext('2d');
+      const gradOrange = createGradient(ctxViews, '#FF4500', '#FFA500', true);
+      new Chart(ctxViews, {
+        type: 'bar',
+        data: {
+          labels: ['₹10K Challenge', 'Hanging Crunches', 'Ayurveda vs Steroids', 'AI Avatar', 'PM Fitness'],
+          datasets: [{
+            label: 'Total Views',
+            data: [1308878, 191861, 148249, 47628, 41170],
+            backgroundColor: [gradOrange, '#333', '#333', '#333', '#333'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            datalabels: {
+              color: (ctx) => ctx.dataIndex === 0 ? '#FFA500' : '#888',
+              anchor: 'end', align: 'right', offset: 8,
+              font: { weight: 'bold' },
+              formatter: (val) => val > 1000000 ? (val/1000000).toFixed(1) + 'M' : (val/1000).toFixed(0) + 'K'
+            }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { grid: { display: false }, ticks: { color: '#ddd' } }
+          }
+        }
+      });
+
+      // Likes vs Comments
+      const ctxInteraction = document.getElementById('interactionChart').getContext('2d');
+      new Chart(ctxInteraction, {
+        type: 'bar',
+        data: {
+          labels: ['₹10K Chal.', 'Ayurveda', 'AI Avatar', 'Crunches', 'PM Fit.'],
+          datasets: [
+            { label: 'Likes', data: [30063, 2365, 778, 1808, 635], backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: 4 },
+            { label: 'Comments', data: [1343, 1031, 1422, 22, 2], backgroundColor: createGradient(ctxInteraction, '#FF4500', '#FF8C00'), borderRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { type: 'logarithmic', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666' } },
+            x: { grid: { display: false }, ticks: { color: '#aaa' } }
+          },
+          plugins: { legend: { labels: { color: '#ccc' } }, datalabels: { display: false } }
+        }
+      });
+
+      // Engagement Rate
+      const ctxER = document.getElementById('erChart').getContext('2d');
+      const goldGrad = createGradient(ctxER, '#FFD700', '#FF8C00', true);
+      new Chart(ctxER, {
+        type: 'bar',
+        data: {
+          labels: ['AI Avatar', '₹10K Chal.', 'Ayurveda', 'PM Fit.', 'Crunches'],
+          datasets: [{
+            label: 'Engagement Rate (%)',
+            data: [4.62, 2.40, 2.29, 1.55, 0.95],
+            backgroundColor: [goldGrad, '#663300', '#663300', '#442200', '#331100'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            datalabels: { color: '#888', anchor: 'end', align: 'right', formatter: (val) => val + '%' }
+          },
+          scales: { x: { display: false }, y: { grid: { display: false }, ticks: { color: '#aaa' } } }
+        }
+      });
+    }
+
+    // Passkey Submission Handler
+    const passkeyForm = document.getElementById('passkeyForm');
+    const passkeyInput = document.getElementById('passkeyInput');
+    const passkeyStatus = document.getElementById('passkeyStatus');
+
+    passkeyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = passkeyInput.value.trim();
+      if (code.length >= 3) {
+        passkeyStatus.textContent = '✓ Passkey Accepted — Loading Creator Dossier...';
+        passkeyStatus.className = 'horizon-status-msg success';
+        setTimeout(() => {
+          window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
+        }, 450);
+      } else {
+        passkeyStatus.textContent = '❌ Please enter a valid passkey.';
+        passkeyStatus.className = 'horizon-status-msg error';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1334,3 +1334,35 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin-top: 15px;
   font-size: 0.95rem;
 }
+
+.btn--horizon-bold {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--accent) !important;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(255, 77, 46, 0.25);
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+.btn--horizon-bold:hover {
+  transform: translateY(-2px);
+  opacity: 0.94;
+}
+
+.horizon-bottom-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-4);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: var(--s-5);
+  margin-top: var(--s-4);
+}
+@media (max-width: 768px) {
+  .horizon-bottom-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
