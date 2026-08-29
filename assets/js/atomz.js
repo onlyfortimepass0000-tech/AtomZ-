@@ -437,3 +437,306 @@ if (document.readyState === 'loading') {
 } else {
   runIntroLoader();
 }
+
+/* ==========================================================================
+   ATOMZ — CREATOR GROWTH DIAGNOSTIC ENGINE
+   ========================================================================== */
+window.CreatorDiagnosticEngine = {
+  profiles: {
+    rahul: {
+      id: "rahul",
+      name: "Rahul Jawatwala",
+      handle: "@rahul_jawatwala",
+      followers: 12400,
+      baselineViews: 8400,
+      peakReach: 48900,
+      sampleSize: 28,
+      confidence: "High (28 Reels analyzed)",
+      provenData: {
+        topFormat: "Case Study Breakdown Reels & Visual Carousels",
+        saveRate: "12.4% Save Rate (4.2× Industry Average)",
+        topCategory: "Founder Case Studies & Growth Breakdown",
+        weakCategory: "Generic Motivational Quotes (<0.4× Outlier)",
+        ctaStatus: "Passive / Missing DM Keyword Trigger"
+      },
+      initialMatrix: [
+        { dimension: "Content Direction", signal: "Developing", confidence: "High", tag: "PROVEN", desc: "Data proves Case Studies outperform quotes by 4.2×" },
+        { dimension: "Growth Objective", signal: "Unclear", confidence: "Low", tag: "UNKNOWN", desc: "Requires creator input on monetization preference" },
+        { dimension: "Audience Alignment", signal: "Strong", confidence: "Medium", tag: "INDICATED", desc: "High saves signal serious founder/creator audience" },
+        { dimension: "Monetization Readiness", signal: "Developing", confidence: "Medium", tag: "INDICATED", desc: "Strong engagement, missing direct offer funnel" },
+        { dimension: "Content Consistency", signal: "Strong", confidence: "High", tag: "PROVEN", desc: "Consistent 4.2 posts/week schedule over 60 days" },
+        { dimension: "Growth Opportunity", signal: "Opportunity", confidence: "High", tag: "PROVEN", desc: "High Save Rate indicates massive DM lead potential" }
+      ],
+      questions: [
+        {
+          id: "q1",
+          title: "What is your primary 90-day business & growth outcome?",
+          subtitle: "Uncertainty: Data shows 12.4% save rate, but monetization intent is unverified.",
+          type: "single",
+          options: [
+            { text: "Monetize via High-Ticket 1-on-1 Consulting or Client Services", value: "consulting", impact: "high_monetization" },
+            { text: "Build Massive Reach & Authority for Brand Sponsorships", value: "brand_deals", impact: "high_reach" },
+            { text: "Launch a Digital Product, Course, or Private Community", value: "digital_product", impact: "high_scale" },
+            { text: "Generate Direct Inbound Leads for an Existing Business", value: "inbound_leads", impact: "high_leads" }
+          ]
+        },
+        {
+          id: "q2",
+          title: "Which content creation format fits your actual weekly schedule?",
+          subtitle: "Uncertainty: Carousels generate 4.2× higher saves but require design time.",
+          type: "single",
+          options: [
+            { text: "2-3 Hours/Week: Prefer Talking Head Videos + Quick Text Overlays", value: "short_video", impact: "time_constrained" },
+            { text: "4-6 Hours/Week: Can create 4-5 Slide Educational Carousels + Video Hooks", value: "carousels_video", impact: "optimal_mix" },
+            { text: "6+ Hours/Week: Full Deep-Dive Production & Long-form Breakdown", value: "deep_dive", impact: "high_production" }
+          ]
+        },
+        {
+          id: "q3",
+          title: "What direct offer or lead trigger can you fulfill immediately?",
+          subtitle: "Uncertainty: Your reels currently lack psychological action triggers.",
+          type: "single",
+          options: [
+            { text: "Free PDF Blueprint / Resource Guide (via Instagram DM Keyword)", value: "dm_keyword", impact: "dm_funnel" },
+            { text: "15-Minute Strategy Audit Call (Link in Bio Booking)", value: "call_booking", impact: "calendar_funnel" },
+            { text: "Exclusive Weekly Newsletter / Substack Signup", value: "newsletter", impact: "email_funnel" }
+          ]
+        },
+        {
+          id: "q4",
+          title: "What is your biggest personal constraint or boundary right now?",
+          subtitle: "Uncertainty: Ensuring recommendations don't cause creator burnout.",
+          type: "single",
+          options: [
+            { text: "Limited time due to client fulfillment / primary business", value: "time_limit", impact: "batch_template" },
+            { text: "Unwilling to post low-effort meme trends or clickbait", value: "quality_boundary", impact: "high_brand" },
+            { text: "Need predictable script templates to remove creative block", value: "script_need", impact: "template_library" }
+          ]
+        }
+      ]
+    },
+    harsh: {
+      id: "harsh",
+      name: "Harsh",
+      handle: "@harsh_fitness",
+      followers: 390,
+      baselineViews: 1943,
+      peakReach: 5894,
+      sampleSize: 14,
+      confidence: "Medium (14 Reels analyzed — 15.1× Viral Outlier Detected)",
+      provenData: {
+        topFormat: "Marathi Cultural Fitness & Gym Meme Reels",
+        saveRate: "68.59% Carousel ER (3.7× Outlier Winner)",
+        topCategory: "Cultural Pride Lifts (कोंडाजी फर्जंद 🚩 - 2.45× Outlier)",
+        weakCategory: "Generic Motivational Posts (<0.8× Outlier)",
+        ctaStatus: "Broken Conversion Mechanism (390 Followers vs 5.8K Views)"
+      },
+      initialMatrix: [
+        { dimension: "Content Direction", signal: "Emerging", confidence: "Medium", tag: "PROVEN", desc: "Marathi audio & humor yield 2.45× outlier reach" },
+        { dimension: "Growth Objective", signal: "Unclear", confidence: "Low", tag: "UNKNOWN", desc: "Requires input on fitness coaching vs entertainment" },
+        { dimension: "Audience Alignment", signal: "Strong", confidence: "Medium", tag: "INDICATED", desc: "AURA FARM & Okay 💀 drive massive engagement" },
+        { dimension: "Monetization Readiness", signal: "Misaligned", confidence: "High", tag: "PROVEN", desc: "High viral reach but 0 active lead capture triggers" },
+        { dimension: "Content Consistency", signal: "Risk", confidence: "High", tag: "PROVEN", desc: "23.5% view slowdown after reverting to generic quotes" },
+        { dimension: "Growth Opportunity", signal: "Opportunity", confidence: "High", tag: "PROVEN", desc: "15.1× follower reach gap represents explosive growth" }
+      ],
+      questions: [
+        {
+          id: "q1",
+          title: "What is your primary 90-day goal for your Instagram account?",
+          subtitle: "Uncertainty: Data shows 5.8K reach (15.1× followers), but conversion intent is unknown.",
+          type: "single",
+          options: [
+            { text: "Build a Massive Following (10K+) & Become a Known Fitness Influencer", value: "influence_scale", impact: "viral_reach" },
+            { text: "Get Paid Online Coaching Clients (1-on-1 Transformation Training)", value: "online_coaching", impact: "high_ticket" },
+            { text: "Promote Local Gym / Personal Training & Regional Fitness Apparel", value: "local_training", impact: "local_brand" }
+          ]
+        },
+        {
+          id: "q2",
+          title: "How do you feel about blending Gym Entertainment with Serious Advice?",
+          subtitle: "Uncertainty: Meme reels drive views (5.8K), while Carousels drive 68% saves.",
+          type: "single",
+          options: [
+            { text: "Hybrid Approach (Recommended): Short 5-7s Memes for Reach + Carousels for Authority", value: "hybrid_blend", impact: "optimal_growth" },
+            { text: "100% Serious Fitness & Transformation (No Jokes or Memes)", value: "pure_fitness", impact: "authority_only" },
+            { text: "100% Gym Humor & Relatable Content (Pure Entertainment)", value: "pure_entertainment", impact: "viral_only" }
+          ]
+        },
+        {
+          id: "q3",
+          title: "What lead magnet or offer can you give viewers who comment 'BULK'?",
+          subtitle: "Uncertainty: Replacing 'Follow for more' requires a tangible incentive.",
+          type: "single",
+          options: [
+            { text: "Free 7-Day Indian Bulk Diet Plan & Workout Split (PDF Guide)", value: "diet_pdf", impact: "lead_magnet" },
+            { text: "Free Physique & Workout Audit via DM Voice Notes", value: "voice_audit", impact: "direct_dm" },
+            { text: "Access to a Private WhatsApp Fitness Community", value: "whatsapp_community", impact: "community_funnel" }
+          ]
+        },
+        {
+          id: "q4",
+          title: "How many days per week can you consistently post new Reels?",
+          subtitle: "Uncertainty: Consistency metric dropped views by 23.5% recently.",
+          type: "single",
+          options: [
+            { text: "3-4 Posts/Week (Focus on High-Quality Carousels & Marathi Audio)", value: "moderate_freq", impact: "quality_focus" },
+            { text: "5-6 Posts/Week (Daily Short Memes + Bi-Weekly Transformation Updates)", value: "high_freq", impact: "scale_focus" }
+          ]
+        }
+      ]
+    }
+  },
+
+  // Calculate dynamic interpretation matrix based on answers
+  calculateMatrix: function(profileId, answers) {
+    const profile = this.profiles[profileId] || this.profiles.rahul;
+    let matrix = JSON.parse(JSON.stringify(profile.initialMatrix));
+
+    if (answers.q1) {
+      const q1Val = answers.q1;
+      const targetDim = matrix.find(m => m.dimension === "Growth Objective");
+      if (targetDim) {
+        targetDim.signal = "Clear";
+        targetDim.confidence = "High";
+        targetDim.tag = "INDICATED";
+        targetDim.desc = "Selected: " + (q1Val === "consulting" || q1Val === "online_coaching" ? "High-Ticket Client Monetization" : "Brand Authority & Massive Reach");
+      }
+    }
+
+    if (answers.q2) {
+      const q2Val = answers.q2;
+      const targetDim = matrix.find(m => m.dimension === "Content Direction");
+      if (targetDim) {
+        targetDim.signal = q2Val.includes("hybrid") || q2Val.includes("carousels") ? "Strong" : "Developing";
+        targetDim.confidence = "High";
+        targetDim.tag = "INDICATED";
+        targetDim.desc = "Aligned with " + (q2Val.includes("carousels") || q2Val.includes("hybrid") ? "High-Save Carousels & Video Hooks" : "Targeted Short Format");
+      }
+    }
+
+    if (answers.q3) {
+      const targetDim = matrix.find(m => m.dimension === "Monetization Readiness");
+      if (targetDim) {
+        targetDim.signal = "Ready";
+        targetDim.confidence = "High";
+        targetDim.tag = "INDICATED";
+        targetDim.desc = "DM Keyword Psychological Trigger Funnel Active";
+      }
+    }
+
+    if (answers.q4) {
+      const targetDim = matrix.find(m => m.dimension === "Content Consistency");
+      if (targetDim) {
+        targetDim.signal = "Strong";
+        targetDim.confidence = "High";
+        targetDim.tag = "INDICATED";
+        targetDim.desc = "Execution batching strategy established";
+      }
+    }
+
+    return matrix;
+  },
+
+  // Synthesize combined Data + Intent + Constraints into structured Diagnosis
+  synthesizeDiagnosis: function(profileId, answers) {
+    const profile = this.profiles[profileId] || this.profiles.rahul;
+    
+    let working = profile.provenData.topFormat + " (" + profile.provenData.saveRate + ")";
+    let intent = answers.q1 ? "Focus on " + answers.q1 : "High-Growth Scaling";
+    let alignment = "Strong alignment between high-performing formats and creator's long-term business goals.";
+    let conflict = "No major strategic conflict detected.";
+    let missing = "Automated DM Keyword Trigger & Niche Hashtag Categorization.";
+    let leverage = "Transition from generic CTAs to High-Intent Psychological Triggers.";
+
+    if (profileId === "harsh") {
+      working = "Cultural Marathi Audio Reels (2.45× Outlier) & 4-Slide Transformation Carousels (68.59% ER).";
+      if (answers.q2 === "pure_fitness") {
+        conflict = "⚠️ STRATEGIC CONFLICT DETECTED: You selected 100% Serious Fitness, but your data proves Relatable Gym Humor (AURA FARM & Okay 💀) generates 15.1× viral reach. We recommend a Hybrid Model rather than eliminating humor completely.";
+      } else {
+        conflict = "Strategic alignment: Blending cultural identity & humor for reach while using carousels for follower conversion.";
+      }
+      missing = "Specific psychological CTAs ('Comment BULK for Diet Plan') to convert 5.8K viral views into followers.";
+      leverage = "Double down on Marathi fitness identity (कोंडाजी फर्जंद 🚩) and convert top Reels into 4-slide carousels.";
+    } else {
+      working = "Case Study Breakdowns & Educational Carousels (12.4% Save Rate • 4.2× Outlier).";
+      missing = "DM Keyword Automation (Comment 'BLUEPRINT' to receive PDF guide).";
+      leverage = "Scale 5-Slide breakdown carousels to drive high-ticket client consulting inquiries.";
+    }
+
+    return {
+      working: working,
+      intent: intent,
+      alignment: alignment,
+      conflict: conflict,
+      missing: missing,
+      leverage: leverage
+    };
+  },
+
+  // Generate Prioritized Next Actions (DO NOW, TEST NEXT, STOP/REDUCE, BUILD TOWARD)
+  generateNextActions: function(profileId, answers) {
+    if (profileId === "harsh") {
+      return [
+        {
+          type: "DO NOW",
+          title: "Implement High-Intent Psychological CTAs",
+          desc: "Replace 'Follow for more' on all upcoming Reels with: 'Save this split for your next push day' or 'Comment BULK and I'll DM you my exact diet plan'.",
+          badgeClass: "do-now",
+          icon: "bolt"
+        },
+        {
+          type: "TEST NEXT",
+          title: "Scale 4-Slide Transformation Carousels",
+          desc: "Convert your top-performing 'Skinny 😮💨' Reel into a 4-slide carousel (Slide 1: Hook, Slide 2: Diet, Slide 3: Workout, Slide 4: Result + Save CTA).",
+          badgeClass: "test-next",
+          icon: "science"
+        },
+        {
+          type: "STOP / REDUCE",
+          title: "Purge Generic Broad Hashtags",
+          desc: "Immediately stop using #viralreels, #explorepage, and #fypppppp. Shift exclusively to niche tags: #marathifitness, #indianfitnesscommunity, #skinnytobulk.",
+          badgeClass: "stop-reduce",
+          icon: "block"
+        },
+        {
+          type: "BUILD TOWARD",
+          title: "Systematize Cultural Identity Moat (कोंडाजी फर्जंद 🚩)",
+          desc: "Establish 1-2 posts/week dedicated to Marathi fitness audio & regional pride combined with heavy lifts (proven 2.45× outlier score).",
+          badgeClass: "build-toward",
+          icon: "flag"
+        }
+      ];
+    } else {
+      return [
+        {
+          type: "DO NOW",
+          title: "Launch DM Keyword Trigger Funnel",
+          desc: "Add 'Comment BLUEPRINT for my free 1-Page Growth Guide' to your next 3 breakdown reels to convert high save rates into direct DM leads.",
+          badgeClass: "do-now",
+          icon: "bolt"
+        },
+        {
+          type: "TEST NEXT",
+          title: "Batch 4-Slide Case Study Carousels",
+          desc: "Test 2 educational carousels per week breaking down specific founder growth case studies (capitalizing on your 12.4% save rate outlier).",
+          badgeClass: "test-next",
+          icon: "science"
+        },
+        {
+          type: "STOP / REDUCE",
+          title: "Eliminate Generic Motivational Quotes",
+          desc: "Stop spending production time on text-on-video quotes (<0.4× outlier performance). Reallocate effort to case study breakdowns.",
+          badgeClass: "stop-reduce",
+          icon: "block"
+        },
+        {
+          type: "BUILD TOWARD",
+          title: "High-Ticket Client Inbound Pipeline",
+          desc: "Build a structured 90-day positioning funnel offering 1-on-1 strategy audits for high-growth founders.",
+          badgeClass: "build-toward",
+          icon: "trending_up"
+        }
+      ];
+    }
+  }
+};

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Creator Growth Diagnostic — ATOMZ Intelligence</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb596",
+                        "surface": "#131313",
+                        "surface-light": "#1C1C1C",
+                        "primary-container": "#ff6600",
+                        "surface-container": "#201f1f",
+                        "text-secondary": "#A0A0A0",
+                        "text-primary": "#FFFFFF",
+                        "surface-deep": "#000000",
+                        "surface-medium": "#121212"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/atomz.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #FFFFFF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.8) !important;
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        .glow-accent {
+            box-shadow: 0 0 20px 2px rgba(255, 102, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid #ff6600 !important;
+        }
+        .profile-selector-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #A0A0A0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .profile-selector-btn.active {
+            background: #FF6600;
+            color: #000000;
+            border-color: #FF6600;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(255, 102, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface-deep text-text-primary min-h-screen pb-24 md:pb-12 selection:bg-primary-container selection:text-surface-deep">
+
+<!-- Intro Loading Screen -->
+<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+  <div class="intro-loader-content">
+    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="bg-background/90 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-surface-light flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 md:h-20">
+    <div class="flex items-center gap-3">
+        <a href="index.html" class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="assets/images/logo.png" alt="ATOMZ Logo" class="h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(255,102,0,0.5)]" />
+            <span class="tracking-tight text-white">ATOMZ</span>
+            <span class="text-xs bg-primary-container text-surface-deep px-2.5 py-0.5 rounded font-label-sm uppercase font-semibold">GROWTH DIAGNOSTIC</span>
+        </a>
+    </div>
+    <div class="flex items-center gap-3 md:gap-6">
+        <a href="horizon-preview.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase hidden sm:inline">← PORTAL PREVIEW</a>
+        <a href="index.html" class="font-label-md text-xs md:text-sm text-on-surface-variant hover:text-primary transition-colors uppercase">HOME</a>
+    </div>
+</header>
+
+<!-- Main Canvas Container -->
+<main class="pt-24 md:pt-28 px-4 md:px-12 max-w-7xl mx-auto w-full space-y-8">
+
+    <!-- Top Hero Banner & Creator Profile Switcher -->
+    <div class="glass-panel p-6 md:p-8 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 scanline" data-reveal>
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-container/10 border border-primary-container/30 rounded-full text-xs font-label-sm text-primary-container uppercase mb-3">
+                <span class="material-symbols-outlined text-sm">psychology</span>
+                INTELLIGENCE ENGINE • DATA + INTENT SYNTHESIS
+            </div>
+            <h1 class="font-display-lg text-3xl md:text-5xl text-white font-bold tracking-tight">Creator Growth Diagnostic</h1>
+            <p class="font-body-md text-text-secondary text-sm md:text-base mt-2 max-w-2xl">
+                We start with your objective Instagram data, identify critical strategic uncertainties, ask 3–5 targeted decision-tree questions, and output an immediate observable action plan.
+            </p>
+        </div>
+
+        <!-- Profile Selector -->
+        <div class="flex flex-col gap-2 w-full md:w-auto bg-surface-medium/80 p-3 rounded-xl border border-surface-light">
+            <span class="font-label-sm text-xs text-text-secondary uppercase">Select Creator Profile:</span>
+            <div class="flex gap-2">
+                <button id="profBtnRahul" class="profile-selector-btn active" onclick="switchProfile('rahul')">Rahul Jawatwala</button>
+                <button id="profBtnHarsh" class="profile-selector-btn" onclick="switchProfile('harsh')">Harsh (@harsh_fitness)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Reality Card (What we already know from Instagram) -->
+    <div id="dataOverviewCard" class="bg-surface-medium border border-surface-light p-6 rounded-xl" data-reveal style="--reveal-delay:.08s">
+        <!-- Dynamically rendered by JS -->
+    </div>
+
+    <!-- Diagnostic Workspace: Split View (Left: Dynamic Question Tree | Right: Live Matrix) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="diagnosticWorkspace">
+        
+        <!-- Left Column: Dynamic Question Card (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+            <div class="glass-panel p-6 md:p-8 rounded-xl border border-surface-light" id="questionCard">
+                <div class="flex justify-between items-center mb-6">
+                    <span id="questionStepBadge" class="font-label-sm text-xs text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1 rounded-full uppercase">
+                        QUESTION 1 OF 4
+                    </span>
+                    <span class="font-label-sm text-xs text-text-secondary uppercase">ADAPTIVE DECISION TREE</span>
+                </div>
+
+                <h2 id="questionTitle" class="font-headline-md text-xl md:text-2xl text-white mb-2 font-bold">
+                    Loading Question...
+                </h2>
+                <p id="questionSubtitle" class="font-body-md text-sm text-text-secondary mb-6 border-l-2 border-primary-container pl-3 py-1">
+                    Loading uncertainty...
+                </p>
+
+                <!-- Options List Container -->
+                <div id="optionsContainer" class="space-y-3">
+                    <!-- Option buttons populated dynamically -->
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center mt-8 pt-4 border-t border-surface-light">
+                    <button id="prevBtn" class="btn btn--ghost text-xs uppercase px-4 py-2 text-text-secondary" onclick="prevQuestion()" disabled>← Previous</button>
+                    <span id="answerStatus" class="font-label-sm text-xs text-primary-container">Select an option to update matrix</span>
+                    <button id="nextBtn" class="btn btn--horizon text-xs uppercase px-6 py-2" onclick="nextQuestion()" disabled>Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Live Interpretation Matrix Panel (5 cols) -->
+        <div class="lg:col-span-5">
+            <div class="glass-panel p-6 rounded-xl border border-surface-light sticky top-24">
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-surface-light">
+                    <div>
+                        <h3 class="font-headline-md text-lg text-white font-bold flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary-container text-xl">analytics</span>
+                            LIVE INTERPRETATION MATRIX
+                        </h3>
+                        <p class="font-label-sm text-xs text-text-secondary mt-0.5">Updates in real time as options are selected</p>
+                    </div>
+                </div>
+
+                <!-- Matrix Table -->
+                <div class="space-y-3" id="matrixContainer">
+                    <!-- Dynamically populated by JS -->
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-surface-light flex items-center justify-between text-xs font-label-sm text-text-secondary">
+                    <span class="flex items-center gap-1"><span class="proven-tag">PROVEN</span> Data</span>
+                    <span class="flex items-center gap-1"><span class="indicated-tag">INDICATED</span> Intent</span>
+                    <span class="flex items-center gap-1"><span class="unknown-tag">UNKNOWN</span> Needs Input</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Diagnosis & Prioritized Actions Canvas (Revealed on Completion) -->
+    <div id="diagnosisCanvas" class="hidden space-y-8" data-reveal>
+        <!-- Synthesis Box -->
+        <div class="glass-panel p-6 md:p-8 rounded-2xl border-2 border-primary-container glow-accent">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <span class="font-label-sm text-xs text-primary-container bg-primary-container/20 border border-primary-container/40 px-3 py-1 rounded-full uppercase">
+                        ✓ DIAGNOSTIC COMPLETE
+                    </span>
+                    <h2 class="font-display-lg text-2xl md:text-3xl text-white font-bold mt-2">Combined Creator Diagnosis</h2>
+                </div>
+                <button onclick="resetDiagnostic()" class="btn text-xs border border-surface-light hover:border-primary-container px-4 py-2 text-text-secondary uppercase">
+                    ↺ Restart Diagnostic
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="synthesisGrid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Prioritized Next Actions (DO NOW, TEST NEXT, STOP/REDUCE, BUILD TOWARD) -->
+        <div>
+            <h3 class="font-headline-md text-2xl text-white font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">format_list_bulleted</span>
+                PRIORITIZED IMMEDIATE NEXT ACTIONS
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="nextActionsGrid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Agency Workflow Persistence Bar -->
+        <div class="glass-panel p-6 rounded-xl border border-surface-light flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h4 class="font-headline-md text-lg text-white font-bold">Connect to Agency Workflow</h4>
+                <p class="font-body-md text-xs text-text-secondary mt-1">Save diagnosis to creator profile & export structured strategy brief for strategists.</p>
+            </div>
+            <div class="flex flex-wrap gap-3 w-full md:w-auto">
+                <button onclick="saveProfile()" class="btn btn--horizon-bold text-xs uppercase px-5 py-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">save</span> Save to Profile
+                </button>
+                <button onclick="copyBrief()" class="btn text-xs border border-primary-container text-primary-container hover:bg-primary-container/10 px-5 py-3 flex items-center gap-2 uppercase">
+                    <span class="material-symbols-outlined text-sm">content_copy</span> Copy Agency Brief
+                </button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- Mobile Bottom Capsule Nav -->
+<nav class="fixed bottom-3 left-1/2 -translate-x-1/2 w-[90%] max-w-[380px] z-50 flex justify-around items-center py-1.5 h-14 glass-panel md:hidden border border-white/20 rounded-full shadow-2xl">
+    <a class="flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform" href="index.html">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">home</span>
+        <span class="font-label-sm text-[10px]">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="horizon-dossier.html">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">person</span>
+        <span class="font-label-sm text-[10px]">Rahul</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="horizon-harsh.html">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">fitness_center</span>
+        <span class="font-label-sm text-[10px]">Harsh</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-secondary-container opacity-70 hover:text-primary active:scale-90 transition-transform" href="horizon-preview.html">
+        <span class="material-symbols-outlined text-[20px] mb-0.5">key</span>
+        <span class="font-label-sm text-[10px]">Portal</span>
+    </a>
+</nav>
+
+<script src="assets/js/atomz.js" defer></script>
+<script>
+    let currentProfileId = 'rahul';
+    let currentQuestionIndex = 0;
+    let selectedAnswers = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Parse URL query parameter ?profile=harsh if available
+        const urlParams = new URLSearchParams(window.location.search);
+        const pParam = urlParams.get('profile');
+        if (pParam === 'harsh') {
+            currentProfileId = 'harsh';
+        }
+        initDiagnostic(currentProfileId);
+    });
+
+    function switchProfile(profId) {
+        currentProfileId = profId;
+        currentQuestionIndex = 0;
+        selectedAnswers = {};
+        
+        document.getElementById('profBtnRahul').className = profId === 'rahul' ? 'profile-selector-btn active' : 'profile-selector-btn';
+        document.getElementById('profBtnHarsh').className = profId === 'harsh' ? 'profile-selector-btn active' : 'profile-selector-btn';
+
+        document.getElementById('diagnosisCanvas').classList.add('hidden');
+        document.getElementById('diagnosticWorkspace').classList.remove('hidden');
+
+        initDiagnostic(profId);
+    }
+
+    function initDiagnostic(profId) {
+        const engine = window.CreatorDiagnosticEngine;
+        const profile = engine.profiles[profId];
+
+        // 1. Render Pre-Loaded Data Overview Card
+        renderDataOverview(profile);
+
+        // 2. Render Initial Live Matrix
+        renderMatrix(profileId, selectedAnswers);
+
+        // 3. Render Current Question
+        renderQuestion(profileId, currentQuestionIndex);
+    }
+
+    function renderDataOverview(profile) {
+        const card = document.getElementById('dataOverviewCard');
+        card.innerHTML = `
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="proven-tag">PRE-ANALYZED INSTAGRAM DATA</span>
+                        <span class="text-xs font-label-sm text-text-secondary">Sample Size: ${profile.confidence}</span>
+                    </div>
+                    <h3 class="font-headline-md text-xl text-white font-bold mt-1">${profile.name} <span class="text-sm font-normal text-text-secondary">(${profile.handle} • ${profile.followers.toLocaleString()} Followers)</span></h3>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-right">
+                        <span class="font-label-sm text-xs text-text-secondary block uppercase">Baseline Avg Views</span>
+                        <span class="font-headline-md text-lg text-white font-bold">${profile.baselineViews.toLocaleString()}</span>
+                    </div>
+                    <div class="text-right border-l border-surface-light pl-4">
+                        <span class="font-label-sm text-xs text-primary-container block uppercase">Peak Reach</span>
+                        <span class="font-headline-md text-lg text-primary-container font-bold">${profile.peakReach.toLocaleString()}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-surface-light/60 text-xs font-body-md text-text-secondary">
+                <div><strong class="text-white">Top Outlier Format:</strong> ${profile.provenData.topFormat}</div>
+                <div><strong class="text-white">Save Rate Metric:</strong> ${profile.provenData.saveRate}</div>
+                <div><strong class="text-white">Conversion Status:</strong> ${profile.provenData.ctaStatus}</div>
+            </div>
+        `;
+    }
+
+    function renderQuestion(profId, qIdx) {
+        const engine = window.CreatorDiagnosticEngine;
+        const profile = engine.profiles[profId];
+        const question = profile.questions[qIdx];
+
+        if (!question) {
+            showFinalDiagnosis(profId);
+            return;
+        }
+
+        document.getElementById('questionStepBadge').textContent = `QUESTION ${qIdx + 1} OF ${profile.questions.length}`;
+        document.getElementById('questionTitle').textContent = question.title;
+        document.getElementById('questionSubtitle').textContent = question.subtitle;
+
+        const optionsContainer = document.getElementById('optionsContainer');
+        optionsContainer.innerHTML = '';
+
+        question.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            const isSelected = selectedAnswers[question.id] === opt.value;
+            btn.className = isSelected ? 'diagnostic-option-btn selected' : 'diagnostic-option-btn';
+            btn.innerHTML = `
+                <span class="font-label-sm text-xs px-2.5 py-1 bg-white/10 rounded font-bold text-primary-container">${String.fromCharCode(65 + idx)}</span>
+                <div>
+                    <span class="font-body-md text-sm text-white font-semibold block">${opt.text}</span>
+                </div>
+            `;
+            btn.onclick = () => selectOption(question.id, opt.value);
+            optionsContainer.appendChild(btn);
+        });
+
+        document.getElementById('prevBtn').disabled = qIdx === 0;
+        document.getElementById('nextBtn').disabled = !selectedAnswers[question.id];
+        document.getElementById('nextBtn').textContent = qIdx === profile.questions.length - 1 ? 'Complete Diagnostic →' : 'Next →';
+    }
+
+    function selectOption(qId, val) {
+        selectedAnswers[qId] = val;
+        renderQuestion(currentProfileId, currentQuestionIndex);
+        renderMatrix(currentProfileId, selectedAnswers);
+    }
+
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            renderQuestion(currentProfileId, currentQuestionIndex);
+        }
+    }
+
+    function nextQuestion() {
+        const engine = window.CreatorDiagnosticEngine;
+        const profile = engine.profiles[currentProfileId];
+        if (currentQuestionIndex < profile.questions.length - 1) {
+            currentQuestionIndex++;
+            renderQuestion(currentProfileId, currentQuestionIndex);
+        } else {
+            showFinalDiagnosis(currentProfileId);
+        }
+    }
+
+    function renderMatrix(profId, answers) {
+        const engine = window.CreatorDiagnosticEngine;
+        const matrix = engine.calculateMatrix(profId, answers);
+        const matrixContainer = document.getElementById('matrixContainer');
+        matrixContainer.innerHTML = '';
+
+        matrix.forEach(item => {
+            const pillClass = item.signal.toLowerCase();
+            const tagClass = item.tag.toLowerCase() + '-tag';
+
+            const row = document.createElement('div');
+            row.className = 'p-3 bg-surface-medium/80 border border-surface-light rounded-lg flex flex-col gap-1 transition-all duration-300';
+            row.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="font-headline-md text-xs font-bold text-white uppercase">${item.dimension}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="${tagClass}">${item.tag}</span>
+                        <span class="matrix-pill ${pillClass}">${item.signal}</span>
+                    </div>
+                </div>
+                <p class="font-body-md text-[11px] text-text-secondary mt-1">${item.desc}</p>
+            `;
+            matrixContainer.appendChild(row);
+        });
+    }
+
+    function showFinalDiagnosis(profId) {
+        document.getElementById('diagnosticWorkspace').classList.add('hidden');
+        const diagCanvas = document.getElementById('diagnosisCanvas');
+        diagCanvas.classList.remove('hidden');
+
+        const engine = window.CreatorDiagnosticEngine;
+        const diagnosis = engine.synthesizeDiagnosis(profId, selectedAnswers);
+        const actions = engine.generateNextActions(profId, selectedAnswers);
+
+        // Render Synthesis Grid
+        const grid = document.getElementById('synthesisGrid');
+        grid.innerHTML = `
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-emerald-400 font-bold block mb-1 uppercase">✓ What is Working (Proven Data)</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.working}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-primary-container font-bold block mb-1 uppercase">🎯 Creator Stated Intent</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.intent}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-amber-400 font-bold block mb-1 uppercase">⚖️ Strategic Alignment & Conflict</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.conflict}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-primary-container font-bold block mb-1 uppercase">⚡ Highest-Leverage Growth Opportunity</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.leverage}</p>
+            </div>
+        `;
+
+        // Render Next Actions
+        const actionsGrid = document.getElementById('nextActionsGrid');
+        actionsGrid.innerHTML = '';
+        actions.forEach(act => {
+            const card = document.createElement('div');
+            card.className = `action-step-card ${act.badgeClass}`;
+            card.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-label-sm text-xs font-bold uppercase tracking-wider text-primary-container flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">${act.icon}</span> ${act.type}
+                    </span>
+                </div>
+                <h4 class="font-headline-md text-lg text-white font-bold mb-2">${act.title}</h4>
+                <p class="font-body-md text-sm text-text-secondary">${act.desc}</p>
+            `;
+            actionsGrid.appendChild(card);
+        });
+    }
+
+    function resetDiagnostic() {
+        selectedAnswers = {};
+        currentQuestionIndex = 0;
+        document.getElementById('diagnosisCanvas').classList.add('hidden');
+        document.getElementById('diagnosticWorkspace').classList.remove('hidden');
+        initDiagnostic(currentProfileId);
+    }
+
+    function saveProfile() {
+        const engine = window.CreatorDiagnosticEngine;
+        const profile = engine.profiles[currentProfileId];
+        const diagnosis = engine.synthesizeDiagnosis(currentProfileId, selectedAnswers);
+        const actions = engine.generateNextActions(currentProfileId, selectedAnswers);
+
+        const payload = {
+            profileId: currentProfileId,
+            name: profile.name,
+            handle: profile.handle,
+            answers: selectedAnswers,
+            diagnosis: diagnosis,
+            actions: actions,
+            timestamp: new Date().toISOString()
+        };
+
+        localStorage.setItem(`atomz_diagnostic_${currentProfileId}`, JSON.stringify(payload));
+        alert(`✓ Diagnostic saved to profile for ${profile.name}! Agency strategists can access this profile.`);
+    }
+
+    function copyBrief() {
+        const engine = window.CreatorDiagnosticEngine;
+        const profile = engine.profiles[currentProfileId];
+        const diagnosis = engine.synthesizeDiagnosis(currentProfileId, selectedAnswers);
+        const actions = engine.generateNextActions(currentProfileId, selectedAnswers);
+
+        let brief = `=== ATOMZ CREATOR GROWTH DIAGNOSIS REPORT ===\n`;
+        brief += `Creator: ${profile.name} (${profile.handle})\n`;
+        brief += `Followers: ${profile.followers} | Baseline Avg: ${profile.baselineViews} | Peak Reach: ${profile.peakReach}\n\n`;
+        brief += `[1. PROVEN DATA]: ${diagnosis.working}\n`;
+        brief += `[2. STATED INTENT]: ${diagnosis.intent}\n`;
+        brief += `[3. STRATEGIC ALIGNMENT/CONFLICT]: ${diagnosis.conflict}\n`;
+        brief += `[4. HIGHEST LEVERAGE OPPORTUNITY]: ${diagnosis.leverage}\n\n`;
+        brief += `=== PRIORITIZED IMMEDIATE NEXT ACTIONS ===\n`;
+        actions.forEach(a => {
+            brief += `• [${a.type}]: ${a.title}\n  ${a.desc}\n\n`;
+        });
+
+        navigator.clipboard.writeText(brief).then(() => {
+            alert(`✓ Formatted Agency Strategy Brief copied to clipboard!`);
+        });
+    }
+</script>
+</body>
+</html>
