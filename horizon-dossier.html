@@ -2,21 +2,215 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOMZ — Where You Actually Stand (Rahul Jawatwala)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ATOMZ — Client Portal (Rahul Jawatwala - atomz111)</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ff8a33",
+                        "primary-container": "#ff6b00",
+                        "pink-accent": "#ff2a7a",
+                        "surface": "#000000",
+                        "surface-container": "#111111",
+                        "surface-container-high": "#1a1a1a",
+                        "outline-variant": "#333333",
+                        "on-surface": "#ffffff",
+                        "on-surface-variant": "#cccccc"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sora", "sans-serif"],
+                        "metadata": ["Montserrat", "sans-serif"],
+                        "script-body": ["Montserrat", "sans-serif"],
+                        "script-highlight": ["Montserrat", "sans-serif"]
+                    }
+                }
+            }
+        }
+</script>
+
 <style>
-:root{--charcoal:#0B0B0D;--accent:#FF4D2E;--gold:#F2B705;--offwhite:#F5F5F0;--grey:#8A8580;--grey-light:#EAE8E3;--green:#2F8F5B;}
+:root{
+  --charcoal:#0B0B0D;
+  --accent:#FF4D2E;
+  --gold:#F2B705;
+  --offwhite:#F5F5F0;
+  --grey:#8A8580;
+  --grey-light:#EAE8E3;
+  --green:#2F8F5B;
+  --primary-orange:#FF6B00;
+  --pink-accent:#FF2A7A;
+}
 *{box-sizing:border-box;}
-body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:var(--offwhite);color:var(--charcoal);}
-.wrap{max-width:640px;margin:0 auto;padding:0 0 60px;}
-.hero{background:var(--charcoal);color:var(--offwhite);padding:28px 20px 22px;}
+body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:#000000;color:#FFFFFF;overflow-x:hidden;}
+.wrap{max-width:680px;margin:0 auto;padding:0 0 80px;}
+
+/* Header Navigation Bar */
+.portal-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(10, 10, 12, 0.9);
+  backdrop-filter: blur(16px);
+  border-b: 1px solid #222222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+}
+.portal-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.portal-logo span.accent { color: #FF6B00; }
+.portal-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: rgba(255, 107, 0, 0.15);
+  color: #FF6B00;
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* Screen 1: Central Portal Option Selector Hub */
+.hub-screen {
+  min-h: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px 60px;
+  background: radial-gradient(circle at center, rgba(255,107,0,0.08) 0%, rgba(0,0,0,1) 70%);
+}
+.hub-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.hub-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #FF6B00;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hub-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+}
+.hub-sub {
+  font-size: 14px;
+  color: #A0A0A0;
+  margin-bottom: 32px;
+}
+.hub-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .hub-options-grid { grid-template-columns: 1fr 1fr; }
+}
+.hub-card {
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hub-card:hover {
+  border-color: #FF6B00;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(255, 107, 0, 0.25);
+  background: #161616;
+}
+.hub-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 107, 0, 0.15);
+  color: #FF6B00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.hub-card-icon.pink {
+  background: rgba(255, 42, 122, 0.15);
+  color: #FF2A7A;
+}
+.hub-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 6px;
+}
+.hub-card-desc {
+  font-size: 12.5px;
+  color: #A0A0A0;
+  line-height: 1.4;
+  margin: 0 0 16px;
+}
+.hub-card-action {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FF6B00;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.hub-card-action.pink { color: #FF2A7A; }
+
+/* Matrix Diagnostic Tool (Screen 2A) */
+.matrix-container-wrap {
+  display: none;
+  padding-top: 80px;
+}
+.matrix-container-wrap.active { display: block; }
+
+/* Matrix CSS from Provided Template */
+.hero{background:var(--charcoal);color:var(--offwhite);padding:28px 20px 22px;border-radius:16px;margin-bottom:20px;}
 .eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px;}
 .headline{font-size:21px;font-weight:800;line-height:1.2;margin:0 0 4px;}
 .handle{font-size:13px;color:#B8B4AD;margin:0;}
 section{padding:18px 20px 4px;}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin:0 0 10px;}
-
-.proof-card{background:#fff;border:1.5px solid var(--grey-light);border-radius:12px;padding:16px;}
+.proof-card{background:#fff;border:1.5px solid var(--grey-light);border-radius:12px;padding:16px;color:var(--charcoal);}
 .proof-tag{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(47,143,91,.1);padding:4px 10px;border-radius:20px;margin-bottom:8px;}
 .proof-title{font-size:15px;font-weight:700;margin:0 0 4px;}
 .proof-stat{font-size:12.5px;color:var(--grey);line-height:1.4;margin:0;}
@@ -25,11 +219,11 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey
 .proof-source{font-size:11px;color:var(--grey);font-style:italic;margin:8px 0 0;}
 
 .q-block{margin-bottom:18px;}
-.q-text{font-size:14px;font-weight:700;margin:0 0 10px;}
+.q-text{font-size:14px;font-weight:700;margin:0 0 10px;color:#FFFFFF;}
 .opts{display:flex;flex-direction:column;gap:8px;}
 .opt{display:block;position:relative;}
 .opt input{position:absolute;opacity:0;}
-.opt .card{display:block;padding:12px 14px;border:1.5px solid var(--grey-light);border-radius:10px;background:#fff;font-size:13.5px;font-weight:600;cursor:pointer;}
+.opt .card{display:block;padding:12px 14px;border:1.5px solid var(--grey-light);border-radius:10px;background:#fff;color:var(--charcoal);font-size:13.5px;font-weight:600;cursor:pointer;}
 .opt input:checked + .card{border-color:var(--accent);background:rgba(255,77,46,.06);color:var(--accent);}
 
 .placeholder{font-size:13px;color:var(--grey);font-style:italic;}
@@ -47,21 +241,20 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey
 .badge-coral{background:rgba(255,77,46,.14);color:var(--accent);}
 .badge-gold{background:rgba(242,183,5,.2);color:#8a6a00;}
 .badge-grey{background:var(--grey-light);color:var(--grey);}
-.verdict p{font-size:13.5px;line-height:1.5;color:#403D38;margin:0;}
-.goalnote{display:none;font-size:13px;line-height:1.5;color:#403D38;margin:8px 0 0;padding:10px 12px;background:#fff;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
-.stakes{display:none;font-size:13px;line-height:1.5;color:#403D38;font-weight:600;margin:10px 0 0;padding:10px 12px;background:rgba(255,77,46,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
-.posnote{display:none;font-size:13px;line-height:1.5;color:#403D38;margin:8px 0 0;padding:10px 12px;background:#fff;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;}
+.verdict p{font-size:13.5px;line-height:1.5;color:#E0E0E0;margin:0;}
+.goalnote{display:none;font-size:13px;line-height:1.5;color:#E0E0E0;margin:8px 0 0;padding:10px 12px;background:#111111;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.stakes{display:none;font-size:13px;line-height:1.5;color:#E0E0E0;font-weight:600;margin:10px 0 0;padding:10px 12px;background:rgba(255,77,46,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.posnote{display:none;font-size:13px;line-height:1.5;color:#E0E0E0;margin:8px 0 0;padding:10px 12px;background:#111111;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;}
 
 .move-wrap{display:none;}
-.move{display:none;background:var(--charcoal);color:var(--offwhite);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.5;margin-bottom:8px;}
+.move{display:none;background:#111111;border:1px solid #333333;color:var(--offwhite);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.5;margin-bottom:8px;}
 .pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
 
-/* ===== Reveal logic — pure CSS, no JavaScript ===== */
+/* Reveal logic */
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholder{display:none}
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .mini-grid .mini,
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .move-wrap{display:block}
 
-/* SERVED goals */
 body:has(#id-win:checked):has(#goal-followers:checked) .v-aligned,
 body:has(#id-win:checked):has(#goal-clients:checked) .v-aligned,
 body:has(#id-win:checked):has(#goal-consistency:checked) .v-aligned,
@@ -100,7 +293,6 @@ body:has(#id-c:checked):has(#goal-followers:checked) .mini.blindspot,
 body:has(#id-c:checked):has(#goal-clients:checked) .mini.blindspot,
 body:has(#id-c:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
 
-/* NOT-SERVED goals */
 body:has(#id-win:checked):has(#goal-branddeals:checked) .v-wrongdest,
 body:has(#id-win:checked):has(#goal-branddeals:checked) .move-wrongdest{display:block}
 body:has(#id-win:checked):has(#goal-branddeals:checked) .mini.wrongdest{opacity:1;border-color:var(--accent)}
@@ -115,128 +307,692 @@ body:has(#id-a:checked):has(#goal-branddeals:checked) .mini.reset,
 body:has(#id-b:checked):has(#goal-branddeals:checked) .mini.reset,
 body:has(#id-c:checked):has(#goal-branddeals:checked) .mini.reset{opacity:1;border-color:var(--grey)}
 
-/* Goal-specific notes */
 body:has(#goal-followers:checked) .gn-followers{display:block}
 body:has(#goal-branddeals:checked) .gn-branddeals{display:block}
 body:has(#goal-clients:checked) .gn-clients{display:block}
 body:has(#goal-consistency:checked) .gn-consistency{display:block}
 
-/* Capacity pace notes */
 body:has(#cap-low:checked) .pace-low{display:block}
 body:has(#cap-mid:checked) .pace-mid{display:block}
 body:has(#cap-high:checked) .pace-high{display:block}
 
-/* Positioning notes (Q4) */
 body:has(#pos-a:checked) .pn-a{display:block}
 body:has(#pos-b:checked) .pn-b{display:block}
 body:has(#pos-c:checked) .pn-c{display:block}
 body:has(#pos-d:checked) .pn-d{display:block}
+
+/* Screen 2B: Custom Script Provider Tool (PRO SCRIPT Kinetic Precision UI) */
+.script-provider-wrap {
+  display: none;
+  padding-top: 80px;
+}
+.script-provider-wrap.active { display: block; }
+
+.script-tab-selector {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-b: 1px solid #222222;
+}
+.script-tab-btn {
+  background: #111111;
+  border: 1px solid #333333;
+  color: #A0A0A0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.script-tab-btn:hover {
+  border-color: #FF6B00;
+  color: #FFFFFF;
+}
+.script-tab-btn.active {
+  background: #FF6B00;
+  color: #000000;
+  border-color: #FF6B00;
+  font-weight: 800;
+}
+
+/* Background Animated Gradient Particle Glow for Live Script Atmosphere */
+.live-script-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 42, 122, 0.12) 0%, rgba(255, 107, 0, 0.05) 50%, transparent 80%);
+  z-index: 0;
+}
 </style>
 </head>
-<body>
-<div class="wrap">
-  <div class="hero">
-    <p class="eyebrow">ATOMZ · Where You Actually Stand</p>
-    <h1 class="headline">A Few Quick Questions</h1>
-    <p class="handle">Rahul Jawatwala · Creator Playbook</p>
+<body class="bg-background text-on-background font-metadata antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- Portal Header -->
+<header class="portal-header">
+  <a href="#" onclick="showScreen('hub')" class="portal-logo">
+    ATOM<span class="accent">Z</span> <span class="text-xs text-on-surface-variant font-normal">| HORIZON PORTAL</span>
+  </a>
+  <div class="flex items-center gap-3">
+    <span class="portal-badge">CLIENT: RAHUL (ATOMZ111)</span>
+    <button onclick="showScreen('hub')" class="text-xs bg-surface-container-high border border-outline-variant hover:border-primary text-on-surface px-3 py-1.5 rounded uppercase font-bold flex items-center gap-1 transition-colors">
+      <span class="material-symbols-outlined text-[16px]">grid_view</span> HUB
+    </button>
   </div>
+</header>
 
-  <section>
-    <h2>What the data already proves</h2>
-    <div class="proof-card">
-      <span class="proof-tag">Pulled from your audit</span>
-      <p class="proof-title">Free value + a specific ask beats raw scale</p>
-      <p class="proof-stat"><b>1,422 comments</b> on your AI Avatar Tip (only 47K views) — more real engagement than your 1.3M-view ₹10K Challenge (1,343 comments), and 65x more than your 191K-view Hanging Crunches video (22 comments).</p>
-      <p class="proof-why">Why: the AI Avatar video gave away a secret trick for free and asked for one specific thing back — a comment. That's the exact signal brands actually look for: an audience that talks back.</p>
-      <p class="proof-source">Based on your actual last 5 reels — not an industry benchmark.</p>
-    </div>
-  </section>
+<!-- ============================================================
+SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB (Middle of Screen)
+============================================================ -->
+<div id="hubScreen" class="hub-screen">
+  <div class="hub-container">
+    <div class="hub-eyebrow">ATOMZ HORIZON CLIENT PORTAL</div>
+    <h1 class="hub-title">Select Client Tool</h1>
+    <p class="hub-sub">Welcome Rahul. Choose a tool below to calculate positioning or execute high-performing Reels scripts.</p>
+    
+    <div class="hub-options-grid">
+      <!-- Option Card 1: Matrix Diagnostic -->
+      <div onclick="showScreen('matrix')" class="hub-card">
+        <div>
+          <div class="hub-card-icon">
+            <span class="material-symbols-outlined text-[24px]">analytics</span>
+          </div>
+          <h3 class="hub-card-title">Matrix Diagnostic</h3>
+          <p class="hub-card-desc">Where You Actually Stand — Goal-Fit Audit, positioning matrix, and weekly action moves.</p>
+        </div>
+        <div class="hub-card-action">
+          OPEN TOOL <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </div>
+      </div>
 
-  <section>
-    <h2>Now, tell us the rest</h2>
-
-    <div class="q-block">
-      <p class="q-text">1. What do you think your content is mainly about right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="identity" id="id-a"><span class="card">High-stakes challenges or bets</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-win"><span class="card">Free value + a specific ask</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-b"><span class="card">A mix of approaches</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-c"><span class="card">Straight fitness/workout demos</span></label>
+      <!-- Option Card 2: Custom Script Provider Tool -->
+      <div onclick="showScreen('scripts')" class="hub-card border-primary-container">
+        <div>
+          <div class="hub-card-icon pink">
+            <span class="material-symbols-outlined text-[24px]">movie</span>
+          </div>
+          <h3 class="hub-card-title text-pink-accent">Script Provider</h3>
+          <p class="hub-card-desc">Execute high-performing Instagram Reels scripts with verbatim dialogue, visual cues & shooting directives.</p>
+        </div>
+        <div class="hub-card-action pink">
+          LAUNCH SCRIPTS <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+        </div>
       </div>
     </div>
-
-    <div class="q-block">
-      <p class="q-text">2. What's your main goal right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
-      </div>
-    </div>
-
-    <div class="q-block">
-      <p class="q-text">3. How many reels can you realistically shoot per week?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
-      </div>
-    </div>
-
-    <div class="q-block">
-      <p class="q-text">4. What do you want to be known for in 6 months?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="position" id="pos-a"><span class="card">Comment-driven value creator</span></label>
-        <label class="opt"><input type="radio" name="position" id="pos-b"><span class="card">Viral challenge creator</span></label>
-        <label class="opt"><input type="radio" name="position" id="pos-c"><span class="card">High-authority educator</span></label>
-        <label class="opt"><input type="radio" name="position" id="pos-d"><span class="card">Commercial brand ambassador</span></label>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Your position</h2>
-    <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
-
-    <div class="mini-grid">
-      <div class="mini blindspot">Blind spot</div>
-      <div class="mini aligned">Fully aligned</div>
-      <div class="mini reset">Reset needed</div>
-      <div class="mini wrongdest">Right lane, wrong destination</div>
-    </div>
-
-    <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
-    <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
-    <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
-    <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
-
-    <p class="goalnote gn-followers">Comment-driven fan-building is exactly what compounds into real follower growth — more sustainably than a one-off viral hit ever will.</p>
-    <p class="goalnote gn-branddeals">Your own audit says this outright: brands want an audience that talks back. This format is your clearest, fastest path to brand-deal readiness.</p>
-    <p class="goalnote gn-clients">This playbook is built for an entertainment/value creator chasing followers and brand deals — there's no coaching or service offer in the picture here, so "clients" isn't really the right goal to chase with this content.</p>
-    <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
-
-    <p class="posnote pn-a">Positioning Note A: Focus 80% of your production volume on Free Trick value reels with direct comment CTAs.</p>
-    <p class="posnote pn-b">Positioning Note B: High-stakes challenges drive reach but low comment conversion on their own.</p>
-    <p class="posnote pn-c">Positioning Note C: Build high-authority breakdown series once a week.</p>
-    <p class="posnote pn-d">Positioning Note D: Assemble a media kit using your 1,422 comment proof point.</p>
-
-    <div class="stakes stakes-aligned">If this stalls: your reach could keep climbing on high-stakes videos while your comment counts stay flat — and reach without real engagement is exactly what "Ghost Video" looks like to a brand.</div>
-    <div class="stakes stakes-wrongdest">If this doesn't change: you'll keep building a genuinely great fanbase with nowhere to send it, since there's no service offer to convert them into.</div>
-    <div class="stakes stakes-blindspot">If this doesn't change: you'll keep chasing views like the ₹10K Challenge while your actual highest-leverage format — the AI Avatar Tip style — gets made once and forgotten.</div>
-    <div class="stakes stakes-reset">If this doesn't change: you'll keep producing "Ghost Videos" — huge reach, 22 comments — mistaking views for traction.</div>
-  </section>
-
-  <section class="move-wrap">
-    <h2>This week's move</h2>
-    <div class="move move-aligned">Shoot 2 more "Free Trick" style videos this week — free tip on camera, end with "Comment [WORD] and I'll DM you the list." Don't chase another high-stakes challenge yet.</div>
-    <div class="move move-wrongdest">Keep making Free Trick content, but redirect the energy toward brand deals specifically — start a simple one-page media kit using your comment/engagement numbers as proof.</div>
-    <div class="move move-blindspot">Try one Free Trick video this week even if challenges feel like your "real" content — the data says it builds more of what brands actually pay for.</div>
-    <div class="move move-reset">Before shooting anything else, decide what you're actually building — an entertainment brand for followers and deals, or a coaching brand for clients. Right now the content doesn't commit to either.</div>
-    <p class="pace pace-low">At 1–2 videos/week, expect the comment-building pattern to take longer to compound into visible brand-deal interest.</p>
-    <p class="pace pace-mid">3–5 videos/week is a solid, sustainable pace to build a genuine comment-driven fanbase.</p>
-    <p class="pace pace-high">5+ videos/week could get you noticed by brands faster — as long as the "give value, ask one thing" structure stays consistent across all of them.</p>
-  </section>
+  </div>
 </div>
+
+
+<!-- ============================================================
+SCREEN 2A: CREATOR MATRIX DIAGNOSTIC (Where You Actually Stand)
+============================================================ -->
+<div id="matrixScreen" class="matrix-container-wrap">
+  <div class="wrap">
+    <div class="hero">
+      <p class="eyebrow">ATOMZ · Where You Actually Stand</p>
+      <h1 class="headline">A Few Quick Questions</h1>
+      <p class="handle">Rahul Jawatwala · Creator Playbook</p>
+    </div>
+
+    <section>
+      <h2>What the data already proves</h2>
+      <div class="proof-card">
+        <span class="proof-tag">Pulled from your audit</span>
+        <p class="proof-title">Free value + a specific ask beats raw scale</p>
+        <p class="proof-stat"><b>1,422 comments</b> on your AI Avatar Tip (only 47K views) — more real engagement than your 1.3M-view ₹10K Challenge (1,343 comments), and 65x more than your 191K-view Hanging Crunches video (22 comments).</p>
+        <p class="proof-why">Why: the AI Avatar video gave away a secret trick for free and asked for one specific thing back — a comment. That's the exact signal brands actually look for: an audience that talks back.</p>
+        <p class="proof-source">Based on your actual last 5 reels — not an industry benchmark.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Now, tell us the rest</h2>
+
+      <div class="q-block">
+        <p class="q-text">1. What do you think your content is mainly about right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="identity" id="id-a"><span class="card">High-stakes challenges or bets</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-win"><span class="card">Free value + a specific ask</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-b"><span class="card">A mix of approaches</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-c"><span class="card">Straight fitness/workout demos</span></label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-text">2. What's your main goal right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-text">3. How many reels can you realistically shoot per week?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <p class="q-text">4. What do you want to be known for in 6 months?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="position" id="pos-a"><span class="card">Comment-driven value creator</span></label>
+          <label class="opt"><input type="radio" name="position" id="pos-b"><span class="card">Viral challenge creator</span></label>
+          <label class="opt"><input type="radio" name="position" id="pos-c"><span class="card">High-authority educator</span></label>
+          <label class="opt"><input type="radio" name="position" id="pos-d"><span class="card">Commercial brand ambassador</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Your position</h2>
+      <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
+
+      <div class="mini-grid">
+        <div class="mini blindspot">Blind spot</div>
+        <div class="mini aligned">Fully aligned</div>
+        <div class="mini reset">Reset needed</div>
+        <div class="mini wrongdest">Right lane, wrong destination</div>
+      </div>
+
+      <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
+      <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
+      <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
+      <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
+
+      <p class="goalnote gn-followers">Comment-driven fan-building is exactly what compounds into real follower growth — more sustainably than a one-off viral hit ever will.</p>
+      <p class="goalnote gn-branddeals">Your own audit says this outright: brands want an audience that talks back. This format is your clearest, fastest path to brand-deal readiness.</p>
+      <p class="goalnote gn-clients">This playbook is built for an entertainment/value creator chasing followers and brand deals — there's no coaching or service offer in the picture here, so "clients" isn't really the right goal to chase with this content.</p>
+      <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
+
+      <p class="posnote pn-a">Positioning Note A: Focus 80% of your production volume on Free Trick value reels with direct comment CTAs.</p>
+      <p class="posnote pn-b">Positioning Note B: High-stakes challenges drive reach but low comment conversion on their own.</p>
+      <p class="posnote pn-c">Positioning Note C: Build high-authority breakdown series once a week.</p>
+      <p class="posnote pn-d">Positioning Note D: Assemble a media kit using your 1,422 comment proof point.</p>
+
+      <div class="stakes stakes-aligned">If this stalls: your reach could keep climbing on high-stakes videos while your comment counts stay flat — and reach without real engagement is exactly what "Ghost Video" looks like to a brand.</div>
+      <div class="stakes stakes-wrongdest">If this doesn't change: you'll keep building a genuinely great fanbase with nowhere to send it, since there's no service offer to convert them into.</div>
+      <div class="stakes stakes-blindspot">If this doesn't change: you'll keep chasing views like the ₹10K Challenge while your actual highest-leverage format — the AI Avatar Tip style — gets made once and forgotten.</div>
+      <div class="stakes stakes-reset">If this doesn't change: you'll keep producing "Ghost Videos" — huge reach, 22 comments — mistaking views for traction.</div>
+    </section>
+
+    <section class="move-wrap">
+      <h2>This week's move</h2>
+      <div class="move move-aligned">Shoot 2 more "Free Trick" style videos this week — free tip on camera, end with "Comment [WORD] and I'll DM you the list." Don't chase another high-stakes challenge yet.</div>
+      <div class="move move-wrongdest">Keep making Free Trick content, but redirect the energy toward brand deals specifically — start a simple one-page media kit using your comment/engagement numbers as proof.</div>
+      <div class="move move-blindspot">Try one Free Trick video this week even if challenges feel like your "real" content — the data says it builds more of what brands actually pay for.</div>
+      <div class="move move-reset">Before shooting anything else, decide what you're actually building — an entertainment brand for followers and deals, or a coaching brand for clients. Right now the content doesn't commit to either.</div>
+      <p class="pace pace-low">At 1–2 videos/week, expect the comment-building pattern to take longer to compound into visible brand-deal interest.</p>
+      <p class="pace pace-mid">3–5 videos/week is a solid, sustainable pace to build a genuine comment-driven fanbase.</p>
+      <p class="pace pace-high">5+ videos/week could get you noticed by brands faster — as long as the "give value, ask one thing" structure stays consistent across all of them.</p>
+    </section>
+  </div>
+</div>
+
+
+<!-- ============================================================
+SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (Kinetic Precision PRO SCRIPT UI)
+============================================================ -->
+<div id="scriptsScreen" class="script-provider-wrap relative">
+  <div class="live-script-bg"></div>
+  <div class="max-w-2xl mx-auto px-margin-mobile pb-16 relative z-10">
+    
+    <!-- Header & Script Selector -->
+    <div class="flex flex-col gap-4 mb-6">
+      <div class="flex justify-between items-center">
+        <div class="font-label-caps text-label-caps text-pink-accent uppercase tracking-widest flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px] text-pink-accent animate-pulse">movie</span> SCRIPT PROVIDER ENGINE
+        </div>
+        <span class="font-label-caps text-[11px] text-on-surface-variant bg-surface-container px-3 py-1 border border-outline-variant rounded-full">CLIENT: RAHUL</span>
+      </div>
+
+      <!-- Multiple Script Library Tabs -->
+      <div class="script-tab-selector">
+        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: OVERNIGHT WEIGHT</button>
+        <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: AI AVATAR SECRET</button>
+        <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: ₹10K CHALLENGE</button>
+        <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: AYURVEDA MYTH</button>
+        <button onclick="switchScript(5)" id="scriptTab5" class="script-tab-btn">SCRIPT 5: 7-DAY BULK PLAN</button>
+      </div>
+    </div>
+
+    <!-- Script Container Display (Populated by JS) -->
+    <div id="scriptContentContainer" class="flex flex-col gap-8">
+      <!-- Populated dynamically via JS renderScript() -->
+    </div>
+  </div>
+</div>
+
+<script>
+// Multiple Scripts Database (Including uploaded exact verbatim template!)
+const scriptsData = {
+  1: {
+    title: "1kg Overnight Weight Mystery",
+    type: "REINFORCE WINNING FORMAT (3/2 SPLIT)",
+    chips: [
+      { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "home", label: "SETUP: HOME GYM", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Ever wake up 1kg heavier overnight and freak out? It's not fat. It's water retention from that late-night salt or extra carbs. Wait until you see how fast this weight actually disappears. Comment 'SCALE' if you've been hurt by the scale this morning. Track your 7-day average, not the daily spike."`,
+    sayThis: [
+      { tag: "HOOK", text: `"Ever wake up 1kg heavier overnight and freak out?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"It's not fat. It's water retention from that late-night salt or extra carbs."`, style: "value" },
+      { tag: "RETENTION", text: `"Wait until you see how fast this weight actually disappears."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'SCALE' if you've been hurt by the scale this morning."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Track your 7-day average, not the daily spike."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Eye level, tripod.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Confident & helpful.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Water bottle, Weighing Scale, Phone Calculator.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in at [CORE VALUE].", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Upbeat lo-fi.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"+1kg OVERNIGHT?!"', '"WATER vs FAT"'], full: true },
+      { icon: "cut", label: "EDITING", value: "One take + 2 punch-ins.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Relatable pain point." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Curiosity about 'how fast'." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Low-friction comment prompt." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Debunks a common myth." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "3 next pieces: 'Water Weight 101', 'High Salt Foods', 'Tracking Wins'.", isBox: true }
+    ],
+    resource: {
+      title: "7-Day Weight-Average Calculator",
+      desc: "Smooths out daily fluctuations for real progress tracking.",
+      quote: `"I've linked my average calculator in the bio for you guys."`
+    }
+  },
+  2: {
+    title: "AI Avatar Free Secret Trick",
+    type: "REINFORCE WINNING FORMAT (3/2 SPLIT)",
+    chips: [
+      { icon: "forum", label: "GOAL: COMMENTS", color: "pink-accent" },
+      { icon: "smart_toy", label: "FORMAT: SCREEN RECORD + VOICE", color: "primary" },
+      { icon: "timer", label: "TIME: 25 SEC", color: "pink-accent" },
+      { icon: "laptop", label: "SETUP: DESK", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"This 10-second AI trick will clone your voice and video for free. Stop spending 4 hours filming. Comment 'AVATAR' below and I'll DM you the exact 3-step prompt blueprint."`,
+    sayThis: [
+      { tag: "HOOK", text: `"This 10-second AI trick will clone your voice and video for free."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Stop spending 4 hours filming. Here is how top creators automate their reels."`, style: "value" },
+      { tag: "RETENTION", text: `"Look at this side-by-side comparison — can you tell which one is real?"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'AVATAR' below and I'll DM you the exact 3-step prompt blueprint."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Never record a 50-take video again."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Screen recording + face cutout.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Mind-blown & urgent.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Laptop screen showing AI avatar generator.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Zoom into voice clone toggle.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Fast futuristic synth beat.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"CLONE YOURSELF IN 10s"', '"FREE AI BLUEPRINT"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Split-screen comparison transition.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "High curiosity tech hack." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Visual side-by-side proof." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Keyword DM trigger (1,422 comments proof)." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Saves creators 4 hours of work." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Follow-up: 'Top 3 Free AI Video Tools'.", isBox: true }
+    ],
+    resource: {
+      title: "AI Avatar Prompt Blueprint PDF",
+      desc: "Free copy-paste prompt template for voice and face cloning.",
+      quote: `"Comment AVATAR and I'll send the PDF directly to your inbox."`
+    }
+  },
+  3: {
+    title: "₹10,000 High-Stakes Fitness Bet",
+    type: "VIRAL REACH EXPERIMENT (2/5 SPLIT)",
+    chips: [
+      { icon: "visibility", label: "GOAL: REACH", color: "pink-accent" },
+      { icon: "directions_run", label: "FORMAT: OUTDOOR CHALLENGE", color: "primary" },
+      { icon: "timer", label: "TIME: 35 SEC", color: "pink-accent" },
+      { icon: "sports_gym", label: "SETUP: PUBLIC PARK", color: "primary" },
+      { icon: "payments", label: "COST: ₹10,000 CASH", color: "pink-accent" }
+    ],
+    fullScript: `"I offered ₹10,000 to anyone in the park who could hold a 3-minute pull-up dead hang. Watch what happened when this guy stepped up."`,
+    sayThis: [
+      { tag: "HOOK", text: `"I offered ₹10,000 to anyone in the park who could hold a 3-minute pull-up dead hang."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Over 15 people tried and failed in the first hour."`, style: "value" },
+      { tag: "RETENTION", text: `"At 2 minutes 40 seconds, his grip started slipping."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Could you hold it for 3 minutes? Comment your max hang time."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Train your grip strength before betting your cash."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Handheld wide-angle + timer on screen.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Hyped & energetic.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Pull-up bar, ₹10,000 cash stack, stopwatch.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Close up on gripping hands at 2:30 mark.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Tense heartbeat to bass drop.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"₹10,000 DEAD HANG"', '"2:50 MARK SLIP"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Fast cuts + big countdown timer overlay.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Instant high cash stakes." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Climactic struggle countdown." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Challenge ego prompt." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Grip strength reality check." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Part 2: 'Grip Strength Secrets'.", isBox: true }
+    ],
+    resource: {
+      title: "Grip Strength & Forearm Routine",
+      desc: "3 exercises to double your pull-up dead hang time.",
+      quote: `"Check out my grip routine to win your next challenge."`
+    }
+  },
+  4: {
+    title: "Ayurveda vs Steroids Mythbusting",
+    type: "AUTHORITY BREAKDOWN (3/2 SPLIT)",
+    chips: [
+      { icon: "bookmark", label: "GOAL: SAVES", color: "pink-accent" },
+      { icon: "balance", label: "FORMAT: COMPARISON", color: "primary" },
+      { icon: "timer", label: "TIME: 30 SEC", color: "pink-accent" },
+      { icon: "biotech", label: "SETUP: LAB BACKGROUND", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Is Ashwagandha actually natural Anavar or a complete internet scam? Here is what 5 clinical trials prove about your testosterone levels."`,
+    sayThis: [
+      { tag: "HOOK", text: `"Is Ashwagandha actually natural Anavar or a complete internet scam?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Study 1 showed a 14.7% increase in T-levels over 60 days, but only at 600mg standardized extract."`, style: "value" },
+      { tag: "RETENTION", text: `"Most store-bought powders don't have enough active withanolides."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'TEST' for the clinical dosage cheat sheet."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Check your label before wasting your money."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Chest-up studio lighting.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Analytical & scientific.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Herb jar, research papers, tablet.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Zoom in on ingredient label list.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Deep documentary ambient tone.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"AYURVEDA vs STEROIDS"', '"CLINICAL TRUTH"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Paper graphic pop-ups + green highlights.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Debunks controversial supplement debate." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Uncovers market secret trick." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Cheat sheet keyword ask." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Saves viewer money on fake supplements." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Next: 'Top 3 Natural Adaptogens'.", isBox: true }
+    ],
+    resource: {
+      title: "Supplement Clinical Dosage Guide",
+      desc: "Optimal dosages and active ingredient thresholds.",
+      quote: `"Link in bio for the full research breakdown PDF."`
+    }
+  },
+  5: {
+    title: "7-Day Clean Bulk Meal Plan",
+    type: "LEAD MAGNET CAROUSEL (3/2 SPLIT)",
+    chips: [
+      { icon: "download", label: "GOAL: LEADS", color: "pink-accent" },
+      { icon: "restaurant", label: "FORMAT: MEAL PREP CAROUSEL", color: "primary" },
+      { icon: "timer", label: "TIME: 45 SEC", color: "pink-accent" },
+      { icon: "kitchen", label: "SETUP: KITCHEN COUNTER", color: "primary" },
+      { icon: "payments", label: "COST: ₹150/DAY", color: "pink-accent" }
+    ],
+    fullScript: `"How to gain 3kg of clean muscle without getting a fat belly. Here is my exact ₹150/day 3,000 calorie meal plan. Save this for your next grocery run."`,
+    sayThis: [
+      { tag: "HOOK", text: `"How to gain 3kg of clean muscle without getting a fat belly."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Meal 1: Oats + Peanut butter + 4 eggs = 850 Cal / 45g Protein."`, style: "value" },
+      { tag: "RETENTION", text: `"The secret isn't more food — it's digestive efficiency."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'BULK' and I'll DM you the full PDF shopping list."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Consistency in your kitchen builds your physique."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Overhead food shot + macro lens.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Warm & instructional.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Meal prep containers, food scale, oats, eggs.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Macro close-up of prepared meals.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Chill acoustic groove.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"3,000 CAL BULK"', '"₹150 PER DAY"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Satisfying prep cuts + macro text counters.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: " Solves skinny-to-bulk struggle." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Specific budget breakdown." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "High-value DM lead magnet." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Actionable low-cost nutrition plan." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Follow-up: 'High Protein Snacks'.", isBox: true }
+    ],
+    resource: {
+      title: "3,000 Calorie Grocery Shopping PDF",
+      desc: "Complete ingredient list and weekly meal prep schedule.",
+      quote: `"Comment BULK for the instant PDF download link."`
+    }
+  }
+};
+
+// Render Script in PRO SCRIPT UI Format
+function renderScript(id) {
+  const data = scriptsData[id];
+  if (!data) return;
+
+  const container = document.getElementById('scriptContentContainer');
+  
+  let chipsHTML = data.chips.map(c => `
+    <div class="flex items-center gap-1.5 px-3 py-2 border border-outline-variant rounded-full bg-surface-container">
+      <span class="material-symbols-outlined text-[16px] text-${c.color}">${c.icon}</span>
+      <span class="font-label-caps text-label-caps text-on-surface">${c.label}</span>
+    </div>
+  `).join('');
+
+  let sayThisHTML = data.sayThis.map(st => {
+    if (st.style === 'hook') {
+      return `
+        <article class="bg-black border-l-4 border-primary p-5 shadow-lg relative">
+          <div class="font-label-caps text-label-caps text-black bg-primary px-3 py-1.5 inline-block mb-3 uppercase font-black">${st.tag}</div>
+          <p class="font-script-highlight text-script-highlight text-on-surface tracking-tight uppercase">${st.text}</p>
+        </article>
+      `;
+    } else if (st.style === 'payoff') {
+      return `
+        <article class="bg-primary text-black p-5 shadow-md relative">
+          <div class="font-label-caps text-label-caps bg-black text-primary px-3 py-1.5 inline-block mb-3 uppercase font-black">${st.tag}</div>
+          <p class="font-script-highlight text-script-highlight font-black uppercase tracking-tight">${st.text}</p>
+        </article>
+      `;
+    } else {
+      const badgeColor = st.style === 'value' ? 'text-pink-accent border-pink-accent/30' : (st.style === 'engagement' ? 'text-pink-accent border-pink-accent/30' : 'text-primary border-primary/30');
+      return `
+        <article class="bg-surface-container border border-outline-variant p-5 relative">
+          <div class="font-label-caps text-label-caps ${badgeColor} border px-3 py-1.5 inline-block mb-3 uppercase">${st.tag}</div>
+          <p class="font-script-body text-script-body text-on-surface-variant">${st.text}</p>
+        </article>
+      `;
+    }
+  }).join('');
+
+  let directivesHTML = data.directives.map(d => {
+    if (d.badges) {
+      const badgeHTML = d.badges.map(b => `<span class="px-3 py-1.5 bg-black border border-primary font-script-body text-[14px] text-primary uppercase font-bold tracking-tight">${b}</span>`).join(' ');
+      return `
+        <div class="bg-surface-container p-4 border border-outline-variant flex flex-col gap-2 col-span-2 relative overflow-hidden">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="material-symbols-outlined text-pink-accent text-[24px]">${d.icon}</span>
+            <span class="font-label-caps text-label-caps text-on-surface-variant">${d.label}</span>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-1">${badgeHTML}</div>
+        </div>
+      `;
+    } else if (d.full) {
+      return `
+        <div class="bg-surface-container p-4 border border-outline-variant flex flex-col gap-2 col-span-2">
+          <span class="material-symbols-outlined text-${d.color} text-[24px]">${d.icon}</span>
+          <span class="font-label-caps text-label-caps text-on-surface-variant">${d.label}</span>
+          <span class="font-metadata text-[16px] text-on-surface font-bold">${d.value}</span>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="bg-surface-container p-4 border border-outline-variant flex flex-col gap-2">
+          <span class="material-symbols-outlined text-${d.color} text-[24px]">${d.icon}</span>
+          <span class="font-label-caps text-label-caps text-on-surface-variant">${d.label}</span>
+          <span class="font-metadata text-[16px] text-on-surface font-bold">${d.value}</span>
+        </div>
+      `;
+    }
+  }).join('');
+
+  let whyHTML = data.whyThisWorks.map(w => {
+    if (w.isBox) {
+      return `
+        <div class="flex items-start gap-4 p-4 mt-2 bg-black border border-primary">
+          <span class="font-label-caps text-label-caps text-primary w-24 shrink-0 pt-1">${w.tag}</span>
+          <p class="font-metadata text-[14px] text-on-surface-variant italic">${w.desc}</p>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="flex items-start gap-4 py-3 border-b border-outline-variant/50">
+          <span class="font-label-caps text-label-caps text-${w.labelColor} w-24 shrink-0 pt-1">${w.tag}</span>
+          <p class="font-metadata text-[16px] text-on-surface">${w.desc}</p>
+        </div>
+      `;
+    }
+  }).join('');
+
+  container.innerHTML = `
+    <!-- Title & Metadata Header -->
+    <header class="flex flex-col gap-4">
+      <div class="font-label-caps text-[11px] text-primary uppercase tracking-widest">${data.type}</div>
+      <h1 class="font-headline-lg text-2xl md:text-headline-lg text-on-surface uppercase font-black tracking-tight">${data.title}</h1>
+      <div class="flex flex-wrap gap-2">${chipsHTML}</div>
+    </header>
+
+    <!-- Full Verbatim Script Box -->
+    <section class="flex flex-col gap-3">
+      <div class="font-label-caps text-label-caps text-pink-accent uppercase">FULL SCRIPT</div>
+      <div class="bg-surface-container border-l-4 border-primary p-5">
+        <p class="font-script-body text-on-surface leading-relaxed">${data.fullScript}</p>
+      </div>
+    </section>
+
+    <!-- SAY THIS Breakdown -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+        <h2 class="font-label-caps text-[14px] text-primary tracking-widest uppercase">SAY THIS</h2>
+      </div>
+      <div class="flex flex-col gap-4">${sayThisHTML}</div>
+    </section>
+
+    <!-- SHOOTING DIRECTIVES Bento Grid -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-pink-accent text-[20px]">movie</span>
+        <h2 class="font-label-caps text-[14px] text-pink-accent tracking-widest uppercase">SHOOTING DIRECTIVES</h2>
+      </div>
+      <div class="grid grid-cols-2 gap-3">${directivesHTML}</div>
+    </section>
+
+    <!-- WHY THIS WORKS Analysis -->
+    <section class="flex flex-col gap-5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+        <h2 class="font-label-caps text-[14px] text-primary tracking-widest uppercase">WHY THIS WORKS</h2>
+      </div>
+      <div class="flex flex-col bg-surface-container border border-outline-variant p-4">${whyHTML}</div>
+    </section>
+
+    <!-- ATOMZ RESOURCE CTA -->
+    <section class="bg-black border border-primary p-6 flex flex-col gap-5 relative overflow-hidden">
+      <div class="flex items-center gap-2 relative z-10">
+        <span class="material-symbols-outlined text-pink-accent text-[20px]">build</span>
+        <h2 class="font-label-caps text-[14px] text-pink-accent tracking-widest uppercase">ATOMZ RESOURCE</h2>
+      </div>
+      <div class="flex flex-col gap-2 relative z-10">
+        <h3 class="font-headline text-[24px] text-primary uppercase font-black tracking-tight leading-tight">${data.resource.title}</h3>
+        <p class="font-metadata text-[15px] text-on-surface">${data.resource.desc}</p>
+      </div>
+      <div class="bg-surface-container border border-outline-variant p-4 flex gap-3 relative z-10">
+        <span class="material-symbols-outlined text-pink-accent shrink-0 text-[24px]">format_quote</span>
+        <p class="font-script-body text-[15px] text-on-surface font-bold italic">${data.resource.quote}</p>
+      </div>
+      <button onclick="attachToolToScript('${data.resource.title}')" class="w-full h-[52px] bg-primary text-black font-label-caps text-[14px] uppercase font-black flex items-center justify-center gap-2 mt-2 hover:bg-primary-container transition-colors active:scale-95 duration-100 relative z-10">
+        <span class="material-symbols-outlined text-[24px]">add_link</span> ATTACH TOOL TO SCRIPT
+      </button>
+    </section>
+  `;
+}
+
+// Switch Scripts Function
+function switchScript(num) {
+  for (let i = 1; i <= 5; i++) {
+    const btn = document.getElementById(`scriptTab${i}`);
+    if (btn) btn.className = i === num ? 'script-tab-btn active' : 'script-tab-btn';
+  }
+  renderScript(num);
+  playChime();
+}
+
+// Attach Tool Feedback
+function attachToolToScript(title) {
+  alert(`✓ Tool Attached: ${title} has been linked to your active script execution calendar!`);
+  playChime();
+}
+
+// Screen Navigation Switcher
+function showScreen(screen) {
+  const hub = document.getElementById('hubScreen');
+  const matrix = document.getElementById('matrixScreen');
+  const scripts = document.getElementById('scriptsScreen');
+
+  hub.style.display = 'none';
+  matrix.classList.remove('active');
+  scripts.classList.remove('active');
+
+  if (screen === 'hub') {
+    hub.style.display = 'flex';
+  } else if (screen === 'matrix') {
+    matrix.classList.add('active');
+  } else if (screen === 'scripts') {
+    scripts.classList.add('active');
+  }
+  playChime();
+}
+
+// Audio Chime Synth
+function playChime() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.08);
+  } catch(e) {}
+}
+
+// Initialize Script 1 on load
+document.addEventListener('DOMContentLoaded', () => {
+  renderScript(1);
+});
+</script>
+
+<script src="assets/js/atomz.js" defer></script>
 </body>
 </html>
