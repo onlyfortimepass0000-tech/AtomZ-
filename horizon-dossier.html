@@ -363,109 +363,86 @@
         </div>
     </section>
 
-    <!-- Section 4: Live Interactive Creator Growth Diagnostic Tool -->
+    <!-- Section 4: ATOMZ · Where You Actually Stand (Interactive Client Diagnostic) -->
     <section class="py-12 md:py-24 mb-16 border-t border-surface-light" id="diagnostic" data-reveal style="--reveal-delay:.16s">
-        <div class="mb-8">
-            <span class="font-label-sm text-xs text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1 rounded-full uppercase">
-                ⚡ EXCLUSIVE CLIENT GROWTH TOOL
-            </span>
-            <h2 class="font-headline-md text-2xl md:text-headline-lg mt-3 text-text-primary flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary-container">psychology</span>
-                CREATOR GROWTH DIAGNOSTIC ENGINE
-            </h2>
-            <p class="font-body-md text-text-secondary mt-1">
-                Select your preferences below to dynamically calculate your growth matrix and generate immediate observable actions.
-            </p>
-        </div>
+        <div class="stand-wrap">
+          <div class="stand-hero">
+            <p class="stand-eyebrow">ATOMZ · Where You Actually Stand</p>
+            <h1 class="stand-headline">A Few Quick Questions</h1>
+            <p class="stand-handle">@rahuljawatwala</p>
+          </div>
 
-        <!-- Diagnostic Tool Workspace (Left: Question Tree | Right: Live Updating Matrix GUI) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="rahulDiagWorkspace">
-            <!-- Left Column: Interactive Questionnaire (7 cols) -->
-            <div class="lg:col-span-7 space-y-6">
-                <div class="glass-panel p-6 md:p-8 rounded-xl border border-surface-light" id="rahulQuestionCard">
-                    <div class="flex justify-between items-center mb-6">
-                        <span id="rahulStepBadge" class="font-label-sm text-xs text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1 rounded-full uppercase">
-                            QUESTION 1 OF 4
-                        </span>
-                        <span class="font-label-sm text-xs text-text-secondary uppercase">ADAPTIVE DECISION TREE</span>
-                    </div>
+          <div class="stand-section">
+            <h2>What the data already proves</h2>
+            <div class="proof-card">
+              <span class="proof-tag">Pulled from your audit</span>
+              <p class="proof-title">Case study breakdowns & educational carousels is your winning format</p>
+              <p class="proof-stat">Carousels achieved a 12.4% Save Rate (4.2× industry average). Your generic motivational text reels did &lt;0.4× median views.</p>
+            </div>
+          </div>
 
-                    <h3 id="rahulQTitle" class="font-headline-md text-xl md:text-2xl text-white mb-2 font-bold">
-                        Loading...
-                    </h3>
-                    <p id="rahulQSub" class="font-body-md text-sm text-text-secondary mb-6 border-l-2 border-primary-container pl-3 py-1">
-                        Loading...
-                    </p>
+          <div class="stand-section">
+            <h2>Now, tell us the rest</h2>
+            <div class="q-block">
+              <p class="q-text">1. What do you think your content is mainly about right now?</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Motivational quotes & lifestyle</span></label>
+                <label class="opt"><input type="radio" name="identity" id="id-travel"><span class="card">Educational case study breakdowns</span></label>
+                <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
+                <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
+              </div>
+            </div>
+            <div class="q-block">
+              <p class="q-text">2. What's your main goal right now?</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
+                <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals & sponsorships</span></label>
+                <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting high-ticket consulting clients</span></label>
+                <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+              </div>
+            </div>
+            <div class="q-block">
+              <p class="q-text">3. How many reels can you realistically shoot per week?</p>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
+                <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
+                <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
+              </div>
+            </div>
+          </div>
 
-                    <!-- Options Container -->
-                    <div id="rahulOptionsContainer" class="space-y-3">
-                        <!-- Populated by JS -->
-                    </div>
+          <div class="stand-section">
+            <h2>Your position</h2>
+            <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
 
-                    <!-- Step Controls -->
-                    <div class="flex justify-between items-center mt-8 pt-4 border-t border-surface-light">
-                        <button id="rahulPrevBtn" class="btn btn--ghost text-xs uppercase px-4 py-2 text-text-secondary" onclick="prevRahulQ()" disabled>← Previous</button>
-                        <span class="font-label-sm text-xs text-primary-container">Select an option to update GUI matrix</span>
-                        <button id="rahulNextBtn" class="btn btn--horizon text-xs uppercase px-6 py-2" onclick="nextRahulQ()" disabled>Next →</button>
-                    </div>
-                </div>
+            <div class="mini-grid">
+              <div class="mini blindspot">Blind spot</div>
+              <div class="mini aligned">Fully aligned</div>
+              <div class="mini reset">Reset needed</div>
+              <div class="mini wrongdest">Right lane, wrong destination</div>
             </div>
 
-            <!-- Right Column: Live Interpretation Matrix GUI (5 cols) -->
-            <div class="lg:col-span-5">
-                <div class="glass-panel p-6 rounded-xl border border-surface-light sticky top-24">
-                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-surface-light">
-                        <div>
-                            <h3 class="font-headline-md text-lg text-white font-bold flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary-container text-xl">analytics</span>
-                                LIVE INTERPRETATION MATRIX
-                            </h3>
-                            <p class="font-label-sm text-xs text-text-secondary mt-0.5">Updates in real time as options are clicked</p>
-                        </div>
-                    </div>
+            <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
+            <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
+            <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
+            <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
 
-                    <!-- Dynamic Matrix Table GUI -->
-                    <div class="space-y-3" id="rahulMatrixContainer">
-                        <!-- Populated by JS -->
-                    </div>
+            <p class="goalnote gn-followers">Educational case studies drive high authority and saves — lean all the way in.</p>
+            <p class="goalnote gn-branddeals">Brands like high-authority breakdown content — you'll need a media kit to convert reach into paid deals.</p>
+            <p class="goalnote gn-clients">Case study breakdowns attract founders — add a direct CTA (e.g. "Comment BLUEPRINT") to turn saves into paying consulting clients.</p>
+            <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
+          </div>
 
-                    <div class="mt-6 pt-4 border-t border-surface-light flex items-center justify-between text-xs font-label-sm text-text-secondary">
-                        <span class="flex items-center gap-1"><span class="proven-tag">PROVEN</span> Data</span>
-                        <span class="flex items-center gap-1"><span class="indicated-tag">INDICATED</span> Intent</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Synthesis & Action Plan (Revealed upon completing questionnaire) -->
-        <div id="rahulDiagnosisResults" class="hidden mt-8 space-y-8">
-            <div class="glass-panel p-6 md:p-8 rounded-2xl border-2 border-primary-container glow-accent">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <span class="font-label-sm text-xs text-primary-container bg-primary-container/20 border border-primary-container/40 px-3 py-1 rounded-full uppercase">
-                            ✓ DIAGNOSTIC COMPLETE
-                        </span>
-                        <h3 class="font-display-lg text-2xl md:text-3xl text-white font-bold mt-2">Combined Creator Diagnosis</h3>
-                    </div>
-                    <button onclick="resetRahulDiag()" class="btn text-xs border border-surface-light hover:border-primary-container px-4 py-2 text-text-secondary uppercase">
-                        ↺ Restart Diagnostic
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rahulSynthGrid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <div>
-                <h3 class="font-headline-md text-2xl text-white font-bold mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary-container">format_list_bulleted</span>
-                    PRIORITIZED IMMEDIATE NEXT ACTIONS
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rahulActionsGrid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
+          <div class="stand-section move-wrap">
+            <h2>This week's move</h2>
+            <div class="move move-aligned">Ship 3–5 more reels in the exact educational case-study format this week. Don't touch generic quote posts.</div>
+            <div class="move move-wrongdest">Keep shooting breakdown reels, but add ONE thing this week: a pinned comment or bio line pointing DM traffic toward booking a call.</div>
+            <div class="move move-blindspot">Try 2 breakdown carousels this week even though it feels like extra work — the data says it will outperform everything else you post.</div>
+            <div class="move move-reset">Before shooting anything else, get on a call with us — the direction needs resetting, not just the format.</div>
+            <p class="pace pace-low">At 1–2 reels/week, expect the 90-day window to stretch closer to 120–150 days.</p>
+            <p class="pace pace-mid">3–5 reels/week is right on pace for the 90-day potential already in your audit.</p>
+            <p class="pace pace-high">5+ reels/week could realistically beat the 90-day estimate.</p>
+          </div>
         </div>
     </section>
 
