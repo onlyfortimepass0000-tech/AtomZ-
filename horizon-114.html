@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOMZ — Where You Actually Stand (Client 114 - atomz114)</title>
+<title>ATOMZ — Where You Actually Stand (@fitwithtoxic_somo - atomz114)</title>
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,6 +109,7 @@ h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercas
 
 .move-wrap{display:none;}
 .move{display:none;background:var(--surface);border:1px solid var(--accent);color:var(--offwhite);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
+.move b{color:var(--gold);}
 .pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
 
 /* ===== Reveal logic — pure CSS ===== */
@@ -116,79 +117,61 @@ body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholde
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .mini-grid .mini,
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .move-wrap{display:block}
 
-/* ALIGNED — value or mix × followers/branddeals/consistency */
-body:has(#id-value:checked):has(#goal-followers:checked) .v-aligned,
-body:has(#id-value:checked):has(#goal-branddeals:checked) .v-aligned,
-body:has(#id-value:checked):has(#goal-consistency:checked) .v-aligned,
+/* ALIGNED */
+body:has(#id-travel:checked):has(#goal-followers:checked) .v-aligned,
+body:has(#id-travel:checked):has(#goal-branddeals:checked) .v-aligned,
+body:has(#id-travel:checked):has(#goal-consistency:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .v-aligned,
-body:has(#id-value:checked):has(#goal-followers:checked) .move-aligned,
-body:has(#id-value:checked):has(#goal-branddeals:checked) .move-aligned,
-body:has(#id-value:checked):has(#goal-consistency:checked) .move-aligned,
+body:has(#id-travel:checked):has(#goal-followers:checked) .move-aligned,
+body:has(#id-travel:checked):has(#goal-branddeals:checked) .move-aligned,
+body:has(#id-travel:checked):has(#goal-consistency:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .move-aligned{display:block}
-body:has(#id-value:checked):has(#goal-followers:checked) .mini.aligned,
-body:has(#id-value:checked):has(#goal-branddeals:checked) .mini.aligned,
-body:has(#id-value:checked):has(#goal-consistency:checked) .mini.aligned,
+body:has(#id-travel:checked):has(#goal-followers:checked) .mini.aligned,
+body:has(#id-travel:checked):has(#goal-branddeals:checked) .mini.aligned,
+body:has(#id-travel:checked):has(#goal-consistency:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:var(--gold)}
 
-/* RIGHT LANE, WRONG DESTINATION — value or mix × clients */
-body:has(#id-value:checked):has(#goal-clients:checked) .v-wrongdest,
+/* RIGHT LANE, WRONG DESTINATION */
+body:has(#id-travel:checked):has(#goal-clients:checked) .v-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .v-wrongdest,
-body:has(#id-value:checked):has(#goal-clients:checked) .move-wrongdest,
+body:has(#id-travel:checked):has(#goal-clients:checked) .move-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .move-wrongdest{display:block}
-body:has(#id-value:checked):has(#goal-clients:checked) .mini.wrongdest,
+body:has(#id-travel:checked):has(#goal-clients:checked) .mini.wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:var(--accent)}
 
-/* BLIND SPOT — generic or motivation × followers/branddeals/consistency */
-body:has(#id-generic:checked):has(#goal-followers:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .v-blindspot,
-body:has(#id-motivation:checked):has(#goal-followers:checked) .v-blindspot,
-body:has(#id-motivation:checked):has(#goal-branddeals:checked) .v-blindspot,
-body:has(#id-motivation:checked):has(#goal-consistency:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-followers:checked) .move-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .move-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .move-blindspot,
-body:has(#id-motivation:checked):has(#goal-followers:checked) .move-blindspot,
-body:has(#id-motivation:checked):has(#goal-branddeals:checked) .move-blindspot,
-body:has(#id-motivation:checked):has(#goal-consistency:checked) .move-blindspot{display:block}
-body:has(#id-generic:checked):has(#goal-followers:checked) .mini.blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .mini.blindspot,
-body:has(#id-motivation:checked):has(#goal-followers:checked) .mini.blindspot,
-body:has(#id-motivation:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-motivation:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
+/* BLIND SPOT */
+body:has(#id-fitness:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-fitness:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-fitness:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-fitness:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-fitness:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-fitness:checked):has(#goal-consistency:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .move-blindspot{display:block}
+body:has(#id-fitness:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-fitness:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-fitness:checked):has(#goal-consistency:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
 
-/* RESET NEEDED — generic or motivation × clients */
-body:has(#id-generic:checked):has(#goal-clients:checked) .v-reset,
-body:has(#id-motivation:checked):has(#goal-clients:checked) .v-reset,
-body:has(#id-generic:checked):has(#goal-clients:checked) .move-reset,
-body:has(#id-motivation:checked):has(#goal-clients:checked) .move-reset{display:block}
-body:has(#id-generic:checked):has(#goal-clients:checked) .mini.reset,
-body:has(#id-motivation:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:var(--grey)}
-
-/* STAKES */
-body:has(#id-value:checked):has(#goal-followers:checked) .stakes-aligned,
-body:has(#id-value:checked):has(#goal-branddeals:checked) .stakes-aligned,
-body:has(#id-value:checked):has(#goal-consistency:checked) .stakes-aligned,
-body:has(#id-mix:checked):has(#goal-followers:checked) .stakes-aligned,
-body:has(#id-mix:checked):has(#goal-branddeals:checked) .stakes-aligned,
-body:has(#id-mix:checked):has(#goal-consistency:checked) .stakes-aligned{display:block}
-body:has(#id-value:checked):has(#goal-clients:checked) .stakes-wrongdest,
-body:has(#id-mix:checked):has(#goal-clients:checked) .stakes-wrongdest{display:block}
-body:has(#id-generic:checked):has(#goal-followers:checked) .stakes-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .stakes-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .stakes-blindspot,
-body:has(#id-motivation:checked):has(#goal-followers:checked) .stakes-blindspot,
-body:has(#id-motivation:checked):has(#goal-branddeals:checked) .stakes-blindspot,
-body:has(#id-motivation:checked):has(#goal-consistency:checked) .stakes-blindspot{display:block}
-body:has(#id-generic:checked):has(#goal-clients:checked) .stakes-reset,
-body:has(#id-motivation:checked):has(#goal-clients:checked) .stakes-reset{display:block}
+/* RESET NEEDED */
+body:has(#id-fitness:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-fitness:checked):has(#goal-clients:checked) .move-reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .move-reset{display:block}
+body:has(#id-fitness:checked):has(#goal-clients:checked) .mini.reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:var(--grey)}
 
 /* Goal-specific notes */
 body:has(#goal-followers:checked) .gn-followers{display:block}
@@ -212,7 +195,7 @@ body:has(#cap-high:checked) .pace-high{display:block}
     <h1 class="headline">Where You Actually Stand</h1>
     <div class="insta-handle-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      <span>@client.114 · Creator Diagnostic (atomz114)</span>
+      <span>@fitwithtoxic_somo · Creator Diagnostic (atomz114)</span>
     </div>
   </div>
 
@@ -220,10 +203,8 @@ body:has(#cap-high:checked) .pace-high{display:block}
     <h2>What the data already proves</h2>
     <div class="proof-card">
       <span class="proof-tag">Pulled from your audit</span>
-      <p class="proof-title">Practical Utility & Actionable Tips is your winning format</p>
-      <p class="proof-stat"><b>4.2x baseline</b> engagement outlier on breakdown reels giving away clear step-by-step frameworks.</p>
-      <p class="proof-why">Why: actionable advice creates immediate saves and shares because viewers want to reference the system later.</p>
-      <p class="proof-source">Based on your actual content performance — not an industry benchmark.</p>
+      <p class="proof-title">Travel humor + trending audio is your winning format</p>
+      <p class="proof-stat"><b>4 of your 5 reels</b> in this lane did ~50K median views. Your one motivational reel did 448.</p>
     </div>
   </section>
 
@@ -232,10 +213,10 @@ body:has(#cap-high:checked) .pace-high{display:block}
     <div class="q-block">
       <p class="q-text">1. What do you think your content is mainly about right now?</p>
       <div class="opts">
-        <label class="opt"><input type="radio" name="identity" id="id-generic"><span class="card">Generic advice & quotes</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-value"><span class="card">Practical utility & step-by-step guides</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of entertainment & tips</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-motivation"><span class="card">Motivation & mindset posts</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Fitness / gym motivation</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-travel"><span class="card">Travel & comedy</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
       </div>
     </div>
     <div class="q-block">
@@ -273,26 +254,21 @@ body:has(#cap-high:checked) .pace-high{display:block}
     <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
     <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
 
-    <p class="goalnote gn-followers">Actionable step-by-step guides drive high save-rates, which compounds directly into algorithm recommendations.</p>
-    <p class="goalnote gn-branddeals">Sponsors love practical authority content because it proves your audience trusts your advice.</p>
-    <p class="goalnote gn-clients">Step-by-step guides establish your authority — layer on a specific keyword DM CTA to turn viewers into booked clients.</p>
-    <p class="goalnote gn-consistency">Any format works for showing up regularly — but utility content gives you a clear weekly template.</p>
-
-    <div class="stakes stakes-aligned">If this stalls: your reach will flatten into generic broad views without establishing a clear niche authority.</div>
-    <div class="stakes stakes-wrongdest">If this doesn't change: you'll build authority without capturing lead inquiries.</div>
-    <div class="stakes stakes-blindspot">If this doesn't change: you'll keep posting motivation while your actual highest-converting format sits unused.</div>
-    <div class="stakes stakes-reset">If this doesn't change: your strategy needs resetting before filming your next content batch.</div>
+    <p class="goalnote gn-followers">Travel comedy is exactly what drives fast follower growth on your account — lean all the way in.</p>
+    <p class="goalnote gn-branddeals">Brands like shareable, relatable content — you're close, but you'll need a media kit to actually convert reach into paid deals.</p>
+    <p class="goalnote gn-clients">Travel comedy doesn't sell a coaching offer on its own — you'd need a separate bridge (a specific CTA or content lane) to turn this reach into paying clients.</p>
+    <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
   </section>
 
   <section class="move-wrap">
     <h2>This week's move</h2>
-    <div class="move move-aligned">Produce 2 step-by-step utility breakdown reels this week, ending each with a specific save-prompt CTA.</div>
-    <div class="move move-wrongdest">Keep giving practical tips, but add a direct DM CTA: 'Comment GUIDE and I'll send you the full PDF breakdown.'</div>
-    <div class="move move-blindspot">Try 1 framework breakdown reel this week — the data proves actionable tips outperform generic posts by 4.2x.</div>
-    <div class="move move-reset">Before filming anything else, define your core 3 utility frameworks.</div>
-    <p class="pace pace-low">At 1–2 reels/week, build a disciplined pipeline of reusable frameworks.</p>
-    <p class="pace pace-mid">3–5 reels/week is ideal for testing multiple framework formats per week.</p>
-    <p class="pace pace-high">5+ reels/week accelerates your authority footprint across your target niche.</p>
+    <div class="move move-aligned">Ship 3–5 more reels in the exact travel + trending-audio format this week. Don't touch the fitness lane.</div>
+    <div class="move move-wrongdest">Keep shooting travel comedy, but add ONE thing this week: a pinned comment or bio line pointing DM traffic toward booking a call.</div>
+    <div class="move move-blindspot">Try 2 travel-comedy reels this week even though it doesn't feel like "your thing" — the data says it will outperform everything else you post.</div>
+    <div class="move move-reset">Before shooting anything else, get on a call with us — the direction needs resetting, not just the format.</div>
+    <p class="pace pace-low">At 1–2 reels/week, expect the 90-day window to stretch closer to 120–150 days.</p>
+    <p class="pace pace-mid">3–5 reels/week is right on pace for the 90-day potential already in your audit.</p>
+    <p class="pace pace-high">5+ reels/week could realistically beat the 90-day estimate.</p>
   </section>
 </div>
 
