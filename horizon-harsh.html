@@ -4,58 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATOMZ — Where You Actually Stand (Harsh - atomz112)</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--charcoal:#0B0B0D;--accent:#FF4D2E;--gold:#F2B705;--offwhite:#F5F5F0;--grey:#8A8580;--grey-light:#EAE8E3;--green:#2F8F5B;}
+:root{
+  --charcoal:#000000;
+  --surface:#111111;
+  --surface-high:#1a1a1a;
+  --accent:#FF6B00;
+  --accent-pink:#FF2A7A;
+  --gold:#F2B705;
+  --offwhite:#FFFFFF;
+  --grey:#A0A0A0;
+  --grey-light:#222222;
+  --green:#00FF41;
+}
 *{box-sizing:border-box;}
-body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:var(--offwhite);color:var(--charcoal);}
-.wrap{max-width:640px;margin:0 auto;padding:0 0 60px;}
-.hero{background:var(--charcoal);color:var(--offwhite);padding:28px 20px 22px;}
-.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px;}
-.headline{font-size:21px;font-weight:800;line-height:1.2;margin:0 0 4px;}
-.handle{font-size:13px;color:#B8B4AD;margin:0;}
-section{padding:18px 20px 4px;}
-h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin:0 0 10px;}
+body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(--charcoal);color:var(--offwhite);overflow-x:hidden;}
+.wrap{max-width:640px;margin:0 auto;padding:40px 20px 80px;}
 
-.proof-card{background:#fff;border:1.5px solid var(--grey-light);border-radius:12px;padding:16px;}
-.proof-tag{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(47,143,91,.1);padding:4px 10px;border-radius:20px;margin-bottom:8px;}
-.proof-title{font-size:15px;font-weight:700;margin:0 0 4px;}
-.proof-stat{font-size:12.5px;color:var(--grey);line-height:1.4;margin:0;}
-.proof-stat b{color:var(--accent);font-size:13.5px;}
-.proof-why{font-size:12px;color:#605C56;line-height:1.5;margin:8px 0 0;}
-.proof-source{font-size:11px;color:var(--grey);font-style:italic;margin:8px 0 0;}
+.hero{background:var(--surface);border:1px solid var(--grey-light);color:var(--offwhite);padding:28px 22px;border-radius:16px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 6px;}
+.headline{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;line-height:1.2;margin:0 0 6px;color:var(--offwhite);}
+.handle{font-family:'Montserrat',sans-serif;font-size:13px;color:var(--grey);margin:0;}
+section{padding:18px 0 4px;}
+h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin:0 0 12px;}
 
-.q-block{margin-bottom:18px;}
-.q-text{font-size:14px;font-weight:700;margin:0 0 10px;}
-.opts{display:flex;flex-direction:column;gap:8px;}
+.proof-card{background:var(--surface);border:1px solid var(--grey-light);border-radius:14px;padding:20px;}
+.proof-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(0,255,65,.12);border:1px solid rgba(0,255,65,.3);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
+.proof-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin:0 0 6px;color:var(--offwhite);}
+.proof-stat{font-size:13px;color:#DDDDDD;line-height:1.5;margin:0;}
+.proof-stat b{color:var(--accent);font-size:14px;}
+.proof-why{font-size:12.5px;color:var(--grey);line-height:1.5;margin:10px 0 0;}
+.proof-source{font-size:11px;color:#666666;font-style:italic;margin:10px 0 0;}
+
+.q-block{margin-bottom:20px;}
+.q-text{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin:0 0 12px;color:var(--offwhite);}
+.opts{display:flex;flex-direction:column;gap:10px;}
 .opt{display:block;position:relative;}
 .opt input{position:absolute;opacity:0;}
-.opt .card{display:block;padding:12px 14px;border:1.5px solid var(--grey-light);border-radius:10px;background:#fff;font-size:13.5px;font-weight:600;cursor:pointer;}
-.opt input:checked + .card{border-color:var(--accent);background:rgba(255,77,46,.06);color:var(--accent);}
+.opt .card{
+  display:block;
+  padding:14px 16px;
+  border:1px solid var(--grey-light);
+  border-radius:12px;
+  background:var(--surface);
+  color:#DDDDDD;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.opt:active .card{transform:scale(0.97);}
+.opt input:checked + .card{
+  border-color:var(--accent);
+  background:rgba(255,107,0,0.12);
+  color:var(--accent);
+  font-weight:700;
+  box-shadow:0 0 20px rgba(255,107,0,0.25);
+}
 
 .placeholder{font-size:13px;color:var(--grey);font-style:italic;}
 
-.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 18px;max-width:320px;}
-.mini{padding:12px 8px;border-radius:10px;text-align:center;font-size:11px;font-weight:800;line-height:1.3;opacity:.35;border:2px solid transparent;}
-.mini.blindspot{background:rgba(242,183,5,.16);color:#8a6a00;}
-.mini.aligned{background:var(--charcoal);color:var(--gold);}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 20px;max-width:340px;}
+.mini{padding:12px 10px;border-radius:10px;text-align:center;font-size:11px;font-weight:800;line-height:1.3;opacity:.35;border:2px solid transparent;font-family:'Sora',sans-serif;}
+.mini.blindspot{background:rgba(242,183,5,.16);color:var(--gold);}
+.mini.aligned{background:var(--surface);color:var(--green);border-color:var(--green);}
 .mini.reset{background:var(--grey-light);color:var(--grey);}
-.mini.wrongdest{background:rgba(255,77,46,.12);color:var(--accent);}
+.mini.wrongdest{background:rgba(255,77,46,.16);color:var(--accent);}
 
-.verdict{display:none;margin-bottom:8px;}
-.badge{display:inline-block;font-size:12px;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:8px;}
-.badge-green{background:rgba(47,143,91,.15);color:var(--green);}
-.badge-coral{background:rgba(255,77,46,.14);color:var(--accent);}
-.badge-gold{background:rgba(242,183,5,.2);color:#8a6a00;}
-.badge-grey{background:var(--grey-light);color:var(--grey);}
-.verdict p{font-size:13.5px;line-height:1.5;color:#403D38;margin:0;}
-.goalnote{display:none;font-size:13px;line-height:1.5;color:#403D38;margin:8px 0 0;padding:10px 12px;background:#fff;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
-.stakes{display:none;font-size:13px;line-height:1.5;color:#403D38;font-weight:600;margin:10px 0 0;padding:10px 12px;background:rgba(255,77,46,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.verdict{display:none;margin-bottom:12px;}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:10px;}
+.badge-green{background:rgba(0,255,65,.15);color:var(--green);border:1px solid rgba(0,255,65,0.4);}
+.badge-coral{background:rgba(255,107,0,.15);color:var(--accent);border:1px solid rgba(255,107,0,0.4);}
+.badge-gold{background:rgba(242,183,5,.2);color:var(--gold);border:1px solid rgba(242,183,5,0.4);}
+.badge-grey{background:var(--grey-light);color:var(--grey);border:1px solid #333333;}
+.verdict p{font-size:14px;line-height:1.6;color:#DDDDDD;margin:0;}
+.goalnote{display:none;font-size:13px;line-height:1.5;color:#EEEEEE;margin:10px 0 0;padding:12px 14px;background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.stakes{display:none;font-size:13px;line-height:1.5;color:#FFFFFF;font-weight:600;margin:12px 0 0;padding:12px 14px;background:rgba(255,107,0,.1);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
 
 .move-wrap{display:none;}
-.move{display:none;background:var(--charcoal);color:var(--offwhite);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.5;margin-bottom:8px;}
+.move{display:none;background:var(--surface);border:1px solid var(--accent);color:var(--offwhite);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
 .pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
 
-/* ===== Reveal logic — pure CSS, no JavaScript ===== */
+/* ===== Reveal logic — pure CSS ===== */
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholder{display:none}
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .mini-grid .mini,
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .move-wrap{display:block}
@@ -106,7 +141,7 @@ body:has(#id-generic:checked):has(#goal-branddeals:checked) .mini.blindspot,
 body:has(#id-generic:checked):has(#goal-consistency:checked) .mini.blindspot,
 body:has(#id-otherpillars:checked):has(#goal-followers:checked) .mini.blindspot,
 body:has(#id-otherpillars:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:#8a6a00}
+body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
 
 /* RESET NEEDED — generic or otherpillars × clients */
 body:has(#id-generic:checked):has(#goal-clients:checked) .v-reset,
@@ -149,9 +184,9 @@ body:has(#cap-high:checked) .pace-high{display:block}
 <body>
 <div class="wrap">
   <div class="hero">
-    <p class="eyebrow">ATOMZ · Where You Actually Stand</p>
-    <h1 class="headline">A Few Quick Questions</h1>
-    <p class="handle">@fitharsh__15 · 390 followers</p>
+    <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
+    <h1 class="headline">Where You Actually Stand</h1>
+    <p class="handle">@fitharsh__15 · 390 followers (atomz112)</p>
   </div>
 
   <section>
@@ -233,5 +268,62 @@ body:has(#cap-high:checked) .pace-high{display:block}
     <p class="pace pace-high">5+ posts/week gives you room to also test the weekly Carousel Anchor alongside your Reels.</p>
   </section>
 </div>
+
+<script>
+// Web Audio Synth Engine for Button Clicks & 3-Question Completion Chime
+function playClickSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch(e) {}
+}
+
+function playCompletionSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime + idx * 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + idx * 0.07);
+      osc.stop(ctx.currentTime + idx * 0.07 + 0.25);
+    });
+  } catch(e) {}
+}
+
+document.addEventListener('change', function(e) {
+  if (e.target.matches('input[type="radio"]')) {
+    playClickSound();
+
+    const idChecked = document.querySelector('input[name="identity"]:checked');
+    const goalChecked = document.querySelector('input[name="goal"]:checked');
+
+    if (idChecked && goalChecked) {
+      if (!window.completionTriggered) {
+        window.completionTriggered = true;
+        setTimeout(() => {
+          playCompletionSound();
+        }, 150);
+      }
+    }
+  }
+});
+</script>
 </body>
 </html>

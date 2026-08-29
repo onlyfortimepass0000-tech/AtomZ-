@@ -1058,6 +1058,43 @@ function initWritingCanvas() {
   animate();
 }
 
+function playCompletionSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime + idx * 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + idx * 0.07);
+      osc.stop(ctx.currentTime + idx * 0.07 + 0.25);
+    });
+  } catch(e) {}
+}
+
+document.addEventListener('change', function(e) {
+  if (e.target.matches('input[type="radio"]')) {
+    playChime();
+
+    const idChecked = document.querySelector('#matrixScreen input[name="identity"]:checked');
+    const goalChecked = document.querySelector('#matrixScreen input[name="goal"]:checked');
+
+    if (idChecked && goalChecked) {
+      if (!window.completionTriggered) {
+        window.completionTriggered = true;
+        setTimeout(() => {
+          playCompletionSound();
+        }, 150);
+      }
+    }
+  }
+});
+
 // Initialize Script 1 and Background Canvas on load
 document.addEventListener('DOMContentLoaded', () => {
   renderScript(1);
