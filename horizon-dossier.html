@@ -61,7 +61,7 @@ body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;backgr
   left: 0;
   width: 100%;
   height: 64px;
-  background: rgba(10, 10, 12, 0.9);
+  background: rgba(10, 10, 12, 0.92);
   backdrop-filter: blur(16px);
   border-b: 1px solid #222222;
   display: flex;
@@ -94,7 +94,7 @@ body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;backgr
 
 /* Screen 1: Central Portal Option Selector Hub */
 .hub-screen {
-  min-h: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -334,7 +334,7 @@ body:has(#pos-d:checked) .pn-d{display:block}
   overflow-x: auto;
   padding-bottom: 12px;
   margin-bottom: 24px;
-  border-b: 1px solid #222222;
+  border-bottom: 1px solid #222222;
 }
 .script-tab-btn {
   background: #111111;
@@ -361,20 +361,23 @@ body:has(#pos-d:checked) .pn-d{display:block}
   font-weight: 800;
 }
 
-/* Background Animated Gradient Particle Glow for Live Script Atmosphere */
-.live-script-bg {
-  position: absolute;
+/* Background Animated Canvas with Pen Writing Graphic Grid Paper Effect */
+#writingCanvas {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 20%, rgba(255, 42, 122, 0.12) 0%, rgba(255, 107, 0, 0.05) 50%, transparent 80%);
   z-index: 0;
+  opacity: 0.22;
 }
 </style>
 </head>
 <body class="bg-background text-on-background font-metadata antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- Background Animated Live Writing Canvas (Notebook Paper + Pen Animation) -->
+<canvas id="writingCanvas"></canvas>
 
 <!-- Portal Header -->
 <header class="portal-header">
@@ -546,7 +549,6 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC (Where You Actually Stand)
 SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (Kinetic Precision PRO SCRIPT UI)
 ============================================================ -->
 <div id="scriptsScreen" class="script-provider-wrap relative">
-  <div class="live-script-bg"></div>
   <div class="max-w-2xl mx-auto px-margin-mobile pb-16 relative z-10">
     
     <!-- Header & Script Selector -->
@@ -576,11 +578,10 @@ SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (Kinetic Precision PRO SCRIPT UI)
 </div>
 
 <script>
-// Multiple Scripts Database (Including uploaded exact verbatim template!)
+// Exact 5 Scripts Database (Verbatim matching user prompt structure)
 const scriptsData = {
   1: {
-    title: "1kg Overnight Weight Mystery",
-    type: "REINFORCE WINNING FORMAT (3/2 SPLIT)",
+    title: "1KG OVERNIGHT WEIGHT MYSTERY",
     chips: [
       { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
       { icon: "record_voice_over", label: "FORMAT: TALKING HEAD", color: "primary" },
@@ -588,194 +589,194 @@ const scriptsData = {
       { icon: "home", label: "SETUP: HOME GYM", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"Ever wake up 1kg heavier overnight and freak out? It's not fat. It's water retention from that late-night salt or extra carbs. Wait until you see how fast this weight actually disappears. Comment 'SCALE' if you've been hurt by the scale this morning. Track your 7-day average, not the daily spike."`,
+    fullScript: `"Ever wake up 1kg heavier overnight and freak out? It’s not automatically fat. Water, glycogen, salt, carbs and even the food still being digested can move your weight up overnight. So don’t judge your progress from one morning. Track your 7-day average instead. How much has your weight jumped overnight before?"`,
     sayThis: [
       { tag: "HOOK", text: `"Ever wake up 1kg heavier overnight and freak out?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"It's not fat. It's water retention from that late-night salt or extra carbs."`, style: "value" },
-      { tag: "RETENTION", text: `"Wait until you see how fast this weight actually disappears."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Comment 'SCALE' if you've been hurt by the scale this morning."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Track your 7-day average, not the daily spike."`, style: "payoff" }
+      { tag: "CORE VALUE", text: `"It’s not automatically fat. Water, glycogen, salt, carbs and even the food still being digested can move your weight up overnight."`, style: "value" },
+      { tag: "RETENTION", text: `"So don’t judge your progress from one morning."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"How much has your weight jumped overnight before?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Track your 7-day average instead."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Eye level, tripod.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Confident & helpful.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Water bottle, Weighing Scale, Phone Calculator.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in at [CORE VALUE].", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Upbeat lo-fi.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"+1kg OVERNIGHT?!"', '"WATER vs FAT"'], full: true },
-      { icon: "cut", label: "EDITING", value: "One take + 2 punch-ins.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Eye level, phone tripod.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Confident, slightly concerned at the beginning.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Weighing scale + 1L water bottle + phone calculator.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on '1kg heavier overnight' and '7-day average.'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice, optional very low-volume neutral beat.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"+1KG OVERNIGHT?!"', '"WEIGHT ≠ FAT"', '"7-DAY AVERAGE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "One take + 2 punch-ins + auto captions.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Relatable pain point." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Curiosity about 'how fast'." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Low-friction comment prompt." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Debunks a common myth." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "3 next pieces: 'Water Weight 101', 'High Salt Foods', 'Tracking Wins'.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Common fear among people tracking weight." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Explains what is actually causing the increase." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Personal experience creates a natural response." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Gives a practical tracking method." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Water Weight 101 → weighing correctly → 7-day progress tracker.", isBox: true }
     ],
     resource: {
-      title: "7-Day Weight-Average Calculator",
-      desc: "Smooths out daily fluctuations for real progress tracking.",
-      quote: `"I've linked my average calculator in the bio for you guys."`
+      title: "7-DAY WEIGHT-AVERAGE CALCULATOR",
+      desc: "Enter seven daily weigh-ins and automatically calculate the weekly average.",
+      quote: `"Track your 7-day average instead."`,
+      toolName: "7-Day Weight Average Calculator"
     }
   },
   2: {
-    title: "AI Avatar Free Secret Trick",
-    type: "REINFORCE WINNING FORMAT (3/2 SPLIT)",
+    title: "AI AVATAR SECRET",
     chips: [
-      { icon: "forum", label: "GOAL: COMMENTS", color: "pink-accent" },
-      { icon: "smart_toy", label: "FORMAT: SCREEN RECORD + VOICE", color: "primary" },
-      { icon: "timer", label: "TIME: 25 SEC", color: "pink-accent" },
-      { icon: "laptop", label: "SETUP: DESK", color: "primary" },
+      { icon: "forum", label: "GOAL: COMMENTS + DMs", color: "pink-accent" },
+      { icon: "smart_toy", label: "FORMAT: TALKING HEAD", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "smartphone", label: "SETUP: PHONE / HOME", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"This 10-second AI trick will clone your voice and video for free. Stop spending 4 hours filming. Comment 'AVATAR' below and I'll DM you the exact 3-step prompt blueprint."`,
+    fullScript: `"Agar AI avatar bana rahe ho aur output fake lag raha hai, problem AI nahi, tumhari input ho sakti hai. Ek clear front-facing photo use karo, lighting consistent rakho, aur prompt mein exactly batao ki expression aur camera angle kya chahiye. Ye teen cheezein fix karo aur output instantly better ho jayega. AI avatar banate waqt tumhari biggest problem kya hai?"`,
     sayThis: [
-      { tag: "HOOK", text: `"This 10-second AI trick will clone your voice and video for free."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Stop spending 4 hours filming. Here is how top creators automate their reels."`, style: "value" },
-      { tag: "RETENTION", text: `"Look at this side-by-side comparison — can you tell which one is real?"`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Comment 'AVATAR' below and I'll DM you the exact 3-step prompt blueprint."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Never record a 50-take video again."`, style: "payoff" }
+      { tag: "HOOK", text: `"Agar AI avatar bana rahe ho aur output fake lag raha hai…"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Ek clear front-facing photo use karo, lighting consistent rakho, aur prompt mein exactly batao ki expression aur camera angle kya chahiye."`, style: "value" },
+      { tag: "RETENTION", text: `"Ye teen cheezein fix karo…"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"AI avatar banate waqt tumhari biggest problem kya hai?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Output instantly better ho jayega."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Screen recording + face cutout.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Mind-blown & urgent.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Laptop screen showing AI avatar generator.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Zoom into voice clone toggle.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Fast futuristic synth beat.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"CLONE YOURSELF IN 10s"', '"FREE AI BLUEPRINT"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Split-screen comparison transition.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Eye level, close talking-head.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "'I know the trick' confidence.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Phone showing an AI avatar.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in when saying 'problem AI nahi…'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"PHOTO"', '"LIGHTING"', '"PROMPT"'], full: true },
+      { icon: "cut", label: "EDITING", value: "3 simple text changes, no B-roll required.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "High curiosity tech hack." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Visual side-by-side proof." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Keyword DM trigger (1,422 comments proof)." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Saves creators 4 hours of work." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Follow-up: 'Top 3 Free AI Video Tools'.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Challenges the assumption that the AI tool itself is bad." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Three-part solution gives viewers a reason to stay." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Invites people to reveal their actual problem." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Gives immediately actionable AI advice." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "AI avatar checklist → prompt template → before/after examples.", isBox: true }
     ],
     resource: {
-      title: "AI Avatar Prompt Blueprint PDF",
-      desc: "Free copy-paste prompt template for voice and face cloning.",
-      quote: `"Comment AVATAR and I'll send the PDF directly to your inbox."`
+      title: "AI AVATAR PROMPT TEMPLATE",
+      desc: "A copy-paste prompt with fields for pose + lighting + expression + camera angle + style.",
+      quote: `"I’ve made the exact prompt structure for this."`,
+      toolName: "AI Avatar Prompt Builder"
     }
   },
   3: {
-    title: "₹10,000 High-Stakes Fitness Bet",
-    type: "VIRAL REACH EXPERIMENT (2/5 SPLIT)",
+    title: "₹10K CHALLENGE",
     chips: [
-      { icon: "visibility", label: "GOAL: REACH", color: "pink-accent" },
-      { icon: "directions_run", label: "FORMAT: OUTDOOR CHALLENGE", color: "primary" },
-      { icon: "timer", label: "TIME: 35 SEC", color: "pink-accent" },
-      { icon: "sports_gym", label: "SETUP: PUBLIC PARK", color: "primary" },
-      { icon: "payments", label: "COST: ₹10,000 CASH", color: "pink-accent" }
+      { icon: "military_tech", label: "GOAL: REACH + FOLLOWS", color: "pink-accent" },
+      { icon: "fitness_center", label: "FORMAT: CHALLENGE", color: "primary" },
+      { icon: "timer", label: "TIME: 20–25 SEC", color: "pink-accent" },
+      { icon: "sports_gym", label: "SETUP: GYM", color: "primary" },
+      { icon: "payments", label: "COST: ₹0–₹500", color: "pink-accent" }
     ],
-    fullScript: `"I offered ₹10,000 to anyone in the park who could hold a 3-minute pull-up dead hang. Watch what happened when this guy stepped up."`,
+    fullScript: `"₹500. You beat my dead hang, you take it. No swinging, no excuses. Ready?" [Friend starts hanging] "Okay… you're actually strong." [Rahul starts hanging] "Bro, why are you still there?" [Friend drops] "₹500 saved." [Look at camera] "Tomorrow, someone else gets a chance."`,
     sayThis: [
-      { tag: "HOOK", text: `"I offered ₹10,000 to anyone in the park who could hold a 3-minute pull-up dead hang."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Over 15 people tried and failed in the first hour."`, style: "value" },
-      { tag: "RETENTION", text: `"At 2 minutes 40 seconds, his grip started slipping."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Could you hold it for 3 minutes? Comment your max hang time."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Train your grip strength before betting your cash."`, style: "payoff" }
+      { tag: "HOOK", text: `"₹500. You beat my dead hang, you take it."`, style: "hook" },
+      { tag: "RETENTION", text: `Escalating challenge between Rahul and opponent.`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Think you can beat me? Tell me your time."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Tomorrow, someone else gets a chance."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Handheld wide-angle + timer on screen.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Hyped & energetic.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Pull-up bar, ₹10,000 cash stack, stopwatch.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Close up on gripping hands at 2:30 mark.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Tense heartbeat to bass drop.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"₹10,000 DEAD HANG"', '"2:50 MARK SLIP"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Fast cuts + big countdown timer overlay.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Phone on tripod, wide enough for both people.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Competitive → surprised → comedic.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "₹500 note + pull-up bar.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Quick punch-in when opponent keeps hanging.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Rising challenge audio during final 2 seconds.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"₹500 CHALLENGE"', '"NO SWINGING"', '"WHO WINS?"'], full: true },
+      { icon: "cut", label: "EDITING", value: "3–4 quick cuts between faces + final direct-to-camera shot.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Instant high cash stakes." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Climactic struggle countdown." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Challenge ego prompt." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Grip strength reality check." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Part 2: 'Grip Strength Secrets'.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Money immediately establishes stakes." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Viewer wants to know who wins." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives viewers a reason to compare their own performance." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Entertainment + physical challenge." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Push-up challenge → plank challenge → squat challenge → follower challenge.", isBox: true }
     ],
     resource: {
-      title: "Grip Strength & Forearm Routine",
-      desc: "3 exercises to double your pull-up dead hang time.",
-      quote: `"Check out my grip routine to win your next challenge."`
+      title: "RAHUL CHALLENGE SCOREBOARD",
+      desc: "A simple leaderboard where viewers can submit their best time.",
+      quote: `"Think you can beat me? Tell me your time."`,
+      toolName: "Rahul Challenge Leaderboard"
     }
   },
   4: {
-    title: "Ayurveda vs Steroids Mythbusting",
-    type: "AUTHORITY BREAKDOWN (3/2 SPLIT)",
+    title: "AYURVEDA MYTH",
     chips: [
-      { icon: "bookmark", label: "GOAL: SAVES", color: "pink-accent" },
-      { icon: "balance", label: "FORMAT: COMPARISON", color: "primary" },
-      { icon: "timer", label: "TIME: 30 SEC", color: "pink-accent" },
-      { icon: "biotech", label: "SETUP: LAB BACKGROUND", color: "primary" },
+      { icon: "bookmark", label: "GOAL: SAVES + COMMENTS", color: "pink-accent" },
+      { icon: "health_and_safety", label: "FORMAT: MYTH-BUSTING TALKING HEAD", color: "primary" },
+      { icon: "timer", label: "TIME: 20–25 SEC", color: "pink-accent" },
+      { icon: "home", label: "SETUP: HOME / GYM", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"Is Ashwagandha actually natural Anavar or a complete internet scam? Here is what 5 clinical trials prove about your testosterone levels."`,
+    fullScript: `"'Natural hai, toh safe hai.' Fitness mein ye assumption dangerous ho sakta hai. Ayurveda mein use hone wali har cheez automatically safe nahi hoti, especially jab dose, contamination ya medication interactions ka issue ho. Isliye sirf natural label dekh ke kisi product ko blindly mat lo. Aapne fitness mein sabse weird 'natural' claim kya suna hai?"`,
     sayThis: [
-      { tag: "HOOK", text: `"Is Ashwagandha actually natural Anavar or a complete internet scam?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Study 1 showed a 14.7% increase in T-levels over 60 days, but only at 600mg standardized extract."`, style: "value" },
-      { tag: "RETENTION", text: `"Most store-bought powders don't have enough active withanolides."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Comment 'TEST' for the clinical dosage cheat sheet."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Check your label before wasting your money."`, style: "payoff" }
+      { tag: "HOOK", text: `"'Natural hai, toh safe hai.'"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Ayurveda mein use hone wali har cheez automatically safe nahi hoti."`, style: "value" },
+      { tag: "RETENTION", text: `"Especially jab dose, contamination ya medication interactions ka issue ho."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Aapne fitness mein sabse weird 'natural' claim kya suna hai?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Sirf natural label dekh ke blindly mat lo."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Chest-up studio lighting.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Analytical & scientific.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Herb jar, research papers, tablet.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Zoom in on ingredient label list.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Deep documentary ambient tone.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"AYURVEDA vs STEROIDS"', '"CLINICAL TRUTH"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Paper graphic pop-ups + green highlights.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Eye level, tight framing.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Serious at hook, explanatory afterwards.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Any relevant packaged product or ingredient label.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on 'natural hai, toh safe hai.'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice only.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"NATURAL ≠ AUTOMATICALLY SAFE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "One take + one punch-in.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Debunks controversial supplement debate." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Uncovers market secret trick." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Cheat sheet keyword ask." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Saves viewer money on fake supplements." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Next: 'Top 3 Natural Adaptogens'.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Challenges a widely repeated assumption." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Introduces three reasons without overexplaining." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Audience contributes their own examples." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Encourages more careful evaluation of health claims." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Natural vs safe → supplement label breakdown → common fitness myths.", isBox: true }
     ],
     resource: {
-      title: "Supplement Clinical Dosage Guide",
-      desc: "Optimal dosages and active ingredient thresholds.",
-      quote: `"Link in bio for the full research breakdown PDF."`
+      title: "'NATURAL OR MARKETING?' CHECKLIST",
+      desc: "A simple checklist for evaluating claims around fitness products.",
+      quote: `"Before you believe a fitness claim, check what’s actually in the product."`,
+      toolName: "Natural Claim Checklist"
     }
   },
   5: {
-    title: "7-Day Clean Bulk Meal Plan",
-    type: "LEAD MAGNET CAROUSEL (3/2 SPLIT)",
+    title: "7-DAY BULK PLAN",
     chips: [
-      { icon: "download", label: "GOAL: LEADS", color: "pink-accent" },
-      { icon: "restaurant", label: "FORMAT: MEAL PREP CAROUSEL", color: "primary" },
-      { icon: "timer", label: "TIME: 45 SEC", color: "pink-accent" },
-      { icon: "kitchen", label: "SETUP: KITCHEN COUNTER", color: "primary" },
-      { icon: "payments", label: "COST: ₹150/DAY", color: "pink-accent" }
+      { icon: "restaurant", label: "GOAL: SAVES + FOLLOWS", color: "pink-accent" },
+      { icon: "kitchen", label: "FORMAT: TALKING HEAD + FOOD PROPS", color: "primary" },
+      { icon: "timer", label: "TIME: 25–30 SEC", color: "pink-accent" },
+      { icon: "countertops", label: "SETUP: HOME / KITCHEN", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"How to gain 3kg of clean muscle without getting a fat belly. Here is my exact ₹150/day 3,000 calorie meal plan. Save this for your next grocery run."`,
+    fullScript: `"Agar bulk karna hai, toh har meal mein bas zyada khana start mat karo. Ek simple rule follow karo: har meal mein protein source, ek proper carb source, aur enough calories. Breakfast mein eggs plus roti, lunch mein rice plus dal plus curd, aur dinner mein chicken or paneer plus rice or roti. Same structure ko 7 din repeat karo, aur portions apne calorie target ke according adjust karo. Bulk ka goal sirf zyada khana nahi, consistently enough khana hai."`,
     sayThis: [
-      { tag: "HOOK", text: `"How to gain 3kg of clean muscle without getting a fat belly."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Meal 1: Oats + Peanut butter + 4 eggs = 850 Cal / 45g Protein."`, style: "value" },
-      { tag: "RETENTION", text: `"The secret isn't more food — it's digestive efficiency."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Comment 'BULK' and I'll DM you the full PDF shopping list."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Consistency in your kitchen builds your physique."`, style: "payoff" }
+      { tag: "HOOK", text: `"Agar bulk karna hai, toh har meal mein bas zyada khana start mat karo."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Har meal mein protein source, proper carb source, aur enough calories."`, style: "value" },
+      { tag: "RETENTION", text: `"Same structure ko 7 din repeat karo…"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Tumhare liye bulk mein sabse difficult meal kaunsa hai, breakfast, lunch ya dinner?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Bulk ka goal sirf zyada khana nahi, consistently enough khana hai."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Overhead food shot + macro lens.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Warm & instructional.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Meal prep containers, food scale, oats, eggs.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Macro close-up of prepared meals.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Chill acoustic groove.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"3,000 CAL BULK"', '"₹150 PER DAY"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Satisfying prep cuts + macro text counters.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Phone vertical, kitchen counter or dining table.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Practical, coach-like.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Eggs + rice/roti + dal/curd + chicken/paneer.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in when showing the 3-part meal structure.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"PROTEIN + CARBS + CALORIES"', '"REPEAT FOR 7 DAYS"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Show each meal component while speaking. Maximum 3–4 cuts.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: " Solves skinny-to-bulk struggle." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Specific budget breakdown." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "High-value DM lead magnet." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Actionable low-cost nutrition plan." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Follow-up: 'High Protein Snacks'.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Rejects the simplistic 'just eat more' approach." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Gives a repeatable 7-day structure." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Lets viewers identify their biggest problem." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Gives a practical framework rather than a random meal list." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "₹200 bulk day → vegetarian bulk → 100g protein bulk → grocery list.", isBox: true }
     ],
     resource: {
-      title: "3,000 Calorie Grocery Shopping PDF",
-      desc: "Complete ingredient list and weekly meal prep schedule.",
-      quote: `"Comment BULK for the instant PDF download link."`
+      title: "7-DAY BULK MEAL BUILDER",
+      desc: "User selects Goal → Calories → Protein → Vegetarian/Non-veg → Budget to generate meal structure.",
+      quote: `"I’ve made a simple 7-day structure you can follow."`,
+      toolName: "7-Day Bulk Meal Builder"
     }
   }
 };
@@ -872,16 +873,15 @@ function renderScript(id) {
   container.innerHTML = `
     <!-- Title & Metadata Header -->
     <header class="flex flex-col gap-4">
-      <div class="font-label-caps text-[11px] text-primary uppercase tracking-widest">${data.type}</div>
       <h1 class="font-headline-lg text-2xl md:text-headline-lg text-on-surface uppercase font-black tracking-tight">${data.title}</h1>
       <div class="flex flex-wrap gap-2">${chipsHTML}</div>
     </header>
 
-    <!-- Full Verbatim Script Box -->
+    <!-- FULL SCRIPT (Dominant Primary Section) -->
     <section class="flex flex-col gap-3">
       <div class="font-label-caps text-label-caps text-pink-accent uppercase">FULL SCRIPT</div>
-      <div class="bg-surface-container border-l-4 border-primary p-5">
-        <p class="font-script-body text-on-surface leading-relaxed">${data.fullScript}</p>
+      <div class="bg-surface-container border-l-4 border-primary p-6 rounded-r-lg shadow-xl">
+        <p class="font-script-body text-xl text-on-surface font-bold leading-relaxed">${data.fullScript}</p>
       </div>
     </section>
 
@@ -926,7 +926,7 @@ function renderScript(id) {
         <span class="material-symbols-outlined text-pink-accent shrink-0 text-[24px]">format_quote</span>
         <p class="font-script-body text-[15px] text-on-surface font-bold italic">${data.resource.quote}</p>
       </div>
-      <button onclick="attachToolToScript('${data.resource.title}')" class="w-full h-[52px] bg-primary text-black font-label-caps text-[14px] uppercase font-black flex items-center justify-center gap-2 mt-2 hover:bg-primary-container transition-colors active:scale-95 duration-100 relative z-10">
+      <button onclick="attachToolToScript('${data.resource.toolName}')" class="w-full h-[52px] bg-primary text-black font-label-caps text-[14px] uppercase font-black flex items-center justify-center gap-2 mt-2 hover:bg-primary-container transition-colors active:scale-95 duration-100 relative z-10">
         <span class="material-symbols-outlined text-[24px]">add_link</span> ATTACH TOOL TO SCRIPT
       </button>
     </section>
@@ -944,8 +944,8 @@ function switchScript(num) {
 }
 
 // Attach Tool Feedback
-function attachToolToScript(title) {
-  alert(`✓ Tool Attached: ${title} has been linked to your active script execution calendar!`);
+function attachToolToScript(toolName) {
+  alert(`✓ ATTACH TOOL: ${toolName} has been linked to your active script execution calendar!`);
   playChime();
 }
 
@@ -987,9 +987,80 @@ function playChime() {
   } catch(e) {}
 }
 
-// Initialize Script 1 on load
+// Live Background Canvas: Moving Grid Notebook + Fountain Pen Writing Script Lines
+function initWritingCanvas() {
+  const canvas = document.getElementById('writingCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let step = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Grid Notebook Lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+    ctx.lineWidth = 1;
+
+    const gridSize = 40;
+    for (let x = 0; x < canvas.width; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    // Draw Live Moving Script Ink Waves & Animated Pen Tip
+    step += 0.02;
+
+    const linesCount = 4;
+    for (let i = 0; i < linesCount; i++) {
+      ctx.beginPath();
+      const baseY = (canvas.height / 5) * (i + 1);
+      ctx.strokeStyle = i % 2 === 0 ? 'rgba(255, 107, 0, 0.15)' : 'rgba(255, 42, 122, 0.15)';
+      ctx.lineWidth = 2;
+
+      for (let x = 0; x < canvas.width; x += 10) {
+        const y = baseY + Math.sin(x * 0.01 + step + i) * 20 + Math.cos(x * 0.02 - step) * 10;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Pen Tip glowing pulse along wave
+      const penX = ((step * 80 + i * 200) % canvas.width);
+      const penY = baseY + Math.sin(penX * 0.01 + step + i) * 20 + Math.cos(penX * 0.02 - step) * 10;
+
+      ctx.fillStyle = i % 2 === 0 ? '#FF6B00' : '#FF2A7A';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.arc(penX, penY, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// Initialize Script 1 and Background Canvas on load
 document.addEventListener('DOMContentLoaded', () => {
   renderScript(1);
+  initWritingCanvas();
 });
 </script>
 
