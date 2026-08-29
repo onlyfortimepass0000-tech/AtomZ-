@@ -403,8 +403,15 @@
         passkeyStatus.style.color = '#FF6600';
         passkeyStatus.style.fontWeight = '600';
         setTimeout(() => {
-          if (code.toLowerCase() === 'atomz112' || code.toLowerCase().includes('harsh')) {
+          const c = code.toLowerCase();
+          if (c === 'atomz112' || c.includes('harsh')) {
             window.location.href = 'horizon-harsh.html?code=' + encodeURIComponent(code);
+          } else if (c === 'atomz113' || c.includes('somo')) {
+            window.location.href = 'horizon-somo.html?code=' + encodeURIComponent(code);
+          } else if (c === 'atomz114' || c.includes('client4') || c.includes('alex')) {
+            window.location.href = 'horizon-client4.html?code=' + encodeURIComponent(code);
+          } else if (c === 'atomz115' || c.includes('client5') || c.includes('vikram')) {
+            window.location.href = 'horizon-client5.html?code=' + encodeURIComponent(code);
           } else {
             window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
           }

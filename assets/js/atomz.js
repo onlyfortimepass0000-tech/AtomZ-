@@ -365,9 +365,16 @@
         statusMsg.textContent = "✓ Access Granted — Redirecting to Horizon Client Portal...";
         statusMsg.className = "horizon-status-msg success";
       }
+      playPasskeySuccessSound();
       setTimeout(function() {
         if (cleanedCode === "atomz112" || cleanedCode.indexOf("harsh") !== -1) {
           window.location.href = "horizon-harsh.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz113" || cleanedCode.indexOf("somo") !== -1) {
+          window.location.href = "horizon-somo.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz114" || cleanedCode.indexOf("client4") !== -1 || cleanedCode.indexOf("alex") !== -1) {
+          window.location.href = "horizon-client4.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz115" || cleanedCode.indexOf("client5") !== -1 || cleanedCode.indexOf("vikram") !== -1) {
+          window.location.href = "horizon-client5.html?code=" + encodeURIComponent(cleanedCode);
         } else {
           window.location.href = "horizon-dossier.html?code=" + encodeURIComponent(cleanedCode);
         }
@@ -387,6 +394,105 @@
     });
   }
 })();
+
+/* ==========================================================================
+   WEB AUDIO API SOUND EFFECTS GENERATOR (Zero External Dependencies)
+   ========================================================================== */
+window.audioCtx = null;
+
+function getAudioCtx() {
+  if (!window.audioCtx) {
+    var AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtxClass) {
+      window.audioCtx = new AudioCtxClass();
+    }
+  }
+  if (window.audioCtx && window.audioCtx.state === 'suspended') {
+    window.audioCtx.resume();
+  }
+  return window.audioCtx;
+}
+
+function playOptionClickSound() {
+  try {
+    var ctx = getAudioCtx();
+    if (!ctx) return;
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(420, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(840, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch(e) {}
+}
+
+function playVerdictRevealSound() {
+  try {
+    var ctx = getAudioCtx();
+    if (!ctx) return;
+    var osc1 = ctx.createOscillator();
+    var osc2 = ctx.createOscillator();
+    var gain = ctx.createGain();
+    
+    osc1.type = 'triangle';
+    osc2.type = 'sine';
+    
+    osc1.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+    osc2.frequency.setValueAtTime(659.25, ctx.currentTime); // E5
+    osc1.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.15); // G5
+    
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.18);
+    
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc1.start();
+    osc2.start();
+    osc1.stop(ctx.currentTime + 0.18);
+    osc2.stop(ctx.currentTime + 0.18);
+  } catch(e) {}
+}
+
+function playPasskeySuccessSound() {
+  try {
+    var ctx = getAudioCtx();
+    if (!ctx) return;
+    var now = ctx.currentTime;
+    [523.25, 659.25, 783.99, 1046.50].forEach(function(freq, i) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + i * 0.05);
+      gain.gain.setValueAtTime(0.15, now + i * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.05 + 0.12);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.05);
+      osc.stop(now + i * 0.05 + 0.12);
+    });
+  } catch(e) {}
+}
+
+// Auto attach sound triggers to diagnostic radio buttons
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.matches('.opt input[type="radio"]')) {
+    playOptionClickSound();
+    
+    // Check if both identity and goal are checked to play verdict chime
+    var idChecked = document.querySelector('input[name="identity"]:checked');
+    var goalChecked = document.querySelector('input[name="goal"]:checked');
+    if (idChecked && goalChecked) {
+      setTimeout(playVerdictRevealSound, 120);
+    }
+  }
+});
 
 /* ==========================================================================
    INTRO LOADING ANIMATION (Center Logo Shrink & Fly to Top-Left)
