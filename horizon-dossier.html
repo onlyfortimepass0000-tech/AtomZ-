@@ -562,7 +562,7 @@ SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (Kinetic Precision PRO SCRIPT UI)
 
       <!-- Multiple Script Library Tabs -->
       <div class="script-tab-selector">
-        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: ₹500 DEAD-HANG</button>
+        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: OVERNIGHT WEIGHT</button>
         <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: 3 CHEAP PROTEIN</button>
         <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: TRAINER VS CLIENT</button>
         <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: 3 AI PROMPT FIXES</button>
@@ -581,43 +581,43 @@ SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (Kinetic Precision PRO SCRIPT UI)
 // Exact 5 PDF-Expanded Scripts Database (Verbatim matching user prompt structure)
 const scriptsData = {
   1: {
-    title: "₹500 DEAD-HANG CHALLENGE",
+    title: "1KG OVERNIGHT WEIGHT MYSTERY",
     chips: [
-      { icon: "military_tech", label: "GOAL: REACH + FOLLOWS", color: "pink-accent" },
-      { icon: "fitness_center", label: "FORMAT: CHALLENGE", color: "primary" },
-      { icon: "timer", label: "TIME: 18–22 SEC", color: "pink-accent" },
-      { icon: "sports_gym", label: "SETUP: GYM", color: "primary" },
-      { icon: "payments", label: "COST: ₹500", color: "pink-accent" }
+      { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "home", label: "SETUP: HOME GYM", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"₹500. You hold longer than me, you take it. No excuses. No swinging. Just a dead hang. Ready?"\n\n[Friend hangs] “Okay… strong.”\n\n[Rahul hangs] “Bro, why are you still there?”\n\n[Friend drops] “₹500 saved.”\n\n[Look at camera] “Follow to see who beats me tomorrow.”`,
+    fullScript: `"Ever wake up 1kg heavier overnight and freak out? It’s not automatically fat. Water, glycogen, salt, carbs and even the food still being digested can move your weight up overnight. So don’t judge your progress from one morning. Track your 7-day average instead. I’ve linked a simple calculator for that. How much has your weight jumped overnight before?"`,
     sayThis: [
-      { tag: "HOOK", text: `"₹500. You hold longer than me, you take it."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"No excuses. No swinging. Just a dead hang."`, style: "value" },
-      { tag: "RETENTION", text: `"Bro, why are you still there?"`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Who’s next?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Follow to see who beats me tomorrow."`, style: "payoff" }
+      { tag: "HOOK", text: `"Ever wake up 1kg heavier overnight and freak out?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"It’s not automatically fat. Water, glycogen, salt, carbs and even the food still being digested can move your weight up overnight."`, style: "value" },
+      { tag: "RETENTION", text: `"So don’t judge your progress from one morning."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"How much has your weight jumped overnight before?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Track your 7-day average instead. I’ve linked a simple calculator for that."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Phone on tripod, wide enough for both people.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Rahul competitive, then genuinely surprised.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "₹500 note + pull-up bar.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in when the friend keeps hanging.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Native dialogue + rising challenge audio during final 2 seconds.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"₹500 IF YOU BEAT ME"', '"NO SWINGING"', '"WHO\'S NEXT?"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Quick cuts between faces, then direct-to-camera ending.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Eye level, tripod.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Confident, slightly concerned at the beginning.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Weighing scale + 1L water bottle + phone calculator.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in at '1kg heavier overnight' and '7-day average.'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice, optional very low-volume neutral beat.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"+1KG OVERNIGHT?!"', '"WEIGHT ≠ FAT"', '"7-DAY AVERAGE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "One take + 2 punch-ins + auto captions.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Immediate money + challenge creates stakes." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Viewer needs to see who wins." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Makes viewers compare themselves with Rahul." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Simple competitive entertainment." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Push-up → plank → pull-ups → follower challenges.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Relatable fear for anyone tracking weight." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Explains why the scale suddenly changes." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Invites viewers to share their own experience." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Gives a better way to track progress." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Water Weight 101 → weighing correctly → daily vs weekly weight.", isBox: true }
     ],
     resource: {
-      title: "RAHUL CHALLENGE SCOREBOARD",
-      desc: "A simple leaderboard where viewers can enter their dead-hang time.",
-      quote: `"Who’s next?"`,
-      toolName: "Rahul Challenge Leaderboard"
+      title: "7-DAY WEIGHT-AVERAGE CALCULATOR",
+      desc: "Automatically calculates the average from seven daily weigh-ins.",
+      quote: `"I’ve linked a simple calculator for that."`,
+      toolName: "7-Day Weight Average Calculator"
     }
   },
   2: {
