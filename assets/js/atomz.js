@@ -355,7 +355,7 @@
     "atomz112": { name: "Harsh", handle: "@fitharsh__15", format: "Harsh (atomz112)" },
     "atomz113": { name: "Aum", handle: "@aum.creation", format: "Aum (atomz113)" },
     "atomz114": { name: "Toxic Somo", handle: "@fitwithtoxic_somo", format: "Toxic Somo (atomz114)" },
-    "atomz115": { name: "Vraj Fit", handle: "@vraj_fit", format: "Vraj Fit (atomz115)" }
+    "atomz115": { name: "Train With Tas", handle: "@trainwithtas_", format: "Train With Tas (atomz115)" }
   };
 
   function processCodeAccess(enteredCode) {
@@ -376,7 +376,7 @@
           window.location.href = "horizon-113.html?code=" + encodeURIComponent(cleanedCode);
         } else if (cleanedCode === "atomz114" || cleanedCode.indexOf("somo") !== -1) {
           window.location.href = "horizon-114.html?code=" + encodeURIComponent(cleanedCode);
-        } else if (cleanedCode === "atomz115" || cleanedCode.indexOf("vraj") !== -1) {
+        } else if (cleanedCode === "atomz115" || cleanedCode.indexOf("tas") !== -1 || cleanedCode.indexOf("train") !== -1) {
           window.location.href = "horizon-115.html?code=" + encodeURIComponent(cleanedCode);
         } else {
           window.location.href = "horizon-dossier.html?code=" + encodeURIComponent(cleanedCode);
