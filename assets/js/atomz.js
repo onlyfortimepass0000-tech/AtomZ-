@@ -370,6 +370,12 @@
           window.location.href = "horizon-trial.html?code=" + encodeURIComponent(cleanedCode);
         } else if (cleanedCode === "atomz112" || cleanedCode.indexOf("harsh") !== -1) {
           window.location.href = "horizon-harsh.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz113" || cleanedCode.indexOf("aum") !== -1) {
+          window.location.href = "horizon-113.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz114") {
+          window.location.href = "horizon-114.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz115") {
+          window.location.href = "horizon-115.html?code=" + encodeURIComponent(cleanedCode);
         } else {
           window.location.href = "horizon-dossier.html?code=" + encodeURIComponent(cleanedCode);
         }

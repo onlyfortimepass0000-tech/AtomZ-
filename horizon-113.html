@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATOMZ — Where You Actually Stand (Aum - atomz113)</title>
+<style>
+:root{--charcoal:#0B0B0D;--accent:#FF4D2E;--gold:#F2B705;--offwhite:#F5F5F0;--grey:#8A8580;--grey-light:#EAE8E3;--green:#2F8F5B;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:var(--offwhite);color:var(--charcoal);}
+.wrap{max-width:640px;margin:0 auto;padding:0 0 60px;}
+.hero{background:var(--charcoal);color:var(--offwhite);padding:28px 20px 22px;}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px;}
+.headline{font-size:21px;font-weight:800;line-height:1.2;margin:0 0 4px;}
+.handle{font-size:13px;color:#B8B4AD;margin:0;}
+section{padding:18px 20px 4px;}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);margin:0 0 10px;}
+
+.proof-card{background:#fff;border:1.5px solid var(--grey-light);border-radius:12px;padding:16px;}
+.proof-tag{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(47,143,91,.1);padding:4px 10px;border-radius:20px;margin-bottom:8px;}
+.proof-title{font-size:15px;font-weight:700;margin:0 0 4px;}
+.proof-stat{font-size:12.5px;color:var(--grey);line-height:1.4;margin:0;}
+.proof-stat b{color:var(--accent);font-size:13.5px;}
+.proof-why{font-size:12px;color:#605C56;line-height:1.5;margin:8px 0 0;}
+.proof-source{font-size:11px;color:var(--grey);font-style:italic;margin:8px 0 0;}
+
+.q-block{margin-bottom:18px;}
+.q-text{font-size:14px;font-weight:700;margin:0 0 10px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{display:block;position:relative;}
+.opt input{position:absolute;opacity:0;}
+.opt .card{display:block;padding:12px 14px;border:1.5px solid var(--grey-light);border-radius:10px;background:#fff;font-size:13.5px;font-weight:600;cursor:pointer;}
+.opt input:checked + .card{border-color:var(--accent);background:rgba(255,77,46,.06);color:var(--accent);}
+
+.placeholder{font-size:13px;color:var(--grey);font-style:italic;}
+
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 18px;max-width:320px;}
+.mini{padding:12px 8px;border-radius:10px;text-align:center;font-size:11px;font-weight:800;line-height:1.3;opacity:.35;border:2px solid transparent;}
+.mini.blindspot{background:rgba(242,183,5,.16);color:#8a6a00;}
+.mini.aligned{background:var(--charcoal);color:var(--gold);}
+.mini.reset{background:var(--grey-light);color:var(--grey);}
+.mini.wrongdest{background:rgba(255,77,46,.12);color:var(--accent);}
+
+.verdict{display:none;margin-bottom:8px;}
+.badge{display:inline-block;font-size:12px;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:8px;}
+.badge-green{background:rgba(47,143,91,.15);color:var(--green);}
+.badge-coral{background:rgba(255,77,46,.14);color:var(--accent);}
+.badge-gold{background:rgba(242,183,5,.2);color:#8a6a00;}
+.badge-grey{background:var(--grey-light);color:var(--grey);}
+.verdict p{font-size:13.5px;line-height:1.5;color:#403D38;margin:0;}
+.goalnote{display:none;font-size:13px;line-height:1.5;color:#403D38;margin:8px 0 0;padding:10px 12px;background:#fff;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.stakes{display:none;font-size:13px;line-height:1.5;color:#403D38;font-weight:600;margin:10px 0 0;padding:10px 12px;background:rgba(255,77,46,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+
+.move-wrap{display:none;}
+.move{display:none;background:var(--charcoal);color:var(--offwhite);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.5;margin-bottom:8px;}
+.pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
+
+/* ===== Reveal logic — pure CSS, no JavaScript ===== */
+body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholder{display:none}
+body:has(input[name=identity]:checked):has(input[name=goal]:checked) .mini-grid .mini,
+body:has(input[name=identity]:checked):has(input[name=goal]:checked) .move-wrap{display:block}
+
+/* ALIGNED — memes or mix × followers/branddeals/consistency */
+body:has(#id-memes:checked):has(#goal-followers:checked) .v-aligned,
+body:has(#id-memes:checked):has(#goal-branddeals:checked) .v-aligned,
+body:has(#id-memes:checked):has(#goal-consistency:checked) .v-aligned,
+body:has(#id-mix:checked):has(#goal-followers:checked) .v-aligned,
+body:has(#id-mix:checked):has(#goal-branddeals:checked) .v-aligned,
+body:has(#id-mix:checked):has(#goal-consistency:checked) .v-aligned,
+body:has(#id-memes:checked):has(#goal-followers:checked) .move-aligned,
+body:has(#id-memes:checked):has(#goal-branddeals:checked) .move-aligned,
+body:has(#id-memes:checked):has(#goal-consistency:checked) .move-aligned,
+body:has(#id-mix:checked):has(#goal-followers:checked) .move-aligned,
+body:has(#id-mix:checked):has(#goal-branddeals:checked) .move-aligned,
+body:has(#id-mix:checked):has(#goal-consistency:checked) .move-aligned{display:block}
+body:has(#id-memes:checked):has(#goal-followers:checked) .mini.aligned,
+body:has(#id-memes:checked):has(#goal-branddeals:checked) .mini.aligned,
+body:has(#id-memes:checked):has(#goal-consistency:checked) .mini.aligned,
+body:has(#id-mix:checked):has(#goal-followers:checked) .mini.aligned,
+body:has(#id-mix:checked):has(#goal-branddeals:checked) .mini.aligned,
+body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:var(--gold)}
+
+/* RIGHT LANE, WRONG DESTINATION — memes or mix × clients */
+body:has(#id-memes:checked):has(#goal-clients:checked) .v-wrongdest,
+body:has(#id-mix:checked):has(#goal-clients:checked) .v-wrongdest,
+body:has(#id-memes:checked):has(#goal-clients:checked) .move-wrongdest,
+body:has(#id-mix:checked):has(#goal-clients:checked) .move-wrongdest{display:block}
+body:has(#id-memes:checked):has(#goal-clients:checked) .mini.wrongdest,
+body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:var(--accent)}
+
+/* BLIND SPOT — journey or philosophical × followers/branddeals/consistency */
+body:has(#id-journey:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-journey:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-journey:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-philosophical:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-philosophical:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-philosophical:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-journey:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-journey:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-journey:checked):has(#goal-consistency:checked) .move-blindspot,
+body:has(#id-philosophical:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-philosophical:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-philosophical:checked):has(#goal-consistency:checked) .move-blindspot{display:block}
+body:has(#id-journey:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-journey:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-journey:checked):has(#goal-consistency:checked) .mini.blindspot,
+body:has(#id-philosophical:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-philosophical:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-philosophical:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:#8a6a00}
+
+/* RESET NEEDED — journey or philosophical × clients */
+body:has(#id-journey:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-philosophical:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-journey:checked):has(#goal-clients:checked) .move-reset,
+body:has(#id-philosophical:checked):has(#goal-clients:checked) .move-reset{display:block}
+body:has(#id-journey:checked):has(#goal-clients:checked) .mini.reset,
+body:has(#id-philosophical:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:var(--grey)}
+
+/* STAKES */
+body:has(#id-memes:checked):has(#goal-followers:checked) .stakes-aligned,
+body:has(#id-memes:checked):has(#goal-branddeals:checked) .stakes-aligned,
+body:has(#id-memes:checked):has(#goal-consistency:checked) .stakes-aligned,
+body:has(#id-mix:checked):has(#goal-followers:checked) .stakes-aligned,
+body:has(#id-mix:checked):has(#goal-branddeals:checked) .stakes-aligned,
+body:has(#id-mix:checked):has(#goal-consistency:checked) .stakes-aligned{display:block}
+body:has(#id-memes:checked):has(#goal-clients:checked) .stakes-wrongdest,
+body:has(#id-mix:checked):has(#goal-clients:checked) .stakes-wrongdest{display:block}
+body:has(#id-journey:checked):has(#goal-followers:checked) .stakes-blindspot,
+body:has(#id-journey:checked):has(#goal-branddeals:checked) .stakes-blindspot,
+body:has(#id-journey:checked):has(#goal-consistency:checked) .stakes-blindspot,
+body:has(#id-philosophical:checked):has(#goal-followers:checked) .stakes-blindspot,
+body:has(#id-philosophical:checked):has(#goal-branddeals:checked) .stakes-blindspot,
+body:has(#id-philosophical:checked):has(#goal-consistency:checked) .stakes-blindspot{display:block}
+body:has(#id-journey:checked):has(#goal-clients:checked) .stakes-reset,
+body:has(#id-philosophical:checked):has(#goal-clients:checked) .stakes-reset{display:block}
+
+/* Goal-specific notes */
+body:has(#goal-followers:checked) .gn-followers{display:block}
+body:has(#goal-branddeals:checked) .gn-branddeals{display:block}
+body:has(#goal-clients:checked) .gn-clients{display:block}
+body:has(#goal-consistency:checked) .gn-consistency{display:block}
+
+/* Capacity pace notes */
+body:has(#cap-low:checked) .pace-low{display:block}
+body:has(#cap-mid:checked) .pace-mid{display:block}
+body:has(#cap-high:checked) .pace-high{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">ATOMZ · Where You Actually Stand</p>
+    <h1 class="headline">A Few Quick Questions</h1>
+    <p class="handle">Aum · 5-reel diagnostic (atomz113)</p>
+  </div>
+
+  <section>
+    <h2>What the data already proves</h2>
+    <div class="proof-card">
+      <span class="proof-tag">Pulled from your audit</span>
+      <p class="proof-title">Simple relatable memes are your winning format</p>
+      <p class="proof-stat"><b>22,848 views</b> on "Fat baby" — 34.7x more than your lowest reel (659 views), and 6.8x more than your second-best.</p>
+      <p class="proof-why">Why: zero cognitive load — familiar audio (American Pie), a casual native caption, one clear joke, zero hashtags. The viewer gets the payoff without needing your backstory.</p>
+      <p class="proof-source">Based on your actual last 5 reels — not an industry benchmark.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Now, tell us the rest</h2>
+    <div class="q-block">
+      <p class="q-text">1. What do you think your content is mainly about right now?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="identity" id="id-journey"><span class="card">Day-by-day journey/challenge content</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-memes"><span class="card">Simple relatable memes</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of different topics</span></label>
+        <label class="opt"><input type="radio" name="identity" id="id-philosophical"><span class="card">Serious or motivational content</span></label>
+      </div>
+    </div>
+    <div class="q-block">
+      <p class="q-text">2. What's your main goal right now?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
+        <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
+        <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
+        <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+      </div>
+    </div>
+    <div class="q-block">
+      <p class="q-text">3. How many reels can you realistically shoot per week?</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
+        <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
+        <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Your position</h2>
+    <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
+
+    <div class="mini-grid">
+      <div class="mini blindspot">Blind spot</div>
+      <div class="mini aligned">Fully aligned</div>
+      <div class="mini reset">Reset needed</div>
+      <div class="mini wrongdest">Right lane, wrong destination</div>
+    </div>
+
+    <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
+    <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
+    <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
+    <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
+
+    <p class="goalnote gn-followers">Simple, shareable memes are exactly what drives fast follower growth — your data proves it by a 34.7x margin.</p>
+    <p class="goalnote gn-branddeals">Broad, relatable content is generally brand-friendly, though your audit doesn't map this directly to deals — you'd want a simple media kit once the format is consistent.</p>
+    <p class="goalnote gn-clients">Meme content doesn't demonstrate an expertise or service on its own — you'd need a separate bridge (a specific CTA or content lane) to turn this reach into paying clients.</p>
+    <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
+
+    <div class="stakes stakes-aligned">If this stalls: you go back to the same 34.7x gap between your best and worst reel — the algorithm rewards this format specifically, not "content" in general.</div>
+    <div class="stakes stakes-wrongdest">If this doesn't change: your reach keeps growing while there's still nothing for a viewer to buy or book.</div>
+    <div class="stakes stakes-blindspot">If this doesn't change: you'll keep making Day X/100 or motivational content that bottoms out at 659–1,664 views, while the format that already hit 22,848 sits unused.</div>
+    <div class="stakes stakes-reset">If this doesn't change: you'll keep mixing gym, finance, travel, and identity in single reels — the exact niche whiplash your audit flagged as confusing the algorithm.</div>
+  </section>
+
+  <section class="move-wrap">
+    <h2>This week's move</h2>
+    <div class="move move-aligned">Replicate the "Fat baby" structure this week: recognizable audio → simple visual situation → short caption → immediate payoff. Don't mix in the Day X/100 counter.</div>
+    <div class="move move-wrongdest">Keep making relatable memes, but pick one and add a light CTA at the end pointing toward whatever you're actually selling.</div>
+    <div class="move move-blindspot">Try 2 meme-format reels this week even if journey content feels more "you" — the data says it will outperform everything else you post by a wide margin.</div>
+    <div class="move move-reset">Before shooting anything else, pick one lane — gym, humour, or lifestyle — and keep the others as separate content, not blended into the same reel.</div>
+    <p class="pace pace-low">At 1–2 reels/week, it'll take longer to build a repeatable meme-format habit.</p>
+    <p class="pace pace-mid">3–5 reels/week is enough to properly test 3–5 different audios in this format and see what repeats.</p>
+    <p class="pace pace-high">5+ reels/week lets you run the full test-then-double-down cycle fast.</p>
+  </section>
+</div>
+</body>
+</html>
