@@ -362,6 +362,112 @@
         </div>
     </section>
 
+    <!-- Section 5: Live Interactive Creator Growth Diagnostic Tool -->
+    <section class="py-12 md:py-20 mb-16 border-t border-surface-light" id="diagnostic" data-reveal style="--reveal-delay:.2s">
+        <div class="mb-8">
+            <span class="font-label-sm text-xs text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1 rounded-full uppercase">
+                ⚡ EXCLUSIVE CLIENT GROWTH TOOL
+            </span>
+            <h2 class="font-headline-md text-2xl md:text-headline-lg mt-3 text-text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">psychology</span>
+                CREATOR GROWTH DIAGNOSTIC ENGINE
+            </h2>
+            <p class="font-body-md text-text-secondary mt-1">
+                Select your goals & constraints below to dynamically calculate your live matrix GUI and generate observable next actions.
+            </p>
+        </div>
+
+        <!-- Diagnostic Workspace (Left: Question Tree | Right: Live Updating Matrix GUI) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="harshDiagWorkspace">
+            <!-- Left Column: Interactive Questionnaire (7 cols) -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glass-panel p-6 md:p-8 rounded-xl border border-surface-light" id="harshQuestionCard">
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="harshStepBadge" class="font-label-sm text-xs text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1 rounded-full uppercase">
+                            QUESTION 1 OF 4
+                        </span>
+                        <span class="font-label-sm text-xs text-text-secondary uppercase">ADAPTIVE DECISION TREE</span>
+                    </div>
+
+                    <h3 id="harshQTitle" class="font-headline-md text-xl md:text-2xl text-white mb-2 font-bold">
+                        Loading...
+                    </h3>
+                    <p id="harshQSub" class="font-body-md text-sm text-text-secondary mb-6 border-l-2 border-primary-container pl-3 py-1">
+                        Loading...
+                    </p>
+
+                    <!-- Options Container -->
+                    <div id="harshOptionsContainer" class="space-y-3">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Step Controls -->
+                    <div class="flex justify-between items-center mt-8 pt-4 border-t border-surface-light">
+                        <button id="harshPrevBtn" class="btn btn--ghost text-xs uppercase px-4 py-2 text-text-secondary" onclick="prevHarshQ()" disabled>← Previous</button>
+                        <span class="font-label-sm text-xs text-primary-container">Select an option to update GUI matrix</span>
+                        <button id="harshNextBtn" class="btn btn--horizon text-xs uppercase px-6 py-2" onclick="nextHarshQ()" disabled>Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Live Interpretation Matrix GUI (5 cols) -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel p-6 rounded-xl border border-surface-light sticky top-24">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-surface-light">
+                        <div>
+                            <h3 class="font-headline-md text-lg text-white font-bold flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary-container text-xl">analytics</span>
+                                LIVE INTERPRETATION MATRIX
+                            </h3>
+                            <p class="font-label-sm text-xs text-text-secondary mt-0.5">Updates in real time as options are clicked</p>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Matrix Table GUI -->
+                    <div class="space-y-3" id="harshMatrixContainer">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-surface-light flex items-center justify-between text-xs font-label-sm text-text-secondary">
+                        <span class="flex items-center gap-1"><span class="proven-tag">PROVEN</span> Data</span>
+                        <span class="flex items-center gap-1"><span class="indicated-tag">INDICATED</span> Intent</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Synthesis & Action Plan (Revealed upon completing questionnaire) -->
+        <div id="harshDiagnosisResults" class="hidden mt-8 space-y-8">
+            <div class="glass-panel p-6 md:p-8 rounded-2xl border-2 border-primary-container glow-accent">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <span class="font-label-sm text-xs text-primary-container bg-primary-container/20 border border-primary-container/40 px-3 py-1 rounded-full uppercase">
+                            ✓ DIAGNOSTIC COMPLETE
+                        </span>
+                        <h3 class="font-display-lg text-2xl md:text-3xl text-white font-bold mt-2">Combined Creator Diagnosis</h3>
+                    </div>
+                    <button onclick="resetHarshDiag()" class="btn text-xs border border-surface-light hover:border-primary-container px-4 py-2 text-text-secondary uppercase">
+                        ↺ Restart Diagnostic
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="harshSynthGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-headline-md text-2xl text-white font-bold mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary-container">format_list_bulleted</span>
+                    PRIORITIZED IMMEDIATE NEXT ACTIONS
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="harshActionsGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <!-- BottomNavBar (Mobile Only — Floating Liquid Glass Capsule Bar) -->
@@ -429,6 +535,164 @@
 
     // Initialize with After mode
     toggleCTA('after');
+
+    // Embedded Creator Growth Diagnostic Engine Logic (Harsh)
+    let harshCurrentQIdx = 0;
+    let harshAnswers = {};
+
+    window.addEventListener('load', () => {
+        initHarshDiagnostic();
+    });
+
+    function initHarshDiagnostic() {
+        const engine = window.CreatorDiagnosticEngine;
+        if (!engine) return;
+        renderHarshMatrix();
+        renderHarshQ(harshCurrentQIdx);
+    }
+
+    function renderHarshMatrix() {
+        const engine = window.CreatorDiagnosticEngine;
+        if (!engine) return;
+        const matrix = engine.calculateMatrix('harsh', harshAnswers);
+        const container = document.getElementById('harshMatrixContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        matrix.forEach(item => {
+            const pillClass = item.signal.toLowerCase();
+            const tagClass = item.tag.toLowerCase() + '-tag';
+            const row = document.createElement('div');
+            row.className = 'p-3 bg-surface-medium/80 border border-surface-light rounded-lg flex flex-col gap-1 transition-all duration-300';
+            row.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="font-headline-md text-xs font-bold text-white uppercase">${item.dimension}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="${tagClass}">${item.tag}</span>
+                        <span class="matrix-pill ${pillClass}">${item.signal}</span>
+                    </div>
+                </div>
+                <p class="font-body-md text-[11px] text-text-secondary mt-1">${item.desc}</p>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function renderHarshQ(qIdx) {
+        const engine = window.CreatorDiagnosticEngine;
+        if (!engine) return;
+        const profile = engine.profiles.harsh;
+        const question = profile.questions[qIdx];
+
+        if (!question) {
+            showHarshDiagnosis();
+            return;
+        }
+
+        document.getElementById('harshStepBadge').textContent = `QUESTION ${qIdx + 1} OF ${profile.questions.length}`;
+        document.getElementById('harshQTitle').textContent = question.title;
+        document.getElementById('harshQSub').textContent = question.subtitle;
+
+        const optionsContainer = document.getElementById('harshOptionsContainer');
+        optionsContainer.innerHTML = '';
+
+        question.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            const isSelected = harshAnswers[question.id] === opt.value;
+            btn.className = isSelected ? 'diagnostic-option-btn selected' : 'diagnostic-option-btn';
+            btn.innerHTML = `
+                <span class="font-label-sm text-xs px-2.5 py-1 bg-white/10 rounded font-bold text-primary-container">${String.fromCharCode(65 + idx)}</span>
+                <div>
+                    <span class="font-body-md text-sm text-white font-semibold block">${opt.text}</span>
+                </div>
+            `;
+            btn.onclick = () => selectHarshOpt(question.id, opt.value);
+            optionsContainer.appendChild(btn);
+        });
+
+        document.getElementById('harshPrevBtn').disabled = qIdx === 0;
+        document.getElementById('harshNextBtn').disabled = !harshAnswers[question.id];
+        document.getElementById('harshNextBtn').textContent = qIdx === profile.questions.length - 1 ? 'Complete Diagnostic →' : 'Next →';
+    }
+
+    function selectHarshOpt(qId, val) {
+        harshAnswers[qId] = val;
+        renderHarshQ(harshCurrentQIdx);
+        renderHarshMatrix();
+    }
+
+    function prevHarshQ() {
+        if (harshCurrentQIdx > 0) {
+            harshCurrentQIdx--;
+            renderHarshQ(harshCurrentQIdx);
+        }
+    }
+
+    function nextHarshQ() {
+        const engine = window.CreatorDiagnosticEngine;
+        if (!engine) return;
+        const profile = engine.profiles.harsh;
+        if (harshCurrentQIdx < profile.questions.length - 1) {
+            harshCurrentQIdx++;
+            renderHarshQ(harshCurrentQIdx);
+        } else {
+            showHarshDiagnosis();
+        }
+    }
+
+    function showHarshDiagnosis() {
+        document.getElementById('harshDiagWorkspace').classList.add('hidden');
+        document.getElementById('harshDiagnosisResults').classList.remove('hidden');
+
+        const engine = window.CreatorDiagnosticEngine;
+        const diagnosis = engine.synthesizeDiagnosis('harsh', harshAnswers);
+        const actions = engine.generateNextActions('harsh', harshAnswers);
+
+        const grid = document.getElementById('harshSynthGrid');
+        grid.innerHTML = `
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-emerald-400 font-bold block mb-1 uppercase">✓ What is Working (Proven Data)</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.working}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-primary-container font-bold block mb-1 uppercase">🎯 Creator Stated Intent</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.intent}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-amber-400 font-bold block mb-1 uppercase">⚖️ Strategic Alignment & Conflict</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.conflict}</p>
+            </div>
+            <div class="p-4 bg-surface-medium border border-surface-light rounded-xl">
+                <span class="font-label-sm text-xs text-primary-container font-bold block mb-1 uppercase">⚡ Highest-Leverage Growth Opportunity</span>
+                <p class="font-body-md text-sm text-white">${diagnosis.leverage}</p>
+            </div>
+        `;
+
+        const actionsGrid = document.getElementById('harshActionsGrid');
+        actionsGrid.innerHTML = '';
+        actions.forEach(act => {
+            const card = document.createElement('div');
+            card.className = `action-step-card ${act.badgeClass}`;
+            card.innerHTML = `
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-label-sm text-xs font-bold uppercase tracking-wider text-primary-container flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">${act.icon}</span> ${act.type}
+                    </span>
+                </div>
+                <h4 class="font-headline-md text-lg text-white font-bold mb-2">${act.title}</h4>
+                <p class="font-body-md text-sm text-text-secondary">${act.desc}</p>
+            `;
+            actionsGrid.appendChild(card);
+        });
+    }
+
+    function resetHarshDiag() {
+        harshAnswers = {};
+        harshCurrentQIdx = 0;
+        document.getElementById('harshDiagnosisResults').classList.add('hidden');
+        document.getElementById('harshDiagWorkspace').classList.remove('hidden');
+        initHarshDiagnostic();
+    }
 </script>
 <script src="assets/js/atomz.js" defer></script>
 </body>
