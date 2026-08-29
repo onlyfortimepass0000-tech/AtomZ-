@@ -366,7 +366,9 @@
         statusMsg.className = "horizon-status-msg success";
       }
       setTimeout(function() {
-        if (cleanedCode === "atomz112" || cleanedCode.indexOf("harsh") !== -1) {
+        if (cleanedCode === "atomztrial" || cleanedCode.indexOf("trial") !== -1) {
+          window.location.href = "horizon-trial.html?code=" + encodeURIComponent(cleanedCode);
+        } else if (cleanedCode === "atomz112" || cleanedCode.indexOf("harsh") !== -1) {
           window.location.href = "horizon-harsh.html?code=" + encodeURIComponent(cleanedCode);
         } else {
           window.location.href = "horizon-dossier.html?code=" + encodeURIComponent(cleanedCode);

@@ -403,7 +403,10 @@
         passkeyStatus.style.color = '#FF6600';
         passkeyStatus.style.fontWeight = '600';
         setTimeout(() => {
-          if (code.toLowerCase() === 'atomz112' || code.toLowerCase().includes('harsh')) {
+          const c = code.toLowerCase();
+          if (c === 'atomztrial' || c.includes('trial')) {
+            window.location.href = 'horizon-trial.html?code=' + encodeURIComponent(code);
+          } else if (c === 'atomz112' || c.includes('harsh')) {
             window.location.href = 'horizon-harsh.html?code=' + encodeURIComponent(code);
           } else {
             window.location.href = 'horizon-dossier.html?code=' + encodeURIComponent(code);
