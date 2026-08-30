@@ -587,6 +587,115 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 [data-theme="dark"] .card--future .tag { color: #0B0B0D; }
 
+/* --- Services accordion (pure CSS :has(), no JS) ------------------------- */
+.svc-intro {
+  font-size: var(--step-1);
+  color: var(--muted);
+  max-width: 44ch;
+  margin: 0 0 var(--s-5);
+  letter-spacing: -0.01em;
+}
+.services__accordion { display: grid; gap: var(--s-3); }
+
+.svc {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.svc:has(.svc__input:checked) {
+  border-color: var(--accent);
+  box-shadow: 0 24px 48px -34px var(--ink-20);
+}
+/* focusable but visually hidden radio */
+.svc__input {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+.svc__head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.2em var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  cursor: pointer;
+}
+.svc__num {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-1);
+  color: var(--accent);
+  letter-spacing: -0.03em;
+}
+.svc__title {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.svc__summary {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--muted);
+  font-size: var(--step-0);
+}
+.svc__icon {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: 1.5em; height: 1.5em;
+  color: var(--muted);
+  transition: transform 0.4s var(--ease), color 0.3s var(--ease);
+}
+.svc:has(.svc__input:checked) .svc__icon { transform: rotate(180deg); color: var(--accent); }
+.svc:has(.svc__input:focus-visible) .svc__head {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
+}
+
+.svc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s var(--ease);
+}
+.svc:has(.svc__input:checked) .svc__panel { grid-template-rows: 1fr; }
+.svc__panel-inner { overflow: hidden; }
+.svc__list {
+  display: grid;
+  gap: var(--s-2);
+  padding: 0 var(--s-5) var(--s-5);
+  margin-left: calc(var(--step-1) + var(--s-4));
+}
+.svc__list li {
+  position: relative;
+  padding-left: 1.3em;
+  color: var(--muted);
+  font-size: var(--step-0);
+}
+.svc__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+@media (max-width: 620px) {
+  .svc__head { padding: var(--s-4); }
+  .svc__list { padding-inline: var(--s-4); margin-left: 0; }
+}
+
 /* --------------------------------------------------------------------------
    11. HOW WE WORK  (dark band)
    -------------------------------------------------------------------------- */
@@ -633,37 +742,30 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* --------------------------------------------------------------------------
-   12. FREE FIRST MONTH  (removable block)
+   12. WHAT'S NEXT: BUSINESSES
    -------------------------------------------------------------------------- */
 
-.free {
-  border-top: 1px solid var(--gold);
-  border-bottom: 1px solid var(--hairline-soft);
+.next-biz__inner {
+  background: var(--accent-12);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  max-width: 48rem;
 }
-.free__inner {
-  display: grid;
-  gap: var(--s-4);
-  align-items: center;
-  grid-template-columns: 1fr;
-  padding-block: var(--s-6);
+.next-biz__head {
+  font-size: var(--step-3);
+  letter-spacing: -0.03em;
+  margin-bottom: var(--s-3);
+  max-width: 18ch;
 }
-.free__tag {
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-}
-.free__tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-.free h2 { font-size: var(--step-2); margin: var(--s-2) 0 var(--s-3); max-width: 20ch; }
-.free p { color: var(--muted); max-width: 54ch; }
-.free strong { color: var(--fg); font-weight: 640; }
-
-@media (min-width: 820px) {
-  .free__inner { grid-template-columns: 0.9fr 1.1fr; gap: var(--s-7); }
+.next-biz__head .accent { color: var(--accent); }
+.next-biz__body {
+  font-size: var(--step-1);
+  color: var(--muted);
+  max-width: 42ch;
+  margin-bottom: var(--s-5);
+  font-weight: 440;
+  letter-spacing: -0.01em;
 }
 
 /* --------------------------------------------------------------------------
@@ -714,6 +816,64 @@ ul { margin: 0; padding: 0; list-style: none; }
   .post-row { grid-template-columns: auto 1fr; }
   .post-row__arrow { display: none; }
 }
+
+/* --- Writing index on the homepage: editorial "essay" cards -------------- */
+/* Deliberately distinct from the numbered Services accordion so posts read  */
+/* as articles, not services.                                                */
+.essays {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: 1fr;
+  margin-top: var(--s-5);
+}
+@media (min-width: 720px) { .essays { grid-template-columns: repeat(2, 1fr); } }
+
+.essay {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-5);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--surface-fg);
+  text-decoration: none;
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.essay:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 24px 48px -30px var(--ink-20);
+}
+.essay__kicker {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-faint);
+}
+.essay__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-1);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.essay__desc { color: var(--muted); font-size: var(--step-0); }
+.essay__read {
+  margin-top: auto;
+  padding-top: var(--s-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 700;
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+.essay__read svg { width: 1.5em; transition: transform 0.3s var(--ease); }
+.essay:hover .essay__read svg { transform: translateX(5px); }
 
 /* --------------------------------------------------------------------------
    14. CONTACT  (dark band)
