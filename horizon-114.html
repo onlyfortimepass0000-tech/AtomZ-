@@ -2,36 +2,201 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOMZ — Where You Actually Stand (@fitwithtoxic_somo - atomz114)</title>
-<!-- Fonts -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ATOMZ — Client Portal (@fitwithtoxic_somo - atomz114)</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ff8a33",
+                        "primary-container": "#ff6b00",
+                        "pink-accent": "#ff2a7a",
+                        "surface": "#000000",
+                        "surface-container": "#111111",
+                        "surface-container-high": "#1a1a1a",
+                        "outline-variant": "#333333",
+                        "on-surface": "#ffffff",
+                        "on-surface-variant": "#cccccc"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sora", "sans-serif"],
+                        "metadata": ["Montserrat", "sans-serif"],
+                        "script-body": ["Montserrat", "sans-serif"],
+                        "script-highlight": ["Montserrat", "sans-serif"]
+                    }
+                }
+            }
+        }
+</script>
 
 <style>
 :root{
-  --charcoal:#000000;
-  --surface:#111111;
-  --surface-high:#1a1a1a;
-  --accent:#FF6B00;
-  --accent-pink:#FF2A7A;
+  --charcoal:#0B0B0D;
+  --accent:#FF4D2E;
   --gold:#F2B705;
-  --offwhite:#FFFFFF;
-  --grey:#A0A0A0;
-  --grey-light:#222222;
-  --green:#00FF41;
+  --offwhite:#F5F5F0;
+  --grey:#8A8580;
+  --grey-light:#EAE8E3;
+  --green:#2F8F5B;
+  --primary-orange:#FF6B00;
+  --pink-accent:#FF2A7A;
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(--charcoal);color:var(--offwhite);overflow-x:hidden;}
+body{margin:0;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:#000000;color:#FFFFFF;overflow-x:hidden;}
+.wrap{max-width:680px;margin:0 auto;padding:0 0 80px;}
+
+/* Header Navigation Bar */
+.portal-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(10, 10, 12, 0.92);
+  backdrop-filter: blur(16px);
+  border-b: 1px solid #222222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+}
+.portal-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.portal-logo span.accent { color: #FF6B00; }
+.portal-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: rgba(255, 107, 0, 0.15);
+  color: #FF6B00;
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* Screen 1: Central Portal Option Selector Hub */
+.hub-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px 60px;
+  background: radial-gradient(circle at center, rgba(255,107,0,0.08) 0%, rgba(0,0,0,1) 70%);
+}
+.hub-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.hub-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #FF6B00;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hub-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+}
+.hub-sub {
+  font-size: 14px;
+  color: #A0A0A0;
+  margin-bottom: 32px;
+}
+.hub-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .hub-options-grid { grid-template-columns: 1fr 1fr; }
+}
+.hub-card {
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: #FF6B00;
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.15);
+}
+.hub-card:active { transform: scale(0.98); }
+.hub-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 107, 0, 0.12);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B00;
+  margin-bottom: 16px;
+}
+.hub-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 6px;
+}
+.hub-card-desc {
+  font-size: 13px;
+  color: #8A8580;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.hub-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FF6B00;
+}
 
 #matrixBgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 
-.wrap{position:relative;z-index:10;max-width:640px;margin:0 auto;padding:40px 20px 80px;}
-
-.hero{background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border:1px solid var(--grey-light);border-top:2px solid var(--accent);color:var(--offwhite);padding:28px 22px;border-radius:16px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 6px;}
-.headline{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;line-height:1.2;margin:0 0 8px;color:var(--offwhite);}
+.hero{background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border:1px solid #222222;border-top:2px solid #FF6B00;color:#FFFFFF;padding:28px 22px;border-radius:16px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#FF6B00;font-weight:700;margin:0 0 6px;}
+.headline{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;line-height:1.2;margin:0 0 8px;color:#FFFFFF;}
 
 /* Instagram Handle Badge */
 .insta-handle-badge {
@@ -40,7 +205,7 @@ body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(-
   gap:6px;
   background:rgba(255,107,0,0.12);
   border:1px solid rgba(255,107,0,0.4);
-  color:var(--accent);
+  color:#FF6B00;
   font-family:'JetBrains Mono',monospace;
   font-size:12px;
   font-weight:700;
@@ -51,25 +216,23 @@ body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(-
 .insta-handle-badge svg { flex-shrink:0; }
 
 section{padding:18px 0 4px;}
-h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin:0 0 12px;}
+h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#FF6B00;margin:0 0 12px;}
 
-.proof-card{background:rgba(17,17,17,0.9);backdrop-filter:blur(12px);border:1px solid var(--grey-light);border-radius:14px;padding:20px;}
-.proof-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(0,255,65,.12);border:1px solid rgba(0,255,65,.3);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
-.proof-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin:0 0 6px;color:var(--offwhite);}
+.proof-card{background:rgba(17,17,17,0.9);backdrop-filter:blur(12px);border:1px solid #222222;border-radius:14px;padding:20px;}
+.proof-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#00FF41;background:rgba(0,255,65,.12);border:1px solid rgba(0,255,65,.3);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
+.proof-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin:0 0 6px;color:#FFFFFF;}
 .proof-stat{font-size:13px;color:#DDDDDD;line-height:1.5;margin:0;}
-.proof-stat b{color:var(--accent);font-size:14px;}
-.proof-why{font-size:12.5px;color:var(--grey);line-height:1.5;margin:10px 0 0;}
-.proof-source{font-size:11px;color:#666666;font-style:italic;margin:10px 0 0;}
+.proof-stat b{color:#FF6B00;font-size:14px;}
 
 .q-block{margin-bottom:20px;}
-.q-text{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin:0 0 12px;color:var(--offwhite);}
+.q-text{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin:0 0 12px;color:#FFFFFF;}
 .opts{display:flex;flex-direction:column;gap:10px;}
 .opt{display:block;position:relative;}
 .opt input{position:absolute;opacity:0;}
 .opt .card{
   display:block;
   padding:14px 16px;
-  border:1px solid var(--grey-light);
+  border:1px solid #222222;
   border-radius:12px;
   background:rgba(17,17,17,0.9);
   backdrop-filter:blur(8px);
@@ -81,36 +244,35 @@ h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercas
 }
 .opt:active .card{transform:scale(0.97);}
 .opt input:checked + .card{
-  border-color:var(--accent);
+  border-color:#FF6B00;
   background:rgba(255,107,0,0.14);
-  color:var(--accent);
+  color:#FF6B00;
   font-weight:700;
   box-shadow:0 0 20px rgba(255,107,0,0.25);
 }
 
-.placeholder{font-size:13px;color:var(--grey);font-style:italic;}
+.placeholder{font-size:13px;color:#A0A0A0;font-style:italic;}
 
 .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 20px;max-width:340px;}
 .mini{padding:12px 10px;border-radius:10px;text-align:center;font-size:11px;font-weight:800;line-height:1.3;opacity:.35;border:2px solid transparent;font-family:'Sora',sans-serif;}
-.mini.blindspot{background:rgba(242,183,5,.16);color:var(--gold);}
-.mini.aligned{background:var(--surface);color:var(--green);border-color:var(--green);}
-.mini.reset{background:var(--grey-light);color:var(--grey);}
-.mini.wrongdest{background:rgba(255,77,46,.16);color:var(--accent);}
+.mini.blindspot{background:rgba(242,183,5,.16);color:#F2B705;}
+.mini.aligned{background:#111111;color:#00FF41;border-color:#00FF41;}
+.mini.reset{background:#222222;color:#A0A0A0;}
+.mini.wrongdest{background:rgba(255,77,46,.16);color:#FF6B00;}
 
 .verdict{display:none;margin-bottom:12px;}
 .badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:10px;}
-.badge-green{background:rgba(0,255,65,.15);color:var(--green);border:1px solid rgba(0,255,65,0.4);}
-.badge-coral{background:rgba(255,107,0,.15);color:var(--accent);border:1px solid rgba(255,107,0,0.4);}
-.badge-gold{background:rgba(242,183,5,.2);color:var(--gold);border:1px solid rgba(242,183,5,0.4);}
-.badge-grey{background:var(--grey-light);color:var(--grey);border:1px solid #333333;}
+.badge-green{background:rgba(0,255,65,.15);color:#00FF41;border:1px solid rgba(0,255,65,0.4);}
+.badge-coral{background:rgba(255,107,0,.15);color:#FF6B00;border:1px solid rgba(255,107,0,0.4);}
+.badge-gold{background:rgba(242,183,5,.2);color:#F2B705;border:1px solid rgba(242,183,5,0.4);}
+.badge-grey{background:#222222;color:#A0A0A0;border:1px solid #333333;}
 .verdict p{font-size:14px;line-height:1.6;color:#DDDDDD;margin:0;}
-.goalnote{display:none;font-size:13px;line-height:1.5;color:#EEEEEE;margin:10px 0 0;padding:12px 14px;background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
-.stakes{display:none;font-size:13px;line-height:1.5;color:#FFFFFF;font-weight:600;margin:12px 0 0;padding:12px 14px;background:rgba(255,107,0,.1);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.goalnote{display:none;font-size:13px;line-height:1.5;color:#EEEEEE;margin:10px 0 0;padding:12px 14px;background:#111111;border-left:3px solid #FF6B00;border-radius:0 8px 8px 0;}
 
 .move-wrap{display:none;}
-.move{display:none;background:var(--surface);border:1px solid var(--accent);color:var(--offwhite);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
-.move b{color:var(--gold);}
-.pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
+.move{display:none;background:#111111;border:1px solid #FF6B00;color:#FFFFFF;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
+.move b{color:#F2B705;}
+.pace{display:none;font-size:12.5px;color:#A0A0A0;padding:0 2px;}
 
 /* ===== Reveal logic — pure CSS ===== */
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholder{display:none}
@@ -135,7 +297,7 @@ body:has(#id-travel:checked):has(#goal-branddeals:checked) .mini.aligned,
 body:has(#id-travel:checked):has(#goal-consistency:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .mini.aligned,
-body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:var(--gold)}
+body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:#F2B705}
 
 /* RIGHT LANE, WRONG DESTINATION */
 body:has(#id-travel:checked):has(#goal-clients:checked) .v-wrongdest,
@@ -143,7 +305,7 @@ body:has(#id-mix:checked):has(#goal-clients:checked) .v-wrongdest,
 body:has(#id-travel:checked):has(#goal-clients:checked) .move-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .move-wrongdest{display:block}
 body:has(#id-travel:checked):has(#goal-clients:checked) .mini.wrongdest,
-body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:var(--accent)}
+body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:#FF6B00}
 
 /* BLIND SPOT */
 body:has(#id-fitness:checked):has(#goal-followers:checked) .v-blindspot,
@@ -163,7 +325,7 @@ body:has(#id-fitness:checked):has(#goal-branddeals:checked) .mini.blindspot,
 body:has(#id-fitness:checked):has(#goal-consistency:checked) .mini.blindspot,
 body:has(#id-other:checked):has(#goal-followers:checked) .mini.blindspot,
 body:has(#id-other:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-other:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
+body:has(#id-other:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:#F2B705}
 
 /* RESET NEEDED */
 body:has(#id-fitness:checked):has(#goal-clients:checked) .v-reset,
@@ -171,7 +333,7 @@ body:has(#id-other:checked):has(#goal-clients:checked) .v-reset,
 body:has(#id-fitness:checked):has(#goal-clients:checked) .move-reset,
 body:has(#id-other:checked):has(#goal-clients:checked) .move-reset{display:block}
 body:has(#id-fitness:checked):has(#goal-clients:checked) .mini.reset,
-body:has(#id-other:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:var(--grey)}
+body:has(#id-other:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:#A0A0A0}
 
 /* Goal-specific notes */
 body:has(#goal-followers:checked) .gn-followers{display:block}
@@ -183,93 +345,223 @@ body:has(#goal-consistency:checked) .gn-consistency{display:block}
 body:has(#cap-low:checked) .pace-low{display:block}
 body:has(#cap-mid:checked) .pace-mid{display:block}
 body:has(#cap-high:checked) .pace-high{display:block}
+
+/* Custom Horizontal Tab Bar for Scripts Engine */
+.script-tab-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.script-tab-selector::-webkit-scrollbar { display: none; }
+
+.script-tab-btn {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #111111;
+  border: 1px solid #222222;
+  color: #A0A0A0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.script-tab-btn:hover {
+  border-color: #FF6B00;
+  color: #FFFFFF;
+}
+.script-tab-btn.active {
+  background: rgba(255, 107, 0, 0.15);
+  border-color: #FF6B00;
+  color: #FF6B00;
+  box-shadow: 0 0 16px rgba(255, 107, 0, 0.25);
+}
 </style>
 </head>
-<body>
+<body class="bg-surface text-on-surface antialiased">
 <!-- Background Live Motion Canvas -->
 <canvas id="matrixBgCanvas"></canvas>
 
-<div class="wrap">
-  <div class="hero">
-    <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
-    <h1 class="headline">Where You Actually Stand</h1>
-    <div class="insta-handle-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      <span>@fitwithtoxic_somo · Creator Diagnostic (atomz114)</span>
+<!-- Top Fixed Navigation Header -->
+<header class="portal-header">
+  <a href="#" onclick="showScreen('hub')" class="portal-logo">
+    <span>ATOM<span class="accent">Z</span> HORIZON</span>
+  </a>
+  <div class="flex items-center gap-3">
+    <span class="portal-badge">CLIENT: SOMODEEP</span>
+    <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all">
+      ← Hub Menu
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB
+============================================================ -->
+<div id="hubScreen" class="hub-screen">
+  <div class="hub-container">
+    <p class="hub-eyebrow">ATOMZ HORIZON · CREATOR ENGINE</p>
+    <h1 class="hub-title">Select Your Dossier Module</h1>
+    <p class="hub-sub">Choose a tool below to access your diagnostic matrix or camera-ready script engine.</p>
+    
+    <div class="hub-options-grid">
+      <!-- Option 1: Matrix Diagnostic -->
+      <div onclick="showScreen('matrix')" class="hub-card">
+        <div>
+          <div class="hub-card-icon">
+            <span class="material-symbols-outlined text-[24px]">grid_view</span>
+          </div>
+          <h2 class="hub-card-title">Creator Growth Matrix</h2>
+          <p class="hub-card-desc">Interactive diagnostic tool mapping your identity, data proof, and weekly moves.</p>
+        </div>
+        <div class="hub-card-btn">
+          <span>Launch Matrix</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </div>
+      </div>
+
+      <!-- Option 2: Script Engine -->
+      <div onclick="showScreen('scripts')" class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:rgba(255,42,122,0.12);border-color:rgba(255,42,122,0.3);color:#FF2A7A;">
+            <span class="material-symbols-outlined text-[24px]">movie</span>
+          </div>
+          <h2 class="hub-card-title">Walmart Sales Scripts Engine</h2>
+          <p class="hub-card-desc">5 ready-to-shoot scripts based on Walmart Sales Analysis findings, with directive breakdowns.</p>
+        </div>
+        <div class="hub-card-btn" style="color:#FF2A7A;">
+          <span>Launch Scripts Engine</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <section>
-    <h2>What the data already proves</h2>
-    <div class="proof-card">
-      <span class="proof-tag">Pulled from your audit</span>
-      <p class="proof-title">Travel humor + trending audio is your winning format</p>
-      <p class="proof-stat"><b>4 of your 5 reels</b> in this lane did ~50K median views. Your one motivational reel did 448.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Now, tell us the rest</h2>
-    <div class="q-block">
-      <p class="q-text">1. What do you think your content is mainly about right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Fitness / gym motivation</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-travel"><span class="card">Travel & comedy</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
+<!-- ============================================================
+SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
+============================================================ -->
+<div id="matrixScreen" class="hidden relative pt-24 pb-16">
+  <div class="wrap">
+    <div class="hero">
+      <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
+      <h1 class="headline">Where You Actually Stand</h1>
+      <div class="insta-handle-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>@fitwithtoxic_somo · Creator Diagnostic (atomz114)</span>
       </div>
     </div>
-    <div class="q-block">
-      <p class="q-text">2. What's your main goal right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+
+    <section>
+      <h2>What the data already proves</h2>
+      <div class="proof-card">
+        <span class="proof-tag">Pulled from your audit</span>
+        <p class="proof-title">Travel humor + trending audio is your winning format</p>
+        <p class="proof-stat"><b>4 of your 5 reels</b> in this lane did ~50K median views. Your one motivational reel did 448.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Now, tell us the rest</h2>
+      <div class="q-block">
+        <p class="q-text">1. What do you think your content is mainly about right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Fitness / gym motivation</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-travel"><span class="card">Travel & comedy</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <p class="q-text">2. What's your main goal right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <p class="q-text">3. How many reels can you realistically shoot per week?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Your position</h2>
+      <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
+
+      <div class="mini-grid">
+        <div class="mini blindspot">Blind spot</div>
+        <div class="mini aligned">Fully aligned</div>
+        <div class="mini reset">Reset needed</div>
+        <div class="mini wrongdest">Right lane, wrong destination</div>
+      </div>
+
+      <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
+      <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
+      <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
+      <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
+
+      <p class="goalnote gn-followers">Travel comedy is exactly what drives fast follower growth on your account — lean all the way in.</p>
+      <p class="goalnote gn-branddeals">Brands like shareable, relatable content — you're close, but you'll need a media kit to actually convert reach into paid deals.</p>
+      <p class="goalnote gn-clients">Travel comedy doesn't sell a coaching offer on its own — you'd need a separate bridge (a specific CTA or content lane) to turn this reach into paying clients.</p>
+      <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
+    </section>
+
+    <section class="move-wrap">
+      <h2>This week's move</h2>
+      <div class="move move-aligned">Ship 3–5 more reels in the exact travel + trending-audio format this week. Don't touch the fitness lane.</div>
+      <div class="move move-wrongdest">Keep shooting travel comedy, but add ONE thing this week: a pinned comment or bio line pointing DM traffic toward booking a call.</div>
+      <div class="move move-blindspot">Try 2 travel-comedy reels this week even though it doesn't feel like "your thing" — the data says it will outperform everything else you post.</div>
+      <div class="move move-reset">Before shooting anything else, get on a call with us — the direction needs resetting, not just the format.</div>
+      <p class="pace pace-low">At 1–2 reels/week, expect the 90-day window to stretch closer to 120–150 days.</p>
+      <p class="pace pace-mid">3–5 reels/week is right on pace for the 90-day potential already in your audit.</p>
+      <p class="pace pace-high">5+ reels/week could realistically beat the 90-day estimate.</p>
+    </section>
+  </div>
+</div>
+
+<!-- ============================================================
+SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (WALMART SALES ANALYSIS ENGINE)
+============================================================ -->
+<div id="scriptsScreen" class="hidden relative pt-24 pb-16">
+  <div class="max-w-2xl mx-auto px-4 pb-16 relative z-10">
+    
+    <!-- Header & Script Selector -->
+    <div class="flex flex-col gap-4 mb-6">
+      <div class="flex justify-between items-center">
+        <div class="font-mono text-[12px] text-pink-accent uppercase tracking-widest flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px] text-pink-accent animate-pulse">movie</span> SCRIPT PROVIDER ENGINE
+        </div>
+        <span class="font-mono text-[11px] text-on-surface-variant bg-surface-container px-3 py-1 border border-outline-variant rounded-full">CLIENT: SOMODEEP</span>
+      </div>
+
+      <!-- Multiple Script Library Tabs -->
+      <div class="script-tab-selector">
+        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: WALMART SALES</button>
+        <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: MOST PROFITABLE BRANCH</button>
+        <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: TOP SALES CITY</button>
+        <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: PAYMENT MIX</button>
+        <button onclick="switchScript(5)" id="scriptTab5" class="script-tab-btn">SCRIPT 5: BEST DAY TO SELL</button>
       </div>
     </div>
-    <div class="q-block">
-      <p class="q-text">3. How many reels can you realistically shoot per week?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/week</span></label>
-      </div>
+
+    <!-- Script Container Display (Populated by JS) -->
+    <div id="scriptContentContainer" class="flex flex-col gap-8">
+      <!-- Populated dynamically via JS renderScript() -->
     </div>
-  </section>
-
-  <section>
-    <h2>Your position</h2>
-    <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
-
-    <div class="mini-grid">
-      <div class="mini blindspot">Blind spot</div>
-      <div class="mini aligned">Fully aligned</div>
-      <div class="mini reset">Reset needed</div>
-      <div class="mini wrongdest">Right lane, wrong destination</div>
-    </div>
-
-    <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
-    <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
-    <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
-    <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
-
-    <p class="goalnote gn-followers">Travel comedy is exactly what drives fast follower growth on your account — lean all the way in.</p>
-    <p class="goalnote gn-branddeals">Brands like shareable, relatable content — you're close, but you'll need a media kit to actually convert reach into paid deals.</p>
-    <p class="goalnote gn-clients">Travel comedy doesn't sell a coaching offer on its own — you'd need a separate bridge (a specific CTA or content lane) to turn this reach into paying clients.</p>
-    <p class="goalnote gn-consistency">Any format works for showing up regularly — but you're sitting on a format that could do a lot more than just "consistent."</p>
-  </section>
-
-  <section class="move-wrap">
-    <h2>This week's move</h2>
-    <div class="move move-aligned">Ship 3–5 more reels in the exact travel + trending-audio format this week. Don't touch the fitness lane.</div>
-    <div class="move move-wrongdest">Keep shooting travel comedy, but add ONE thing this week: a pinned comment or bio line pointing DM traffic toward booking a call.</div>
-    <div class="move move-blindspot">Try 2 travel-comedy reels this week even though it doesn't feel like "your thing" — the data says it will outperform everything else you post.</div>
-    <div class="move move-reset">Before shooting anything else, get on a call with us — the direction needs resetting, not just the format.</div>
-    <p class="pace pace-low">At 1–2 reels/week, expect the 90-day window to stretch closer to 120–150 days.</p>
-    <p class="pace pace-mid">3–5 reels/week is right on pace for the 90-day potential already in your audit.</p>
-    <p class="pace pace-high">5+ reels/week could realistically beat the 90-day estimate.</p>
-  </section>
+  </div>
 </div>
 
 <script>
@@ -309,6 +601,27 @@ if (bgCanvas) {
     requestAnimationFrame(drawBg);
   }
   drawBg();
+}
+
+// Module Navigation Logic
+function showScreen(screenId) {
+  playClickSound();
+  document.getElementById('hubScreen').classList.add('hidden');
+  document.getElementById('matrixScreen').classList.add('hidden');
+  document.getElementById('scriptsScreen').classList.add('hidden');
+  document.getElementById('btnBackToHub').classList.remove('hidden');
+
+  if (screenId === 'hub') {
+    document.getElementById('hubScreen').classList.remove('hidden');
+    document.getElementById('btnBackToHub').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (screenId === 'matrix') {
+    document.getElementById('matrixScreen').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (screenId === 'scripts') {
+    document.getElementById('scriptsScreen').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
 
 // Web Audio Synth Engine for Button Clicks & 3-Question Completion Chime
@@ -364,6 +677,370 @@ document.addEventListener('change', function(e) {
       }
     }
   }
+});
+
+// Walmart Sales Analysis Scripts Engine Data
+const scriptsData = {
+  1: {
+    title: "WHERE IS WALMART ACTUALLY MAKING ITS SALES?",
+    chips: [
+      { icon: "campaign", label: "GOAL: EXPLAIN + ENGAGEMENT", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + DASHBOARD", color: "primary" },
+      { icon: "timer", label: "TIME: 25 SEC", color: "pink-accent" },
+      { icon: "laptop_mac", label: "SETUP: LAPTOP / SCREEN", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Want to know where most of Walmart’s sales are actually coming from? Two categories dominate this dataset: Fashion Accessories and Home & Lifestyle. Each generates almost ₹4.9 lakh in sales, and together they account for roughly 81% of total sales. So if you were managing this business, these are the categories you’d probably look at first. But would you keep investing in the biggest categories, or try to grow the weaker ones?"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Want to know where most of Walmart’s sales are actually coming from?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Fashion Accessories and Home & Lifestyle each generate almost ₹4.9 lakh."`, style: "value" },
+      { tag: "RETENTION", text: `"Together they account for roughly 81% of total sales."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Would you keep investing in the biggest categories, or try to grow the weaker ones?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"These are the categories you’d probably look at first."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Phone at eye level + laptop/dashboard visible.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Analytical, curious.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Laptop showing category chart.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on 81%.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"81% OF SALES"', '"₹489K"', '"₹489K"'], full: true },
+      { icon: "cut", label: "EDITING", value: "2–3 cuts.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Starts with a business question." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "The 81% figure creates a clear payoff." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Forces a management decision." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Converts raw sales data into a business insight." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Weakest category → category profitability → category-by-branch comparison.", isBox: true }
+    ],
+    resource: {
+      title: "CATEGORY PERFORMANCE CALCULATOR",
+      desc: "Compare category revenue, contribution %, and profit.",
+      quote: `"Compare category revenue, contribution %, and profit."`,
+      toolName: "Category Performance Calculator"
+    }
+  },
+  2: {
+    title: "THE BRANCH THAT MAKES THE MOST PROFIT",
+    chips: [
+      { icon: "forum", label: "GOAL: COMMENTS + AUTHORITY", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + SCREEN", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"If I gave you Walmart’s sales dashboard and asked you to find the most profitable branch, where would you look? In this dataset, Walm009 comes out on top in the displayed profit analysis, followed by Walm030, Walm003 and Walm029. But here’s the important part: the highest-sales branch isn’t automatically the best branch. You have to look at profit too. Which branch would you investigate first?"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Find the most profitable Walmart branch."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Walm009 comes out on top in the displayed profit analysis."`, style: "value" },
+      { tag: "RETENTION", text: `"The highest-sales branch isn’t automatically the best branch."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which branch would you investigate first?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"You have to look at profit too."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Talking head → dashboard.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Analytical, slightly challenging.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Laptop showing branch chart.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on Walm009.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"#1 PROFIT"', '"Walm009"', '"SALES ≠ PROFIT"'], full: true },
+      { icon: "cut", label: "EDITING", value: "2 cuts.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Turns data analysis into a challenge." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Introduces the sales-vs-profit distinction." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Asks viewers to make a business decision." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Shows why revenue alone isn't enough." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Branch ranking → profit margin → weak branch investigation.", isBox: true }
+    ],
+    resource: {
+      title: "BRANCH PERFORMANCE COMPARATOR",
+      desc: "Compare branches using revenue, profit, margin and rank.",
+      quote: `"Compare branches using revenue, profit, margin and rank."`,
+      toolName: "Branch Performance Comparator"
+    }
+  },
+  3: {
+    title: "THE CITY THAT LEADS WALMART SALES",
+    chips: [
+      { icon: "help_outline", label: "GOAL: CURIOSITY + COMMENTS", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + MAP/CHART", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Which Texas city is actually leading Walmart sales in this dataset? It’s Weslaco, with sales approaching ₹50,000 in the displayed ranking. Waxahachie, Plano and San Antonio are also among the stronger performers. Now the interesting question is: is Weslaco winning because customers buy more, because of its category mix, or because of something else? That’s where the dashboard gets interesting."`,
+    sayThis: [
+      { tag: "HOOK", text: `"Which Texas city is actually leading Walmart sales?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Weslaco leads the displayed city ranking, approaching ₹50,000."`, style: "value" },
+      { tag: "RETENTION", text: `"But why is it leading?"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Is it customers, category mix, or something else?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"That’s where the dashboard gets interesting."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Somodeep beside laptop screen.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Curious / investigative.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Dashboard city chart.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on WESLACO.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"#1 CITY"', '"WESLACO"', '"≈₹50K"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Reveal the city after the hook.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Starts with a question rather than a statistic." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Viewer wants to understand why the city leads." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Creates competing explanations." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Demonstrates how descriptive analytics leads to deeper investigation." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Weslaco category mix → city vs branch → city profitability.", isBox: true }
+    ],
+    resource: {
+      title: "CITY PERFORMANCE EXPLORER",
+      desc: "Select a city and see its sales, categories, branches and payment mix.",
+      quote: `"Select a city and see its sales, categories, branches and payment mix."`,
+      toolName: "City Performance Explorer"
+    }
+  },
+  4: {
+    title: "HOW DO WALMART CUSTOMERS PAY?",
+    chips: [
+      { icon: "bookmark", label: "GOAL: SAVES + COMMENTS", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + CHART", color: "primary" },
+      { icon: "timer", label: "TIME: 18–22 SEC", color: "pink-accent" },
+      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"If you were running Walmart, would you expect cash, credit card or Ewallet to dominate? In this dataset, Credit Card is the strongest payment method, followed by Ewallet and Cash. That sounds simple, but payment behaviour can actually affect how you design checkout and promotions. So if you were the manager, would you give your biggest payment-related promotion to credit-card users?"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Would you expect cash, credit card or Ewallet to dominate?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Credit Card is the strongest payment method."`, style: "value" },
+      { tag: "RETENTION", text: `"Payment behaviour can actually affect business decisions."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Would you give the biggest promotion to credit-card users?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Payment data can influence checkout and promotions."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Direct-to-camera with payment chart beside/behind you.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Curious, analytical.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Laptop/dashboard.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on CREDIT CARD.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"CREDIT CARD #1"', '"EWALLET #2"', '"CASH #3"'], full: true },
+      { icon: "cut", label: "EDITING", value: "2 simple cuts.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Makes the audience predict the result." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Connects a simple chart to a management decision." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Creates a choice rather than asking for a generic comment." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Shows how customer behaviour can inform operations." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Payment × category → payment × weekday → payment trends.", isBox: true }
+    ],
+    resource: {
+      title: "PAYMENT MIX ANALYZER",
+      desc: "Select a payment method and compare its share across categories, cities and branches.",
+      quote: `"Select a payment method and compare its share across categories, cities and branches."`,
+      toolName: "Payment Mix Analyzer"
+    }
+  },
+  5: {
+    title: "THE BEST DAY TO SELL",
+    chips: [
+      { icon: "share", label: "GOAL: SHARES + SAVES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + CHART", color: "primary" },
+      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
+      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"If you could choose only one day to maximise Walmart sales, which day would you choose? In this dataset, Saturday is the highest displayed sales day, while Monday is the lowest. That means the same store could need completely different staffing and inventory strategies depending on the day. So if you were managing this store, would you add staff on Saturday or run promotions on Monday?"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Which day would you choose to maximise Walmart sales?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Saturday is the highest displayed sales day, while Monday is the lowest."`, style: "value" },
+      { tag: "RETENTION", text: `"The same store could need completely different strategies depending on the day."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Would you add staff Saturday or run promotions Monday?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Day-level data can change how you operate the store."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Phone + dashboard screen.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Problem-solving / managerial.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Weekday sales chart.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on SATURDAY and MONDAY.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"SATURDAY = HIGHEST"', '"MONDAY = LOWEST"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Reveal both days with simple text.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Makes viewers choose before revealing the data." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "The operational consequence is the payoff." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives two plausible business actions to debate." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Connects data to staffing and inventory decisions." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Hourly sales → weekday × category → staffing planner.", isBox: true }
+    ],
+    resource: {
+      title: "WEEKDAY SALES PLANNER",
+      desc: "Select a weekday and category to identify stronger/weaker sales periods and support staffing or promotion planning.",
+      quote: `"Select a weekday and category to identify stronger/weaker sales periods and support staffing or promotion planning."`,
+      toolName: "Weekday Sales Planner"
+    }
+  }
+};
+
+let currentScriptId = 1;
+
+function switchScript(id) {
+  playClickSound();
+  currentScriptId = id;
+  for (let i = 1; i <= 5; i++) {
+    const tab = document.getElementById(`scriptTab${i}`);
+    if (tab) {
+      if (i === id) tab.classList.add('active');
+      else tab.classList.remove('active');
+    }
+  }
+  renderScript(id);
+}
+
+function renderScript(id) {
+  const data = scriptsData[id];
+  const container = document.getElementById('scriptContentContainer');
+  if (!container || !data) return;
+
+  let chipsHTML = data.chips.map(c => `
+    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-[12px] font-mono text-${c.color}">
+      <span class="material-symbols-outlined text-[16px]">${c.icon}</span>
+      <span>${c.label}</span>
+    </div>
+  `).join('');
+
+  let sayThisHTML = data.sayThis.map(s => {
+    let colorClass = s.tag === 'HOOK' ? 'text-primary' : (s.tag === 'CORE VALUE' ? 'text-pink-accent' : (s.tag === 'ENGAGEMENT' ? 'text-primary' : 'text-on-surface'));
+    return `
+      <div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container border border-outline-variant">
+        <span class="font-mono text-[10px] font-bold tracking-wider uppercase ${colorClass}">${s.tag}</span>
+        <p class="font-medium text-[13.5px] text-on-surface leading-snug">${s.text}</p>
+      </div>
+    `;
+  }).join('');
+
+  let directivesHTML = data.directives.map(d => {
+    if (d.badges) {
+      let bHTML = d.badges.map(b => `<span class="px-2 py-0.5 rounded bg-surface border border-outline-variant font-mono text-[11px] text-pink-accent">${b}</span>`).join(' ');
+      return `
+        <div class="col-span-2 p-3.5 rounded-xl bg-surface-container border border-outline-variant flex flex-col gap-1.5">
+          <div class="flex items-center gap-1.5 text-pink-accent">
+            <span class="material-symbols-outlined text-[18px]">${d.icon}</span>
+            <span class="font-mono text-[11px] font-bold uppercase tracking-wider">${d.label}</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-0.5">${bHTML}</div>
+        </div>
+      `;
+    }
+    let colSpan = d.full ? 'col-span-2' : 'col-span-1';
+    return `
+      <div class="${colSpan} p-3.5 rounded-xl bg-surface-container border border-outline-variant flex flex-col gap-1">
+        <div class="flex items-center gap-1.5 text-${d.color}">
+          <span class="material-symbols-outlined text-[18px]">${d.icon}</span>
+          <span class="font-mono text-[11px] font-bold uppercase tracking-wider">${d.label}</span>
+        </div>
+        <p class="text-[12.5px] text-on-surface-variant leading-snug mt-0.5">${d.value}</p>
+      </div>
+    `;
+  }).join('');
+
+  let whyHTML = data.whyThisWorks.map(w => {
+    if (w.isBox) {
+      return `
+        <div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant mt-1">
+          <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-${w.labelColor} block mb-1">EXPANSION PATHS</span>
+          <p class="text-[12.5px] text-on-surface-variant leading-snug">${w.desc}</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="flex items-start gap-2.5">
+        <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-${w.labelColor} bg-surface-container border border-outline-variant px-2 py-0.5 rounded flex-shrink-0 mt-0.5">${w.tag}</span>
+        <p class="text-[13px] text-on-surface-variant leading-snug">${w.desc}</p>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <!-- Title & Goal Badges -->
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-[11px] text-primary bg-primary/10 border border-primary/30 px-2.5 py-0.5 rounded-full uppercase">SCRIPT ${id} OF 5</span>
+        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">WALMART SALES ANALYSIS</span>
+      </div>
+      <h1 class="font-headline text-[22px] font-extrabold text-on-surface leading-tight">${data.title}</h1>
+      <div class="flex flex-wrap gap-2 mt-1">
+        ${chipsHTML}
+      </div>
+    </div>
+
+    <!-- Teleprompter Full Script Card -->
+    <div class="flex flex-col gap-2 p-5 rounded-2xl bg-surface-container border-2 border-primary/40 relative overflow-hidden shadow-lg shadow-primary/5">
+      <div class="flex justify-between items-center mb-1">
+        <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">description</span> FULL SCRIPT (TELEPROMPTER READY)
+        </span>
+        <button onclick="navigator.clipboard.writeText(\`${data.fullScript.replace(/"/g, '&quot;')}\`)" class="font-mono text-[10px] text-on-surface-variant hover:text-primary bg-surface px-2.5 py-1 border border-outline-variant rounded transition-all">
+          COPY SCRIPT
+        </button>
+      </div>
+      <blockquote class="text-[16px] font-medium leading-relaxed text-on-surface italic bg-surface/60 p-4 rounded-xl border border-outline-variant/50">
+        ${data.fullScript}
+      </blockquote>
+    </div>
+
+    <!-- Say This Section -->
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container-high border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-pink-accent flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">record_voice_over</span> SAY THIS (DIALOGUE BREAKDOWN)
+      </span>
+      <div class="flex flex-col gap-2 mt-1">
+        ${sayThisHTML}
+      </div>
+    </div>
+
+    <!-- Shooting Directives Bento Grid -->
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">videocam</span> SHOOTING DIRECTIVES
+      </span>
+      <div class="grid grid-cols-2 gap-2.5 mt-1">
+        ${directivesHTML}
+      </div>
+    </div>
+
+    <!-- Why This Works -->
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-pink-accent flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">psychology</span> WHY THIS WORKS & EXPANSION
+      </span>
+      <div class="flex flex-col gap-2.5 mt-1">
+        ${whyHTML}
+      </div>
+    </div>
+
+    <!-- ATOMZ Resource Attachment -->
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-gradient-to-r from-surface-container to-surface-container-high border border-primary/40 relative overflow-hidden">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">build</span>
+        <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-primary">ATTACHED ATOMZ TOOL RESOURCE</span>
+      </div>
+      <h3 class="font-headline text-[17px] font-bold text-on-surface">${data.resource.title}</h3>
+      <p class="text-[13px] text-on-surface-variant">${data.resource.desc}</p>
+      <div class="mt-2 pt-3 border-t border-outline-variant flex justify-between items-center">
+        <span class="font-mono text-[11px] text-on-surface-variant">TOOL: ${data.resource.toolName}</span>
+        <button onclick="alert('Launching ${data.resource.toolName}...')" class="font-mono text-[11px] font-bold uppercase bg-primary-container text-surface px-4 py-2 rounded-lg hover:bg-primary transition-all shadow-md">
+          ATTACH TOOL →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Initial script render on load
+document.addEventListener('DOMContentLoaded', () => {
+  renderScript(1);
 });
 </script>
 </body>
