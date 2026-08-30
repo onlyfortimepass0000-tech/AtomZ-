@@ -685,39 +685,39 @@ const scriptsData = {
     title: "CLAIM THE TRIP",
     chips: [
       { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: POV / GROUP COMEDY", color: "primary" },
+      { icon: "record_voice_over", label: "FORMAT: POV / GROUP-COMEDY STYLE TALKING HEAD", color: "primary" },
       { icon: "timer", label: "TIME: 15–20 SEC", color: "pink-accent" },
       { icon: "flight_takeoff", label: "SETUP: TRIP DESTINATION", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"POV: convincing your friend group that OUR trip destination was the best one. Bro, our destination had the best views. No, yours was just expensive. At least we actually enjoyed the trip. Okay fine, maybe your destination was good too. But ours was better. Which trip are YOU still defending in the group chat?"`,
+    fullScript: `"I’m not saying our trip was better than yours… but if your trip didn’t have views like this, food like this, and a sunset like this, I don’t know what to tell you. You can argue with me in the group chat, but deep down you know I’m right. Which trip are you still defending?"`,
     sayThis: [
-      { tag: "HOOK", text: `"POV: convincing your friend group that OUR trip destination was the best one."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Bro, our destination had the best views. At least we actually enjoyed the trip."`, style: "value" },
-      { tag: "RETENTION", text: `"Okay fine, maybe your destination was good too. But ours was better."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Which trip are YOU still defending in the group chat?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Ours was better."`, style: "payoff" }
+      { tag: "HOOK", text: `"I’m not saying our trip was better than yours…"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"If your trip didn’t have views like this, food like this, and a sunset like this…"`, style: "value" },
+      { tag: "RETENTION", text: `"I don’t know what to tell you. You can argue with me…"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which trip are you still defending?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Deep down you know I’m right."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Start with a 2–3 sec aesthetic destination shot.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Playfully defensive and exaggerated.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Sunglasses / backpack / phone.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Quick punch-in on the funniest reaction.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Taylor Swift's 'august', as specified in the original idea.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"POV: OUR TRIP WAS BETTER"', '"WHICH TRIP ARE YOU DEFENDING?"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Establishing shot → quick mock-debate cuts → freeze-frame on funniest face.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Start with Somodeep facing camera, then cut between destination clips.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Confident, playful, slightly arrogant.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Sunglasses / phone / backpack.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on 'deep down you know I’m right.'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Use the current trending travel/summer audio at low volume.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"OUR TRIP WAS BETTER"', '"PROVE ME WRONG"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Fast cuts between Somodeep and 2–3 strongest destination clips.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Immediately establishes a familiar group-trip argument." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "The argument escalates instead of becoming a simple destination montage." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Makes viewers think of their own group-chat debate." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Highly relatable travel content designed for sharing." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Best destination → worst destination → best trip decision → group-trip personalities.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Immediately creates playful conflict." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Keeps building the case for why his trip was better." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives viewers a specific question to answer." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Relatable travel-group behaviour." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Best destination → worst destination → best travel memory → destination debates.", isBox: true }
     ],
     resource: {
       title: "TRIP DESTINATION COMPARATOR",
       desc: "Compare destinations based on budget, activities, travel time, weather and group suitability.",
-      quote: `"Which trip are YOU still defending in the group chat?"`,
+      quote: `"Which trip are you still defending?"`,
       toolName: "Trip Destination Comparator"
     }
   },
@@ -725,118 +725,118 @@ const scriptsData = {
     title: "THE UNBROKEN TAKE",
     chips: [
       { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
-      { icon: "videocam", label: "FORMAT: ONE-TAKE POV / LIP SYNC", color: "primary" },
-      { icon: "timer", label: "TIME: 12–18 SEC", color: "pink-accent" },
+      { icon: "videocam", label: "FORMAT: UNBROKEN TAKE / LIP-SYNC COMEDY", color: "primary" },
+      { icon: "timer", label: "TIME: 15–20 SEC", color: "pink-accent" },
       { icon: "hotel", label: "SETUP: HOTEL / AIRPORT / TRIP LOCATION", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"POV: you planned a relaxing trip and somehow you're more tired than before. First day, missed the cab. Second day, wrong restaurant. Third day, someone says, ‘This wasn't in the itinerary.’ And somehow you're still calling this a vacation. Tag whoever is ALWAYS that friend."`,
+    fullScript: `"The most dangerous sentence on a trip is ‘We have plenty of time.’ Because suddenly it’s 10 AM, you’re still having breakfast. Then it’s 12, you’re getting coffee. Then you spend an hour taking photos. And suddenly it’s 5 PM and you’re saying, ‘Guys, we haven’t actually seen anything yet.’"`,
     sayThis: [
-      { tag: "HOOK", text: `"POV: you planned a relaxing trip and somehow you're more tired than before."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"First day, missed the cab. Second day, wrong restaurant."`, style: "value" },
-      { tag: "RETENTION", text: `"Third day, someone says, ‘This wasn't in the itinerary.’"`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Tag whoever is ALWAYS that friend."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"And somehow you're still calling this a vacation."`, style: "payoff" }
+      { tag: "HOOK", text: `"The most dangerous sentence on a trip is ‘We have plenty of time.’"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"You’re still having breakfast… then coffee… then taking photos."`, style: "value" },
+      { tag: "RETENTION", text: `"And suddenly it’s 5 PM…"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Tag the person who always says ‘We have plenty of time.’"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Guys, we haven’t actually seen anything yet."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Phone fixed at eye level.", color: "primary" },
+      { icon: "photo_camera", label: "CAMERA", value: "Fixed phone, eye level.", color: "primary" },
       { icon: "mood", label: "EXPRESSION", value: "Completely deadpan.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Backpack / sunglasses / phone.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "No zoom. The unbroken take is the point.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Use a currently trending unbroken-take lip-sync audio that fits the dialogue.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"POV: RELAXING TRIP"', '"DAY 1"', '"DAY 2"', '"DAY 3"'], full: true },
-      { icon: "cut", label: "EDITING", value: "ONE CONTINUOUS TAKE. No cuts. Hold the final expression for 1–2 seconds.", color: "primary", full: true }
+      { icon: "category", label: "PROPS", value: "Coffee / sunglasses / phone.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "No zoom. Keep it completely unbroken.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Trending unbroken-take/lip-sync audio that fits the delivery.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"WE HAVE PLENTY OF TIME"', '"5 HOURS LATER..."'], full: true },
+      { icon: "cut", label: "EDITING", value: "One continuous take. No cuts. Hold final expression for 1–2 seconds.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Turns a supposedly relaxing trip into an immediate contradiction." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Day-by-day escalation keeps adding problems." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives viewers a specific friend to tag." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Relatable travel humour with almost zero production." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "'The budget trip' → 'The family trip' → 'The perfectly planned trip.'", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Turns a completely normal sentence into a recognizable travel problem." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "The timeline keeps getting worse." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives viewers an obvious friend to tag." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Relatable travel humour." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "'We'll leave in 5 minutes' → 'It's nearby' → 'I know a shortcut.'", isBox: true }
     ],
     resource: {
-      title: "TRIP CHAOS CHECKLIST",
-      desc: "A simple pre-trip checklist covering bookings, transport, documents, hotel and essentials.",
-      quote: `"Save this for your next trip."`,
-      toolName: "Trip Chaos Checklist"
+      title: "TRIP TIME PLANNER",
+      desc: "Estimate realistic time for travel, activities, food, rest and unexpected delays.",
+      quote: `"We haven’t actually seen anything yet."`,
+      toolName: "Trip Time Planner"
     }
   },
   3: {
     title: "AESTHETIC CUTDOWN",
     chips: [
       { icon: "bookmark", label: "GOAL: SAVES + SHARES", color: "pink-accent" },
-      { icon: "movie", label: "FORMAT: AESTHETIC TRAVEL MONTAGE", color: "primary" },
-      { icon: "timer", label: "TIME: 10–15 SEC", color: "pink-accent" },
-      { icon: "landscape", label: "SETUP: TRIP FOOTAGE", color: "primary" },
+      { icon: "movie", label: "FORMAT: AESTHETIC TRAVEL STORY", color: "primary" },
+      { icon: "timer", label: "TIME: 15–20 SEC", color: "pink-accent" },
+      { icon: "landscape", label: "SETUP: TRIP LOCATION", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"No spoken dialogue. [Destination establishing shot] TEXT: “Maybe we needed this trip.” [Street / landscape / food shot] [Friends walking / travelling] [Genuine group-laugh moment] TEXT: “Save this for your next trip.” FINAL TEXT: “Where's this taking you next?”"`,
+    fullScript: `"You know what’s crazy about travelling? You spend months planning the destination, the hotel and all the places you want to see… and somehow the moments you remember are the completely random ones. That sunset, that stupid joke, getting lost, eating somewhere you never planned to. Maybe that’s what makes a trip worth remembering."`,
     sayThis: [
-      { tag: "HOOK", text: `"Maybe we needed this trip."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"No dialogue. Let the visuals tell the story."`, style: "value" },
-      { tag: "RETENTION", text: `"Rapidly change from destination → experience → people → genuine moment."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Where's this taking you next?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"End on the genuine group-laugh moment."`, style: "payoff" }
+      { tag: "HOOK", text: `"You know what’s crazy about travelling?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"You spend months planning the destination, the hotel and all the places you want to see…"`, style: "value" },
+      { tag: "RETENTION", text: `"And somehow the moments you remember are the completely random ones."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Save this for the next trip you’re planning."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Maybe that’s what makes a trip worth remembering."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Use existing phone footage. Prioritise natural moments.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Natural, not posed.", color: "pink-accent" },
+      { icon: "photo_camera", label: "CAMERA", value: "Use strong existing phone footage from the trip.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Natural and reflective.", color: "pink-accent" },
       { icon: "category", label: "PROPS", value: "None required.", color: "primary", full: true },
       { icon: "zoom_in", label: "ZOOM", value: "No artificial zoom.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Dreamy / synth-heavy trending travel track.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"MAYBE WE NEEDED THIS TRIP"', '"SAVE THIS FOR YOUR NEXT TRIP"'], full: true },
-      { icon: "cut", label: "EDITING", value: "3–4 clips, synced to the music. End on the laugh.", color: "primary", full: true }
+      { icon: "graphic_eq", label: "AUDIO", value: "Dreamy / synth-heavy trending travel track underneath the voice.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"THE MOMENTS YOU DON\'T PLAN"', '"ARE SOMETIMES THE BEST ONES"'], full: true },
+      { icon: "cut", label: "EDITING", value: "4–5 aesthetic clips synced softly to the narration. End on a genuine moment.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Strong visual + emotional statement immediately establishes the mood." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Rapid visual changes keep the montage moving." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Destination question encourages people to share where they want to go." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Aspirational content people can save for future travel inspiration." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Food edition → nightlife edition → road-trip edition → '48 hours here.'", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Opens with a thought people can relate to." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Creates contrast between planned experiences and spontaneous memories." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Save CTA fits the emotional travel message." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Emotional storytelling rather than another destination montage." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Best unplanned moments → things to film on a trip → travel memories → 'things I wish I had recorded.'", isBox: true }
     ],
     resource: {
-      title: "TRIP SHOT LIST",
-      desc: "A simple list of 20 phone shots to capture on any trip for better Reels.",
-      quote: `"Save this for your next trip."`,
-      toolName: "Trip Shot List"
+      title: "TRIP MEMORY SHOT LIST",
+      desc: "A simple checklist of 20 moments and shots to capture during a trip without needing professional equipment.",
+      quote: `"Save this for the next trip you’re planning."`,
+      toolName: "Trip Memory Shot List"
     }
   },
   4: {
     title: "AIRPORT CHAOS",
     chips: [
       { icon: "forum", label: "GOAL: SHARES + COMMENTS", color: "pink-accent" },
-      { icon: "theater_comedy", label: "FORMAT: COMEDY / POV", color: "primary" },
-      { icon: "timer", label: "TIME: 12–18 SEC", color: "pink-accent" },
+      { icon: "theater_comedy", label: "FORMAT: COMEDY / SOLO PERFORMANCE", color: "primary" },
+      { icon: "timer", label: "TIME: 15–20 SEC", color: "pink-accent" },
       { icon: "connecting_airports", label: "SETUP: AIRPORT", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"[Somodeep calmly sitting at the gate] TEXT: “When the gate changes 3 times.” SOMODEEP: “Wait… what?” [Beat drops] [Somodeep starts running] [Reaches new gate, exhausted] SOMODEEP: “Gate mil gaya.” [Another notification] SOMODEEP: “You have got to be kidding me.” [Collapses into seat]"`,
+    fullScript: `"There are two types of people at an airport. The person who arrives three hours early and is sitting at the gate before everyone else… and the person who arrives 20 minutes before boarding, runs through security like their life depends on it, and still says, ‘Bro, relax. We have time.’ Which one are you?"`,
     sayThis: [
-      { tag: "HOOK", text: `"When the gate changes 3 times."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Wait… what?"`, style: "value" },
-      { tag: "RETENTION", text: `"Gate changes → panic sprint → new gate → another notification."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Tag someone who's missed a flight."`, style: "engagement" },
-      { tag: "PAYOFF", text: `"You have got to be kidding me."`, style: "payoff" }
+      { tag: "HOOK", text: `"There are two types of people at an airport."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"One arrives three hours early. The other arrives 20 minutes before boarding."`, style: "value" },
+      { tag: "RETENTION", text: `"Runs through security like their life depends on it…"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which one are you?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Bro, relax. We have time."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Start static and calm.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Relaxed → confused → panic → exhausted.", color: "pink-accent" },
+      { icon: "photo_camera", label: "CAMERA", value: "Start calm, then switch to frantic movement.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Calm → panic → completely exhausted.", color: "pink-accent" },
       { icon: "category", label: "PROPS", value: "Phone + backpack / carry-on.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Small punch-in when the first notification appears.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Trending track with a clean beat drop when Somodeep starts running.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"GATE CHANGED"', '"AGAIN?!"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Calm opening → beat-drop sprint → exhausted collapse.", color: "primary", full: true }
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in when saying '20 minutes before boarding.'", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Beat-drop track during the transition from calm to panic.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"3 HOURS EARLY"', '"20 MINUTES BEFORE BOARDING"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Two contrasting sections. Calm opening → sudden panic → final direct-to-camera look.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Extremely recognisable airport situation." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Every beat makes the situation worse." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Naturally makes viewers think of a friend who has missed a flight." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Simple relatable travel comedy." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Security queue → delayed flight → baggage problems → wrong terminal.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Instantly establishes two recognizable personalities." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "The calm-to-panic contrast creates the payoff." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Viewers have to choose which type they are." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Relatable airport humour." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Airport personalities → security → boarding → baggage claim → flight delays.", isBox: true }
     ],
     resource: {
       title: "AIRPORT SURVIVAL CHECKLIST",
-      desc: "A phone-friendly checklist covering check-in, security, gate, boarding and essential travel items.",
+      desc: "A simple checklist covering check-in, security, gate, boarding and essential travel items.",
       quote: `"Save this for your next flight."`,
       toolName: "Airport Survival Checklist"
     }
@@ -845,39 +845,39 @@ const scriptsData = {
     title: "THREE FRIENDS, ONE ITINERARY",
     chips: [
       { icon: "group_add", label: "GOAL: SHARES + FOLLOWS", color: "pink-accent" },
-      { icon: "group", label: "FORMAT: MULTI-CHARACTER COMEDY", color: "primary" },
+      { icon: "group", label: "FORMAT: SOLO MULTI-CHARACTER COMEDY", color: "primary" },
       { icon: "timer", label: "TIME: 18–25 SEC", color: "pink-accent" },
       { icon: "meeting_room", label: "SETUP: ONE ROOM", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"CHARACTER 1: “Guys, we're waking up at 6 AM. We're seeing everything.” CHARACTER 2: “6 AM? I'm on holiday. I'm waking up at 10.” CHARACTER 3: “Neither. We're finding the best food in the city.” CHARACTER 1: “We don't have time for food.” CHARACTER 3: “Then what's the point of travelling?” CHARACTER 2: “Can we just wake up at 10?” [Beat] CHARACTER 1: “Fine. 10 AM.” CHARACTER 3: “And food first.” CHARACTER 2: “Now that's an itinerary.” FINAL TEXT: “Which friend are you?”"`,
+    fullScript: `"Planning a group trip by yourself is basically a full-time job. One person wants adventure, one wants to sleep till noon, one only cares about food, and somehow you’re supposed to make everyone happy. So after two hours of planning, you give up and make the final itinerary: wake up whenever, eat something good, and figure it out. Honestly… probably the best plan."`,
     sayThis: [
-      { tag: "HOOK", text: `"Guys, we're waking up at 6 AM. We're seeing everything."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Three friends have completely different ideas of the perfect trip."`, style: "value" },
-      { tag: "RETENTION", text: `"The planner, sleeper and foodie keep fighting over the itinerary."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Which friend are you?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Now that's an itinerary."`, style: "payoff" }
+      { tag: "HOOK", text: `"Planning a group trip by yourself is basically a full-time job."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"One wants adventure, one wants to sleep, one only cares about food."`, style: "value" },
+      { tag: "RETENTION", text: `"And somehow you’re supposed to make everyone happy."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which one are you in your group?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Honestly… probably the best plan."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Same phone position for every character.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Give each character a distinct personality.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Backpack / sunglasses / phone to differentiate characters.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Small punch-in on each character's funniest line.", color: "pink-accent" },
+      { icon: "photo_camera", label: "CAMERA", value: "Same phone position, different angles for each personality.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Switch personality with each character.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Sunglasses / pillow / food / phone.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Small punch-in on the funniest character.", color: "pink-accent" },
       { icon: "graphic_eq", label: "AUDIO", value: "Low-volume dramatized debate-style trending audio.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"THE PLANNER"', '"THE SLEEPER"', '"THE FOODIE"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Quick character switches. One angle per character. Final deadpan/group-style shot.", color: "primary", full: true }
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"THE ADVENTURE FRIEND"', '"THE SLEEPER"', '"THE FOODIE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Quick character switches. Keep each character visually distinct.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Immediate conflict between three personalities." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Each character introduces another opinion." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Viewers identify themselves with one character." },
+      { tag: "HOOK", labelColor: "primary", desc: "Turns ordinary trip planning into a recognizable problem." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Three conflicting priorities create escalating comedy." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Viewers identify themselves with one personality." },
       { tag: "VALUE", labelColor: "pink-accent", desc: "Highly relatable group-trip content." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "The planner → budget friend → photographer → late friend → 'let's wing it' friend.", isBox: true }
+      { tag: "EXPANSION", labelColor: "primary", desc: "Budget friend → photographer → late friend → planner → 'let's just wing it' friend.", isBox: true }
     ],
     resource: {
       title: "GROUP TRIP ITINERARY BUILDER",
-      desc: "Enter destination + number of days + budget + interests and generate a balanced itinerary for the group.",
-      quote: `"Which friend are you?"`,
+      desc: "Enter destination + number of days + budget + interests and create a balanced itinerary.",
+      quote: `"Which one are you in your group?"`,
       toolName: "Group Trip Itinerary Builder"
     }
   }
@@ -967,7 +967,7 @@ function renderScript(id) {
     <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
       <div class="flex items-center gap-2">
         <span class="font-mono text-[11px] text-primary bg-primary/10 border border-primary/30 px-2.5 py-0.5 rounded-full uppercase">SCRIPT ${id} OF 5</span>
-        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">TRAVEL COMEDY EDITION</span>
+        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">PERSONALISED REELS SCRIPTS</span>
       </div>
       <h1 class="font-headline text-[22px] font-extrabold text-on-surface leading-tight">${data.title}</h1>
       <div class="flex flex-wrap gap-2 mt-1">
