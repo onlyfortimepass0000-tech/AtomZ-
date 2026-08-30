@@ -426,14 +426,14 @@ SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB
         </div>
       </div>
 
-      <!-- Option 2: Script Engine -->
+      <!-- Option 2: Personalised Scripts Engine -->
       <div onclick="showScreen('scripts')" class="hub-card">
         <div>
           <div class="hub-card-icon" style="background:rgba(255,42,122,0.12);border-color:rgba(255,42,122,0.3);color:#FF2A7A;">
             <span class="material-symbols-outlined text-[24px]">movie</span>
           </div>
           <h2 class="hub-card-title">Personalised Scripts</h2>
-          <p class="hub-card-desc">5 ready-to-shoot scripts based on Walmart Sales Analysis findings, with directive breakdowns.</p>
+          <p class="hub-card-desc">5 ready-to-shoot travel comedy scripts, complete with dialogue breakdowns and shooting directives.</p>
         </div>
         <div class="hub-card-btn" style="color:#FF2A7A;">
           <span>Launch Personalised Scripts</span>
@@ -533,7 +533,7 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 </div>
 
 <!-- ============================================================
-SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (WALMART SALES ANALYSIS ENGINE)
+SCREEN 2B: PERSONALISED SCRIPTS ENGINE
 ============================================================ -->
 <div id="scriptsScreen" class="hidden relative pt-24 pb-16">
   <div class="max-w-2xl mx-auto px-4 pb-16 relative z-10">
@@ -542,18 +542,18 @@ SCREEN 2B: CUSTOM SCRIPT PROVIDER TOOL (WALMART SALES ANALYSIS ENGINE)
     <div class="flex flex-col gap-4 mb-6">
       <div class="flex justify-between items-center">
         <div class="font-mono text-[12px] text-pink-accent uppercase tracking-widest flex items-center gap-2">
-          <span class="material-symbols-outlined text-[16px] text-pink-accent animate-pulse">movie</span> SCRIPT PROVIDER ENGINE
+          <span class="material-symbols-outlined text-[16px] text-pink-accent animate-pulse">movie</span> PERSONALISED SCRIPTS ENGINE
         </div>
         <span class="font-mono text-[11px] text-on-surface-variant bg-surface-container px-3 py-1 border border-outline-variant rounded-full">CLIENT: SOMODEEP</span>
       </div>
 
       <!-- Multiple Script Library Tabs -->
       <div class="script-tab-selector">
-        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: WALMART SALES</button>
-        <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: MOST PROFITABLE BRANCH</button>
-        <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: TOP SALES CITY</button>
-        <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: PAYMENT MIX</button>
-        <button onclick="switchScript(5)" id="scriptTab5" class="script-tab-btn">SCRIPT 5: BEST DAY TO SELL</button>
+        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: CLAIM THE TRIP</button>
+        <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: THE UNBROKEN TAKE</button>
+        <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: AESTHETIC CUTDOWN</button>
+        <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: AIRPORT CHAOS</button>
+        <button onclick="switchScript(5)" id="scriptTab5" class="script-tab-btn">SCRIPT 5: THREE FRIENDS</button>
       </div>
     </div>
 
@@ -679,206 +679,206 @@ document.addEventListener('change', function(e) {
   }
 });
 
-// Walmart Sales Analysis Scripts Engine Data
+// Personalised Travel Comedy Scripts Database
 const scriptsData = {
   1: {
-    title: "WHERE IS WALMART ACTUALLY MAKING ITS SALES?",
+    title: "CLAIM THE TRIP",
     chips: [
-      { icon: "campaign", label: "GOAL: EXPLAIN + ENGAGEMENT", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + DASHBOARD", color: "primary" },
-      { icon: "timer", label: "TIME: 25 SEC", color: "pink-accent" },
-      { icon: "laptop_mac", label: "SETUP: LAPTOP / SCREEN", color: "primary" },
+      { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: POV / GROUP COMEDY", color: "primary" },
+      { icon: "timer", label: "TIME: 15–20 SEC", color: "pink-accent" },
+      { icon: "flight_takeoff", label: "SETUP: TRIP DESTINATION", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"Want to know where most of Walmart’s sales are actually coming from? Two categories dominate this dataset: Fashion Accessories and Home & Lifestyle. Each generates almost ₹4.9 lakh in sales, and together they account for roughly 81% of total sales. So if you were managing this business, these are the categories you’d probably look at first. But would you keep investing in the biggest categories, or try to grow the weaker ones?"`,
+    fullScript: `"POV: convincing your friend group that OUR trip destination was the best one. Bro, our destination had the best views. No, yours was just expensive. At least we actually enjoyed the trip. Okay fine, maybe your destination was good too. But ours was better. Which trip are YOU still defending in the group chat?"`,
     sayThis: [
-      { tag: "HOOK", text: `"Want to know where most of Walmart’s sales are actually coming from?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Fashion Accessories and Home & Lifestyle each generate almost ₹4.9 lakh."`, style: "value" },
-      { tag: "RETENTION", text: `"Together they account for roughly 81% of total sales."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Would you keep investing in the biggest categories, or try to grow the weaker ones?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"These are the categories you’d probably look at first."`, style: "payoff" }
+      { tag: "HOOK", text: `"POV: convincing your friend group that OUR trip destination was the best one."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Bro, our destination had the best views. At least we actually enjoyed the trip."`, style: "value" },
+      { tag: "RETENTION", text: `"Okay fine, maybe your destination was good too. But ours was better."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which trip are YOU still defending in the group chat?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Ours was better."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Phone at eye level + laptop/dashboard visible.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Analytical, curious.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Laptop showing category chart.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in on 81%.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"81% OF SALES"', '"₹489K"', '"₹489K"'], full: true },
-      { icon: "cut", label: "EDITING", value: "2–3 cuts.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Start with a 2–3 sec aesthetic destination shot.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Playfully defensive and exaggerated.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Sunglasses / backpack / phone.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Quick punch-in on the funniest reaction.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Taylor Swift's 'august', as specified in the original idea.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"POV: OUR TRIP WAS BETTER"', '"WHICH TRIP ARE YOU DEFENDING?"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Establishing shot → quick mock-debate cuts → freeze-frame on funniest face.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Starts with a business question." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "The 81% figure creates a clear payoff." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Forces a management decision." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Converts raw sales data into a business insight." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Weakest category → category profitability → category-by-branch comparison.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Immediately establishes a familiar group-trip argument." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "The argument escalates instead of becoming a simple destination montage." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Makes viewers think of their own group-chat debate." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Highly relatable travel content designed for sharing." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Best destination → worst destination → best trip decision → group-trip personalities.", isBox: true }
     ],
     resource: {
-      title: "CATEGORY PERFORMANCE CALCULATOR",
-      desc: "Compare category revenue, contribution %, and profit.",
-      quote: `"Compare category revenue, contribution %, and profit."`,
-      toolName: "Category Performance Calculator"
+      title: "TRIP DESTINATION COMPARATOR",
+      desc: "Compare destinations based on budget, activities, travel time, weather and group suitability.",
+      quote: `"Which trip are YOU still defending in the group chat?"`,
+      toolName: "Trip Destination Comparator"
     }
   },
   2: {
-    title: "THE BRANCH THAT MAKES THE MOST PROFIT",
+    title: "THE UNBROKEN TAKE",
     chips: [
-      { icon: "forum", label: "GOAL: COMMENTS + AUTHORITY", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + SCREEN", color: "primary" },
-      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
-      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "share", label: "GOAL: SHARES", color: "pink-accent" },
+      { icon: "videocam", label: "FORMAT: ONE-TAKE POV / LIP SYNC", color: "primary" },
+      { icon: "timer", label: "TIME: 12–18 SEC", color: "pink-accent" },
+      { icon: "hotel", label: "SETUP: HOTEL / AIRPORT / TRIP LOCATION", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"If I gave you Walmart’s sales dashboard and asked you to find the most profitable branch, where would you look? In this dataset, Walm009 comes out on top in the displayed profit analysis, followed by Walm030, Walm003 and Walm029. But here’s the important part: the highest-sales branch isn’t automatically the best branch. You have to look at profit too. Which branch would you investigate first?"`,
+    fullScript: `"POV: you planned a relaxing trip and somehow you're more tired than before. First day, missed the cab. Second day, wrong restaurant. Third day, someone says, ‘This wasn't in the itinerary.’ And somehow you're still calling this a vacation. Tag whoever is ALWAYS that friend."`,
     sayThis: [
-      { tag: "HOOK", text: `"Find the most profitable Walmart branch."`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Walm009 comes out on top in the displayed profit analysis."`, style: "value" },
-      { tag: "RETENTION", text: `"The highest-sales branch isn’t automatically the best branch."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Which branch would you investigate first?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"You have to look at profit too."`, style: "payoff" }
+      { tag: "HOOK", text: `"POV: you planned a relaxing trip and somehow you're more tired than before."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"First day, missed the cab. Second day, wrong restaurant."`, style: "value" },
+      { tag: "RETENTION", text: `"Third day, someone says, ‘This wasn't in the itinerary.’"`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Tag whoever is ALWAYS that friend."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"And somehow you're still calling this a vacation."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Talking head → dashboard.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Analytical, slightly challenging.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Laptop showing branch chart.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in on Walm009.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"#1 PROFIT"', '"Walm009"', '"SALES ≠ PROFIT"'], full: true },
-      { icon: "cut", label: "EDITING", value: "2 cuts.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Phone fixed at eye level.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Completely deadpan.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Backpack / sunglasses / phone.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "No zoom. The unbroken take is the point.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Use a currently trending unbroken-take lip-sync audio that fits the dialogue.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"POV: RELAXING TRIP"', '"DAY 1"', '"DAY 2"', '"DAY 3"'], full: true },
+      { icon: "cut", label: "EDITING", value: "ONE CONTINUOUS TAKE. No cuts. Hold the final expression for 1–2 seconds.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Turns data analysis into a challenge." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Introduces the sales-vs-profit distinction." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Asks viewers to make a business decision." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Shows why revenue alone isn't enough." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Branch ranking → profit margin → weak branch investigation.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Turns a supposedly relaxing trip into an immediate contradiction." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Day-by-day escalation keeps adding problems." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives viewers a specific friend to tag." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Relatable travel humour with almost zero production." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "'The budget trip' → 'The family trip' → 'The perfectly planned trip.'", isBox: true }
     ],
     resource: {
-      title: "BRANCH PERFORMANCE COMPARATOR",
-      desc: "Compare branches using revenue, profit, margin and rank.",
-      quote: `"Compare branches using revenue, profit, margin and rank."`,
-      toolName: "Branch Performance Comparator"
+      title: "TRIP CHAOS CHECKLIST",
+      desc: "A simple pre-trip checklist covering bookings, transport, documents, hotel and essentials.",
+      quote: `"Save this for your next trip."`,
+      toolName: "Trip Chaos Checklist"
     }
   },
   3: {
-    title: "THE CITY THAT LEADS WALMART SALES",
+    title: "AESTHETIC CUTDOWN",
     chips: [
-      { icon: "help_outline", label: "GOAL: CURIOSITY + COMMENTS", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + MAP/CHART", color: "primary" },
-      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
-      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "bookmark", label: "GOAL: SAVES + SHARES", color: "pink-accent" },
+      { icon: "movie", label: "FORMAT: AESTHETIC TRAVEL MONTAGE", color: "primary" },
+      { icon: "timer", label: "TIME: 10–15 SEC", color: "pink-accent" },
+      { icon: "landscape", label: "SETUP: TRIP FOOTAGE", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"Which Texas city is actually leading Walmart sales in this dataset? It’s Weslaco, with sales approaching ₹50,000 in the displayed ranking. Waxahachie, Plano and San Antonio are also among the stronger performers. Now the interesting question is: is Weslaco winning because customers buy more, because of its category mix, or because of something else? That’s where the dashboard gets interesting."`,
+    fullScript: `"No spoken dialogue. [Destination establishing shot] TEXT: “Maybe we needed this trip.” [Street / landscape / food shot] [Friends walking / travelling] [Genuine group-laugh moment] TEXT: “Save this for your next trip.” FINAL TEXT: “Where's this taking you next?”"`,
     sayThis: [
-      { tag: "HOOK", text: `"Which Texas city is actually leading Walmart sales?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Weslaco leads the displayed city ranking, approaching ₹50,000."`, style: "value" },
-      { tag: "RETENTION", text: `"But why is it leading?"`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Is it customers, category mix, or something else?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"That’s where the dashboard gets interesting."`, style: "payoff" }
+      { tag: "HOOK", text: `"Maybe we needed this trip."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"No dialogue. Let the visuals tell the story."`, style: "value" },
+      { tag: "RETENTION", text: `"Rapidly change from destination → experience → people → genuine moment."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Where's this taking you next?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"End on the genuine group-laugh moment."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Somodeep beside laptop screen.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Curious / investigative.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Dashboard city chart.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in on WESLACO.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"#1 CITY"', '"WESLACO"', '"≈₹50K"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Reveal the city after the hook.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Use existing phone footage. Prioritise natural moments.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Natural, not posed.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "None required.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "No artificial zoom.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Dreamy / synth-heavy trending travel track.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"MAYBE WE NEEDED THIS TRIP"', '"SAVE THIS FOR YOUR NEXT TRIP"'], full: true },
+      { icon: "cut", label: "EDITING", value: "3–4 clips, synced to the music. End on the laugh.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Starts with a question rather than a statistic." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Viewer wants to understand why the city leads." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Creates competing explanations." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Demonstrates how descriptive analytics leads to deeper investigation." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Weslaco category mix → city vs branch → city profitability.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Strong visual + emotional statement immediately establishes the mood." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Rapid visual changes keep the montage moving." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Destination question encourages people to share where they want to go." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Aspirational content people can save for future travel inspiration." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Food edition → nightlife edition → road-trip edition → '48 hours here.'", isBox: true }
     ],
     resource: {
-      title: "CITY PERFORMANCE EXPLORER",
-      desc: "Select a city and see its sales, categories, branches and payment mix.",
-      quote: `"Select a city and see its sales, categories, branches and payment mix."`,
-      toolName: "City Performance Explorer"
+      title: "TRIP SHOT LIST",
+      desc: "A simple list of 20 phone shots to capture on any trip for better Reels.",
+      quote: `"Save this for your next trip."`,
+      toolName: "Trip Shot List"
     }
   },
   4: {
-    title: "HOW DO WALMART CUSTOMERS PAY?",
+    title: "AIRPORT CHAOS",
     chips: [
-      { icon: "bookmark", label: "GOAL: SAVES + COMMENTS", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + CHART", color: "primary" },
-      { icon: "timer", label: "TIME: 18–22 SEC", color: "pink-accent" },
-      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "forum", label: "GOAL: SHARES + COMMENTS", color: "pink-accent" },
+      { icon: "theater_comedy", label: "FORMAT: COMEDY / POV", color: "primary" },
+      { icon: "timer", label: "TIME: 12–18 SEC", color: "pink-accent" },
+      { icon: "connecting_airports", label: "SETUP: AIRPORT", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"If you were running Walmart, would you expect cash, credit card or Ewallet to dominate? In this dataset, Credit Card is the strongest payment method, followed by Ewallet and Cash. That sounds simple, but payment behaviour can actually affect how you design checkout and promotions. So if you were the manager, would you give your biggest payment-related promotion to credit-card users?"`,
+    fullScript: `"[Somodeep calmly sitting at the gate] TEXT: “When the gate changes 3 times.” SOMODEEP: “Wait… what?” [Beat drops] [Somodeep starts running] [Reaches new gate, exhausted] SOMODEEP: “Gate mil gaya.” [Another notification] SOMODEEP: “You have got to be kidding me.” [Collapses into seat]"`,
     sayThis: [
-      { tag: "HOOK", text: `"Would you expect cash, credit card or Ewallet to dominate?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Credit Card is the strongest payment method."`, style: "value" },
-      { tag: "RETENTION", text: `"Payment behaviour can actually affect business decisions."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Would you give the biggest promotion to credit-card users?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Payment data can influence checkout and promotions."`, style: "payoff" }
+      { tag: "HOOK", text: `"When the gate changes 3 times."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Wait… what?"`, style: "value" },
+      { tag: "RETENTION", text: `"Gate changes → panic sprint → new gate → another notification."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Tag someone who's missed a flight."`, style: "engagement" },
+      { tag: "PAYOFF", text: `"You have got to be kidding me."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Direct-to-camera with payment chart beside/behind you.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Curious, analytical.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Laptop/dashboard.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in on CREDIT CARD.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"CREDIT CARD #1"', '"EWALLET #2"', '"CASH #3"'], full: true },
-      { icon: "cut", label: "EDITING", value: "2 simple cuts.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Start static and calm.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Relaxed → confused → panic → exhausted.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Phone + backpack / carry-on.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Small punch-in when the first notification appears.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Trending track with a clean beat drop when Somodeep starts running.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"GATE CHANGED"', '"AGAIN?!"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Calm opening → beat-drop sprint → exhausted collapse.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Makes the audience predict the result." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "Connects a simple chart to a management decision." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Creates a choice rather than asking for a generic comment." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Shows how customer behaviour can inform operations." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Payment × category → payment × weekday → payment trends.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Extremely recognisable airport situation." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Every beat makes the situation worse." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Naturally makes viewers think of a friend who has missed a flight." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Simple relatable travel comedy." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Security queue → delayed flight → baggage problems → wrong terminal.", isBox: true }
     ],
     resource: {
-      title: "PAYMENT MIX ANALYZER",
-      desc: "Select a payment method and compare its share across categories, cities and branches.",
-      quote: `"Select a payment method and compare its share across categories, cities and branches."`,
-      toolName: "Payment Mix Analyzer"
+      title: "AIRPORT SURVIVAL CHECKLIST",
+      desc: "A phone-friendly checklist covering check-in, security, gate, boarding and essential travel items.",
+      quote: `"Save this for your next flight."`,
+      toolName: "Airport Survival Checklist"
     }
   },
   5: {
-    title: "THE BEST DAY TO SELL",
+    title: "THREE FRIENDS, ONE ITINERARY",
     chips: [
-      { icon: "share", label: "GOAL: SHARES + SAVES", color: "pink-accent" },
-      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD + CHART", color: "primary" },
-      { icon: "timer", label: "TIME: 20 SEC", color: "pink-accent" },
-      { icon: "laptop_mac", label: "SETUP: LAPTOP", color: "primary" },
+      { icon: "group_add", label: "GOAL: SHARES + FOLLOWS", color: "pink-accent" },
+      { icon: "group", label: "FORMAT: MULTI-CHARACTER COMEDY", color: "primary" },
+      { icon: "timer", label: "TIME: 18–25 SEC", color: "pink-accent" },
+      { icon: "meeting_room", label: "SETUP: ONE ROOM", color: "primary" },
       { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
     ],
-    fullScript: `"If you could choose only one day to maximise Walmart sales, which day would you choose? In this dataset, Saturday is the highest displayed sales day, while Monday is the lowest. That means the same store could need completely different staffing and inventory strategies depending on the day. So if you were managing this store, would you add staff on Saturday or run promotions on Monday?"`,
+    fullScript: `"CHARACTER 1: “Guys, we're waking up at 6 AM. We're seeing everything.” CHARACTER 2: “6 AM? I'm on holiday. I'm waking up at 10.” CHARACTER 3: “Neither. We're finding the best food in the city.” CHARACTER 1: “We don't have time for food.” CHARACTER 3: “Then what's the point of travelling?” CHARACTER 2: “Can we just wake up at 10?” [Beat] CHARACTER 1: “Fine. 10 AM.” CHARACTER 3: “And food first.” CHARACTER 2: “Now that's an itinerary.” FINAL TEXT: “Which friend are you?”"`,
     sayThis: [
-      { tag: "HOOK", text: `"Which day would you choose to maximise Walmart sales?"`, style: "hook" },
-      { tag: "CORE VALUE", text: `"Saturday is the highest displayed sales day, while Monday is the lowest."`, style: "value" },
-      { tag: "RETENTION", text: `"The same store could need completely different strategies depending on the day."`, style: "retention" },
-      { tag: "ENGAGEMENT", text: `"Would you add staff Saturday or run promotions Monday?"`, style: "engagement" },
-      { tag: "PAYOFF", text: `"Day-level data can change how you operate the store."`, style: "payoff" }
+      { tag: "HOOK", text: `"Guys, we're waking up at 6 AM. We're seeing everything."`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Three friends have completely different ideas of the perfect trip."`, style: "value" },
+      { tag: "RETENTION", text: `"The planner, sleeper and foodie keep fighting over the itinerary."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Which friend are you?"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Now that's an itinerary."`, style: "payoff" }
     ],
     directives: [
-      { icon: "photo_camera", label: "CAMERA", value: "Phone + dashboard screen.", color: "primary" },
-      { icon: "mood", label: "EXPRESSION", value: "Problem-solving / managerial.", color: "pink-accent" },
-      { icon: "category", label: "PROPS", value: "Weekday sales chart.", color: "primary", full: true },
-      { icon: "zoom_in", label: "ZOOM", value: "Punch in on SATURDAY and MONDAY.", color: "pink-accent" },
-      { icon: "graphic_eq", label: "AUDIO", value: "Original voice.", color: "primary" },
-      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"SATURDAY = HIGHEST"', '"MONDAY = LOWEST"'], full: true },
-      { icon: "cut", label: "EDITING", value: "Reveal both days with simple text.", color: "primary", full: true }
+      { icon: "photo_camera", label: "CAMERA", value: "Same phone position for every character.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Give each character a distinct personality.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Backpack / sunglasses / phone to differentiate characters.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Small punch-in on each character's funniest line.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Low-volume dramatized debate-style trending audio.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"THE PLANNER"', '"THE SLEEPER"', '"THE FOODIE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Quick character switches. One angle per character. Final deadpan/group-style shot.", color: "primary", full: true }
     ],
     whyThisWorks: [
-      { tag: "HOOK", labelColor: "primary", desc: "Makes viewers choose before revealing the data." },
-      { tag: "RETENTION", labelColor: "pink-accent", desc: "The operational consequence is the payoff." },
-      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Gives two plausible business actions to debate." },
-      { tag: "VALUE", labelColor: "pink-accent", desc: "Connects data to staffing and inventory decisions." },
-      { tag: "EXPANSION", labelColor: "primary", desc: "Hourly sales → weekday × category → staffing planner.", isBox: true }
+      { tag: "HOOK", labelColor: "primary", desc: "Immediate conflict between three personalities." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Each character introduces another opinion." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Viewers identify themselves with one character." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Highly relatable group-trip content." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "The planner → budget friend → photographer → late friend → 'let's wing it' friend.", isBox: true }
     ],
     resource: {
-      title: "WEEKDAY SALES PLANNER",
-      desc: "Select a weekday and category to identify stronger/weaker sales periods and support staffing or promotion planning.",
-      quote: `"Select a weekday and category to identify stronger/weaker sales periods and support staffing or promotion planning."`,
-      toolName: "Weekday Sales Planner"
+      title: "GROUP TRIP ITINERARY BUILDER",
+      desc: "Enter destination + number of days + budget + interests and generate a balanced itinerary for the group.",
+      quote: `"Which friend are you?"`,
+      toolName: "Group Trip Itinerary Builder"
     }
   }
 };
@@ -967,7 +967,7 @@ function renderScript(id) {
     <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
       <div class="flex items-center gap-2">
         <span class="font-mono text-[11px] text-primary bg-primary/10 border border-primary/30 px-2.5 py-0.5 rounded-full uppercase">SCRIPT ${id} OF 5</span>
-        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">WALMART SALES ANALYSIS</span>
+        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">TRAVEL COMEDY EDITION</span>
       </div>
       <h1 class="font-headline text-[22px] font-extrabold text-on-surface leading-tight">${data.title}</h1>
       <div class="flex flex-wrap gap-2 mt-1">
