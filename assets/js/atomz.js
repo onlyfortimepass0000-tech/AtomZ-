@@ -447,3 +447,22 @@ if (document.readyState === 'loading') {
 } else {
   runIntroLoader();
 }
+
+/* ==========================================================================
+   ATOMZ atom ↔ legend highlight sync (progressive enhancement)
+   Hovering a legend row highlights its orbiting electron. No-op if absent.
+   ========================================================================== */
+(function () {
+  "use strict";
+  var atom = document.querySelector(".atom");
+  var legend = document.querySelector(".atom-legend");
+  if (!atom || !legend) return;
+  legend.querySelectorAll(".leg").forEach(function (li) {
+    var k = li.getAttribute("data-k");
+    var orbit = atom.querySelector('.orbit[data-k="' + k + '"]');
+    function on() { li.classList.add("is-active"); if (orbit) orbit.classList.add("is-active"); }
+    function off() { li.classList.remove("is-active"); if (orbit) orbit.classList.remove("is-active"); }
+    li.addEventListener("mouseenter", on);
+    li.addEventListener("mouseleave", off);
+  });
+})();

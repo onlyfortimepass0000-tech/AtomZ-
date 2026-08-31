@@ -910,93 +910,156 @@ ul { margin: 0; padding: 0; list-style: none; }
    -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
-   14b. ELEMENTS — the A·T·O·M·Z acronym as a compounding staircase
-   Tiles rise in height A→T→O→M→Z; Z (Zero Limits) is the tallest, in gold.
+   14b. ELEMENTS — "The ATOMZ Atom"
+   The A·T·O·M·Z acronym as a live atom: a glowing nucleus with five orbiting
+   electrons, paired with a readable legend. Palette tokens only.
    -------------------------------------------------------------------------- */
 
-.elements-grid {
+.atom-wrap {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(6px, 1vw, 14px);
-  align-items: end;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+  align-items: center;
   margin-top: var(--s-6);
 }
-.el {
+.atom { order: 1; }              /* mobile: atom first (the visual leads) */
+.atom-legend { order: 2; }
+@media (min-width: 900px) {
+  .atom-wrap { grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+  .atom { order: 2; }            /* desktop: legend left, atom right */
+  .atom-legend { order: 1; }
+}
+
+/* --- The atom graphic (decorative) --- */
+.atom {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--s-4);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  color: var(--surface-fg);
-  overflow: hidden;
-  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
-              box-shadow 0.35s var(--ease);
+  width: min(100%, clamp(300px, 42vw, 520px));
+  aspect-ratio: 1;
+  margin-inline: auto;
 }
-/* ascending heights = compounding */
-.el[data-i="1"] { min-height: clamp(150px, 30vw, 230px); }
-.el[data-i="2"] { min-height: clamp(172px, 34vw, 270px); }
-.el[data-i="3"] { min-height: clamp(194px, 38vw, 310px); }
-.el[data-i="4"] { min-height: clamp(216px, 42vw, 350px); }
-.el[data-i="5"] { min-height: clamp(240px, 47vw, 396px); }
-
-.el:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-  box-shadow: 0 26px 50px -30px var(--ink-20);
-}
-.el--z { border-color: var(--gold); }
-
-.el__idx {
+.atom__ring,
+.atom__nucleus,
+.orbit {
   position: absolute;
-  top: var(--s-4);
-  left: var(--s-4);
-  font-family: var(--font-body);
-  font-size: var(--step--1);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--muted-faint);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.el__letter {
+.atom__ring { border: 1px solid var(--hairline); border-radius: 50%; }
+.atom__ring--1 { width: 44%; height: 44%; }
+.atom__ring--2 { width: 70%; height: 70%; }
+.atom__ring--3 { width: 96%; height: 96%; }
+
+.atom__nucleus {
+  width: 15%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-12), 0 0 34px 4px var(--accent-12);
+  animation: atomPulse 3.6s var(--ease) infinite;
+}
+
+/* --- Orbits + electrons --- */
+.orbit {
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%) rotate(var(--a));
+  pointer-events: none;         /* atom is decorative; the legend drives highlight */
+}
+.orbit__spin {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  animation: atomSpin var(--dur) linear infinite;
+}
+.electron {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(30px, 8.5%, 46px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--accent-12);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.orbit--z .electron {
+  background: var(--gold);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 16%, transparent);
+}
+.electron__l { display: grid; place-items: center; transform: rotate(calc(-1 * var(--a))); }
+.electron__t {
+  display: block;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: var(--accent);
-}
-.el--z .el__letter { color: var(--gold); }
-.el__name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  letter-spacing: -0.02em;
-  margin: 0.5rem 0 0.2rem;
+  font-size: clamp(0.82rem, 1.6vw, 1.1rem);
   line-height: 1;
-}
-.el__desc { color: var(--muted); font-size: var(--step--1); line-height: 1.4; margin: 0; max-width: none; }
-.el__orbit {
-  position: absolute;
-  top: -18px; right: -18px;
-  width: 72px; height: 72px;
-  color: var(--hairline);
-  opacity: 0.7;
+  color: var(--on-accent);
+  animation: atomSpinRev var(--dur) linear infinite;
 }
 
-@media (max-width: 640px) {
-  .elements-grid { grid-template-columns: 1fr 1fr; align-items: stretch; }
-  .el, .el[data-i] { min-height: 150px; }
-  /* short cards: let content flow from the top so the index can't collide with the letter */
-  .el:not(.el--z) { justify-content: flex-start; }
-  .el:not(.el--z) .el__idx { position: static; margin-bottom: var(--s-2); }
-  .el--z { grid-column: 1 / -1; min-height: 128px; flex-direction: row; align-items: flex-end; gap: var(--s-3); }
-  .el--z .el__name { margin-top: 0; }
+/* highlight the electron whose legend row is hovered */
+.orbit.is-active { z-index: 3; }
+.orbit.is-active .electron {
+  transform: translate(-50%, -50%) scale(1.5);
+  box-shadow: 0 0 0 8px var(--accent-12), 0 0 22px 3px var(--accent-12);
 }
-@media (max-width: 380px) {
-  .elements-grid { grid-template-columns: 1fr; }
-  .el--z { flex-direction: column; }
+.orbit--z.is-active .electron {
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--gold) 18%, transparent),
+              0 0 22px 3px color-mix(in srgb, var(--gold) 18%, transparent);
+}
+
+@keyframes atomSpin { to { transform: rotate(360deg); } }
+@keyframes atomSpinRev { to { transform: rotate(-360deg); } }
+@keyframes atomPulse {
+  0%, 100% { box-shadow: 0 0 0 6px var(--accent-12), 0 0 34px 4px var(--accent-12); }
+  50%      { box-shadow: 0 0 0 10px var(--accent-12), 0 0 48px 9px var(--accent-12); }
+}
+
+/* --- Legend (the real content) --- */
+.atom-legend { display: grid; gap: var(--s-2); align-content: center; }
+.leg {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-3);
+  align-items: center;
+  padding: var(--s-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.leg.is-active { border-color: var(--hairline); background: var(--surface); }
+.leg__chip {
+  width: 2.5em;
+  height: 2.5em;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-0);
+  transition: transform 0.3s var(--ease);
+}
+.leg--z .leg__chip { background: var(--gold); }
+.leg.is-active .leg__chip { transform: scale(1.08); }
+.leg__text { display: flex; flex-direction: column; color: var(--muted); font-size: var(--step--1); line-height: 1.35; }
+.leg__text b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-0);
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  line-height: 1.05;
+  margin-bottom: 0.15em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit__spin, .electron__t, .atom__nucleus { animation: none; }
 }
 
 /* --------------------------------------------------------------------------

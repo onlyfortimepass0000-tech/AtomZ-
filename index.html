@@ -411,46 +411,39 @@
           <h2 id="elements-title">Five elements. Zero limits.</h2>
         </div>
 
-        <div class="elements-grid" role="list" aria-label="What ATOMZ stands for">
-          <div class="el" data-i="1" role="listitem" data-reveal>
-            <svg class="el__orbit" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="50" rx="42" ry="16"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/></svg>
-            <span class="el__idx" aria-hidden="true">01</span>
-            <span class="el__letter" aria-hidden="true">A</span>
-            <h3 class="el__name">Ambition</h3>
-            <p class="el__desc">Aim higher than comfortable.</p>
+        <div class="atom-wrap" data-reveal>
+          <!-- The atom: decorative, animated visual -->
+          <div class="atom" aria-hidden="true">
+            <span class="atom__ring atom__ring--1"></span>
+            <span class="atom__ring atom__ring--2"></span>
+            <span class="atom__ring atom__ring--3"></span>
+            <span class="atom__nucleus"></span>
+
+            <div class="orbit" data-k="A" style="--size:44%;--a:18deg;--dur:23s">
+              <span class="orbit__spin"><span class="electron"><span class="electron__l"><span class="electron__t">A</span></span></span></span>
+            </div>
+            <div class="orbit" data-k="T" style="--size:70%;--a:118deg;--dur:31s">
+              <span class="orbit__spin"><span class="electron"><span class="electron__l"><span class="electron__t">T</span></span></span></span>
+            </div>
+            <div class="orbit" data-k="O" style="--size:70%;--a:298deg;--dur:31s">
+              <span class="orbit__spin"><span class="electron"><span class="electron__l"><span class="electron__t">O</span></span></span></span>
+            </div>
+            <div class="orbit" data-k="M" style="--size:96%;--a:62deg;--dur:41s">
+              <span class="orbit__spin"><span class="electron"><span class="electron__l"><span class="electron__t">M</span></span></span></span>
+            </div>
+            <div class="orbit orbit--z" data-k="Z" style="--size:96%;--a:242deg;--dur:41s">
+              <span class="orbit__spin"><span class="electron"><span class="electron__l"><span class="electron__t">Z</span></span></span></span>
+            </div>
           </div>
 
-          <div class="el" data-i="2" role="listitem" data-reveal style="--reveal-delay:.06s">
-            <svg class="el__orbit" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="50" rx="42" ry="16"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/></svg>
-            <span class="el__idx" aria-hidden="true">02</span>
-            <span class="el__letter" aria-hidden="true">T</span>
-            <h3 class="el__name">Tenacity</h3>
-            <p class="el__desc">Show up when it's boring.</p>
-          </div>
-
-          <div class="el" data-i="3" role="listitem" data-reveal style="--reveal-delay:.12s">
-            <svg class="el__orbit" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="50" rx="42" ry="16"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/></svg>
-            <span class="el__idx" aria-hidden="true">03</span>
-            <span class="el__letter" aria-hidden="true">O</span>
-            <h3 class="el__name">Ownership</h3>
-            <p class="el__desc">We carry the outcome, not just the tasks.</p>
-          </div>
-
-          <div class="el" data-i="4" role="listitem" data-reveal style="--reveal-delay:.18s">
-            <svg class="el__orbit" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="50" rx="42" ry="16"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/></svg>
-            <span class="el__idx" aria-hidden="true">04</span>
-            <span class="el__letter" aria-hidden="true">M</span>
-            <h3 class="el__name">Momentum</h3>
-            <p class="el__desc">Every month builds on the last.</p>
-          </div>
-
-          <div class="el el--z" data-i="5" role="listitem" data-reveal style="--reveal-delay:.24s">
-            <svg class="el__orbit" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="50" rx="42" ry="16"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/></svg>
-            <span class="el__idx" aria-hidden="true">05</span>
-            <span class="el__letter" aria-hidden="true">Z</span>
-            <h3 class="el__name">Zero Limits</h3>
-            <p class="el__desc">No ceiling on where this goes.</p>
-          </div>
+          <!-- Legend: the real, readable meaning -->
+          <ul class="atom-legend" aria-label="What ATOMZ stands for">
+            <li class="leg" data-k="A"><span class="leg__chip">A</span><span class="leg__text"><b>Ambition</b>Aim higher than comfortable.</span></li>
+            <li class="leg" data-k="T"><span class="leg__chip">T</span><span class="leg__text"><b>Tenacity</b>Show up when it's boring.</span></li>
+            <li class="leg" data-k="O"><span class="leg__chip">O</span><span class="leg__text"><b>Ownership</b>We carry the outcome, not just the tasks.</span></li>
+            <li class="leg" data-k="M"><span class="leg__chip">M</span><span class="leg__text"><b>Momentum</b>Every month builds on the last.</span></li>
+            <li class="leg leg--z" data-k="Z"><span class="leg__chip">Z</span><span class="leg__text"><b>Zero Limits</b>No ceiling on where this goes.</span></li>
+          </ul>
         </div>
       </div>
     </section>
