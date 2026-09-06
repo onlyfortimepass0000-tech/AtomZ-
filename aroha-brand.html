@@ -188,35 +188,8 @@ tailwind.config = {
 
 <main class="flex-1 flex flex-col relative w-full pt-28 pb-24 bg-surface max-w-4xl mx-auto">
 
-  <!-- ================= ACCESS KEY GATE (Code: testing) ================= -->
-  <div id="brandAccessGate" class="w-full max-w-md mx-auto text-center flex flex-col items-center px-4 my-auto">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-5">
-      <span class="material-symbols-outlined text-[16px] text-secondary">domain_verification</span>
-      <span class="font-mono text-[11px] font-bold text-secondary uppercase tracking-widest">ENTERPRISE BRAND ACCESS KEY</span>
-    </div>
-
-    <h1 class="font-sora text-3xl font-extrabold text-on-surface tracking-tight mb-3">
-      Enter Access Key
-    </h1>
-    <p class="font-body text-sm text-on-surface-variant max-w-sm mx-auto leading-relaxed mb-8">
-      Type your authorized enterprise access key to unlock criteria specification, creator parity matches, and campaign escrow deployment.
-    </p>
-
-    <!-- Key Input Form -->
-    <form id="brandKeyForm" onsubmit="handleBrandKeySubmit(event)" class="w-full flex flex-col gap-3">
-      <div class="key-input-box">
-        <input type="password" id="brandKeyInput" placeholder="Enter brand access key (e.g. testing)..." autocomplete="off" required class="bg-transparent border-none text-on-surface text-sm font-mono w-full focus:outline-none placeholder:text-on-surface-variant/60" />
-        <button type="submit" class="bg-primary-container text-on-primary-container font-mono text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer shadow-[0_0_12px_rgba(0,245,160,0.3)]">
-          <span>Unlock</span>
-          <span class="material-symbols-outlined text-[16px]">lock_open</span>
-        </button>
-      </div>
-      <div id="brandKeyStatus" class="font-mono text-xs text-left px-2 min-h-[20px]" aria-live="polite"></div>
-    </form>
-  </div>
-
-  <!-- ================= BRAND DASHBOARD CONTENT (UNLOCKED BY 'testing') ================= -->
-  <div id="brandDashboardContent" class="hidden flex-col w-full">
+  <!-- ================= BRAND DASHBOARD CONTENT ================= -->
+  <div id="brandDashboardContent" class="flex flex-col w-full">
     
     <!-- Editorial Top Canvas Context -->
     <section class="px-margin-mobile pt-spacing-sm pb-spacing-md">

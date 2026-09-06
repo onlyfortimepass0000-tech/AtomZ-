@@ -183,35 +183,8 @@ tailwind.config = {
 
 <main class="flex flex-col relative w-full pt-28 pb-24 bg-surface min-h-screen max-w-4xl mx-auto">
 
-  <!-- ================= ACCESS KEY GATE (Code: testing) ================= -->
-  <div id="creatorAccessGate" class="w-full max-w-md mx-auto text-center flex flex-col items-center px-4 my-auto">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-5">
-      <span class="material-symbols-outlined text-[16px] text-primary-container">key</span>
-      <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">CREATOR CONSOLE ACCESS KEY</span>
-    </div>
-
-    <h1 class="font-sora text-3xl font-extrabold text-on-surface tracking-tight mb-3">
-      Enter Access Key
-    </h1>
-    <p class="font-body text-sm text-on-surface-variant max-w-sm mx-auto leading-relaxed mb-8">
-      Type your assigned creator access key to unlock your telemetry, gap-closing directives, and matched brand opportunities.
-    </p>
-
-    <!-- Key Input Form -->
-    <form id="keyForm" onsubmit="handleKeySubmit(event)" class="w-full flex flex-col gap-3">
-      <div class="key-input-box">
-        <input type="password" id="keyInput" placeholder="Enter creator access key (e.g. testing)..." autocomplete="off" required class="bg-transparent border-none text-on-surface text-sm font-mono w-full focus:outline-none placeholder:text-on-surface-variant/60" />
-        <button type="submit" class="bg-primary-container text-on-primary-container font-mono text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer shadow-[0_0_12px_rgba(0,245,160,0.3)]">
-          <span>Unlock</span>
-          <span class="material-symbols-outlined text-[16px]">lock_open</span>
-        </button>
-      </div>
-      <div id="keyStatus" class="font-mono text-xs text-left px-2 min-h-[20px]" aria-live="polite"></div>
-    </form>
-  </div>
-
-  <!-- ================= CREATOR DASHBOARD CONTENT (UNLOCKED BY 'testing') ================= -->
-  <div id="creatorDashboardContent" class="hidden flex-col w-full px-margin-mobile pb-spacing-2xl space-y-spacing-xl">
+  <!-- ================= CREATOR DASHBOARD CONTENT ================= -->
+  <div id="creatorDashboardContent" class="flex flex-col w-full px-margin-mobile pb-spacing-2xl space-y-spacing-xl">
     
     <!-- Toast Feedback Overlay -->
     <div class="fixed top-20 right-4 left-4 z-50 transform -translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center justify-between px-spacing-md py-spacing-sm rounded-full bg-surface-container-high shadow-xl border border-primary-container/30" id="toast">
