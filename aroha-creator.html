@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>AROHA by ATOMZ — Creator Console (Esteban)</title>
+<!-- Google Fonts: Sora, Montserrat, JetBrains Mono, Geist, Newsreader -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Montserrat:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+<style>
+@layer base {
+  html, body { width: 100vw; margin: 0; padding: 0; background-color: #121318; font-family: 'Montserrat', 'Geist', sans-serif; }
+  body { overscroll-behavior: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+.font-sora { font-family: 'Sora', sans-serif; }
+.font-mono-code { font-family: 'JetBrains Mono', monospace; }
+</style>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-primary-container": "#006b43",
+        "surface-container-high": "#292a2f",
+        "tertiary": "#f3f3f5",
+        "outline-variant": "#3b4a40",
+        "secondary": "#c2c1ff",
+        "primary-fixed": "#50ffaf",
+        "primary": "#cdffde",
+        "primary-fixed-dim": "#00e293",
+        "secondary-fixed-dim": "#c2c1ff",
+        "on-secondary": "#1800a7",
+        "on-tertiary-fixed-variant": "#454749",
+        "on-tertiary-fixed": "#1a1c1d",
+        "error-container": "#93000a",
+        "surface-container-lowest": "#0d0e13",
+        "on-secondary-fixed-variant": "#332dbc",
+        "surface-bright": "#38393f",
+        "on-surface": "#e3e1e9",
+        "on-error-container": "#ffdad6",
+        "primary-container": "#00f5a0",
+        "on-primary-fixed-variant": "#005232",
+        "secondary-container": "#3630bf",
+        "outline": "#849588",
+        "tertiary-fixed": "#e2e2e4",
+        "on-tertiary-container": "#5c5d5f",
+        "inverse-on-surface": "#2f3036",
+        "background": "#121318",
+        "error": "#ffb4ab",
+        "surface-variant": "#34343a",
+        "surface-dim": "#121318",
+        "surface": "#121318",
+        "surface-container": "#1e1f25",
+        "surface-container-highest": "#34343a",
+        "on-primary-fixed": "#002111",
+        "on-primary": "#003921",
+        "inverse-primary": "#006c44",
+        "surface-tint": "#00e293",
+        "on-secondary-container": "#b1b1ff",
+        "tertiary-fixed-dim": "#c6c6c8",
+        "on-background": "#e3e1e9",
+        "on-tertiary": "#2f3132",
+        "tertiary-container": "#d7d7d9",
+        "on-secondary-fixed": "#0c006b",
+        "on-surface-variant": "#b9cbbd",
+        "inverse-surface": "#e3e1e9",
+        "secondary-fixed": "#e2dfff",
+        "surface-container-low": "#1a1b21",
+        "on-error": "#690005"
+      },
+      "borderRadius": {
+        "DEFAULT": "1rem",
+        "lg": "2rem",
+        "xl": "3rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "margin-mobile": "1.25rem",
+        "spacing-3xl": "4.5rem",
+        "spacing-2xl": "3rem",
+        "spacing-sm": "0.75rem",
+        "margin-desktop": "3rem",
+        "spacing-md": "1rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-xs": "0.5rem",
+        "gutter-desktop": "1.5rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xl": "2rem",
+        "spacing-2xs": "0.25rem",
+        "gutter-mobile": "1rem"
+      },
+      "fontFamily": {
+        "display-md": ["Newsreader", "Sora"],
+        "label-xs": ["JetBrains Mono", "Geist"],
+        "display-md-mobile": ["Newsreader", "Sora"],
+        "metric-xl": ["Geist", "Sora"],
+        "label-md": ["JetBrains Mono", "Geist"],
+        "headline-sm": ["Sora", "Geist"],
+        "body-md": ["Montserrat", "Geist"],
+        "display-lg": ["Newsreader", "Sora"],
+        "headline-lg": ["Sora", "Newsreader"],
+        "body-lg": ["Montserrat", "Geist"],
+        "metric-sm": ["Geist", "Sora"],
+        "title-md": ["Sora", "Geist"],
+        "display-lg-mobile": ["Newsreader", "Sora"]
+      },
+      "fontSize": {
+        "display-md": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+        "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+        "display-md-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+        "metric-xl": ["44px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "300"}],
+        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-md": ["14px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400"}],
+        "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "400"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400"}],
+        "metric-sm": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "500"}],
+        "display-lg-mobile": ["38px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-fixed">
+
+<!-- Top Header Navigation -->
+<header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.4)] border-b border-outline-variant/40">
+  <div class="h-16 px-margin-mobile flex items-center justify-between gap-spacing-sm">
+    <div class="flex items-center gap-spacing-xs">
+      <a href="aroha.html" class="flex items-center gap-spacing-xs text-on-surface no-underline">
+        <div class="flex flex-col">
+          <div class="flex items-center gap-spacing-xs">
+            <span class="font-sora text-headline-sm tracking-tight text-on-surface leading-none font-bold">Aroha <span class="text-primary-container text-xs font-mono font-normal">by ATOMZ</span></span>
+            <span class="font-mono text-label-xs uppercase tracking-widest text-on-surface-variant/80 px-spacing-2xs py-spacing-3xs rounded-full bg-surface-container-high border border-outline-variant/60">Creator Console</span>
+          </div>
+          <span class="font-mono text-label-xs text-on-surface-variant uppercase tracking-widest leading-none mt-1">Esteban Ramos • @esteban</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Navigation Switchers -->
+    <div class="flex items-center gap-spacing-sm">
+      <a href="aroha-brand.html" class="hidden sm:flex items-center gap-spacing-2xs px-spacing-xs py-1 rounded-full bg-secondary-container/30 hover:bg-secondary-container/50 text-secondary font-mono text-[11px] font-bold border border-secondary/40 transition-all">
+        <span class="material-symbols-outlined text-[14px]">domain</span>
+        <span>Switch to Brand Portal</span>
+      </a>
+      <a href="aroha.html" class="px-spacing-xs py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-mono text-[11px] border border-outline-variant transition-all">
+        ← Hub
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen max-w-4xl mx-auto">
+  <div class="flex flex-col w-full px-margin-mobile pb-spacing-2xl space-y-spacing-xl">
+    
+    <!-- Toast Feedback Overlay -->
+    <div class="fixed top-20 right-4 left-4 z-50 transform -translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center justify-between px-spacing-md py-spacing-sm rounded-full bg-surface-container-high shadow-xl border border-primary-container/30" id="toast">
+      <div class="flex items-center gap-spacing-xs">
+        <span class="material-symbols-outlined text-primary-container text-[18px]">check_circle</span>
+        <span class="font-mono text-label-md text-on-surface" id="toast-text">Access Code copied to clipboard</span>
+      </div>
+      <span class="font-mono text-label-xs text-primary-container uppercase tracking-wider font-semibold">Done</span>
+    </div>
+
+    <!-- Header & Welcome Section -->
+    <section class="flex flex-col space-y-spacing-sm pt-spacing-sm">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-spacing-xs">
+          <span class="px-spacing-xs py-spacing-3xs rounded-full bg-surface-container text-on-surface-variant font-mono text-label-xs tracking-wider uppercase flex items-center gap-1 border border-outline-variant/40">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+            ATOMZ COHORT 04
+          </span>
+          <span class="px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-low text-outline font-mono text-label-xs tracking-wider uppercase border border-outline-variant/30">
+            SYNCED TODAY • 06:12 AM
+          </span>
+        </div>
+        <button class="flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface-variant transition-colors group active:scale-95 border border-outline-variant/40" onclick="copyAccessCode()">
+          <span class="font-mono text-label-xs tracking-widest uppercase text-on-surface" id="code-val">ARH-CRT-EST77</span>
+          <span class="material-symbols-outlined text-[14px] text-outline group-hover:text-primary-container transition-colors">content_copy</span>
+        </button>
+      </div>
+
+      <div class="space-y-spacing-3xs">
+        <h1 class="font-sora text-display-lg-mobile text-on-surface tracking-tight font-extrabold">
+          Good morning, <span class="italic font-serif font-normal text-primary-container">Esteban.</span>
+        </h1>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-lg">
+          Your dynamic institutional readiness score sits at <strong class="text-on-surface font-semibold">78%</strong> for Tier 2 enterprise lifestyle campaigns.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 1: Content Performance & Publishing Activity -->
+    <section class="flex flex-col space-y-spacing-md">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-spacing-xs">
+          <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+          <h2 class="font-sora text-headline-sm text-on-surface tracking-tight font-bold">Telemetry & Cadence</h2>
+        </div>
+        <span class="font-mono text-label-xs text-outline uppercase tracking-widest">30-Day Window</span>
+      </div>
+
+      <!-- Telemetry Cards Grid -->
+      <div class="grid grid-cols-2 gap-spacing-xs">
+        <!-- KPI 1 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-spacing-xs border border-outline-variant/40">
+          <div class="flex items-center justify-between text-outline">
+            <span class="font-mono text-label-xs uppercase tracking-wider">Avg Views</span>
+            <span class="material-symbols-outlined text-[16px] text-primary-container">trending_up</span>
+          </div>
+          <div class="space-y-spacing-3xs">
+            <div class="font-sora text-metric-sm text-on-surface font-light font-bold">24.3K</div>
+            <div class="flex items-center gap-1 text-primary-container font-mono text-label-xs">
+              <span>+18% MoM</span>
+              <span class="text-outline">vs baseline</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-spacing-xs border border-outline-variant/40">
+          <div class="flex items-center justify-between text-outline">
+            <span class="font-mono text-label-xs uppercase tracking-wider">Engagement</span>
+            <span class="material-symbols-outlined text-[16px] text-secondary">donut_small</span>
+          </div>
+          <div class="space-y-spacing-3xs">
+            <div class="font-sora text-metric-sm text-on-surface font-light font-bold">3.8%</div>
+            <div class="text-on-surface-variant font-mono text-label-xs">
+              Benchmark: <span class="text-on-surface font-semibold">4.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-spacing-xs border border-outline-variant/40">
+          <div class="flex items-center justify-between text-outline">
+            <span class="font-mono text-label-xs uppercase tracking-wider">Cadence</span>
+            <span class="material-symbols-outlined text-[16px] text-primary-container">bolt</span>
+          </div>
+          <div class="space-y-spacing-3xs">
+            <div class="font-sora text-metric-sm text-on-surface font-light font-bold">4.2 <span class="text-body-md font-normal text-on-surface-variant">/wk</span></div>
+            <div class="text-primary-container font-mono text-label-xs flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              Optimal pace
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col justify-between space-y-spacing-xs border border-outline-variant/40">
+          <div class="flex items-center justify-between text-outline">
+            <span class="font-mono text-label-xs uppercase tracking-wider">Purchase Index</span>
+            <span class="material-symbols-outlined text-[16px] text-secondary">monetization_on</span>
+          </div>
+          <div class="space-y-spacing-3xs">
+            <div class="font-sora text-metric-sm text-on-surface font-light font-bold">High</div>
+            <div class="text-on-surface-variant font-mono text-label-xs truncate">
+              Austin / US Tier 1
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Content Audit Strip -->
+      <div class="space-y-spacing-xs pt-spacing-2xs">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-label-xs uppercase tracking-widest text-on-surface-variant">Recent Reels Audit</span>
+          <span class="font-mono text-label-xs text-outline">2 Logged</span>
+        </div>
+
+        <!-- Content Item 1 -->
+        <div class="p-spacing-sm rounded-xl bg-surface-container flex items-center gap-spacing-sm hover:bg-surface-container-high transition-colors border border-outline-variant/30">
+          <div class="w-16 h-20 rounded bg-surface-container-lowest overflow-hidden flex-shrink-0 relative">
+            <img class="w-full h-full object-cover" alt="Morning Mobility & Cold Protocol" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDItEftCGQJucMdadkK-L7Y2_SG4P_UI8u796HYUxatvnYu4cXF4O1D8IEWKE24ltSd5jEG7AVDuX4A5E0QYeSrLrxvjcY4uOjxjDpz-PILF_YXIwg3K8EhoBnijtkjjW7L41PU2v4W28y3rxUB_Hj04qlsE92Qv3gbicWF1u7ytHm3V7LIi8Qoubm7KdGCeviol6ohH-KemBMDa_FRVq26SsLamEMtK3ppr3DmwK8CXPCPvG3dhjnO1A"/>
+            <div class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-primary-container font-mono text-[9px]">Reel</div>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 space-y-1">
+            <div class="flex items-center justify-between gap-1">
+              <h4 class="font-sora text-title-md text-on-surface truncate font-bold">Morning Mobility & Cold Protocol</h4>
+              <span class="px-spacing-xs py-spacing-3xs rounded-full bg-on-primary-container/30 text-primary-container font-mono text-[10px] font-bold whitespace-nowrap flex-shrink-0">+41%</span>
+            </div>
+            <div class="flex items-center gap-spacing-sm text-outline font-mono text-label-xs">
+              <span>34.2K views</span>
+              <span>•</span>
+              <span>4.4% eng</span>
+            </div>
+            <div class="font-mono text-[11px] text-primary-fixed-dim truncate">
+              Outperforming Baseline (+41%)
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Item 2 -->
+        <div class="p-spacing-sm rounded-xl bg-surface-container flex items-center gap-spacing-sm hover:bg-surface-container-high transition-colors border border-outline-variant/30">
+          <div class="w-16 h-20 rounded bg-surface-container-lowest overflow-hidden flex-shrink-0 relative">
+            <img class="w-full h-full object-cover" alt="Weekly High-Protein Meal Prep" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ4ZraMnEQP2O4gg9DPqBrKh7eocOjZxDDCbM4lPsiypq8_5wHIk1gPfnud40_uINMP9IoTI_i8RPvr8nVLU2tTZPnsQURpDqxwGxOwL3prP_io5R6z9BPM7xdZxicOlZZX-hACXM7bxGVEQpb5Qa3gir36JnSN2YyDR9uL8PSO4IlF52pmZDO2z64z_V0klXPXQEelDxVafrOYinlEyYxWLaMHYhS1SbCM3HYuqA5b25xvSlNuJoZ1Q"/>
+            <div class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-on-surface-variant font-mono text-[9px]">Reel</div>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 space-y-1">
+            <div class="flex items-center justify-between gap-1">
+              <h4 class="font-sora text-title-md text-on-surface truncate font-bold">Weekly High-Protein Meal Prep</h4>
+              <span class="px-spacing-xs py-spacing-3xs rounded-full bg-error-container/40 text-error font-mono text-[10px] font-bold whitespace-nowrap flex-shrink-0">-9%</span>
+            </div>
+            <div class="flex items-center gap-spacing-sm text-outline font-mono text-label-xs">
+              <span>22.1K views</span>
+              <span>•</span>
+              <span>3.6% eng</span>
+            </div>
+            <div class="font-mono text-[11px] text-error truncate">
+              Sub-baseline (-9%) • Pacing fatigue detected
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Brand Performance Targets & Percentage Gaps -->
+    <section class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col space-y-spacing-md relative overflow-hidden border border-outline-variant/40">
+      <div class="flex items-center justify-between">
+        <div class="space-y-spacing-3xs">
+          <span class="font-mono text-label-xs uppercase tracking-widest text-outline">Target Cohort</span>
+          <h3 class="font-sora text-headline-sm text-on-surface font-extrabold">Tier 2 — Enterprise Lifestyle</h3>
+          <p class="font-mono text-label-md text-on-surface-variant">Novu Athletic, Gymshark, WHOOP Benchmarks</p>
+        </div>
+
+        <!-- Radial Progress -->
+        <div class="relative w-16 h-16 flex items-center justify-center flex-shrink-0">
+          <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+            <path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+            <path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="78, 100" stroke-linecap="round" stroke-width="3.5"></path>
+          </svg>
+          <div class="absolute flex flex-col items-center">
+            <span class="font-sora text-title-md font-bold text-on-surface">78%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gap Progress Bars -->
+      <div class="space-y-spacing-sm pt-spacing-2xs">
+        <!-- Metric 1 -->
+        <div class="space-y-spacing-2xs">
+          <div class="flex justify-between items-baseline">
+            <span class="font-body-md text-body-md text-on-surface font-semibold">Average Views</span>
+            <span class="font-mono text-label-md text-outline">
+              <strong class="text-on-surface font-bold">24.3K</strong> / 30.0K Target
+            </span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+            <div class="h-full bg-primary-container rounded-full" style="width: 81%"></div>
+          </div>
+          <div class="flex justify-between items-center font-mono text-label-xs">
+            <span class="text-primary-container font-bold">81% Reached</span>
+            <span class="text-on-surface-variant font-medium">Remaining Gap: 19% (5.7K views needed)</span>
+          </div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="space-y-spacing-2xs">
+          <div class="flex justify-between items-baseline">
+            <span class="font-body-md text-body-md text-on-surface font-semibold">Engagement Rate</span>
+            <span class="font-mono text-label-md text-outline">
+              <strong class="text-on-surface font-bold">3.8%</strong> / 4.0% Target
+            </span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+            <div class="h-full bg-secondary rounded-full" style="width: 95%"></div>
+          </div>
+          <div class="flex justify-between items-center font-mono text-label-xs">
+            <span class="text-secondary font-bold">95% Reached</span>
+            <span class="text-on-surface-variant font-medium">Remaining Gap: 5% (0.2% needed)</span>
+          </div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="space-y-spacing-2xs">
+          <div class="flex justify-between items-baseline">
+            <span class="font-body-md text-body-md text-on-surface font-semibold">Production Cadence</span>
+            <span class="font-mono text-label-md text-outline">
+              <strong class="text-on-surface font-bold">4.2</strong> / 4.0/wk Target
+            </span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+            <div class="h-full bg-primary-container rounded-full" style="width: 100%"></div>
+          </div>
+          <div class="flex justify-between items-center font-mono text-label-xs">
+            <span class="text-primary-container flex items-center gap-1 font-bold">
+              <span class="material-symbols-outlined text-[13px]">check_circle</span>
+              100% Qualified
+            </span>
+            <span class="text-outline">Criterion Fully Met</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Concise Recommendations (How to Close the Gap) -->
+    <section class="flex flex-col space-y-spacing-sm">
+      <div class="space-y-spacing-3xs">
+        <div class="flex items-center gap-spacing-xs">
+          <span class="material-symbols-outlined text-primary-container text-[18px]">lightbulb</span>
+          <h3 class="font-sora text-headline-sm text-on-surface font-bold">Tailored Gap-Closing Actions</h3>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant">Three high-leverage interventions calibrated from your last 12 reels.</p>
+      </div>
+
+      <div class="space-y-spacing-xs">
+        <!-- Directive 01 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container flex items-start gap-spacing-sm border border-outline-variant/30">
+          <span class="font-sora text-headline-sm text-primary-container font-light flex-shrink-0 font-bold">01</span>
+          <div class="space-y-1">
+            <h4 class="font-sora text-title-md text-on-surface font-bold">Hook Velocity (Cut 2.4s Opening Delay)</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Lead directly with the cold dip plunge or sudden kettlebell drop. Strip out logo fades and spoken intros.
+            </p>
+            <div class="inline-flex items-center gap-1 px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-primary-container font-mono text-label-xs">
+              <span class="material-symbols-outlined text-[14px]">insights</span>
+              Estimated lift: +3.2K views
+            </div>
+          </div>
+        </div>
+
+        <!-- Directive 02 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container flex items-start gap-spacing-sm border border-outline-variant/30">
+          <span class="font-sora text-headline-sm text-primary-container font-light flex-shrink-0 font-bold">02</span>
+          <div class="space-y-1">
+            <h4 class="font-sora text-title-md text-on-surface font-bold">Content Format: 0:28–0:42s Rituals</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Double down on morning movement sequences. Data shows high-density short rituals yield a 34% higher algorithmic watch-through hold.
+            </p>
+          </div>
+        </div>
+
+        <!-- Directive 03 -->
+        <div class="p-spacing-md rounded-xl bg-surface-container flex items-start gap-spacing-sm border border-outline-variant/30">
+          <span class="font-sora text-headline-sm text-primary-container font-light flex-shrink-0 font-bold">03</span>
+          <div class="space-y-1">
+            <h4 class="font-sora text-title-md text-on-surface font-bold">Save & Share Prompts in Captions</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Replace 'Thoughts?' with explicit utility prompts like 'Bookmark this 4-step routine for tomorrow morning' to trigger Instagram save velocity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Matched Brand Opportunities -->
+    <section class="flex flex-col space-y-spacing-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-sora text-headline-sm text-on-surface font-bold">Matched Opportunities</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">Filtered by Esteban's current qualification status</p>
+        </div>
+        <span class="px-spacing-xs py-spacing-3xs rounded-full bg-surface-container text-primary-container font-mono text-label-xs border border-primary-container/30">2 Available</span>
+      </div>
+
+      <!-- Opportunity 1 (Qualified) -->
+      <div class="p-spacing-md rounded-xl bg-surface-container flex flex-col space-y-spacing-sm relative overflow-hidden border border-outline-variant/40">
+        <div class="flex items-start justify-between gap-spacing-xs">
+          <div>
+            <span class="px-spacing-xs py-spacing-3xs rounded-full bg-on-primary-container text-primary-container font-mono text-[10px] uppercase font-bold border border-primary-container/40">
+              100% Qualified • Deal Draft Ready
+            </span>
+            <h4 class="font-sora text-headline-sm text-on-surface mt-spacing-2xs font-extrabold">Aura Recovery Hardware</h4>
+            <p class="font-mono text-label-md text-outline">Tier 1 Boutique Hardware • Biometrics & Saunas</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <div class="font-sora text-title-md text-primary-container font-extrabold">$2,800</div>
+            <div class="font-mono text-label-xs text-on-surface-variant">+ Retainer</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-spacing-sm py-spacing-2xs font-mono text-label-md text-on-surface">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-primary-container">videocam</span> 1 IG Reel
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-primary-container">auto_stories</span> 2 Stories
+          </span>
+        </div>
+        <button class="w-full py-spacing-xs px-spacing-md rounded-full bg-on-surface text-surface font-sora text-title-md font-bold hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] transition-all flex items-center justify-center gap-spacing-xs cursor-pointer">
+          <span>Review Brief & Terms</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </button>
+      </div>
+
+      <!-- Opportunity 2 (Approaching) -->
+      <div class="p-spacing-md rounded-xl bg-surface-container-low flex flex-col space-y-spacing-sm relative border border-outline-variant/40">
+        <div class="flex items-start justify-between gap-spacing-xs">
+          <div>
+            <span class="px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-secondary font-mono text-[10px] uppercase font-bold border border-secondary/30">
+              81% Qualified (Needs +5.7K Views)
+            </span>
+            <h4 class="font-sora text-headline-sm text-on-surface mt-spacing-2xs font-extrabold">Novu Athletic Q3 Endurance</h4>
+            <p class="font-mono text-label-md text-outline">Tier 2 Enterprise Fitness Apparel</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <div class="font-sora text-title-md text-on-surface font-bold">$4,500</div>
+            <div class="font-mono text-label-xs text-outline">2 IG Reels</div>
+          </div>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          Requires 30K average views. Applying the Hook Velocity directive is estimated to close this threshold within 10 days.
+        </p>
+        <button class="w-full py-spacing-xs px-spacing-md rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface font-sora text-title-md font-bold active:scale-[0.98] transition-colors flex items-center justify-center gap-spacing-xs border border-outline-variant cursor-pointer">
+          <span class="material-symbols-outlined text-[18px] text-primary-container">tune</span>
+          <span>View Calibration Strategy</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Section 5: Bigger-Brand Request Option -->
+    <section class="p-spacing-md rounded-xl bg-surface-container-high flex flex-col space-y-spacing-sm border border-outline-variant/60">
+      <div class="space-y-spacing-3xs">
+        <div class="flex items-center gap-spacing-2xs text-secondary">
+          <span class="material-symbols-outlined text-[18px]">military_tech</span>
+          <span class="font-mono text-label-xs uppercase tracking-widest">Expansion Protocol</span>
+        </div>
+        <h3 class="font-sora text-headline-sm text-on-surface font-extrabold">Aiming for Global Flagships?</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          Directly inform your ATOMZ agency representation team to re-index institutional outreach for Tier 3 partnerships ($10,000+).
+        </p>
+      </div>
+
+      <div class="space-y-spacing-2xs">
+        <span class="font-mono text-label-xs text-outline uppercase tracking-wider">Select Growth Directives</span>
+        <div class="flex flex-wrap gap-spacing-2xs" id="ambition-chips">
+          <button class="chip px-spacing-sm py-spacing-2xs rounded-full bg-surface-container text-on-surface-variant font-mono text-label-md active:scale-95 transition-colors flex items-center gap-1 border border-outline-variant/40" onclick="toggleChip(this)" type="button">
+            <span>Bigger Tier 1 Brands</span>
+          </button>
+          <button class="chip px-spacing-sm py-spacing-2xs rounded-full bg-surface-container text-on-surface-variant font-mono text-label-md active:scale-95 transition-colors flex items-center gap-1 border border-outline-variant/40" onclick="toggleChip(this)" type="button">
+            <span>Higher CPM / Base Payouts</span>
+          </button>
+          <button class="chip px-spacing-sm py-spacing-2xs rounded-full bg-surface-container text-on-surface-variant font-mono text-label-md active:scale-95 transition-colors flex items-center gap-1 border border-outline-variant/40" onclick="toggleChip(this)" type="button">
+            <span>Apparel & Tech Exclusives</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="w-full py-spacing-xs px-spacing-md rounded-full bg-primary-container text-on-primary-fixed font-sora text-title-md font-extrabold hover:bg-primary active:scale-[0.98] transition-all flex items-center justify-center gap-spacing-xs mt-spacing-2xs cursor-pointer shadow-[0_0_20px_rgba(0,245,160,0.3)]" onclick="submitAmbitions()">
+        <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+        <span>Submit Ambition to Agency</span>
+      </button>
+    </section>
+
+    <!-- Section 6: Direct Meeting Scheduling with ATOMZ Concierge -->
+    <section class="p-spacing-md rounded-xl bg-surface-container flex flex-col space-y-spacing-md border border-outline-variant/40">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-spacing-xs">
+          <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+          <h3 class="font-sora text-headline-sm text-on-surface font-extrabold">ATOMZ Strategic Concierge</h3>
+        </div>
+        <span class="font-mono text-label-xs text-primary-container uppercase font-bold">Priority Queue</span>
+      </div>
+
+      <div class="p-spacing-sm rounded bg-surface-container-low flex items-center gap-spacing-sm border border-outline-variant/30">
+        <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-surface-container-highest border border-primary-container/30">
+          <img class="w-full h-full object-cover" alt="Sarah Vance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuZuO7pUfqMydX6OR0siZUFj_pQ83KptZCIiTwAxCNCuV5ZO6eQqcSPqWxjAeSmsvOA9ojRlgbN2kvR8WaLobo71W7LlarcjfyFcnWXs5MrZ2XkpRdTbAplKc99DGnLPibyz9LCcTozphJ6meVdAT1HUWqwACwyXM6o5KYiZec7I2PKUTxYQ6zxSdKukrMflQwozw-1LeAsG0WvhAKkVT2Ej68C1i_zZmh99ThqtbIBaaebJmifw5eHw"/>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <div class="flex items-center gap-1">
+            <h4 class="font-sora text-title-md text-on-surface font-bold truncate">Sarah Vance</h4>
+            <span class="material-symbols-outlined text-primary-container text-[14px]">verified</span>
+          </div>
+          <p class="font-mono text-label-xs text-outline truncate">Senior Partner Strategist, ATOMZ Ops</p>
+        </div>
+      </div>
+
+      <div class="space-y-spacing-xs font-body-md text-body-md">
+        <div class="flex items-center justify-between text-on-surface">
+          <span class="text-on-surface-variant flex items-center gap-spacing-2xs font-mono text-label-xs">
+            <span class="material-symbols-outlined text-[16px] text-primary-container">calendar_month</span>
+            Next Slot:
+          </span>
+          <span class="font-medium text-right text-sm">Thursday, Sept 12 • 6:30 PM (45m)</span>
+        </div>
+        <div class="flex items-center justify-between text-on-surface">
+          <span class="text-on-surface-variant flex items-center gap-spacing-2xs font-mono text-label-xs">
+            <span class="material-symbols-outlined text-[16px] text-secondary">track_changes</span>
+            Focus:
+          </span>
+          <span class="font-semibold text-right text-primary-container text-sm">Closing 5.7K Tier 2 Gap</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-spacing-2xs pt-spacing-2xs">
+        <button class="w-full py-spacing-xs px-spacing-md rounded-full bg-on-surface text-surface font-sora text-title-md font-bold hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] transition-all flex items-center justify-center gap-spacing-xs cursor-pointer" onclick="triggerBooking()">
+          <span>Schedule 1-on-1 Session</span>
+          <span class="material-symbols-outlined text-[18px]">north_east</span>
+        </button>
+        <button class="w-full py-spacing-2xs px-spacing-md rounded-full text-outline hover:text-on-surface font-mono text-label-md transition-colors flex items-center justify-center gap-1 cursor-pointer" onclick="requestUrgentAudit()">
+          <span>Request Urgent Async Audit Instead</span>
+          <span class="material-symbols-outlined text-[14px]">arrow_right_alt</span>
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toast-text');
+  toastText.textContent = message;
+  toast.classList.remove('-translate-y-20', 'opacity-0', 'pointer-events-none');
+  toast.classList.add('translate-y-0', 'opacity-100');
+  setTimeout(() => {
+    toast.classList.add('-translate-y-20', 'opacity-0', 'pointer-events-none');
+    toast.classList.remove('translate-y-0', 'opacity-100');
+  }, 2800);
+}
+
+function copyAccessCode() {
+  const code = document.getElementById('code-val').innerText;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).then(() => {
+      showToast('Access Key ' + code + ' copied to clipboard');
+    }).catch(() => {
+      showToast('Access Key ' + code + ' ready to paste');
+    });
+  } else {
+    showToast('Access Key ' + code + ' copied');
+  }
+}
+
+function toggleChip(element) {
+  const isSelected = element.classList.contains('bg-primary-container');
+  if (isSelected) {
+    element.classList.remove('bg-primary-container', 'text-on-primary-fixed', 'font-medium');
+    element.classList.add('bg-surface-container', 'text-on-surface-variant');
+  } else {
+    element.classList.add('bg-primary-container', 'text-on-primary-fixed', 'font-medium');
+    element.classList.remove('bg-surface-container', 'text-on-surface-variant');
+  }
+}
+
+function submitAmbitions() {
+  const selectedChips = document.querySelectorAll('#ambition-chips .bg-primary-container');
+  if (selectedChips.length === 0) {
+    showToast('Please select at least one expansion directive');
+    return;
+  }
+  showToast('Directives logged. Agent Sarah Vance notified.');
+}
+
+function triggerBooking() {
+  showToast('Slot confirmed for Thurs, Sept 12 @ 6:30 PM');
+}
+
+function requestUrgentAudit() {
+  showToast('Async audit ticket #9421 logged with ATOMZ Ops');
+}
+</script>
+</body>
+</html>
