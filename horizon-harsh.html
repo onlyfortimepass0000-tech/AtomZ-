@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOMZ — Where You Actually Stand (Harsh - atomz112)</title>
-<!-- Fonts -->
+<title>ATOMZ — Creator Dossier (Harsh - atomz112)</title>
+<!-- Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Montserrat:wght@400;600;700;800&family=Sora:wght@400;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#FF6B00",
+          "primary-container": "#FF6B00",
+          "pink-accent": "#FF2A7A",
+          "surface": "#000000",
+          "surface-container": "#111111",
+          "surface-container-high": "#1C1C1C",
+          "outline-variant": "#222222",
+          "on-surface": "#FFFFFF",
+          "on-surface-variant": "#A0A0A0"
+        },
+        fontFamily: {
+          "sans": ["Montserrat", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"],
+          "headline": ["Sora", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
 <style>
 :root{
   --charcoal:#000000;
@@ -25,13 +51,151 @@
 *{box-sizing:border-box;}
 body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(--charcoal);color:var(--offwhite);overflow-x:hidden;}
 
+/* Top Header Bar */
+.portal-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(10, 10, 12, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #222222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+}
+.portal-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.portal-logo span.accent { color: #FF6B00; }
+.portal-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: rgba(255, 107, 0, 0.15);
+  color: #FF6B00;
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* Central Portal Option Selector Hub */
+.hub-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px 60px;
+  background: radial-gradient(circle at center, rgba(255,107,0,0.08) 0%, rgba(0,0,0,1) 70%);
+}
+.hub-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+.hub-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #FF6B00;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hub-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+}
+.hub-sub {
+  font-size: 14px;
+  color: #A0A0A0;
+  margin-bottom: 32px;
+}
+.hub-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .hub-options-grid { grid-template-columns: 1fr 1fr; }
+}
+.hub-card {
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: #FF6B00;
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.15);
+}
+.hub-card:active { transform: scale(0.98); }
+.hub-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 107, 0, 0.12);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B00;
+  margin-bottom: 16px;
+}
+.hub-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 6px;
+}
+.hub-card-desc {
+  font-size: 13px;
+  color: #8A8580;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.hub-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FF6B00;
+}
+
 #matrixBgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 
 .wrap{position:relative;z-index:10;max-width:640px;margin:0 auto;padding:40px 20px 80px;}
 
-.hero{background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border:1px solid var(--grey-light);border-top:2px solid var(--accent);color:var(--offwhite);padding:28px 22px;border-radius:16px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 6px;}
-.headline{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;line-height:1.2;margin:0 0 8px;color:var(--offwhite);}
+.hero{background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);border:1px solid #222222;border-top:2px solid #FF6B00;color:#FFFFFF;padding:28px 22px;border-radius:16px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#FF6B00;font-weight:700;margin:0 0 6px;}
+.headline{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;line-height:1.2;margin:0 0 8px;color:#FFFFFF;}
 
 /* Instagram Handle Badge */
 .insta-handle-badge {
@@ -40,7 +204,7 @@ body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(-
   gap:6px;
   background:rgba(255,107,0,0.12);
   border:1px solid rgba(255,107,0,0.4);
-  color:var(--accent);
+  color:#FF6B00;
   font-family:'JetBrains Mono',monospace;
   font-size:12px;
   font-weight:700;
@@ -51,249 +215,367 @@ body{margin:0;font-family:'Montserrat',-apple-system,sans-serif;background:var(-
 .insta-handle-badge svg { flex-shrink:0; }
 
 section{padding:18px 0 4px;}
-h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin:0 0 12px;}
+h2{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#FF6B00;margin:0 0 12px;}
 
-.proof-card{background:rgba(17,17,17,0.9);backdrop-filter:blur(12px);border:1px solid var(--grey-light);border-radius:14px;padding:20px;}
-.proof-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--green);background:rgba(0,255,65,.12);border:1px solid rgba(0,255,65,.3);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
-.proof-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin:0 0 6px;color:var(--offwhite);}
+.proof-card{background:rgba(17,17,17,0.9);backdrop-filter:blur(12px);border:1px solid #222222;border-radius:14px;padding:20px;}
+.proof-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#00FF41;background:rgba(0,255,65,.12);border:1px solid rgba(0,255,65,.3);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
+.proof-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin:0 0 6px;color:#FFFFFF;}
 .proof-stat{font-size:13px;color:#DDDDDD;line-height:1.5;margin:0;}
-.proof-stat b{color:var(--accent);font-size:14px;}
-.proof-why{font-size:12.5px;color:var(--grey);line-height:1.5;margin:10px 0 0;}
+.proof-stat b{color:#FF6B00;font-size:14px;}
+.proof-why{font-size:12.5px;color:#A0A0A0;line-height:1.5;margin:10px 0 0;}
 .proof-source{font-size:11px;color:#666666;font-style:italic;margin:10px 0 0;}
 
 .q-block{margin-bottom:20px;}
-.q-text{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin:0 0 12px;color:var(--offwhite);}
-.opts{display:flex;flex-direction:column;gap:10px;}
-.opt{display:block;position:relative;}
-.opt input{position:absolute;opacity:0;}
+.q-text{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin:0 0 12px;color:#FFFFFF;}
+.opts{display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;width:100%;}
+.opt{display:block;position:relative;margin:0;}
+.opt input{position:absolute;opacity:0;pointer-events:none;}
 .opt .card{
-  display:block;
-  padding:14px 16px;
-  border:1px solid var(--grey-light);
-  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px 12px;
+  border:1px solid #222222;
+  border-radius:8px;
   background:rgba(17,17,17,0.9);
   backdrop-filter:blur(8px);
   color:#DDDDDD;
-  font-size:13.5px;
+  font-size:12.5px;
   font-weight:600;
   cursor:pointer;
   transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-height:38px;
+  box-sizing:border-box;
+  width:100%;
 }
-.opt:active .card{transform:scale(0.97);}
+.opt:active .card{transform:scale(0.96);}
 .opt input:checked + .card{
-  border-color:var(--accent);
+  border-color:#FF6B00;
   background:rgba(255,107,0,0.14);
-  color:var(--accent);
+  color:#FF6B00;
   font-weight:700;
-  box-shadow:0 0 20px rgba(255,107,0,0.25);
+  box-shadow:0 0 12px rgba(255,107,0,0.25);
 }
 
-.placeholder{font-size:13px;color:var(--grey);font-style:italic;}
+.placeholder{font-size:13px;color:#A0A0A0;font-style:italic;}
 
 .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 20px;max-width:340px;}
 .mini{padding:12px 10px;border-radius:10px;text-align:center;font-size:11px;font-weight:800;line-height:1.3;opacity:.35;border:2px solid transparent;font-family:'Sora',sans-serif;}
-.mini.blindspot{background:rgba(242,183,5,.16);color:var(--gold);}
-.mini.aligned{background:var(--surface);color:var(--green);border-color:var(--green);}
-.mini.reset{background:var(--grey-light);color:var(--grey);}
-.mini.wrongdest{background:rgba(255,77,46,.16);color:var(--accent);}
+.mini.blindspot{background:rgba(242,183,5,.16);color:#F2B705;}
+.mini.aligned{background:#111111;color:#00FF41;border-color:#00FF41;}
+.mini.reset{background:#222222;color:#A0A0A0;}
+.mini.wrongdest{background:rgba(255,77,46,.16);color:#FF6B00;}
 
 .verdict{display:none;margin-bottom:12px;}
 .badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:10px;}
-.badge-green{background:rgba(0,255,65,.15);color:var(--green);border:1px solid rgba(0,255,65,0.4);}
-.badge-coral{background:rgba(255,107,0,.15);color:var(--accent);border:1px solid rgba(255,107,0,0.4);}
-.badge-gold{background:rgba(242,183,5,.2);color:var(--gold);border:1px solid rgba(242,183,5,0.4);}
-.badge-grey{background:var(--grey-light);color:var(--grey);border:1px solid #333333;}
+.badge-green{background:rgba(0,255,65,.15);color:#00FF41;border:1px solid rgba(0,255,65,0.4);}
+.badge-coral{background:rgba(255,107,0,.15);color:#FF6B00;border:1px solid rgba(255,107,0,0.4);}
+.badge-gold{background:rgba(242,183,5,.2);color:#F2B705;border:1px solid rgba(242,183,5,0.4);}
+.badge-grey{background:#222222;color:#A0A0A0;border:1px solid #333333;}
 .verdict p{font-size:14px;line-height:1.6;color:#DDDDDD;margin:0;}
-.goalnote{display:none;font-size:13px;line-height:1.5;color:#EEEEEE;margin:10px 0 0;padding:12px 14px;background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
-.stakes{display:none;font-size:13px;line-height:1.5;color:#FFFFFF;font-weight:600;margin:12px 0 0;padding:12px 14px;background:rgba(255,107,0,.1);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;}
+.goalnote{display:none;font-size:13px;line-height:1.5;color:#EEEEEE;margin:10px 0 0;padding:12px 14px;background:#111111;border-left:3px solid #FF6B00;border-radius:0 8px 8px 0;}
+.stakes{display:none;font-size:13px;line-height:1.5;color:#FFFFFF;font-weight:600;margin:12px 0 0;padding:12px 14px;background:rgba(255,107,0,.1);border-left:3px solid #FF6B00;border-radius:0 8px 8px 0;}
 
 .move-wrap{display:none;}
-.move{display:none;background:var(--surface);border:1px solid var(--accent);color:var(--offwhite);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
-.pace{display:none;font-size:12.5px;color:var(--grey);padding:0 2px;}
+.move{display:none;background:#111111;border:1px solid #FF6B00;color:#FFFFFF;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.6;margin-bottom:12px;}
+.pace{display:none;font-size:12.5px;color:#A0A0A0;padding:0 2px;}
 
-/* ===== Reveal logic — pure CSS ===== */
+/* Reveal logic */
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .placeholder{display:none}
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .mini-grid .mini,
 body:has(input[name=identity]:checked):has(input[name=goal]:checked) .move-wrap{display:block}
 
-/* ALIGNED — marathi or mix × followers/branddeals/consistency */
-body:has(#id-marathi:checked):has(#goal-followers:checked) .v-aligned,
-body:has(#id-marathi:checked):has(#goal-branddeals:checked) .v-aligned,
-body:has(#id-marathi:checked):has(#goal-consistency:checked) .v-aligned,
+body:has(#id-tech:checked):has(#goal-followers:checked) .v-aligned,
+body:has(#id-tech:checked):has(#goal-branddeals:checked) .v-aligned,
+body:has(#id-tech:checked):has(#goal-consistency:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .v-aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .v-aligned,
-body:has(#id-marathi:checked):has(#goal-followers:checked) .move-aligned,
-body:has(#id-marathi:checked):has(#goal-branddeals:checked) .move-aligned,
-body:has(#id-marathi:checked):has(#goal-consistency:checked) .move-aligned,
+body:has(#id-tech:checked):has(#goal-followers:checked) .move-aligned,
+body:has(#id-tech:checked):has(#goal-branddeals:checked) .move-aligned,
+body:has(#id-tech:checked):has(#goal-consistency:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .move-aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .move-aligned{display:block}
-body:has(#id-marathi:checked):has(#goal-followers:checked) .mini.aligned,
-body:has(#id-marathi:checked):has(#goal-branddeals:checked) .mini.aligned,
-body:has(#id-marathi:checked):has(#goal-consistency:checked) .mini.aligned,
+body:has(#id-tech:checked):has(#goal-followers:checked) .mini.aligned,
+body:has(#id-tech:checked):has(#goal-branddeals:checked) .mini.aligned,
+body:has(#id-tech:checked):has(#goal-consistency:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .mini.aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .mini.aligned,
-body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:var(--gold)}
+body:has(#id-mix:checked):has(#goal-consistency:checked) .mini.aligned{opacity:1;border-color:#F2B705}
 
-/* RIGHT LANE, WRONG DESTINATION — marathi or mix × clients */
-body:has(#id-marathi:checked):has(#goal-clients:checked) .v-wrongdest,
+body:has(#id-tech:checked):has(#goal-clients:checked) .v-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .v-wrongdest,
-body:has(#id-marathi:checked):has(#goal-clients:checked) .move-wrongdest,
+body:has(#id-tech:checked):has(#goal-clients:checked) .move-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .move-wrongdest{display:block}
-body:has(#id-marathi:checked):has(#goal-clients:checked) .mini.wrongdest,
-body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:var(--accent)}
+body:has(#id-tech:checked):has(#goal-clients:checked) .mini.wrongdest,
+body:has(#id-mix:checked):has(#goal-clients:checked) .mini.wrongdest{opacity:1;border-color:#FF6B00}
 
-/* BLIND SPOT — generic or otherpillars × followers/branddeals/consistency */
-body:has(#id-generic:checked):has(#goal-followers:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .v-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-followers:checked) .v-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-branddeals:checked) .v-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .v-blindspot,
-body:has(#id-generic:checked):has(#goal-followers:checked) .move-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .move-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .move-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-followers:checked) .move-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-branddeals:checked) .move-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .move-blindspot{display:block}
-body:has(#id-generic:checked):has(#goal-followers:checked) .mini.blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .mini.blindspot,
-body:has(#id-otherpillars:checked):has(#goal-followers:checked) .mini.blindspot,
-body:has(#id-otherpillars:checked):has(#goal-branddeals:checked) .mini.blindspot,
-body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:var(--gold)}
+body:has(#id-general:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-general:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-general:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .v-blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .v-blindspot,
+body:has(#id-general:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-general:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-general:checked):has(#goal-consistency:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .move-blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .move-blindspot{display:block}
+body:has(#id-general:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-general:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-general:checked):has(#goal-consistency:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .mini.blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .mini.blindspot{opacity:1;border-color:#F2B705}
 
-/* RESET NEEDED — generic or otherpillars × clients */
-body:has(#id-generic:checked):has(#goal-clients:checked) .v-reset,
-body:has(#id-otherpillars:checked):has(#goal-clients:checked) .v-reset,
-body:has(#id-generic:checked):has(#goal-clients:checked) .move-reset,
-body:has(#id-otherpillars:checked):has(#goal-clients:checked) .move-reset{display:block}
-body:has(#id-generic:checked):has(#goal-clients:checked) .mini.reset,
-body:has(#id-otherpillars:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:var(--grey)}
+body:has(#id-general:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .v-reset,
+body:has(#id-general:checked):has(#goal-clients:checked) .move-reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .move-reset{display:block}
+body:has(#id-general:checked):has(#goal-clients:checked) .mini.reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .mini.reset{opacity:1;border-color:#A0A0A0}
 
-/* STAKES */
-body:has(#id-marathi:checked):has(#goal-followers:checked) .stakes-aligned,
-body:has(#id-marathi:checked):has(#goal-branddeals:checked) .stakes-aligned,
-body:has(#id-marathi:checked):has(#goal-consistency:checked) .stakes-aligned,
+body:has(#id-tech:checked):has(#goal-followers:checked) .stakes-aligned,
+body:has(#id-tech:checked):has(#goal-branddeals:checked) .stakes-aligned,
+body:has(#id-tech:checked):has(#goal-consistency:checked) .stakes-aligned,
 body:has(#id-mix:checked):has(#goal-followers:checked) .stakes-aligned,
 body:has(#id-mix:checked):has(#goal-branddeals:checked) .stakes-aligned,
 body:has(#id-mix:checked):has(#goal-consistency:checked) .stakes-aligned{display:block}
-body:has(#id-marathi:checked):has(#goal-clients:checked) .stakes-wrongdest,
+body:has(#id-tech:checked):has(#goal-clients:checked) .stakes-wrongdest,
 body:has(#id-mix:checked):has(#goal-clients:checked) .stakes-wrongdest{display:block}
-body:has(#id-generic:checked):has(#goal-followers:checked) .stakes-blindspot,
-body:has(#id-generic:checked):has(#goal-branddeals:checked) .stakes-blindspot,
-body:has(#id-generic:checked):has(#goal-consistency:checked) .stakes-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-followers:checked) .stakes-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-branddeals:checked) .stakes-blindspot,
-body:has(#id-otherpillars:checked):has(#goal-consistency:checked) .stakes-blindspot{display:block}
-body:has(#id-generic:checked):has(#goal-clients:checked) .stakes-reset,
-body:has(#id-otherpillars:checked):has(#goal-clients:checked) .stakes-reset{display:block}
+body:has(#id-general:checked):has(#goal-followers:checked) .stakes-blindspot,
+body:has(#id-general:checked):has(#goal-branddeals:checked) .stakes-blindspot,
+body:has(#id-general:checked):has(#goal-consistency:checked) .stakes-blindspot,
+body:has(#id-other:checked):has(#goal-followers:checked) .stakes-blindspot,
+body:has(#id-other:checked):has(#goal-branddeals:checked) .stakes-blindspot,
+body:has(#id-other:checked):has(#goal-consistency:checked) .stakes-blindspot{display:block}
+body:has(#id-general:checked):has(#goal-clients:checked) .stakes-reset,
+body:has(#id-other:checked):has(#goal-clients:checked) .stakes-reset{display:block}
 
-/* Goal-specific notes */
 body:has(#goal-followers:checked) .gn-followers{display:block}
 body:has(#goal-branddeals:checked) .gn-branddeals{display:block}
 body:has(#goal-clients:checked) .gn-clients{display:block}
 body:has(#goal-consistency:checked) .gn-consistency{display:block}
 
-/* Capacity pace notes */
 body:has(#cap-low:checked) .pace-low{display:block}
 body:has(#cap-mid:checked) .pace-mid{display:block}
 body:has(#cap-high:checked) .pace-high{display:block}
+
+/* Script Selector Tabs */
+.script-tab-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+.script-tab-btn {
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #111111;
+  border: 1px solid #222222;
+  color: #A0A0A0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.script-tab-btn:hover {
+  border-color: #FF6B00;
+  color: #FFFFFF;
+}
+.script-tab-btn.active {
+  background: rgba(255,107,0,0.15);
+  border-color: #FF6B00;
+  color: #FF6B00;
+  box-shadow: 0 0 12px rgba(255,107,0,0.2);
+}
 </style>
+<link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
-<body>
+<body class="bg-surface text-on-surface min-h-screen">
 <!-- Background Live Motion Canvas -->
 <canvas id="matrixBgCanvas"></canvas>
 
-<div class="wrap">
-  <div class="hero">
-    <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
-    <h1 class="headline">Where You Actually Stand</h1>
-    <div class="insta-handle-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      <span>@fitharsh__15 · 390 followers (atomz112)</span>
+<!-- Fixed Header Bar -->
+<header class="portal-header">
+  <a href="#" onclick="showScreen('hub')" class="portal-logo">
+    <span>ATOMZ</span><span class="accent">HORIZON</span>
+  </a>
+  <div class="flex items-center gap-3">
+    <span class="portal-badge">CLIENT: HARSH</span>
+    <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all">
+      ← Hub Menu
+    </button>
+  </div>
+</header>
+
+<!-- SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB -->
+<div id="hubScreen" class="hub-screen">
+  <div class="hub-container">
+    <p class="hub-eyebrow">ATOMZ HORIZON · CREATOR ENGINE</p>
+    <h1 class="hub-title">Select Your Dossier Module</h1>
+    <p class="hub-sub">Choose a tool below to access your diagnostic matrix or camera-ready script engine.</p>
+    
+    <div class="hub-options-grid">
+      <!-- Option 1: Matrix Diagnostic -->
+      <div onclick="showScreen('matrix')" class="hub-card">
+        <div>
+          <div class="hub-card-icon">
+            <span class="material-symbols-outlined text-[24px]">grid_view</span>
+          </div>
+          <h2 class="hub-card-title">Creator Growth Matrix</h2>
+          <p class="hub-card-desc">Interactive diagnostic tool mapping your identity, data proof, and weekly moves.</p>
+        </div>
+        <div class="hub-card-btn">
+          <span>Launch Matrix</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </div>
+      </div>
+
+      <!-- Option 2: Personalised Scripts Engine -->
+      <div onclick="showScreen('scripts')" class="hub-card">
+        <div>
+          <div class="hub-card-icon" style="background:rgba(255,42,122,0.12);border-color:rgba(255,42,122,0.3);color:#FF2A7A;">
+            <span class="material-symbols-outlined text-[24px]">movie</span>
+          </div>
+          <h2 class="hub-card-title">Personalised Scripts</h2>
+          <p class="hub-card-desc">5 ready-to-shoot camera-ready production scripts with dialogue breakdowns and shooting directives.</p>
+        </div>
+        <div class="hub-card-btn" style="color:#FF2A7A;">
+          <span>Launch Personalised Scripts</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <section>
-    <h2>What the data already proves</h2>
-    <div class="proof-card">
-      <span class="proof-tag">Pulled from your audit</span>
-      <p class="proof-title">Fitness + Marathi cultural identity is your winning pillar</p>
-      <p class="proof-stat"><b>2.5x–3.0x baseline</b> outlier score for Identity/Marathi content — your strongest pillar by far, versus 0.3x–1.0x (underperforming) for generic fitness posts.</p>
-      <p class="proof-why">Why: plain "gym motivation" is oversaturated. Stacking Fitness + Cultural Identity + Relatability gives you a moat that generic fitness accounts can't copy — and it's the exact combination behind your March–July explosion.</p>
-      <p class="proof-source">Based on your actual last 76 posts — not an industry benchmark.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>Now, tell us the rest</h2>
-    <div class="q-block">
-      <p class="q-text">1. What do you think your content is mainly about right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="identity" id="id-generic"><span class="card">Generic fitness content</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-marathi"><span class="card">Fitness + Marathi cultural identity</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of all of these</span></label>
-        <label class="opt"><input type="radio" name="identity" id="id-otherpillars"><span class="card">Transformation or gym humour</span></label>
+<!-- SCREEN 2A: CREATOR MATRIX DIAGNOSTIC -->
+<div id="matrixScreen" class="hidden relative pt-24 pb-16">
+  <div class="wrap">
+    <div class="hero">
+      <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
+      <h1 class="headline">Where You Actually Stand</h1>
+      <div class="insta-handle-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>@harsh.growth · 5-reel diagnostic (atomz112)</span>
       </div>
     </div>
-    <div class="q-block">
-      <p class="q-text">2. What's your main goal right now?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand deals</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Getting clients or customers</span></label>
-        <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
+
+    <section>
+      <h2>What the data already proves</h2>
+      <div class="proof-card">
+        <span class="proof-tag">Pulled from your audit</span>
+        <p class="proof-title">Direct breakdown tech & monetization reels drive highest audience retention</p>
+        <p class="proof-stat"><b>31,200 views</b> on "Scale Strategy" — 15.2x higher than generic vlog updates.</p>
+        <p class="proof-why">Why: Clear value proposition, fast visual cuts, and zero fluff opening.</p>
+        <p class="proof-source">Based on your actual performance audit.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Now, tell us the rest</h2>
+      <div class="q-block">
+        <p class="q-text">1. What do you think your content is mainly about right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="identity" id="id-tech"><span class="card">Tech & Growth Breakdown</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-general"><span class="card">General Vlogs</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <p class="q-text">2. What's your main goal right now?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Brand Deals & Sponsors</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Agency Clients</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Consistency</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <p class="q-text">3. How many reels can you realistically shoot per week?</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 reels/wk</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 reels/wk</span></label>
+          <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ reels/wk</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Your position</h2>
+      <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
+
+      <div class="mini-grid">
+        <div class="mini blindspot">Blind spot</div>
+        <div class="mini aligned">Fully aligned</div>
+        <div class="mini reset">Reset needed</div>
+        <div class="mini wrongdest">Right lane, wrong destination</div>
+      </div>
+
+      <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>Your tech and growth breakdowns are positioned perfectly for high-tier brand sponsorships and agency leads.</p></div>
+      <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>High reach on tech reels, but missing a direct lead magnet link for agency client acquisition.</p></div>
+      <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>General vlogs get casual views, but high-depth breakdown reels convert top-tier brand deals.</p></div>
+      <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Re-structure your script hooks around quantifiable ROI metrics before recording.</p></div>
+
+      <p class="goalnote gn-followers">Direct tech breakdown reels trigger massive bookmarking and algorithmic distribution.</p>
+      <p class="goalnote gn-branddeals">Sponsors love crisp, high-authority breakdowns with clean product integration.</p>
+      <p class="goalnote gn-clients">Add a clear 'DM GROWTH' CTA to funnel interested brands directly into your inbox.</p>
+      <p class="goalnote gn-consistency">Batch 5 reels per session using our teleprompter ready scripts engine.</p>
+
+      <div class="stakes stakes-aligned">Maintain authoritative breakdown style to secure recurring monthly brand sponsorships.</div>
+      <div class="stakes stakes-wrongdest">Without lead conversion hooks, high views won't turn into client retainer contracts.</div>
+      <div class="stakes stakes-blindspot">Vague vlog content dilutes your core position as a top tech growth creator.</div>
+      <div class="stakes stakes-reset">Align script hooks with explicit ROI metrics to fix engagement drops.</div>
+    </section>
+
+    <section class="move-wrap">
+      <h2>This week's move</h2>
+      <div class="move move-aligned">Shoot a 3-step AI workflow breakdown reel with a 'Comment AUDIT' CTA.</div>
+      <div class="move move-wrongdest">Implement an automated DM keyword bot to convert viewers into consultation calls.</div>
+      <div class="move move-blindspot">Pivot from casual vlogs to structured 20-second growth breakdowns.</div>
+      <div class="move move-reset">Redesign your script hooks around a single quantifiable result statement.</div>
+      <p class="pace pace-low">At 1–2 reels/wk, prioritize top-performing breakdown formats exclusively.</p>
+      <p class="pace pace-mid">3–5 reels/wk gives you the perfect frequency to test new brand hooks.</p>
+      <p class="pace pace-high">5+ reels/wk lets you dominate search and feed placement fast.</p>
+    </section>
+  </div>
+</div>
+
+<!-- SCREEN 2B: PERSONALISED SCRIPTS ENGINE -->
+<div id="scriptsScreen" class="hidden relative pt-24 pb-16">
+  <div class="max-w-2xl mx-auto px-4 pb-16 relative z-10">
+    <!-- Header & Script Selector -->
+    <div class="flex flex-col gap-4 mb-6">
+      <div class="flex justify-between items-center">
+        <div class="font-mono text-[12px] text-pink-accent uppercase tracking-widest flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px] text-pink-accent animate-pulse">movie</span> PERSONALISED SCRIPTS ENGINE
+        </div>
+        <span class="font-mono text-[11px] text-on-surface-variant bg-surface-container px-3 py-1 border border-outline-variant rounded-full">CLIENT: HARSH</span>
+      </div>
+
+      <!-- Multiple Script Library Tabs -->
+      <div class="script-tab-selector">
+        <button onclick="switchScript(1)" id="scriptTab1" class="script-tab-btn active">SCRIPT 1: 100K FOLLOWERS SACH</button>
+        <button onclick="switchScript(2)" id="scriptTab2" class="script-tab-btn">SCRIPT 2: ALGORITHM TRICK 2026</button>
+        <button onclick="switchScript(3)" id="scriptTab3" class="script-tab-btn">SCRIPT 3: HOOK THAT NEVER FAILS</button>
+        <button onclick="switchScript(4)" id="scriptTab4" class="script-tab-btn">SCRIPT 4: STOP EDITING LIKE THIS</button>
+        <button onclick="switchScript(5)" id="scriptTab5" class="script-tab-btn">SCRIPT 5: BRAND DEAL HACK</button>
       </div>
     </div>
-    <div class="q-block">
-      <p class="q-text">3. How many posts can you realistically shoot per week?</p>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="capacity" id="cap-low"><span class="card">1–2 posts/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-mid"><span class="card">3–5 posts/week</span></label>
-        <label class="opt"><input type="radio" name="capacity" id="cap-high"><span class="card">5+ posts/week</span></label>
-      </div>
+
+    <!-- Script Container Display (Populated by JS) -->
+    <div id="scriptContentContainer" class="flex flex-col gap-8">
+      <!-- Populated dynamically via JS renderScript() -->
     </div>
-  </section>
-
-  <section>
-    <h2>Your position</h2>
-    <p class="placeholder">Answer questions 1 and 2 above to see where you actually stand.</p>
-
-    <div class="mini-grid">
-      <div class="mini blindspot">Blind spot</div>
-      <div class="mini aligned">Fully aligned</div>
-      <div class="mini reset">Reset needed</div>
-      <div class="mini wrongdest">Right lane, wrong destination</div>
-    </div>
-
-    <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
-    <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without one more piece.</p></div>
-    <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering what you think you're known for.</p></div>
-    <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is the one worth a real conversation before shooting anything else.</p></div>
-
-    <p class="goalnote gn-followers">Identity/Marathi content is your highest outlier pillar — it's exactly what should be driving your follower growth, not generic fitness posts.</p>
-    <p class="goalnote gn-branddeals">Your audit doesn't map this directly to brand deals, but a genuinely differentiated, culturally-specific niche is generally what regional and fitness brands look for over generic gym content.</p>
-    <p class="goalnote gn-clients">This content builds real community and trust (comments, relatability) — a good foundation for coaching clients eventually, but your audit is about content pillars, not a client-conversion funnel. You'd still need a clear CTA layered on top.</p>
-    <p class="goalnote gn-consistency">Any pillar works for showing up regularly — but you're sitting on one that could do a lot more than just "consistent."</p>
-
-    <div class="stakes stakes-aligned">If this stalls: your recent 5 posts already dropped to 15 likes and 1,487 views because they reverted to generic tropes — that's the direct cost of dropping this pillar, not random bad luck.</div>
-    <div class="stakes stakes-wrongdest">If this doesn't change: you'll keep building real community and engagement with no clear path to actually monetizing it.</div>
-    <div class="stakes stakes-blindspot">If this doesn't change: you'll keep posting Generic Fitness content at a 0.3x–1.0x outlier score while your actual best pillar (2.5x–3.0x) sits unused.</div>
-    <div class="stakes stakes-reset">If this doesn't change: your engagement rate stays anchored to the 0.26% you're getting on vague captions and generic tropes instead of the pillar that's already proven to work.</div>
-  </section>
-
-  <section class="move-wrap">
-    <h2>This week's move</h2>
-    <div class="move move-aligned">Post 2–3 Identity/Marathi pieces this week, and convert 1 in every 5 posts into a Carousel — your only 2 so far scored a 3.7x–6.2x outlier, the strongest signal in your whole audit.</div>
-    <div class="move move-wrongdest">Keep leaning into Identity/Marathi content, but add one thing: a clear line in your bio or captions about how people can work with you directly.</div>
-    <div class="move move-blindspot">Try one Fitness + Marathi post this week even if generic fitness feels safer — the data says it will outperform everything else on your grid by 2.5x or more.</div>
-    <div class="move move-reset">Before posting anything else, kill the vague captions ("...", "Peak male physique") and bring back the cultural identity and micro-storytelling that drove your March–July results.</div>
-    <p class="pace pace-low">At 1–2 posts/week, expect the rebuild to take longer since Identity/Marathi content compounds with repetition.</p>
-    <p class="pace pace-mid">3–5 posts/week is a solid pace to re-establish this pillar as your main identity.</p>
-    <p class="pace pace-high">5+ posts/week gives you room to also test the weekly Carousel Anchor alongside your Reels.</p>
-  </section>
+  </div>
 </div>
 
 <script>
@@ -335,7 +617,28 @@ if (bgCanvas) {
   drawBg();
 }
 
-// Web Audio Synth Engine for Button Clicks & 3-Question Completion Chime
+// Module Navigation Logic
+function showScreen(screenId) {
+  playClickSound();
+  document.getElementById('hubScreen').classList.add('hidden');
+  document.getElementById('matrixScreen').classList.add('hidden');
+  document.getElementById('scriptsScreen').classList.add('hidden');
+  document.getElementById('btnBackToHub').classList.remove('hidden');
+
+  if (screenId === 'hub') {
+    document.getElementById('hubScreen').classList.remove('hidden');
+    document.getElementById('btnBackToHub').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (screenId === 'matrix') {
+    document.getElementById('matrixScreen').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (screenId === 'scripts') {
+    document.getElementById('scriptsScreen').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Web Audio Synth Engine for Clicks
 function playClickSound() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -389,6 +692,352 @@ document.addEventListener('change', function(e) {
     }
   }
 });
+
+// Production Scripts Database for Harsh (atomz112)
+const scriptsData = {
+  1: {
+    title: "100K FOLLOWERS SACH",
+    chips: [
+      { icon: "share", label: "GOAL: HIGH SHARES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: TALKING HEAD", color: "primary" },
+      { icon: "timer", label: "TIME: 15–18 SEC", color: "pink-accent" },
+      { icon: "laptop", label: "SETUP: DESK / STUDIO", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"100K followers hone ke baad bhi bank account empty kyun hota hai? Kyunki log reach pe focus karte hain, retention aur monetization infrastructure pe nahi! Stop chasing vanity follower numbers."`,
+    sayThis: [
+      { tag: "HOOK", text: `"100K followers hone ke baad bhi bank account empty?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Kyunki log reach pe focus karte hain, retention & infrastructure pe nahi!"`, style: "value" },
+      { tag: "RETENTION", text: `"Stop chasing vanity follower numbers."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'SCALE' to get our creator monetization roadmap!"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Focus on high-value audience alignment."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Desk talking head with side key light.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Authoritative, serious business tone.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Laptop open showing revenue metrics.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on 'bank account empty'.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Studio quality vocal mic.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"100K FOLLOWERS TRAP"', '"REACH ≠ MONEY"', '"BUILD INFRASTRUCTURE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Clean cut to revenue chart graphic.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Exposes the biggest paradox in creator growth." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Hard-hitting truth retains business-minded creators." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "High DM conversion for agency strategy." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Refocuses creators on monetization." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Audience building → Sales funnels → High-ticket deals.", isBox: true }
+    ],
+    resource: {
+      title: "CREATOR MONETIZATION ROADMAP 2026",
+      desc: "Blueprint to convert 10K views into $5K monthly recurring revenue.",
+      quote: `"Infrastructure and retention beat vanity follower counts every time."`,
+      toolName: "Monetization Blueprint"
+    }
+  },
+  2: {
+    title: "ALGORITHM TRICK 2026",
+    chips: [
+      { icon: "bookmark", label: "GOAL: HIGH SAVES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: SCREEN RECORDING BREAKDOWN", color: "primary" },
+      { icon: "timer", label: "TIME: 16–20 SEC", color: "pink-accent" },
+      { icon: "desktop_windows", label: "SETUP: MONITOR", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Instagram algorithm 2026 mein ek hi cheez care karta hai: Watch Time percentage! Agar 15 sec ke reel pe 100% watch time nahi aaya, toh distribution band! Here is how to keep users locked in."`,
+    sayThis: [
+      { tag: "HOOK", text: `"Instagram algorithm 2026 mein sirf 1 cheez dekhta hai!"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Watch Time percentage!"`, style: "value" },
+      { tag: "RETENTION", text: `"15 sec reel pe 100%+ watch time nahi aaya, toh distribution ZERO."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Save this reel to fix your retention curve today!"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Keep your pacing tight and hooks open."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Over the shoulder showing screen analytics graph.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Analytical, insightful.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Retention curve graph on monitor.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Zoom in on 100% retention line.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Crisp studio voice over.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"ALGORITHM 2026"', '"100%+ WATCH TIME"', '"RETENTION = REACH"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Split screen graph comparison.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Provides updated 2026 algorithmic insight." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Concrete data metric holds creator attention." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Massive save rate for analytics reference." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Directly solves low reach problems." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Watch time metrics → Loop hooks → Pacing optimization.", isBox: true }
+    ],
+    resource: {
+      title: "WATCH-TIME AUDIT TOOL",
+      desc: "Calculator to analyze your retention drop-off points.",
+      quote: `"Watch Time percentage is the single metric driving 2026 reach."`,
+      toolName: "Retention Auditor"
+    }
+  },
+  3: {
+    title: "HOOK THAT NEVER FAILS",
+    chips: [
+      { icon: "forum", label: "GOAL: COMMENTS & SHARES", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: DIRECT TUTORIAL", color: "primary" },
+      { icon: "timer", label: "TIME: 14–17 SEC", color: "pink-accent" },
+      { icon: "podium", label: "SETUP: STUDIO", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Ye 3 word hook har baar viral jaata hai: 'Nobody is talking about...' Iske baad apna industry secret bolo aur watch time boom!"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Ye 3 word hook har baar viral jaata hai!"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"'Nobody is talking about...' Iske baad seedha main secret bolo."`, style: "value" },
+      { tag: "RETENTION", text: `"Curiosity gap instantly opens up."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'HOOK' to get 30 more viral opening lines!"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Open curiosity gaps in sentence 1."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Tight face shot, high engagement.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Sharply focused.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Whiteboard or iPad showing hook phrase.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Quick snap zoom on 'Nobody is talking about'.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Energetic speech with zero background noise.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"3-WORD VIRAL HOOK"', '"CURIOSITY GAP"', '"COMMENT HOOK"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Bold text flash on screen with snap sound.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Instant promise of a proven viral script formula." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Delivers immediate 3-word actionable takeaway." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Generates high comment volume via DM bot." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Plug-and-play hook formula for any niche." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Curiosity gaps → Pattern interrupts → Retention locks.", isBox: true }
+    ],
+    resource: {
+      title: "30 VIRAL HOOK OUTLINES",
+      desc: "Plug-and-play opening hooks for tech, growth, and business reels.",
+      quote: `"Curiosity gaps in sentence 1 lock viewers in immediately."`,
+      toolName: "Hook Generator"
+    }
+  },
+  4: {
+    title: "STOP EDITING LIKE THIS",
+    chips: [
+      { icon: "trending_up", label: "GOAL: HIGH REACH", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: BEFORE/AFTER EDIT", color: "primary" },
+      { icon: "timer", label: "TIME: 15–18 SEC", color: "pink-accent" },
+      { icon: "movie", label: "SETUP: EDITING BAY", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Over-editing reels se retention kam hoti hai! Too many random sound effects aur flashes viewer ko overwhelm kar dete hain. Clean cuts + strong messaging always wins."`,
+    sayThis: [
+      { tag: "HOOK", text: `"Stop over-editing your reels like this!"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Random flashes and noise overwhelm the viewer."`, style: "value" },
+      { tag: "RETENTION", text: `"Clean cuts + clear message hamesha win karta hai."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Share this reel with your video editor right now!"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Pacing and clarity beats chaotic noise."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Side angle at timeline timeline on Premiere/CapCut.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Direct, experienced editor perspective.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Editing timeline timeline waveform.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Zoom in on cluttered vs clean timeline.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Exaggerated annoying SFX vs clean audio.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"STOP OVER-EDITING"', '"CLEAN CUTS WIN"', '"CLARITY > NOISE"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Side-by-side visual comparison.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Attracts creators struggling with complex editing." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Before/After visual comparison holds curiosity." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "High share count to video editors." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Saves hours in post-production." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Minimal editing → Sound design → Narrative pacing.", isBox: true }
+    ],
+    resource: {
+      title: "MINIMALIST EDITING TEMPLATE",
+      desc: "Clean CapCut & Premiere project files with pre-built pacing cuts.",
+      quote: `"Clean cuts and strong messaging beat chaotic noise every single time."`,
+      toolName: "Editing Pack"
+    }
+  },
+  5: {
+    title: "BRAND DEAL HACK",
+    chips: [
+      { icon: "monetization_on", label: "GOAL: HIGH MONETIZATION", color: "pink-accent" },
+      { icon: "record_voice_over", label: "FORMAT: CASE STUDY", color: "primary" },
+      { icon: "timer", label: "TIME: 18–22 SEC", color: "pink-accent" },
+      { icon: "business_center", label: "SETUP: OFFICE", color: "primary" },
+      { icon: "payments", label: "COST: ₹0", color: "pink-accent" }
+    ],
+    fullScript: `"Brand deals ke liye DMs bhejte ho par reply nahi aata? Here is the exact email pitch that got us $10K in brand deals last month. Comment 'PITCH' to get the free template!"`,
+    sayThis: [
+      { tag: "HOOK", text: `"Brand deals ke liye DMs bhejte ho par reply zero?"`, style: "hook" },
+      { tag: "CORE VALUE", text: `"Here is the exact email pitch formula that secured $10K."`, style: "value" },
+      { tag: "RETENTION", text: `"Pitch value & audience overlap, not just view counts."`, style: "retention" },
+      { tag: "ENGAGEMENT", text: `"Comment 'PITCH' to get the exact cold email template!"`, style: "engagement" },
+      { tag: "PAYOFF", text: `"Land high-paying sponsors directly in your inbox."`, style: "payoff" }
+    ],
+    directives: [
+      { icon: "photo_camera", label: "CAMERA", value: "Front facing, high-confidence delivery.", color: "primary" },
+      { icon: "mood", label: "EXPRESSION", value: "Executive, authoritative.", color: "pink-accent" },
+      { icon: "category", label: "PROPS", value: "Gmail inbox showing brand response.", color: "primary", full: true },
+      { icon: "zoom_in", label: "ZOOM", value: "Punch in on $10K sponsorship deal text.", color: "pink-accent" },
+      { icon: "graphic_eq", label: "AUDIO", value: "Clear studio recording.", color: "primary" },
+      { icon: "subtitles", label: "TEXT OVERLAYS", badges: ['"BRAND DEAL PITCH HACK"', '"$10K SPONSOR PITCH"', '"COMMENT PITCH"'], full: true },
+      { icon: "cut", label: "EDITING", value: "Smooth text slide-in showing email hook lines.", color: "primary", full: true }
+    ],
+    whyThisWorks: [
+      { tag: "HOOK", labelColor: "primary", desc: "Hits the ultimate monetization pain point for creators." },
+      { tag: "RETENTION", labelColor: "pink-accent", desc: "Real income proof creates strong authority." },
+      { tag: "ENGAGEMENT", labelColor: "primary", desc: "Generates high comment volume for template access." },
+      { tag: "VALUE", labelColor: "pink-accent", desc: "Provides a field-tested cold pitch template." },
+      { tag: "EXPANSION", labelColor: "primary", desc: "Cold outreach → Media kit creation → Sponsor retainer closing.", isBox: true }
+    ],
+    resource: {
+      title: "COLD EMAIL BRAND PITCH TEMPLATE",
+      desc: "Field-tested outreach email template to land paid brand sponsors.",
+      quote: `"Pitch audience overlap and ROI, not just raw views."`,
+      toolName: "Pitch Template Bot"
+    }
+  }
+};
+
+function switchScript(id) {
+  for (let i = 1; i <= 5; i++) {
+    const tab = document.getElementById(`scriptTab${i}`);
+    if (tab) {
+      if (i === id) tab.classList.add('active');
+      else tab.classList.remove('active');
+    }
+  }
+  renderScript(id);
+}
+
+function renderScript(id) {
+  const data = scriptsData[id];
+  const container = document.getElementById('scriptContentContainer');
+  if (!container || !data) return;
+
+  let chipsHTML = data.chips.map(c => `
+    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-[12px] font-mono text-${c.color}">
+      <span class="material-symbols-outlined text-[16px]">${c.icon}</span>
+      <span>${c.label}</span>
+    </div>
+  `).join('');
+
+  let sayThisHTML = data.sayThis.map(s => {
+    let colorClass = s.tag === 'HOOK' ? 'text-primary' : (s.tag === 'CORE VALUE' ? 'text-pink-accent' : (s.tag === 'ENGAGEMENT' ? 'text-primary' : 'text-on-surface'));
+    return `
+      <div class="flex flex-col gap-1 p-3 rounded-lg bg-surface-container border border-outline-variant">
+        <span class="font-mono text-[10px] font-bold tracking-wider uppercase ${colorClass}">${s.tag}</span>
+        <p class="font-medium text-[13.5px] text-on-surface leading-snug">${s.text}</p>
+      </div>
+    `;
+  }).join('');
+
+  let directivesHTML = data.directives.map(d => {
+    if (d.badges) {
+      let bHTML = d.badges.map(b => `<span class="px-2 py-0.5 rounded bg-surface border border-outline-variant font-mono text-[11px] text-pink-accent">${b}</span>`).join(' ');
+      return `
+        <div class="col-span-2 p-3.5 rounded-xl bg-surface-container border border-outline-variant flex flex-col gap-1.5">
+          <div class="flex items-center gap-1.5 text-pink-accent">
+            <span class="material-symbols-outlined text-[18px]">${d.icon}</span>
+            <span class="font-mono text-[11px] font-bold uppercase tracking-wider">${d.label}</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-0.5">${bHTML}</div>
+        </div>
+      `;
+    }
+    let colSpan = d.full ? 'col-span-2' : 'col-span-1';
+    return `
+      <div class="${colSpan} p-3.5 rounded-xl bg-surface-container border border-outline-variant flex flex-col gap-1">
+        <div class="flex items-center gap-1.5 text-${d.color}">
+          <span class="material-symbols-outlined text-[18px]">${d.icon}</span>
+          <span class="font-mono text-[11px] font-bold uppercase tracking-wider">${d.label}</span>
+        </div>
+        <p class="text-[12.5px] text-on-surface-variant leading-snug mt-0.5">${d.value}</p>
+      </div>
+    `;
+  }).join('');
+
+  let whyHTML = data.whyThisWorks.map(w => {
+    if (w.isBox) {
+      return `
+        <div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant mt-1">
+          <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-${w.labelColor} block mb-1">EXPANSION PATHS</span>
+          <p class="text-[12.5px] text-on-surface-variant leading-snug">${w.desc}</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="flex items-start gap-2.5">
+        <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-${w.labelColor} bg-surface-container border border-outline-variant px-2 py-0.5 rounded flex-shrink-0 mt-0.5">${w.tag}</span>
+        <p class="text-[13px] text-on-surface-variant leading-snug">${w.desc}</p>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-[11px] text-primary bg-primary/10 border border-primary/30 px-2.5 py-0.5 rounded-full uppercase">SCRIPT ${id} OF 5</span>
+        <span class="font-mono text-[11px] text-pink-accent bg-pink-accent/10 border border-pink-accent/30 px-2.5 py-0.5 rounded-full uppercase">PRODUCTION READY</span>
+      </div>
+      <h1 class="font-headline text-[22px] font-extrabold text-on-surface leading-tight">${data.title}</h1>
+      <div class="flex flex-wrap gap-2 mt-1">${chipsHTML}</div>
+    </div>
+
+    <div class="flex flex-col gap-2 p-5 rounded-2xl bg-surface-container border-2 border-primary/40 relative overflow-hidden shadow-lg shadow-primary/5">
+      <div class="flex justify-between items-center mb-1">
+        <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">description</span> FULL SCRIPT (TELEPROMPTER READY)
+        </span>
+        <button onclick="navigator.clipboard.writeText(\`${data.fullScript.replace(/"/g, '&quot;')}\`)" class="font-mono text-[10px] text-on-surface-variant hover:text-primary bg-surface px-2.5 py-1 border border-outline-variant rounded transition-all">
+          COPY SCRIPT
+        </button>
+      </div>
+      <blockquote class="text-[16px] font-medium leading-relaxed text-on-surface italic bg-surface/60 p-4 rounded-xl border border-outline-variant/50">
+        ${data.fullScript}
+      </blockquote>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container-high border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-pink-accent flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">record_voice_over</span> SAY THIS (DIALOGUE BREAKDOWN)
+      </span>
+      <div class="flex flex-col gap-2 mt-1">${sayThisHTML}</div>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">videocam</span> SHOOTING DIRECTIVES
+      </span>
+      <div class="grid grid-cols-2 gap-2.5 mt-1">${directivesHTML}</div>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-surface-container border border-outline-variant">
+      <span class="font-mono text-[12px] font-bold uppercase tracking-widest text-pink-accent flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[18px]">psychology</span> WHY THIS WORKS & EXPANSION
+      </span>
+      <div class="flex flex-col gap-2.5 mt-1">${whyHTML}</div>
+    </div>
+
+    <div class="flex flex-col gap-3 p-5 rounded-2xl bg-gradient-to-r from-surface-container to-surface-container-high border border-primary/40 relative overflow-hidden">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">build</span>
+        <span class="font-mono text-[11px] font-bold uppercase tracking-widest text-primary">ATTACHED ATOMZ TOOL RESOURCE</span>
+      </div>
+      <h3 class="font-headline text-[17px] font-bold text-on-surface">${data.resource.title}</h3>
+      <p class="text-[13px] text-on-surface-variant">${data.resource.desc}</p>
+      <div class="mt-2 pt-3 border-t border-outline-variant flex justify-between items-center">
+        <span class="font-mono text-[11px] text-on-surface-variant">TOOL: ${data.resource.toolName}</span>
+        <button onclick="alert('Launching ${data.resource.toolName}...')" class="font-mono text-[11px] font-bold uppercase bg-primary-container text-surface px-4 py-2 rounded-lg hover:bg-primary transition-all shadow-md">
+          ATTACH TOOL →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderScript(1);
+});
 </script>
+<script src="assets/js/atomz.js" defer></script>
 </body>
 </html>
