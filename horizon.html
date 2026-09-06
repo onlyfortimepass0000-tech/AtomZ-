@@ -345,14 +345,28 @@
     });
 
     // Code parameter check if opened via passkey
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-        const clientNameEl = document.getElementById('dossierClientName');
-        if (clientNameEl && (code.toLowerCase().includes('rahul') || code.toLowerCase() === 'atomz111')) {
-            clientNameEl.textContent = 'Rahul Jawatwala';
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const rawCode = urlParams.get('code');
+      if (rawCode) {
+        const c = rawCode.trim().toLowerCase().replace(/[\s\-_]/g, '');
+        if (c === 'atomz116' || c === '116' || c.includes('esteban')) {
+          window.location.replace('horizon-116.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomz111' || c === '111' || c.includes('rahul')) {
+          window.location.replace('horizon-dossier.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomz112' || c === '112' || c.includes('harsh')) {
+          window.location.replace('horizon-harsh.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomz113' || c === '113' || c.includes('aum')) {
+          window.location.replace('horizon-113.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomz114' || c === '114' || c.includes('somo')) {
+          window.location.replace('horizon-114.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomz115' || c === '115' || c.includes('tas') || c.includes('train')) {
+          window.location.replace('horizon-115.html?code=' + encodeURIComponent(rawCode));
+        } else if (c === 'atomztrial' || c === 'trial' || c.includes('trial')) {
+          window.location.replace('horizon-trial.html?code=' + encodeURIComponent(rawCode));
         }
-    }
+      }
+    })();
 </script>
 </body>
 </html>

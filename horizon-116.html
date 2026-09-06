@@ -435,74 +435,28 @@ body:has(#cap-high:checked) .pace-high{display:block}
 
 <!-- Top Fixed Navigation Header -->
 <header class="portal-header">
-  <a href="#" onclick="showScreen('matrix')" class="portal-logo">
+  <a href="#matrixScreen" class="portal-logo">
     <span>ATOM<span class="accent">Z</span> HORIZON</span>
   </a>
   <div class="flex items-center gap-3">
-    <button onclick="showScreen('matrix')" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+    <a href="#matrixScreen" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all no-underline">
       📊 Matrix Diagnostic
-    </button>
-    <button onclick="showScreen('insights')" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+    </a>
+    <a href="#insightsScreen" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all no-underline">
       📈 Personalised Insights
-    </button>
+    </a>
     <a href="aroha.html" class="inline-flex flex-col items-start justify-center bg-[rgba(0,245,160,0.08)] border border-[rgba(0,245,160,0.35)] px-3 py-1 rounded-xl no-underline transition-all hover:bg-[rgba(0,245,160,0.15)]">
       <span class="font-headline font-extrabold text-[12px] text-white tracking-wide leading-none">AROHA</span>
       <span class="font-mono text-[8.5px] font-bold text-[#00f5a0] tracking-widest uppercase leading-tight mt-0.5">by ATOMZ</span>
     </a>
     <span class="portal-badge">CLIENT 116: ESTEBAN</span>
-    <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all">
-      ← Hub Menu
-    </button>
   </div>
 </header>
 
 <!-- ============================================================
-SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB
-============================================================ -->
-<div id="hubScreen" class="hub-screen hidden">
-  <div class="hub-container">
-    <p class="hub-eyebrow">ATOMZ HORIZON · CREATOR ENGINE</p>
-    <h1 class="hub-title">Select Your Dossier Module</h1>
-    <p class="hub-sub">Choose a tool below to access your diagnostic matrix or private strategy performance framework.</p>
-    
-    <div class="hub-options-grid">
-      <!-- Option 1: Matrix Diagnostic -->
-      <div onclick="showScreen('matrix')" class="hub-card">
-        <div>
-          <div class="hub-card-icon">
-            <span class="material-symbols-outlined text-[24px]">grid_view</span>
-          </div>
-          <h2 class="hub-card-title">Creator Growth Matrix</h2>
-          <p class="hub-card-desc">Interactive diagnostic tool mapping your identity, data proof, and weekly moves.</p>
-        </div>
-        <div class="hub-card-btn">
-          <span>Launch Matrix</span>
-          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-        </div>
-      </div>
-
-      <!-- Option 2: Personalised Insights Dashboard -->
-      <div onclick="showScreen('insights')" class="hub-card" style="border-color:rgba(59,130,246,0.4);">
-        <div>
-          <div class="hub-card-icon" style="background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);color:#3B82F6;">
-            <span class="material-symbols-outlined text-[24px]">bar_chart</span>
-          </div>
-          <h2 class="hub-card-title">Personalised Insights</h2>
-          <p class="hub-card-desc">14-visualization strategy performance breakdown mapping reach, resonance, conversation, identity, and the final growth model.</p>
-        </div>
-        <div class="hub-card-btn" style="color:#3B82F6;background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.4);">
-          <span>View Your Personalised Insights</span>
-          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
 SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 ============================================================ -->
-<div id="matrixScreen" class="relative pt-24 pb-16">
+<div id="matrixScreen" class="relative pt-24 pb-12">
   <div class="wrap">
     <div class="hero">
       <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
@@ -512,10 +466,10 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
         <span>@esteban · Creator Diagnostic (atomz116)</span>
       </div>
       <div class="mt-4">
-        <button onclick="showScreen('insights')" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ff6b00] to-[#ff4d2e] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.4)] hover:scale-105 transition-all cursor-pointer">
+        <a href="#insightsScreen" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ff6b00] to-[#ff4d2e] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.4)] hover:scale-105 transition-all no-underline">
           <span>📈 View Your Personalised Insights (14 Visualizations)</span>
-          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-        </button>
+          <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+        </a>
       </div>
     </div>
 
@@ -596,7 +550,7 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 <!-- ============================================================
 SCREEN 2B: PERSONALISED INSIGHTS DASHBOARD (14 VISUALIZATIONS)
 ============================================================ -->
-<div id="insightsScreen" class="hidden relative pt-24 pb-16">
+<div id="insightsScreen" class="relative pt-12 pb-16 border-t border-outline-variant/30">
   <div class="max-w-4xl mx-auto px-4 relative z-10">
     
     <!-- Header Banner -->
