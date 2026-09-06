@@ -418,22 +418,22 @@
     passkeyForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const code = passkeyInput.value.trim();
-      const c = code.toLowerCase();
+      const c = code.toLowerCase().replace(/[\s\-_]/g, '');
       
       let targetUrl = null;
-      if (c === 'atomz111' || c.includes('rahul')) {
+      if (c === 'atomz111' || c === '111' || c.includes('rahul')) {
         targetUrl = 'horizon-dossier.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomz112' || c.includes('harsh')) {
+      } else if (c === 'atomz112' || c === '112' || c.includes('harsh')) {
         targetUrl = 'horizon-harsh.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomz113' || c.includes('aum')) {
+      } else if (c === 'atomz113' || c === '113' || c.includes('aum')) {
         targetUrl = 'horizon-113.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomz114' || c.includes('somo')) {
+      } else if (c === 'atomz114' || c === '114' || c.includes('somo')) {
         targetUrl = 'horizon-114.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomz115' || c.includes('tas') || c.includes('train')) {
+      } else if (c === 'atomz115' || c === '115' || c.includes('tas') || c.includes('train')) {
         targetUrl = 'horizon-115.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomz116' || c.includes('esteban')) {
+      } else if (c === 'atomz116' || c === '116' || c.includes('esteban')) {
         targetUrl = 'horizon-116.html?code=' + encodeURIComponent(code);
-      } else if (c === 'atomztrial' || c.includes('trial')) {
+      } else if (c === 'atomztrial' || c === 'trial' || c.includes('trial')) {
         targetUrl = 'horizon-trial.html?code=' + encodeURIComponent(code);
       }
 

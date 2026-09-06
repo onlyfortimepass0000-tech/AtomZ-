@@ -361,23 +361,23 @@
 
   function processCodeAccess(enteredCode) {
     if (!enteredCode) return;
-    var cleanedCode = enteredCode.trim().toLowerCase();
+    var cleanedCode = enteredCode.trim().toLowerCase().replace(/[\s\-_]/g, '');
     
     var targetUrl = null;
-    if (cleanedCode === "atomz111" || cleanedCode.indexOf("rahul") !== -1) {
-      targetUrl = "horizon-dossier.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomz112" || cleanedCode.indexOf("harsh") !== -1) {
-      targetUrl = "horizon-harsh.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomz113" || cleanedCode.indexOf("aum") !== -1) {
-      targetUrl = "horizon-113.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomz114" || cleanedCode.indexOf("somo") !== -1) {
-      targetUrl = "horizon-114.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomz115" || cleanedCode.indexOf("tas") !== -1 || cleanedCode.indexOf("train") !== -1) {
-      targetUrl = "horizon-115.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomz116" || cleanedCode.indexOf("esteban") !== -1) {
-      targetUrl = "horizon-116.html?code=" + encodeURIComponent(cleanedCode);
-    } else if (cleanedCode === "atomztrial" || cleanedCode.indexOf("trial") !== -1) {
-      targetUrl = "horizon-trial.html?code=" + encodeURIComponent(cleanedCode);
+    if (cleanedCode === "atomz111" || cleanedCode === "111" || cleanedCode.indexOf("rahul") !== -1) {
+      targetUrl = "horizon-dossier.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz112" || cleanedCode === "112" || cleanedCode.indexOf("harsh") !== -1) {
+      targetUrl = "horizon-harsh.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz113" || cleanedCode === "113" || cleanedCode.indexOf("aum") !== -1) {
+      targetUrl = "horizon-113.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz114" || cleanedCode === "114" || cleanedCode.indexOf("somo") !== -1) {
+      targetUrl = "horizon-114.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz115" || cleanedCode === "115" || cleanedCode.indexOf("tas") !== -1 || cleanedCode.indexOf("train") !== -1) {
+      targetUrl = "horizon-115.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz116" || cleanedCode === "116" || cleanedCode.indexOf("esteban") !== -1) {
+      targetUrl = "horizon-116.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomztrial" || cleanedCode === "trial" || cleanedCode.indexOf("trial") !== -1) {
+      targetUrl = "horizon-trial.html?code=" + encodeURIComponent(enteredCode);
     }
 
     if (targetUrl) {
