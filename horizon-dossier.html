@@ -945,25 +945,6 @@ function renderScript(id) {
       </div>
       <div class="flex flex-col bg-surface-container border border-outline-variant p-4">${whyHTML}</div>
     </section>
-
-    <!-- ATOMZ RESOURCE CTA -->
-    <section class="bg-black border border-primary p-6 flex flex-col gap-5 relative overflow-hidden">
-      <div class="flex items-center gap-2 relative z-10">
-        <span class="material-symbols-outlined text-pink-accent text-[20px]">build</span>
-        <h2 class="font-label-caps text-[14px] text-pink-accent tracking-widest uppercase">ATOMZ RESOURCE</h2>
-      </div>
-      <div class="flex flex-col gap-2 relative z-10">
-        <h3 class="font-headline text-[24px] text-primary uppercase font-black tracking-tight leading-tight">${data.resource.title}</h3>
-        <p class="font-metadata text-[15px] text-on-surface">${data.resource.desc}</p>
-      </div>
-      <div class="bg-surface-container border border-outline-variant p-4 flex gap-3 relative z-10">
-        <span class="material-symbols-outlined text-pink-accent shrink-0 text-[24px]">format_quote</span>
-        <p class="font-script-body text-[15px] text-on-surface font-bold italic">${data.resource.quote}</p>
-      </div>
-      <button onclick="attachToolToScript('${data.resource.toolName}')" class="w-full h-[52px] bg-primary text-black font-label-caps text-[14px] uppercase font-black flex items-center justify-center gap-2 mt-2 hover:bg-primary-container transition-colors active:scale-95 duration-100 relative z-10">
-        <span class="material-symbols-outlined text-[24px]">add_link</span> ATTACH TOOL TO SCRIPT
-      </button>
-    </section>
   `;
 }
 
