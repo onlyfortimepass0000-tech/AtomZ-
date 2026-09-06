@@ -410,7 +410,12 @@
 function runIntroLoader() {
   const overlay = document.getElementById('introLoaderOverlay');
   const loaderLogo = document.getElementById('introLoaderLogo');
-  const targetLogo = document.querySelector('.brand__logo') || document.querySelector('.brand img') || document.querySelector('header img');
+  const targetLogo = document.querySelector('.brand__logo') || 
+                     document.querySelector('.brand img') || 
+                     document.querySelector('header img') || 
+                     document.querySelector('header a.brand') || 
+                     document.querySelector('header .portal-logo') || 
+                     document.querySelector('header a');
 
   if (!overlay || !loaderLogo) return;
 

@@ -1819,3 +1819,38 @@ ul { margin: 0; padding: 0; list-style: none; }
   visibility: hidden;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   SUBTLE NAV BUTTON HOVER SCALE ANIMATION
+   ========================================================================== */
+.nav__horizon-link,
+.nav__aroha-link,
+.portal-header a,
+.portal-header button,
+header a:not(.brand),
+header button,
+.btn-back-home,
+.aroha-badge {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+  will-change: transform;
+}
+
+.nav__horizon-link:hover,
+.nav__aroha-link:hover,
+.portal-header a:hover:not(.brand),
+.portal-header button:hover,
+header a:hover:not(.brand),
+header button:hover,
+.btn-back-home:hover {
+  transform: scale(1.05) translateY(-1px) !important;
+}
+
+.nav__horizon-link:active,
+.nav__aroha-link:active,
+.portal-header a:active:not(.brand),
+.portal-header button:active,
+header a:active:not(.brand),
+header button:active,
+.btn-back-home:active {
+  transform: scale(0.97) translateY(0) !important;
+}

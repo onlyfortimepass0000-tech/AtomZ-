@@ -45,6 +45,7 @@ tailwind.config = {
 }
 </script>
 
+<link rel="stylesheet" href="assets/css/atomz.css" />
 <style>
 :root {
   --primary-green: #00F5A0;
@@ -58,16 +59,20 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-#matrixBgCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-.portal-header {
+</style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col justify-between">
+
+<!-- ======================================================= INTRO LOADING SCREEN -->
+<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+  <div class="intro-loader-content">
+    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+  </div>
+</div>
+
+<!-- Live Green Canvas -->
+<canvas id="matrixBgCanvas"></canvas>
   position: fixed;
   top: 0;
   left: 0;
@@ -382,5 +387,6 @@ function handleBetaSubmit(e) {
 
 document.addEventListener('DOMContentLoaded', checkUnlockState);
 </script>
+<script src="assets/js/atomz.js" defer></script>
 </body>
 </html>

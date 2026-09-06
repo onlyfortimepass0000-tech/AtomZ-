@@ -382,9 +382,17 @@ body:has(#cap-high:checked) .pace-high{display:block}
   color: #FF6B00;
   box-shadow: 0 0 16px rgba(255, 107, 0, 0.25);
 }
-</style>
+<link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
 <body class="bg-surface text-on-surface antialiased">
+
+<!-- ======================================================= INTRO LOADING SCREEN -->
+<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
+  <div class="intro-loader-content">
+    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
+  </div>
+</div>
 <!-- Background Live Motion Canvas -->
 <canvas id="matrixBgCanvas"></canvas>
 
@@ -1077,5 +1085,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderScript(1);
 });
 </script>
+<script src="assets/js/atomz.js" defer></script>
 </body>
 </html>
