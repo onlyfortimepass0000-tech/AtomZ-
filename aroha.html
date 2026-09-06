@@ -270,22 +270,16 @@ if (bgCanvas) {
   drawBg();
 }
 
-// Check Beta Passcode Unlock State
+// Enforce Beta Passcode Gate (1111)
 function checkUnlockState() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const codeParam = urlParams.get('code');
-  const isUnlocked = sessionStorage.getItem('aroha_beta_unlocked') === 'true' || codeParam === '1111' || codeParam === '0000' || codeParam === 'testing';
-
-  if (isUnlocked) {
-    const betaGate = document.getElementById('betaGateScreen');
-    if (betaGate) betaGate.classList.add('hidden');
-
-    const choiceHub = document.getElementById('choiceHubScreen');
-    if (choiceHub) {
-      choiceHub.classList.remove('hidden');
-      choiceHub.classList.add('flex');
-    }
-    sessionStorage.setItem('aroha_beta_unlocked', 'true');
+  const betaGate = document.getElementById('betaGateScreen');
+  const choiceHub = document.getElementById('choiceHubScreen');
+  
+  // Always present the Beta Gate screen on load
+  if (betaGate) betaGate.classList.remove('hidden');
+  if (choiceHub) {
+    choiceHub.classList.add('hidden');
+    choiceHub.classList.remove('flex');
   }
 }
 
@@ -294,9 +288,8 @@ function handleBetaSubmit(e) {
   const input = document.getElementById('betaInput').value.trim();
   const status = document.getElementById('betaStatus');
 
-  if (input === '1111' || input === '0000' || input === 'testing') {
+  if (input === '1111') {
     status.innerHTML = '<span style="color:#00F5A0; font-weight:700;">✓ Code Accepted — Unlocking Aroha...</span>';
-    sessionStorage.setItem('aroha_beta_unlocked', 'true');
     setTimeout(() => {
       const betaGate = document.getElementById('betaGateScreen');
       if (betaGate) betaGate.classList.add('hidden');
@@ -308,7 +301,7 @@ function handleBetaSubmit(e) {
       }
     }, 400);
   } else {
-    status.innerHTML = '<span style="color:#FF4A4A; font-weight:700;">❌ Wrong passkey. Contact ATOMZ WhatsApp for key.</span>';
+    status.innerHTML = '<span style="color:#FF4A4A; font-weight:700;">❌ Incorrect passcode. Please enter 1111 to unlock access.</span>';
   }
 }
 
