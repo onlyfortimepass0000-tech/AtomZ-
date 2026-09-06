@@ -436,16 +436,19 @@ body:has(#cap-high:checked) .pace-high{display:block}
 
 <!-- Top Fixed Navigation Header -->
 <header class="portal-header">
-  <a href="#matrixScreen" class="portal-logo">
+  <a href="#" onclick="showScreen('hub')" class="portal-logo">
     <span>ATOM<span class="accent">Z</span> HORIZON</span>
   </a>
   <div class="flex items-center gap-3">
-    <a href="#matrixScreen" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all no-underline">
-      📊 Matrix Diagnostic
-    </a>
-    <a href="#insightsScreen" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all no-underline">
-      📈 Personalised Insights
-    </a>
+    <button onclick="showScreen('matrix')" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      📊 Creator Matrix
+    </button>
+    <button onclick="showScreen('insights')" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      📈 Content Strategy Analysis
+    </button>
+    <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-on-surface-variant bg-surface-container hover:bg-surface-container-high border border-outline-variant px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      ← Modules Hub
+    </button>
     <a href="aroha.html" class="inline-flex flex-col items-start justify-center bg-[rgba(0,245,160,0.08)] border border-[rgba(0,245,160,0.35)] px-3 py-1 rounded-xl no-underline transition-all hover:bg-[rgba(0,245,160,0.15)]">
       <span class="font-headline font-extrabold text-[12px] text-white tracking-wide leading-none">AROHA</span>
       <span class="font-mono text-[8.5px] font-bold text-[#00f5a0] tracking-widest uppercase leading-tight mt-0.5">by ATOMZ</span>
@@ -455,9 +458,66 @@ body:has(#cap-high:checked) .pace-high{display:block}
 </header>
 
 <!-- ============================================================
+SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB (AFTER ENTERING CODE)
+============================================================ -->
+<div id="hubScreen" class="hub-screen">
+  <div class="hub-container">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container-high border border-primary-container/40 mb-4">
+      <span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#ff6b00]"></span>
+      <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">CLIENT 116 DOSSIER HUB</span>
+    </div>
+    
+    <h1 class="hub-title text-3xl sm:text-4xl font-extrabold text-white mb-2">Select Your Client Dossier</h1>
+    <p class="hub-sub text-sm sm:text-base text-on-surface-variant max-w-lg mx-auto mb-8">
+      Welcome Esteban. Choose between your Interactive Creator Matrix and your 14-Visualization Content Strategy Analysis below.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl mx-auto">
+      
+      <!-- Option 1: Creator Growth Matrix -->
+      <div onclick="showScreen('matrix')" class="hub-card group cursor-pointer bg-[#111115] border border-[#2a2b35] hover:border-[#ff6b00] rounded-2xl p-6 transition-all text-left flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(255,107,0,0.2)]">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-[#ff6b00]/10 border border-[#ff6b00]/30 flex items-center justify-center text-[#ff6b00] mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[26px]">grid_view</span>
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#ff6b00] uppercase tracking-wider block mb-1">MODULE 01</span>
+          <h2 class="font-headline text-2xl font-bold text-white mb-2">Creator Growth Matrix</h2>
+          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+            Interactive diagnostic tool mapping your identity stack, position baseline, goal-fit audit, and weekly action moves.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-outline-variant/40 flex items-center justify-between">
+          <span class="font-mono text-[12px] font-bold text-[#ff6b00] uppercase tracking-wider">Launch Creator Matrix</span>
+          <span class="material-symbols-outlined text-[#ff6b00] text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+
+      <!-- Option 2: Content Strategy Analysis (14 Visualizations) -->
+      <div onclick="showScreen('insights')" class="hub-card group cursor-pointer bg-[#111115] border border-[#2a2b35] hover:border-[#3b82f6] rounded-2xl p-6 transition-all text-left flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(59,130,246,0.2)]">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-[#3b82f6]/10 border border-[#3b82f6]/30 flex items-center justify-center text-[#3b82f6] mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[26px]">bar_chart</span>
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#3b82f6] uppercase tracking-wider block mb-1">MODULE 02</span>
+          <h2 class="font-headline text-2xl font-bold text-white mb-2">Content Strategy Analysis</h2>
+          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+            Comprehensive 14-visualization breakdown analyzing quantitative evidence, narrative engines, and the 4-pillar growth model.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-outline-variant/40 flex items-center justify-between">
+          <span class="font-mono text-[12px] font-bold text-[#3b82f6] uppercase tracking-wider">Launch Strategy Analysis</span>
+          <span class="material-symbols-outlined text-[#3b82f6] text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
 SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 ============================================================ -->
-<div id="matrixScreen" class="relative pt-24 pb-12">
+<div id="matrixScreen" class="hidden relative pt-24 pb-12">
   <div class="wrap">
     <div class="hero">
       <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
@@ -466,11 +526,14 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         <span>@esteban · Creator Diagnostic (atomz116)</span>
       </div>
-      <div class="mt-4">
-        <a href="#insightsScreen" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ff6b00] to-[#ff4d2e] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.4)] hover:scale-105 transition-all no-underline">
-          <span>📈 View Your Personalised Insights (14 Visualizations)</span>
-          <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
-        </a>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button onclick="showScreen('insights')" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-all cursor-pointer">
+          <span>📈 Switch to Content Strategy Analysis (14 Visualizations)</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </button>
+        <button onclick="showScreen('hub')" class="inline-flex items-center gap-2 bg-surface-container text-on-surface-variant hover:text-white font-mono text-sm px-4 py-2.5 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer">
+          <span>← Modules Hub</span>
+        </button>
       </div>
     </div>
 
@@ -549,9 +612,9 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 </div>
 
 <!-- ============================================================
-SCREEN 2B: PERSONALISED INSIGHTS DASHBOARD (14 VISUALIZATIONS)
+SCREEN 2B: CONTENT STRATEGY ANALYSIS (14 VISUALIZATIONS)
 ============================================================ -->
-<div id="insightsScreen" class="relative pt-12 pb-16 border-t border-outline-variant/30">
+<div id="insightsScreen" class="hidden relative pt-24 pb-16">
   <div class="max-w-4xl mx-auto px-4 relative z-10">
     
     <!-- Header Banner -->
@@ -563,8 +626,17 @@ SCREEN 2B: PERSONALISED INSIGHTS DASHBOARD (14 VISUALIZATIONS)
           <p class="text-[14px] text-on-surface-variant max-w-xl leading-relaxed">
             A comprehensive breakdown of content mechanics, transitioning from quantitative evidence (views, likes, comments) to analytical structures and a unified growth model.
           </p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button onclick="showScreen('matrix')" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#ff6b00] to-[#ff4d2e] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.4)] hover:scale-105 transition-all cursor-pointer">
+              <span>📊 Switch to Creator Matrix</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+            <button onclick="showScreen('hub')" class="inline-flex items-center gap-2 bg-surface-container text-on-surface-variant hover:text-white font-mono text-sm px-4 py-2.5 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer">
+              <span>← Modules Hub</span>
+            </button>
+          </div>
         </div>
-        <span class="portal-badge">CLIENT: ESTEBAN (@esteban)</span>
+        <span class="portal-badge">CLIENT 116: ESTEBAN</span>
       </div>
     </div>
 
