@@ -85,9 +85,9 @@ body {
 .aroha-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(0, 245, 160, 0.12);
-  border: 1px solid rgba(0, 245, 160, 0.4);
+  gap: 8px;
+  background: rgba(0, 245, 160, 0.1);
+  border: 1px solid rgba(0, 245, 160, 0.35);
   color: #00f5a0;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -116,6 +116,20 @@ body {
 .portal-card:active {
   transform: scale(0.98);
 }
+.beta-input-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1b21;
+  border: 1px solid #3b4a40;
+  border-radius: 16px;
+  padding: 6px 8px 6px 16px;
+  transition: all 0.2s;
+}
+.beta-input-box:focus-within {
+  border-color: #00f5a0;
+  box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
+}
 </style>
 </head>
 <body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col justify-between">
@@ -130,7 +144,7 @@ body {
     </a>
     <span class="text-outline-variant font-mono text-sm">/</span>
     <span class="aroha-badge">
-      <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse shadow-[0_0_8px_#00f5a0]"></span>
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm3N8fOYwTy4nuDh82WntAz1qO6HmZp1LMPvwof0ejzYW53mk06SBRnG5IXmFwBUO4jySj-QXMfAs2nM5beJYK93uk383Wk8PLpOLR9EGitQdBxiPZ8YRBnxqrQD3eOMjkX8iLk7TZlYzXgyxIozNYLpMt_wLJv8eEKT3mJp0SB6nyfQ6almNMWS4HE6Ctk_gKSm0UOybvJ_gYgz400tm49AKqj_hcIn6C7ABHaa8zYM9dzdcaChFanw" alt="Aroha Logo" class="h-4.5 w-auto object-contain" />
       AROHA by ATOMZ
     </span>
   </div>
@@ -145,69 +159,101 @@ body {
   </div>
 </header>
 
-<!-- Main Portal Hub Container -->
+<!-- Main Portal Container -->
 <main class="relative z-10 pt-28 pb-16 px-4 max-w-4xl mx-auto flex-1 flex flex-col justify-center">
-  <div class="text-center mb-10">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-4">
-      <span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f5a0]"></span>
-      <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">ENTERPRISE ALGORITHMIC MATCHING ENGINE</span>
+
+  <!-- ================= SCREEN 1: BETA ACCESS GATE (Code: 0000) ================= -->
+  <div id="betaGateScreen" class="w-full max-w-md mx-auto text-center flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-5">
+      <span class="material-symbols-outlined text-[16px] text-primary-container">lock</span>
+      <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">PRIVATE BETA ACCESS</span>
     </div>
-    
-    <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight leading-tight mb-3">
-      AROHA <span class="text-primary-container italic font-serif font-normal">by ATOMZ</span>
+
+    <h1 class="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight mb-3">
+      Currently in Beta Version
     </h1>
-    <p class="font-body text-base text-on-surface-variant max-w-xl mx-auto leading-relaxed">
-      Institutional creator parity, dynamic readiness scoring, and performance escrow deployment for high-retention enterprise campaigns.
+    <p class="font-body text-sm text-on-surface-variant max-w-sm mx-auto leading-relaxed mb-8">
+      Access to AROHA by ATOMZ is restricted to authorized participants during our initial release. Enter your passcode below.
     </p>
+
+    <!-- Beta Passcode Form -->
+    <form id="betaForm" onsubmit="handleBetaSubmit(event)" class="w-full flex flex-col gap-3">
+      <div class="beta-input-box">
+        <input type="password" id="betaInput" placeholder="Enter beta passcode (e.g. 0000)..." autocomplete="off" required class="bg-transparent border-none text-on-surface text-sm font-mono w-full focus:outline-none placeholder:text-on-surface-variant/60" />
+        <button type="submit" class="bg-primary-container text-on-primary-container font-mono text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer shadow-[0_0_12px_rgba(0,245,160,0.3)]">
+          <span>Unlock</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+      </div>
+      <div id="betaStatus" class="font-mono text-xs text-left px-2 min-h-[20px]" aria-live="polite"></div>
+    </form>
   </div>
 
-  <!-- Dual Option Selector Grid (Creator vs Brand) -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
-    
-    <!-- CARD 1: CREATOR CONSOLE -->
-    <div onclick="window.location.href='aroha-creator.html'" class="portal-card group cursor-pointer">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container mb-6 group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined text-[28px]">person_pin</span>
-        </div>
-        <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-wider block mb-1">CREATOR CONSOLE</span>
-        <h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Creator Portal</h2>
-        <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
-          Access your dynamic institutional readiness score, view performance telemetry, gap-closing directives, and matched brand opportunities.
-        </p>
+  <!-- ================= SCREEN 2: DUAL CHOICE HUB (UNLOCKED BY 0000) ================= -->
+  <div id="choiceHubScreen" class="hidden w-full flex-col">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-4">
+        <span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f5a0]"></span>
+        <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">ENTERPRISE ALGORITHMIC MATCHING ENGINE</span>
       </div>
-
-      <div class="pt-4 border-t border-outline-variant/50 flex items-center justify-between">
-        <span class="font-mono text-[12px] font-bold text-primary-container uppercase tracking-wider">Access Creator Dashboard</span>
-        <span class="material-symbols-outlined text-primary-container text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-      </div>
+      
+      <h1 class="font-headline text-3xl sm:text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight leading-tight mb-3">
+        AROHA <span class="text-primary-container italic font-serif font-normal">by ATOMZ</span>
+      </h1>
+      <p class="font-body text-base text-on-surface-variant max-w-xl mx-auto leading-relaxed">
+        Institutional creator parity, dynamic readiness scoring, and performance escrow deployment for high-retention enterprise campaigns.
+      </p>
     </div>
 
-    <!-- CARD 2: ENTERPRISE BRAND PORTAL -->
-    <div onclick="window.location.href='aroha-brand.html'" class="portal-card group cursor-pointer" style="border-color:rgba(194,193,255,0.3);">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-secondary-container/30 border border-secondary/40 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform">
-          <span class="material-symbols-outlined text-[28px]">domain</span>
+    <!-- Dual Option Selector Grid (Creator vs Brand) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
+      
+      <!-- CARD 1: CREATOR CONSOLE -->
+      <div onclick="window.location.href='aroha-creator.html'" class="portal-card group cursor-pointer">
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container mb-6 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[28px]">person_pin</span>
+          </div>
+          <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-wider block mb-1">CREATOR CONSOLE</span>
+          <h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Creator Portal</h2>
+          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+            Access your dynamic institutional readiness score, view performance telemetry, gap-closing directives, and matched brand opportunities.
+          </p>
         </div>
-        <span class="font-mono text-[11px] font-bold text-secondary uppercase tracking-wider block mb-1">ENTERPRISE BRAND PORTAL</span>
-        <h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Brand Portal</h2>
-        <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
-          Calibrate campaign mandates, review parity-matched creator cohorts, lock smart escrow, and monitor real-time campaign telemetry.
-        </p>
+
+        <div class="pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+          <span class="font-mono text-[12px] font-bold text-primary-container uppercase tracking-wider">Access Creator Dashboard</span>
+          <span class="material-symbols-outlined text-primary-container text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
       </div>
 
-      <div class="pt-4 border-t border-outline-variant/50 flex items-center justify-between">
-        <span class="font-mono text-[12px] font-bold text-secondary uppercase tracking-wider">Access Brand Console</span>
-        <span class="material-symbols-outlined text-secondary text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      <!-- CARD 2: ENTERPRISE BRAND PORTAL -->
+      <div onclick="window.location.href='aroha-brand.html'" class="portal-card group cursor-pointer" style="border-color:rgba(194,193,255,0.3);">
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-secondary-container/30 border border-secondary/40 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[28px]">domain</span>
+          </div>
+          <span class="font-mono text-[11px] font-bold text-secondary uppercase tracking-wider block mb-1">ENTERPRISE BRAND PORTAL</span>
+          <h2 class="font-headline text-2xl font-bold text-on-surface mb-2">Brand Portal</h2>
+          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+            Calibrate campaign mandates, review parity-matched creator cohorts, lock smart escrow, and monitor real-time campaign telemetry.
+          </p>
+        </div>
+
+        <div class="pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+          <span class="font-mono text-[12px] font-bold text-secondary uppercase tracking-wider">Access Brand Console</span>
+          <span class="material-symbols-outlined text-secondary text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
       </div>
+
     </div>
 
+    <!-- Bottom Institutional Footer Note -->
+    <div class="text-center font-mono text-[11.5px] text-on-surface-variant/70 border-t border-outline-variant/40 pt-6">
+      ⚡ Powered by <strong class="text-primary-container">ATOMZ Algorithmic Engine</strong> • Real-Time Performance Escrow & Parity Tracking
+    </div>
   </div>
 
-  <!-- Bottom Institutional Footer Note -->
-  <div class="text-center font-mono text-[11.5px] text-on-surface-variant/70 border-t border-outline-variant/40 pt-6">
-    ⚡ Powered by <strong class="text-primary-container">ATOMZ Algorithmic Engine</strong> • Real-Time Performance Escrow & Parity Tracking
-  </div>
 </main>
 
 <script>
@@ -248,6 +294,40 @@ if (bgCanvas) {
   }
   drawBg();
 }
+
+// Check Beta Passcode Unlock State
+function checkUnlockState() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const codeParam = urlParams.get('code');
+  const isUnlocked = sessionStorage.getItem('aroha_beta_unlocked') === 'true' || codeParam === '0000';
+
+  if (isUnlocked) {
+    document.getElementById('betaGateScreen').classList.add('hidden');
+    document.getElementById('choiceHubScreen').classList.remove('hidden');
+    document.getElementById('choiceHubScreen').classList.add('flex');
+    sessionStorage.setItem('aroha_beta_unlocked', 'true');
+  }
+}
+
+function handleBetaSubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById('betaInput').value.trim();
+  const status = document.getElementById('betaStatus');
+
+  if (input === '0000') {
+    status.innerHTML = '<span style="color:#00F5A0; font-weight:700;">✓ Beta Passcode Accepted — Unlocking Aroha Hub...</span>';
+    sessionStorage.setItem('aroha_beta_unlocked', 'true');
+    setTimeout(() => {
+      document.getElementById('betaGateScreen').classList.add('hidden');
+      document.getElementById('choiceHubScreen').classList.remove('hidden');
+      document.getElementById('choiceHubScreen').classList.add('flex');
+    }, 450);
+  } else {
+    status.innerHTML = '<span style="color:#FF4A4A; font-weight:700;">❌ Invalid Beta Passcode. Enter 0000 to proceed.</span>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', checkUnlockState);
 </script>
 </body>
 </html>

@@ -22,6 +22,21 @@
 ::-webkit-scrollbar { display: none; }
 .font-sora { font-family: 'Sora', sans-serif; }
 .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+.key-input-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1b21;
+  border: 1px solid #3b4a40;
+  border-radius: 16px;
+  padding: 6px 8px 6px 16px;
+  transition: all 0.2s;
+}
+.key-input-box:focus-within {
+  border-color: #00f5a0;
+  box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
+}
 </style>
 
 <!-- Tailwind CSS -->
@@ -124,7 +139,6 @@ tailwind.config = {
         "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400"}],
         "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "500"}],
         "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
         "body-md": ["14px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400"}],
         "display-md-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
         "metric-xl": ["44px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "300"}],
@@ -172,8 +186,37 @@ tailwind.config = {
   </div>
 </header>
 
-<main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface max-w-4xl mx-auto">
-  <div class="flex flex-col w-full">
+<main class="flex-1 flex flex-col relative w-full pt-28 pb-24 bg-surface max-w-4xl mx-auto">
+
+  <!-- ================= ACCESS KEY GATE (Code: testing) ================= -->
+  <div id="brandAccessGate" class="w-full max-w-md mx-auto text-center flex flex-col items-center px-4 my-auto">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-5">
+      <span class="material-symbols-outlined text-[16px] text-secondary">domain_verification</span>
+      <span class="font-mono text-[11px] font-bold text-secondary uppercase tracking-widest">ENTERPRISE BRAND ACCESS KEY</span>
+    </div>
+
+    <h1 class="font-sora text-3xl font-extrabold text-on-surface tracking-tight mb-3">
+      Enter Access Key
+    </h1>
+    <p class="font-body text-sm text-on-surface-variant max-w-sm mx-auto leading-relaxed mb-8">
+      Type your authorized enterprise access key to unlock criteria specification, creator parity matches, and campaign escrow deployment.
+    </p>
+
+    <!-- Key Input Form -->
+    <form id="brandKeyForm" onsubmit="handleBrandKeySubmit(event)" class="w-full flex flex-col gap-3">
+      <div class="key-input-box">
+        <input type="password" id="brandKeyInput" placeholder="Enter brand access key (e.g. testing)..." autocomplete="off" required class="bg-transparent border-none text-on-surface text-sm font-mono w-full focus:outline-none placeholder:text-on-surface-variant/60" />
+        <button type="submit" class="bg-primary-container text-on-primary-container font-mono text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer shadow-[0_0_12px_rgba(0,245,160,0.3)]">
+          <span>Unlock</span>
+          <span class="material-symbols-outlined text-[16px]">lock_open</span>
+        </button>
+      </div>
+      <div id="brandKeyStatus" class="font-mono text-xs text-left px-2 min-h-[20px]" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <!-- ================= BRAND DASHBOARD CONTENT (UNLOCKED BY 'testing') ================= -->
+  <div id="brandDashboardContent" class="hidden flex-col w-full">
     
     <!-- Editorial Top Canvas Context -->
     <section class="px-margin-mobile pt-spacing-sm pb-spacing-md">
@@ -301,7 +344,7 @@ tailwind.config = {
           </div>
         </div>
 
-        <button class="w-full mt-spacing-sm py-spacing-xs px-spacing-md rounded-full bg-surface-container-highest hover:bg-surface-bright text-on-surface font-mono text-label-md uppercase tracking-wider transition-all flex items-center justify-center gap-spacing-xs border border-outline-variant" id="sync-engine-btn" type="button">
+        <button class="w-full mt-spacing-sm py-spacing-xs px-spacing-md rounded-full bg-surface-container-highest hover:bg-surface-bright text-on-surface font-mono text-label-md uppercase tracking-wider transition-all flex items-center justify-center gap-spacing-xs border border-outline-variant cursor-pointer" id="sync-engine-btn" type="button">
           <span class="material-symbols-outlined text-[16px] text-primary-container">sync</span>
           <span>Sync Algorithmic Engine</span>
         </button>
@@ -377,7 +420,7 @@ tailwind.config = {
             <span class="material-symbols-outlined text-primary-container text-[16px]">lock_clock</span>
             <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
           </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)]" data-target="esteban" type="button">
+          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)] cursor-pointer" data-target="esteban" type="button">
             <span class="material-symbols-outlined text-[16px]">check</span>
             <span>Selected</span>
           </button>
@@ -437,7 +480,7 @@ tailwind.config = {
             <span class="material-symbols-outlined text-primary-container text-[16px]">lock_clock</span>
             <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
           </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)]" data-target="maya" type="button">
+          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)] cursor-pointer" data-target="maya" type="button">
             <span class="material-symbols-outlined text-[16px]">check</span>
             <span>Selected</span>
           </button>
@@ -488,7 +531,7 @@ tailwind.config = {
             <span class="material-symbols-outlined text-on-surface-variant text-[16px]">lock_clock</span>
             <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
           </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-surface-container-highest text-on-surface font-mono text-label-md transition-all flex items-center gap-spacing-2xs hover:bg-surface-bright" data-target="marcus" type="button">
+          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-surface-container-highest text-on-surface font-mono text-label-md transition-all flex items-center gap-spacing-2xs hover:bg-surface-bright cursor-pointer" data-target="marcus" type="button">
             <span class="material-symbols-outlined text-[16px]">add</span>
             <span>Add to Campaign</span>
           </button>
@@ -644,9 +687,44 @@ tailwind.config = {
     </section>
 
   </div>
+
 </main>
 
 <script>
+// Check Access Key Unlock State (Code: testing)
+function checkBrandKeyUnlockState() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const codeParam = urlParams.get('code');
+  const isUnlocked = sessionStorage.getItem('aroha_brand_unlocked') === 'true' || (codeParam && codeParam.toLowerCase() === 'testing');
+
+  if (isUnlocked) {
+    document.getElementById('brandAccessGate').classList.add('hidden');
+    document.getElementById('brandDashboardContent').classList.remove('hidden');
+    document.getElementById('brandDashboardContent').classList.add('flex');
+    sessionStorage.setItem('aroha_brand_unlocked', 'true');
+  }
+}
+
+function handleBrandKeySubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById('brandKeyInput').value.trim().toLowerCase();
+  const status = document.getElementById('brandKeyStatus');
+
+  if (input === 'testing') {
+    status.innerHTML = '<span style="color:#00F5A0; font-weight:700;">✓ Access Key Accepted — Unlocking Brand Console...</span>';
+    sessionStorage.setItem('aroha_brand_unlocked', 'true');
+    setTimeout(() => {
+      document.getElementById('brandAccessGate').classList.add('hidden');
+      document.getElementById('brandDashboardContent').classList.remove('hidden');
+      document.getElementById('brandDashboardContent').classList.add('flex');
+    }, 450);
+  } else {
+    status.innerHTML = '<span style="color:#FF4A4A; font-weight:700;">❌ Invalid Access Key. Contact ATOMZ for your key.</span>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', checkBrandKeyUnlockState);
+
 (function() {
   const slider = document.getElementById('views-slider');
   const viewsLabel = document.getElementById('views-label');
