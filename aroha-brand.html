@@ -331,20 +331,20 @@ tailwind.config = {
         </div>
       </div>
 
-      <!-- Creator Card 1 (Esteban Ramos) -->
-      <div class="creator-card relative mt-spacing-xs bg-surface-container-low rounded-lg p-spacing-md shadow-md transition-all border border-outline-variant/40" data-creator-id="esteban" data-selected="true">
+      <!-- Creator Card 1 (Ethan R.) -->
+      <div class="creator-card relative mt-spacing-xs bg-surface-container-low rounded-lg p-spacing-md shadow-md transition-all border border-outline-variant/40" data-creator-id="ethan" data-selected="true">
         <div class="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-primary-container/40 to-transparent"></div>
         <div class="flex items-start justify-between">
           <div class="flex items-center gap-spacing-sm">
             <div class="relative w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0 border border-primary-container/40">
-              <img class="w-full h-full object-cover" alt="Esteban Ramos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuD9aazxX_0aAG6X03JsZ0-6BxnpLPSpBWoysuD-JBgAkYNiLQJsbJQKrEcRpr-h9x1g3PP4Vxi6K_HEaPV21UE4pWbEHb2lc5SvLMkKQFF90JnXAwL2aBTEsYpOjpf7uqB4J0chkVCkdvRRaTYXfvCdQd9bwEgNVO9IUXE0IwiDqWmoZcJA6UYSLMC4EQOnH4AtBqdkTMV8VKmjSbEWYqOBYgREo3wyfCDZxPpQqoEDp5TPsgGtKnLQ"/>
+              <img class="w-full h-full object-cover" alt="Ethan R." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuD9aazxX_0aAG6X03JsZ0-6BxnpLPSpBWoysuD-JBgAkYNiLQJsbJQKrEcRpr-h9x1g3PP4Vxi6K_HEaPV21UE4pWbEHb2lc5SvLMkKQFF90JnXAwL2aBTEsYpOjpf7uqB4J0chkVCkdvRRaTYXfvCdQd9bwEgNVO9IUXE0IwiDqWmoZcJA6UYSLMC4EQOnH4AtBqdkTMV8VKmjSbEWYqOBYgREo3wyfCDZxPpQqoEDp5TPsgGtKnLQ"/>
             </div>
             <div class="min-w-0">
               <div class="flex items-center gap-spacing-2xs">
-                <span class="font-sora text-title-md text-on-surface font-bold truncate">Esteban Ramos</span>
+                <span class="font-sora text-title-md text-on-surface font-bold truncate">Ethan R.</span>
                 <span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
               </div>
-              <span class="font-mono text-label-md text-on-surface-variant">@esteban • Austin, TX</span>
+              <span class="font-mono text-label-md text-on-surface-variant">@ethan_fit • Austin, TX</span>
             </div>
           </div>
           <div class="flex flex-col items-end">
@@ -525,7 +525,7 @@ tailwind.config = {
         <div class="mt-spacing-sm bg-surface-container-lowest rounded-DEFAULT p-spacing-sm space-y-spacing-xs border border-outline-variant/30">
           <div class="flex justify-between items-center text-body-md">
             <span class="text-on-surface-variant font-mono text-label-md">Assigned Creators</span>
-            <span class="text-on-surface font-semibold" id="summary-creators">2 Creators (Esteban Ramos, Maya Lin)</span>
+            <span class="text-on-surface font-semibold" id="summary-creators">2 Creators (Ethan R., Maya Lin)</span>
           </div>
           <div class="flex justify-between items-center text-body-md">
             <span class="text-on-surface-variant font-mono text-label-md">Total Contract Deliverables</span>
@@ -633,7 +633,7 @@ tailwind.config = {
             <div class="flex items-center gap-spacing-xs">
               <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-mono text-label-xs text-on-surface">ER</div>
               <div>
-                <span class="font-body-md text-label-md text-on-surface font-semibold block">Esteban Ramos</span>
+                <span class="font-body-md text-label-md text-on-surface font-semibold block">Ethan R.</span>
                 <span class="font-mono text-label-xs text-primary-container">34.2K views (136% Target)</span>
               </div>
             </div>
@@ -714,7 +714,7 @@ document.addEventListener('DOMContentLoaded', checkBrandKeyUnlockState);
   });
 
   const selectButtons = document.querySelectorAll('.select-creator-btn');
-  const selectedCreators = new Set(['esteban', 'maya']);
+  const selectedCreators = new Set(['ethan', 'maya']);
 
   function updateDealRoomSummary() {
     const summaryCreators = document.getElementById('summary-creators');
@@ -724,7 +724,7 @@ document.addEventListener('DOMContentLoaded', checkBrandKeyUnlockState);
 
     const count = selectedCreators.size;
     const names = [];
-    if (selectedCreators.has('esteban')) names.push('Esteban Ramos');
+    if (selectedCreators.has('ethan')) names.push('Ethan R.');
     if (selectedCreators.has('maya')) names.push('Maya Lin');
     if (selectedCreators.has('marcus')) names.push('Marcus Vance');
 

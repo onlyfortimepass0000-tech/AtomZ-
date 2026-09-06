@@ -435,15 +435,21 @@ body:has(#cap-high:checked) .pace-high{display:block}
 
 <!-- Top Fixed Navigation Header -->
 <header class="portal-header">
-  <a href="#" onclick="showScreen('hub')" class="portal-logo">
+  <a href="#" onclick="showScreen('matrix')" class="portal-logo">
     <span>ATOM<span class="accent">Z</span> HORIZON</span>
   </a>
   <div class="flex items-center gap-3">
+    <button onclick="showScreen('matrix')" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      📊 Matrix Diagnostic
+    </button>
+    <button onclick="showScreen('insights')" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      📈 Personalised Insights
+    </button>
     <a href="aroha.html" class="inline-flex flex-col items-start justify-center bg-[rgba(0,245,160,0.08)] border border-[rgba(0,245,160,0.35)] px-3 py-1 rounded-xl no-underline transition-all hover:bg-[rgba(0,245,160,0.15)]">
       <span class="font-headline font-extrabold text-[12px] text-white tracking-wide leading-none">AROHA</span>
       <span class="font-mono text-[8.5px] font-bold text-[#00f5a0] tracking-widest uppercase leading-tight mt-0.5">by ATOMZ</span>
     </a>
-    <span class="portal-badge">CLIENT: ESTEBAN (@esteban)</span>
+    <span class="portal-badge">CLIENT 116: ESTEBAN</span>
     <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all">
       ← Hub Menu
     </button>
@@ -453,7 +459,7 @@ body:has(#cap-high:checked) .pace-high{display:block}
 <!-- ============================================================
 SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB
 ============================================================ -->
-<div id="hubScreen" class="hub-screen">
+<div id="hubScreen" class="hub-screen hidden">
   <div class="hub-container">
     <p class="hub-eyebrow">ATOMZ HORIZON · CREATOR ENGINE</p>
     <h1 class="hub-title">Select Your Dossier Module</h1>
@@ -496,7 +502,7 @@ SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB
 <!-- ============================================================
 SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
 ============================================================ -->
-<div id="matrixScreen" class="hidden relative pt-24 pb-16">
+<div id="matrixScreen" class="relative pt-24 pb-16">
   <div class="wrap">
     <div class="hero">
       <p class="eyebrow">ATOMZ HORIZON · CREATOR MATRIX</p>
