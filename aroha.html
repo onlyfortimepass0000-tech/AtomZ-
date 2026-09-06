@@ -45,7 +45,6 @@ tailwind.config = {
 }
 </script>
 
-<link rel="stylesheet" href="assets/css/atomz.css" />
 <style>
 :root {
   --primary-green: #00F5A0;
@@ -59,20 +58,16 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-</style>
-</head>
-<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col justify-between">
-
-<!-- ======================================================= INTRO LOADING SCREEN -->
-<div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
-  <div class="intro-loader-content">
-    <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
-    <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
-  </div>
-</div>
-
-<!-- Live Green Canvas -->
-<canvas id="matrixBgCanvas"></canvas>
+#matrixBgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.portal-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -80,33 +75,19 @@ body {
   height: 68px;
   background: rgba(18, 19, 24, 0.92);
   backdrop-filter: blur(16px);
-  border-b: 1px solid #3b4a40;
+  border-bottom: 1px solid #3b4a40;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
   z-index: 100;
 }
-.aroha-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0, 245, 160, 0.1);
-  border: 1px solid rgba(0, 245, 160, 0.35);
-  color: #00f5a0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
 .portal-card {
   background: #1e1f25;
   border: 1px solid #3b4a40;
   border-radius: 24px;
   padding: 32px 28px;
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -114,39 +95,24 @@ body {
   justify-content: space-between;
 }
 .portal-card:hover {
-  transform: translateY(-6px);
+  transform: scale(1.03) translateY(-4px);
   border-color: #00f5a0;
   box-shadow: 0 12px 36px rgba(0, 245, 160, 0.18);
 }
 .portal-card:active {
   transform: scale(0.98);
 }
-.beta-input-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #1a1b21;
-  border: 1px solid #3b4a40;
-  border-radius: 16px;
-  padding: 6px 8px 6px 16px;
-  transition: all 0.2s;
-}
-.beta-input-box:focus-within {
-  border-color: #00f5a0;
-  box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
-}
 </style>
 </head>
 <body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col justify-between">
-<!-- Live Green Canvas -->
+
+<!-- Live Green Canvas Background -->
 <canvas id="matrixBgCanvas"></canvas>
 
 <!-- Top Header Navigation Bar -->
-<!-- Top Header Navigation Bar -->
 <header class="portal-header">
   <div class="flex items-center gap-3">
-    <a href="index.html" class="brand flex items-center gap-2 text-on-surface font-headline font-extrabold text-lg tracking-tight text-white no-underline">
-      <img src="assets/images/logo.png" alt="ATOMZ Logo" class="brand__logo h-7 w-auto object-contain" />
+    <a href="index.html" class="flex items-center gap-2 text-on-surface font-headline font-extrabold text-lg tracking-tight text-white no-underline">
       <span>ATOM<span class="text-primary-container">Z</span></span>
     </a>
     <span class="text-outline-variant font-mono text-sm">/</span>
@@ -167,10 +133,10 @@ body {
 </header>
 
 <!-- Main Portal Container -->
-<main class="relative z-10 pt-24 pb-20 px-4 max-w-4xl mx-auto flex-1 flex flex-col justify-between">
+<main class="relative z-10 pt-28 pb-16 px-4 max-w-4xl mx-auto flex-1 flex flex-col justify-between">
 
   <!-- ================= DUAL CHOICE HUB (CREATOR vs BRAND SELECTION) ================= -->
-  <div id="choiceHubScreen" class="w-full flex flex-col pt-4">
+  <div id="choiceHubScreen" class="w-full flex flex-col">
     <div class="text-center mb-10">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-4">
         <span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00f5a0]"></span>
@@ -186,7 +152,7 @@ body {
     </div>
 
     <!-- Dual Option Selector Grid (Creator vs Brand) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
       
       <!-- CARD 1: CREATOR CONSOLE -->
       <div onclick="window.location.href='aroha-creator.html'" class="portal-card group cursor-pointer">
