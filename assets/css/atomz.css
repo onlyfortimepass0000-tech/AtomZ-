@@ -1892,7 +1892,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTINUOUS BRAND RIBBON STYLES & TEXTURE
+   CONTINUOUS BRAND RIBBON: STATIC BASE + SUBTLE TRAIN CYCLING TEXTURE
    ========================================================================== */
 .ribbon-wrapper {
   position: absolute;
@@ -1908,55 +1908,75 @@ body {
 .brand-ribbon-svg {
   width: 100%;
   height: 100%;
-  will-change: transform;
+  transform: translateZ(0);
 }
 
-.ribbon-glow {
+/* Very subtle warm ambient baseline */
+.ribbon-base-track {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 96px;
+  stroke-width: 44px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.15;
-  filter: blur(28px);
+  opacity: 0.08;
+  filter: blur(8px);
   vector-effect: non-scaling-stroke;
 }
 
+/* Crisp textured spine with subtle micro-grain */
 .ribbon-main-stroke {
   fill: none;
-  stroke: url(#ribbonTextureGrad);
-  stroke-width: 64px;
+  stroke: var(--accent);
+  stroke-width: 32px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  opacity: 0.22;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 12px 24px rgba(255, 77, 46, 0.22));
+  filter: url(#ribbonGrain);
 }
 
-.ribbon-inner-grain {
+/* Train / cycling dashes moving continuously along the stationary path */
+.ribbon-train-cycle {
   fill: none;
-  stroke: url(#ribbonNoisePattern);
-  stroke-width: 64px;
+  stroke: #FF6644;
+  stroke-width: 32px;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  opacity: 0.38;
-  mix-blend-mode: overlay;
+  opacity: 0.55;
+  stroke-dasharray: 12 28;
+  animation: ribbonTrainCycle 24s linear infinite;
+  filter: drop-shadow(0 4px 12px rgba(255, 77, 46, 0.3));
 }
 
-.ribbon-specular-edge {
+/* Secondary delicate pulse dots cycling like circulating beads */
+.ribbon-train-beads {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.28);
-  stroke-width: 3px;
+  stroke: #FFFFFF;
+  stroke-width: 5px;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+  opacity: 0.65;
+  stroke-dasharray: 2 38;
+  animation: ribbonTrainCycle 24s linear infinite;
 }
 
-[data-theme="dark"] .ribbon-glow {
-  opacity: 0.25;
-  filter: blur(34px);
+@keyframes ribbonTrainCycle {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
 }
 
+[data-theme="dark"] .ribbon-base-track {
+  opacity: 0.12;
+}
 [data-theme="dark"] .ribbon-main-stroke {
-  filter: drop-shadow(0 16px 36px rgba(255, 77, 46, 0.35));
+  opacity: 0.28;
+}
+[data-theme="dark"] .ribbon-train-cycle {
+  opacity: 0.7;
 }
