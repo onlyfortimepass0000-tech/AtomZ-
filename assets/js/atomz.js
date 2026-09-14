@@ -635,36 +635,36 @@ if (document.readyState === 'loading') {
 
   /* ---- Scroll-interactive ambient background & kinetic element handler - */
   var kineticEl = document.getElementById("ambientKinetic");
+  var kineticSecEl = document.getElementById("ambientKineticSec");
   var ambientBg = document.querySelector(".ambient-bg");
 
   function updateAmbientMotion() {
     var scrollY = window.scrollY || window.pageYOffset || 0;
     var viewportH = window.innerHeight || 800;
+    var docH = document.documentElement.scrollHeight - viewportH;
+    var p = docH > 0 ? Math.min(1, scrollY / docH) : 0;
 
-    // 1. Kinetic Element: Most visible on first screen, smoothly fades to 0 as user scrolls past hero (approx 1.25 viewports)
+    // 1. Primary Kinetic Orbital Motion: Smooth floating & movable parallax across scroll
     if (kineticEl) {
-      // Fade from 0.42 (top) down to 0 at 1.2 viewports
-      var fadeFactor = Math.max(0, 1 - (scrollY / (viewportH * 1.25)));
-      var targetOpacity = (fadeFactor * 0.45).toFixed(3);
-      
-      // Interactive scroll rotation and vertical parallax drift
-      var spinDeg = (scrollY * 0.05).toFixed(2);
-      var driftPx = (scrollY * 0.16).toFixed(1);
+      // Gentle opacity modulation across pages: highest at top (~0.35), subtly settling to steady ~0.20-0.24
+      var mainFade = Math.max(0.18, 0.36 - (scrollY / (viewportH * 2.5)) * 0.16).toFixed(3);
+      var spinDeg = (scrollY * 0.04).toFixed(2);
+      var driftPx = (scrollY * 0.12).toFixed(1);
 
-      kineticEl.style.setProperty("--kinetic-fade", targetOpacity);
+      kineticEl.style.setProperty("--kinetic-fade", mainFade);
       kineticEl.style.setProperty("--scroll-spin", spinDeg + "deg");
       kineticEl.style.setProperty("--scroll-drift", driftPx + "px");
-
-      // Hide completely when scrolled far to save GPU compositor work
-      kineticEl.style.visibility = fadeFactor <= 0.005 ? "hidden" : "visible";
     }
 
-    // 2. Ambient background deep blur orbs: subtle fade on deeper scroll
+    // 2. Secondary Harmonic Node: complementary scroll motion for overall page liveliness
+    if (kineticSecEl) {
+      var secFade = Math.min(0.25, 0.12 + p * 0.13).toFixed(3);
+      kineticSecEl.style.setProperty("--kinetic-fade-sec", secFade);
+    }
+
+    // 3. Deep ambient radiant blur orbs: continuous soft glow
     if (ambientBg) {
-      var docH = document.documentElement.scrollHeight - viewportH;
-      var p = docH > 0 ? Math.min(1, scrollY / docH) : 0;
-      // Slightly reduce ambient blur intensity deeper on the page for cleaner reading
-      ambientBg.style.opacity = Math.max(0.4, 0.95 - p * 0.35).toFixed(2);
+      ambientBg.style.opacity = Math.max(0.65, 0.95 - p * 0.2).toFixed(2);
     }
   }
 
