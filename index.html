@@ -20,9 +20,8 @@
   <!-- Fonts: preconnect + swap for fast first paint -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
 
   <!-- Tailwind CSS & Configuration for Creator Dossier -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -139,6 +138,39 @@
   </div>
 
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- CONTINUOUS RIBBON ARTWORK -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden;">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width: 100%; height: 100%;" id="brand-ribbon">
+      <!-- We use vector-effect to keep the ribbon width consistent regardless of page height -->
+      <style>
+        .ribbon-path {
+          fill: none;
+          stroke: var(--accent);
+          stroke-width: 80px;
+          vector-effect: non-scaling-stroke;
+          stroke-linecap: square;
+          stroke-linejoin: round;
+        }
+        .ribbon-fold {
+          fill: none;
+          stroke: rgba(200, 40, 20, 0.8); /* Darker shade of brand color for depth */
+          stroke-width: 80px;
+          vector-effect: non-scaling-stroke;
+          stroke-linecap: square;
+          stroke-linejoin: round;
+        }
+        [data-theme="dark"] .ribbon-fold {
+          stroke: rgba(255, 120, 100, 0.8);
+        }
+      </style>
+      <path class="ribbon-path" d="M 85,-2 C 85,10 85,12 50,15 C 20,18 20,20 20,25" />
+      <path class="ribbon-fold" d="M 20,25 C 20,30 85,32 85,40" />
+      <path class="ribbon-path" d="M 85,40 C 85,48 20,50 20,60" />
+      <path class="ribbon-fold" d="M 20,60 C 20,70 85,75 85,85" />
+      <path class="ribbon-path" d="M 85,85 C 85,95 50,98 50,102" />
+    </svg>
+  </div>
+
 
   <!-- Signature: the compound (built by JS; harmless if absent) -->
   <div class="compound compound--top" aria-hidden="true"></div>
@@ -182,137 +214,115 @@
   <main id="main">
 
     <!-- ======================================================= HERO -->
-    <section class="section hero" aria-labelledby="hero-title">
-      <div class="wrap hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow" data-reveal>Growth partner for creators</p>
-          <h1 class="hero__title" id="hero-title" data-reveal>
-            <span class="line">We make</span>
-            <span class="line">growth</span>
-            <span class="line"><span class="accent">inevitable.</span></span>
+    <section class="section hero" aria-labelledby="hero-title" style="padding-top: 180px; padding-bottom: 120px;">
+      <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+        <div class="hero__left" style="flex: 1 1 60%; min-width: 300px;" data-reveal>
+          <p class="eyebrow" style="font-family: var(--font-body); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; font-weight: 600; color: var(--accent); margin-bottom: 12px; display: block;">Growth partner for creators</p>
+          <h1 class="hero__title" id="hero-title" style="font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 24px;">
+            Precision ecommerce operations.
           </h1>
-          <p class="hero__sub" data-reveal style="--reveal-delay:.08s">
-            For <strong>creators and founders</strong> who are done guessing. We turn
-            your content and attention into a personal brand — and a business that keeps
-            growing after the post stops trending.
+          <p class="hero__sub" style="font-family: var(--font-body); font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--fg); opacity: 0.8; max-width: 90%; margin-bottom: 40px; line-height: 1.6;">
+            We turn your content and attention into a personal brand — and a business that keeps growing after the post stops trending.
           </p>
-          <div class="hero__cta-row" data-reveal style="--reveal-delay:.16s; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
-            <div class="flex flex-wrap gap-3 items-center">
-              <a class="btn btn--lg" href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20talk%20about%20growth." target="_blank" rel="noopener">
+          <div class="hero__cta-row" style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+              <a class="btn btn--lg" href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20talk%20about%20growth." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background-color: var(--accent); color: #fff; text-decoration: none; font-family: var(--font-body); font-weight: 600; border-radius: 4px;">
                 Talk to us on WhatsApp
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width: 20px; height: 20px; margin-left: 8px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
               </a>
-              <a class="btn btn--lg btn--horizon-bold" href="horizon-preview.html">
+              <a class="btn btn--lg btn--horizon-bold" href="horizon-preview.html" style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background-color: var(--surface); color: var(--fg); border: 1px solid var(--hairline); text-decoration: none; font-family: var(--font-body); font-weight: 600; border-radius: 4px;">
                 <span>Horizon Client Portal</span>
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
-            <div>
-              <a class="btn btn--lg btn--aroha-orange" href="aroha.html">
-                <span>AROHA Portal</span>
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width: 20px; height: 20px; margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
           </div>
         </div>
-
-        <!-- Signature echo: the compounding staircase (abstract, no numbers) -->
-        <div class="hero__signature" data-reveal style="--reveal-delay:.2s">
-          <div class="stair" aria-hidden="true">
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-            <span class="stair__bar"></span>
-          </div>
-          <p class="stair__caption"><span>Build relentlessly.</span> <b>Compound consistently.</b></p>
+        
+        <div class="hero__right" style="flex: 1 1 30%; min-width: 250px; display: flex; justify-content: center; align-items: center; position: relative; height: 300px;">
+           <!-- The continuous ribbon starts here, it's visually aligned with this area via the SVG coordinates -->
         </div>
       </div>
     </section>
 
     <!-- ======================================================= SERVICES -->
-    <section class="section" id="services" aria-labelledby="services-title">
+    <section class="section" id="services" aria-labelledby="services-title" style="padding: 120px 0;">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <p class="eyebrow">What you get</p>
-          <h2 id="services-title">Outcomes, not deliverables.</h2>
+        <div class="sec-head" data-reveal style="margin-bottom: 80px;">
+          <p class="eyebrow" style="font-family: var(--font-body); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; font-weight: 600; color: var(--accent); margin-bottom: 12px; display: block;">What you get</p>
+          <h2 id="services-title" style="font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 24px;">Outcomes, not deliverables.</h2>
+          <p class="svc-intro" style="font-family: var(--font-body); font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--fg); opacity: 0.8; max-width: 600px;">We don't sell you a number of posts. We sell you what actually needs to happen — and that's different for every creator.</p>
         </div>
 
-        <p class="svc-intro" data-reveal>We don't sell you a number of posts. We sell you what actually needs to happen — and that's different for every creator.</p>
-
-        <div class="services__accordion">
-          <div class="svc" data-reveal>
-            <input class="svc__input" type="radio" name="svc" id="svc-01" />
-            <label class="svc__head" for="svc-01">
-              <span class="svc__num">01</span>
-              <span class="svc__title">Content Strategy</span>
-              <span class="svc__summary">More of the right people find you — not just more people.</span>
-              <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </label>
-            <div class="svc__panel"><div class="svc__panel-inner">
-              <ul class="svc__list">
-                <li>Reel ideas grounded in what's trending in your niche</li>
-                <li>Hooks, scripts, CTAs — written as one motion, ready to film</li>
-                <li>A content calendar so you're never guessing what's next</li>
-                <li>Performance tracking on every post</li>
+        <div class="services__list" style="display: flex; flex-direction: column; gap: 120px;">
+          
+          <!-- Service 1 -->
+          <div class="svc-row" data-reveal style="display: flex; flex-wrap: wrap; gap: 60px; align-items: flex-start; position: relative;">
+            <div class="svc-left" style="flex: 1 1 42%; min-width: 300px;">
+              <span class="svc-num" style="font-family: var(--font-display); font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; margin-bottom: 16px; display: block;">01</span>
+              <h3 class="svc-title" style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px;">Content Strategy</h3>
+              <p class="svc-desc" style="font-family: var(--font-body); font-size: 1.125rem; opacity: 0.8;">More of the right people find you — not just more people.</p>
+            </div>
+            <div class="svc-right" style="flex: 1 1 calc(58% - 60px); min-width: 300px; padding-top: 20px;">
+              <ul class="svc-details" style="list-style: none; font-family: var(--font-body); font-size: 1.05rem;">
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Reel ideas grounded in what's trending in your niche</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Hooks, scripts, CTAs — written as one motion, ready to film</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>A content calendar so you're never guessing what's next</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Performance tracking on every post</li>
               </ul>
-            </div></div>
+            </div>
           </div>
 
-          <div class="svc" data-reveal style="--reveal-delay:.06s">
-            <input class="svc__input" type="radio" name="svc" id="svc-02" />
-            <label class="svc__head" for="svc-02">
-              <span class="svc__num">02</span>
-              <span class="svc__title">Brand Growth</span>
-              <span class="svc__summary">You become someone worth following, not just watching.</span>
-              <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </label>
-            <div class="svc__panel"><div class="svc__panel-inner">
-              <ul class="svc__list">
-                <li>Instagram bio, profile, and identity — what you're known for</li>
-                <li>Content pillars mapped out</li>
-                <li>Website design and build, if you need one</li>
-                <li>Visual identity — graphics, covers, templates that look like you, not a stock kit</li>
+          <!-- Service 2 -->
+          <div class="svc-row" data-reveal style="display: flex; flex-wrap: wrap; gap: 60px; align-items: flex-start; position: relative;">
+            <div class="svc-left" style="flex: 1 1 42%; min-width: 300px;">
+              <span class="svc-num" style="font-family: var(--font-display); font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; margin-bottom: 16px; display: block;">02</span>
+              <h3 class="svc-title" style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px;">Brand Growth</h3>
+              <p class="svc-desc" style="font-family: var(--font-body); font-size: 1.125rem; opacity: 0.8;">You become someone worth following, not just watching.</p>
+            </div>
+            <div class="svc-right" style="flex: 1 1 calc(58% - 60px); min-width: 300px; padding-top: 20px;">
+              <ul class="svc-details" style="list-style: none; font-family: var(--font-body); font-size: 1.05rem;">
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Visual identity that doesn't look like a template</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Profile optimization to convert viewers into followers</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Community management to build real relationships</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Collaboration strategy to tap into other audiences</li>
               </ul>
-            </div></div>
+            </div>
           </div>
 
-          <div class="svc" data-reveal style="--reveal-delay:.12s">
-            <input class="svc__input" type="radio" name="svc" id="svc-03" />
-            <label class="svc__head" for="svc-03">
-              <span class="svc__num">03</span>
-              <span class="svc__title">Audience → Revenue</span>
-              <span class="svc__summary">Attention turns into enquiries, clients and sales.</span>
-              <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </label>
-            <div class="svc__panel"><div class="svc__panel-inner">
-              <ul class="svc__list">
-                <li>DM and comment scripts that turn viewers into leads</li>
-                <li>A clear call-to-action strategy on every piece of content</li>
-                <li>Reporting on what's actually driving results, not just views</li>
+          <!-- Service 3 -->
+          <div class="svc-row" data-reveal style="display: flex; flex-wrap: wrap; gap: 60px; align-items: flex-start; position: relative;">
+            <div class="svc-left" style="flex: 1 1 42%; min-width: 300px;">
+              <span class="svc-num" style="font-family: var(--font-display); font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; margin-bottom: 16px; display: block;">03</span>
+              <h3 class="svc-title" style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px;">Monetization</h3>
+              <p class="svc-desc" style="font-family: var(--font-body); font-size: 1.125rem; opacity: 0.8;">Turn your audience into a predictable business.</p>
+            </div>
+            <div class="svc-right" style="flex: 1 1 calc(58% - 60px); min-width: 300px; padding-top: 20px;">
+              <ul class="svc-details" style="list-style: none; font-family: var(--font-body); font-size: 1.05rem;">
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Product and offer design tailored to your followers</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Sales funnel building (landing pages, emails, checkouts)</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Brand deal negotiation and outreach</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Long-term revenue modeling</li>
               </ul>
-            </div></div>
+            </div>
           </div>
 
-          <div class="svc" data-reveal style="--reveal-delay:.18s">
-            <input class="svc__input" type="radio" name="svc" id="svc-04" />
-            <label class="svc__head" for="svc-04">
-              <span class="svc__num">04</span>
-              <span class="svc__title">AI Growth Systems</span>
-              <span class="svc__summary">Automation and systems that scale growth without more manual work.</span>
-              <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </label>
-            <div class="svc__panel"><div class="svc__panel-inner">
-              <ul class="svc__list">
-                <li>Automated follow-ups so no lead goes cold</li>
-                <li>AI-assisted research and trend tracking</li>
-                <li>Systems that scale growth without more manual work</li>
-                <li>Built around your business. Not bolted onto it.</li>
+          <!-- Service 4 -->
+          <div class="svc-row" data-reveal style="display: flex; flex-wrap: wrap; gap: 60px; align-items: flex-start; position: relative;">
+            <div class="svc-left" style="flex: 1 1 42%; min-width: 300px;">
+              <span class="svc-num" style="font-family: var(--font-display); font-size: 4rem; color: var(--accent); opacity: 0.4; line-height: 1; margin-bottom: 16px; display: block;">04</span>
+              <h3 class="svc-title" style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 16px;">Operations</h3>
+              <p class="svc-desc" style="font-family: var(--font-body); font-size: 1.125rem; opacity: 0.8;">Run your brand like a company, not a side hustle.</p>
+            </div>
+            <div class="svc-right" style="flex: 1 1 calc(58% - 60px); min-width: 300px; padding-top: 20px;">
+              <ul class="svc-details" style="list-style: none; font-family: var(--font-body); font-size: 1.05rem;">
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Custom dashboards (Horizon) to see all your numbers in one place</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Automated tools to handle repetitive tasks</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Editor and team management</li>
+                <li style="margin-bottom: 16px; padding-left: 24px; position: relative;"><span style="position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent);"></span>Systems so you can focus entirely on creating</li>
               </ul>
-            </div></div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>

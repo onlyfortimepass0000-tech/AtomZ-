@@ -509,3 +509,48 @@ document.addEventListener('click', function(e) {
     playClickSound();
   }
 });
+
+/* ==========================================================================
+   CONTINUOUS RIBBON SCROLL REVEAL
+   ========================================================================== */
+function initRibbonScroll() {
+  const svg = document.getElementById('brand-ribbon');
+  if (!svg) return;
+  const paths = svg.querySelectorAll('path');
+  
+  paths.forEach(path => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    // Add small transition for smooth drawing
+    path.style.transition = 'stroke-dashoffset 0.1s ease-out';
+  });
+
+  function updateRibbon() {
+    // Determine scroll percentage (0 to 1)
+    let maxScroll = document.body.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) maxScroll = 1;
+    const scrollPercent = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+    
+    // As we scroll, dashoffset goes from length to 0
+    paths.forEach((path, index) => {
+      const length = path.getTotalLength();
+      
+      // Calculate a staggered or slightly amplified drawing progress
+      // index * 0.1 delays the drawing of subsequent paths slightly
+      const progress = Math.min(1, Math.max(0, (scrollPercent * 1.5) - (index * 0.1)));
+      
+      path.style.strokeDashoffset = length * (1 - progress);
+    });
+  }
+
+  window.addEventListener('scroll', updateRibbon, { passive: true });
+  // Initial check
+  updateRibbon();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initRibbonScroll);
+} else {
+  initRibbonScroll();
+}
