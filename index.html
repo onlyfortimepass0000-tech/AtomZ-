@@ -129,10 +129,61 @@
   <link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
 <body>
-  <!-- Ambient slow-moving background animation -->
+  <!-- Ambient slow-moving background animation & scroll-interactive kinetic motion element -->
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-bg__orb ambient-bg__orb--1"></div>
     <div class="ambient-bg__orb ambient-bg__orb--2"></div>
+    
+    <!-- Static floating orbital constellation (interactive with scroll & fades out as you scroll) -->
+    <div class="ambient-kinetic-wrap" id="ambientKinetic">
+      <svg class="ambient-kinetic-svg" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="akGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF4D2E" stop-opacity="0.65" />
+            <stop offset="50%" stop-color="#FF8C00" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#FF4D2E" stop-opacity="0.05" />
+          </linearGradient>
+          <linearGradient id="akGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFA07A" stop-opacity="0.45" />
+            <stop offset="50%" stop-color="#FF6644" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#FF4D2E" stop-opacity="0.05" />
+          </linearGradient>
+          <radialGradient id="akGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FF4D2E" stop-opacity="0.22" />
+            <stop offset="50%" stop-color="#FF6644" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#FF4D2E" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        
+        <!-- Central radiant energy glow -->
+        <circle cx="500" cy="500" r="320" fill="url(#akGlow)" />
+
+        <!-- Orbital Ring 1: Primary wide trajectory with orbital bodies -->
+        <g class="ak-ring ak-ring--1">
+          <ellipse cx="500" cy="500" rx="440" ry="210" stroke="url(#akGrad1)" stroke-width="1.2" stroke-dasharray="6 14" />
+          <circle cx="940" cy="500" r="4.5" fill="#FF4D2E" opacity="0.85" />
+          <circle cx="60" cy="500" r="3" fill="#FF8C00" opacity="0.65" />
+        </g>
+
+        <!-- Orbital Ring 2: Tilted counter-orbit -->
+        <g class="ak-ring ak-ring--2">
+          <ellipse cx="500" cy="500" rx="380" ry="180" stroke="url(#akGrad2)" stroke-width="1.2" />
+          <circle cx="500" cy="320" r="3.5" fill="#FF6644" opacity="0.8" />
+          <circle cx="500" cy="680" r="2.5" fill="#FFA07A" opacity="0.6" />
+        </g>
+
+        <!-- Orbital Ring 3: Concentric harmonic boundary -->
+        <g class="ak-ring ak-ring--3">
+          <ellipse cx="500" cy="500" rx="270" ry="270" stroke="url(#akGrad1)" stroke-width="1" stroke-dasharray="4 8" opacity="0.45" />
+          <circle cx="500" cy="500" r="160" stroke="#FF4D2E" stroke-width="0.75" stroke-dasharray="2 12" opacity="0.35" />
+        </g>
+
+        <!-- Core Geometric Stencil Mark -->
+        <g class="ak-core-glyph">
+          <path d="M 460 540 L 460 460 L 540 460 L 540 484 L 490 484 L 540 540 L 460 540 Z" stroke="url(#akGrad1)" stroke-width="1.2" stroke-linejoin="round" opacity="0.45" />
+        </g>
+      </svg>
+    </div>
   </div>
 
   <!-- ======================================================= RESTORED INTRO SCREEN: DUO-STYLE 3D FLIP + FLY TO LOGO -->

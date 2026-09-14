@@ -633,20 +633,49 @@ if (document.readyState === 'loading') {
     });
   });
 
-  /* ---- Scroll progress for ambient background orb intensity ------------ */
+  /* ---- Scroll-interactive ambient background & kinetic element handler - */
+  var kineticEl = document.getElementById("ambientKinetic");
   var ambientBg = document.querySelector(".ambient-bg");
-  if (ambientBg) {
-    var updateAmbient = function () {
-      var p = Math.min(1, window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
-      ambientBg.style.opacity = (0.7 + p * 0.3).toFixed(2);
-    };
-    var aTicking = false;
-    window.addEventListener("scroll", function () {
-      if (!aTicking) {
-        window.requestAnimationFrame(function () { updateAmbient(); aTicking = false; });
-        aTicking = true;
-      }
-    }, { passive: true });
-    updateAmbient();
+
+  function updateAmbientMotion() {
+    var scrollY = window.scrollY || window.pageYOffset || 0;
+    var viewportH = window.innerHeight || 800;
+
+    // 1. Kinetic Element: Most visible on first screen, smoothly fades to 0 as user scrolls past hero (approx 1.25 viewports)
+    if (kineticEl) {
+      // Fade from 0.42 (top) down to 0 at 1.2 viewports
+      var fadeFactor = Math.max(0, 1 - (scrollY / (viewportH * 1.25)));
+      var targetOpacity = (fadeFactor * 0.45).toFixed(3);
+      
+      // Interactive scroll rotation and vertical parallax drift
+      var spinDeg = (scrollY * 0.05).toFixed(2);
+      var driftPx = (scrollY * 0.16).toFixed(1);
+
+      kineticEl.style.setProperty("--kinetic-fade", targetOpacity);
+      kineticEl.style.setProperty("--scroll-spin", spinDeg + "deg");
+      kineticEl.style.setProperty("--scroll-drift", driftPx + "px");
+
+      // Hide completely when scrolled far to save GPU compositor work
+      kineticEl.style.visibility = fadeFactor <= 0.005 ? "hidden" : "visible";
+    }
+
+    // 2. Ambient background deep blur orbs: subtle fade on deeper scroll
+    if (ambientBg) {
+      var docH = document.documentElement.scrollHeight - viewportH;
+      var p = docH > 0 ? Math.min(1, scrollY / docH) : 0;
+      // Slightly reduce ambient blur intensity deeper on the page for cleaner reading
+      ambientBg.style.opacity = Math.max(0.4, 0.95 - p * 0.35).toFixed(2);
+    }
   }
+
+  var aTicking = false;
+  window.addEventListener("scroll", function () {
+    if (!aTicking) {
+      window.requestAnimationFrame(function () { updateAmbientMotion(); aTicking = false; });
+      aTicking = true;
+    }
+  }, { passive: true });
+  
+  // Initial compute
+  updateAmbientMotion();
 })();
