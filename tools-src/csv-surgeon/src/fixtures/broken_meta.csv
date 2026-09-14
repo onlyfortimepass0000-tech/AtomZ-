@@ -1,0 +1,3 @@
+id,title,description,price,availability,condition,link,image_link
+PROD001,Oversized Tee,<p>Premium heavy cotton tee</p>,₹1299,YES,Like New,https://brand.com/tee,https://brand.com/tee.jpg
+PROD001,Oversized Tee Black,Black color variant,₹1299,INSTOCK,brand_new,https://brand.com/tee-black,
