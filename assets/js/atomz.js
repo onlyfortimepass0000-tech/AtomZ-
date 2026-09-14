@@ -511,42 +511,112 @@ document.addEventListener('click', function(e) {
 });
 
 /* ==========================================================================
-   CONTINUOUS RIBBON SCROLL REVEAL
+   CONTINUOUS BRAND RIBBON: SCROLL REVEAL + ORGANIC WAVE MOTION
    ========================================================================== */
 function initRibbonScroll() {
   const svg = document.getElementById('brand-ribbon');
   if (!svg) return;
   const paths = svg.querySelectorAll('path');
-  
+  if (!paths.length) return;
+
+  const basePath = "M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103";
+
   paths.forEach(path => {
     const length = path.getTotalLength();
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
-    // Add small transition for smooth drawing
-    path.style.transition = 'stroke-dashoffset 0.1s ease-out';
+    path.style.transition = 'stroke-dashoffset 0.08s linear';
   });
 
-  function updateRibbon() {
-    // Determine scroll percentage (0 to 1)
-    let maxScroll = document.body.scrollHeight - window.innerHeight;
-    if (maxScroll <= 0) maxScroll = 1;
-    const scrollPercent = Math.min(1, Math.max(0, window.scrollY / maxScroll));
-    
-    // As we scroll, dashoffset goes from length to 0
-    paths.forEach((path, index) => {
-      const length = path.getTotalLength();
-      
-      // Calculate a staggered or slightly amplified drawing progress
-      // index * 0.1 delays the drawing of subsequent paths slightly
-      const progress = Math.min(1, Math.max(0, (scrollPercent * 1.5) - (index * 0.1)));
-      
-      path.style.strokeDashoffset = length * (1 - progress);
-    });
+  let currentScroll = window.scrollY || 0;
+  let targetProgress = 0;
+  let currentProgress = 0;
+
+  function updateScrollProgress() {
+    const docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    const winHeight = window.innerHeight;
+    const maxScroll = Math.max(1, docHeight - winHeight);
+    currentScroll = window.scrollY || window.pageYOffset || 0;
+    targetProgress = Math.min(1, Math.max(0, currentScroll / maxScroll));
   }
 
-  window.addEventListener('scroll', updateRibbon, { passive: true });
-  // Initial check
-  updateRibbon();
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  // Subtle floating undulation wave animation
+  let animationFrameId = null;
+  let time = 0;
+
+  function animateRibbon() {
+    time += 0.018; // gentle speed
+
+    // Smooth lerp for scroll drawing
+    currentProgress += (targetProgress - currentProgress) * 0.15;
+
+    // Small organic swaying offsets
+    const ox1 = Math.sin(time * 0.9) * 2.2;
+    const oy1 = Math.cos(time * 0.7) * 1.4;
+    const ox2 = Math.cos(time * 1.1) * 3.0;
+    const oy2 = Math.sin(time * 0.8) * 1.8;
+    const ox3 = Math.sin(time * 1.2 + 1.2) * 2.6;
+    const oy3 = Math.cos(time * 1.0 + 0.8) * 1.6;
+
+    // Dynamic wave path
+    const p1x = (82 + ox1 * 0.4).toFixed(2);
+    const p2x = (90 + ox1).toFixed(2);
+    const p2y = (8 + oy1).toFixed(2);
+    const p3x = (80 + ox2).toFixed(2);
+    const p3y = (18 + oy2).toFixed(2);
+    const p4x = (48 + ox2).toFixed(2);
+    const p4y = (22 + oy1).toFixed(2);
+    const p5x = (16 + ox3).toFixed(2);
+    const p5y = (26 + oy2).toFixed(2);
+    const p6x = (12 + ox1).toFixed(2);
+    const p6y = (36 + oy3).toFixed(2);
+    const p7x = (34 + ox2).toFixed(2);
+    const p7y = (44 + oy1).toFixed(2);
+    const p8x = (58 + ox3).toFixed(2);
+    const p8y = (51 + oy2).toFixed(2);
+    const p9x = (86 + ox1).toFixed(2);
+    const p9y = (58 + oy3).toFixed(2);
+    const p10x = (78 + ox2).toFixed(2);
+    const p10y = (72 + oy1).toFixed(2);
+    const p11x = (70 + ox1).toFixed(2);
+    const p11y = (84 + oy2).toFixed(2);
+    const p12x = (28 + ox3).toFixed(2);
+    const p12y = (88 + oy1).toFixed(2);
+    const p13x = (42 + ox2 * 0.5).toFixed(2);
+
+    const animatedD = 'M ' + p1x + ',-3 C ' + p2x + ',' + p2y + ' ' + p3x + ',' + p3y + ' ' + p4x + ',' + p4y + ' C ' + p5x + ',' + p5y + ' ' + p6x + ',' + p6y + ' ' + p7x + ',' + p7y + ' C ' + p8x + ',' + p8y + ' ' + p9x + ',' + p9y + ' ' + p10x + ',' + p10y + ' C ' + p11x + ',' + p11y + ' ' + p12x + ',' + p12y + ' ' + p13x + ',103';
+
+    // Parallax sway translation on entire SVG
+    const parallaxY = (currentScroll * 0.04).toFixed(1);
+    const floatX = (Math.sin(time * 0.7) * 8).toFixed(1);
+    svg.style.transform = 'translate3d(' + floatX + 'px, ' + parallaxY + 'px, 0)';
+
+    // Update paths
+    paths.forEach(path => {
+      path.setAttribute('d', animatedD);
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = length;
+      const revealAmount = Math.min(1, Math.max(0.12, currentProgress * 1.15 + 0.1));
+      path.style.strokeDashoffset = length * (1 - revealAmount);
+    });
+
+    animationFrameId = requestAnimationFrame(animateRibbon);
+  }
+
+  // Handle visibility change to conserve battery
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    } else {
+      animationFrameId = requestAnimationFrame(animateRibbon);
+    }
+  });
+
+  animateRibbon();
 }
 
 if (document.readyState === 'loading') {

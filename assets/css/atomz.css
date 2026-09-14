@@ -1890,3 +1890,73 @@ header button:active,
 body {
   position: relative;
 }
+
+/* ==========================================================================
+   CONTINUOUS BRAND RIBBON STYLES & TEXTURE
+   ========================================================================== */
+.ribbon-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.brand-ribbon-svg {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.ribbon-glow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 96px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.15;
+  filter: blur(28px);
+  vector-effect: non-scaling-stroke;
+}
+
+.ribbon-main-stroke {
+  fill: none;
+  stroke: url(#ribbonTextureGrad);
+  stroke-width: 64px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 12px 24px rgba(255, 77, 46, 0.22));
+}
+
+.ribbon-inner-grain {
+  fill: none;
+  stroke: url(#ribbonNoisePattern);
+  stroke-width: 64px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.38;
+  mix-blend-mode: overlay;
+}
+
+.ribbon-specular-edge {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-theme="dark"] .ribbon-glow {
+  opacity: 0.25;
+  filter: blur(34px);
+}
+
+[data-theme="dark"] .ribbon-main-stroke {
+  filter: drop-shadow(0 16px 36px rgba(255, 77, 46, 0.35));
+}

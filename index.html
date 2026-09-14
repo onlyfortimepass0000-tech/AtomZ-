@@ -139,35 +139,45 @@
 
   <a class="skip-link" href="#main">Skip to content</a>
   <!-- CONTINUOUS RIBBON ARTWORK -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden;">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width: 100%; height: 100%;" id="brand-ribbon">
-      <!-- We use vector-effect to keep the ribbon width consistent regardless of page height -->
-      <style>
-        .ribbon-path {
-          fill: none;
-          stroke: var(--accent);
-          stroke-width: 80px;
-          vector-effect: non-scaling-stroke;
-          stroke-linecap: square;
-          stroke-linejoin: round;
-        }
-        .ribbon-fold {
-          fill: none;
-          stroke: rgba(200, 40, 20, 0.8); /* Darker shade of brand color for depth */
-          stroke-width: 80px;
-          vector-effect: non-scaling-stroke;
-          stroke-linecap: square;
-          stroke-linejoin: round;
-        }
-        [data-theme="dark"] .ribbon-fold {
-          stroke: rgba(255, 120, 100, 0.8);
-        }
-      </style>
-      <path class="ribbon-path" d="M 85,-2 C 85,10 85,12 50,15 C 20,18 20,20 20,25" />
-      <path class="ribbon-fold" d="M 20,25 C 20,30 85,32 85,40" />
-      <path class="ribbon-path" d="M 85,40 C 85,48 20,50 20,60" />
-      <path class="ribbon-fold" d="M 20,60 C 20,70 85,75 85,85" />
-      <path class="ribbon-path" d="M 85,85 C 85,95 50,98 50,102" />
+  <div class="ribbon-wrapper" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="brand-ribbon-svg" id="brand-ribbon">
+      <defs>
+        <!-- Fine tactical tactile grain texture -->
+        <filter id="ribbonGrain" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.78 0.78" numOctaves="3" result="noise" />
+          <feColorMatrix type="matrix" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.28 0" result="coloredNoise" />
+          <feComposite in="SourceGraphic" in2="coloredNoise" operator="arithmetic" k1="0.3" k2="0.9" k3="0.2" k4="0" />
+        </filter>
+
+        <!-- Consistent unified brand orange gradient with subtle luminous sheen -->
+        <linearGradient id="ribbonTextureGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF5B35" />
+          <stop offset="30%" stop-color="#FF4D2E" />
+          <stop offset="50%" stop-color="#FF6240" />
+          <stop offset="70%" stop-color="#FF4D2E" />
+          <stop offset="100%" stop-color="#FF5230" />
+        </linearGradient>
+
+        <!-- Micro-pattern grain overlay -->
+        <pattern id="ribbonNoisePattern" width="8" height="8" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="0.75" fill="#FFFFFF" opacity="0.25" />
+          <circle cx="6" cy="6" r="0.75" fill="#000000" opacity="0.2" />
+          <circle cx="6" cy="2" r="0.5" fill="#FFFFFF" opacity="0.15" />
+          <circle cx="2" cy="6" r="0.5" fill="#000000" opacity="0.15" />
+        </pattern>
+      </defs>
+
+      <!-- Ambient soft backlight -->
+      <path id="ribbon-glow-path" class="ribbon-glow" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
+
+      <!-- Single continuous unbroken ribbon strip with texture filter -->
+      <path id="ribbon-main-path" class="ribbon-main-stroke" filter="url(#ribbonGrain)" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
+
+      <!-- Subtle tactile weave overlay -->
+      <path id="ribbon-texture-path" class="ribbon-inner-grain" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
+
+      <!-- Delicate silk specular highlight along the spine -->
+      <path id="ribbon-edge-path" class="ribbon-specular-edge" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
     </svg>
   </div>
 
