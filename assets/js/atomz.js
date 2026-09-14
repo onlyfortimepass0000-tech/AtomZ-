@@ -537,3 +537,116 @@ if (document.readyState === 'loading') {
   });
 })();
 
+/* ==========================================================================
+   CRENCY-STYLE SCROLL ANIMATIONS
+   – Stagger reveal observer (for [data-reveal-stagger])
+   – Smooth parallax sections
+   – Split-word headline stagger
+   – Magnetic button hover tracking
+   ========================================================================== */
+(function crencyAnimations() {
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  /* ---- Stagger reveal observer ----------------------------------------- */
+  var staggerEls = document.querySelectorAll("[data-reveal-stagger]");
+  if ("IntersectionObserver" in window && staggerEls.length) {
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-visible");
+          sio.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    staggerEls.forEach(function (el) { sio.observe(el); });
+  }
+
+  /* ---- Smooth parallax for [data-parallax] elements -------------------- */
+  /* Elements with data-parallax="0.06" move 6% of scroll delta relative    */
+  /* to their natural position — subtle Crency-style depth.                 */
+  var parallaxEls = document.querySelectorAll("[data-parallax]");
+  if (parallaxEls.length) {
+    var applyParallax = function () {
+      var scrollTop = window.scrollY;
+      var wH = window.innerHeight;
+      parallaxEls.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var offset = ((center - wH / 2) / wH) * parseFloat(el.dataset.parallax || 0.06) * -100;
+        el.style.transform = "translateY(" + offset.toFixed(2) + "px)";
+      });
+    };
+    var pTicking = false;
+    window.addEventListener("scroll", function () {
+      if (!pTicking) {
+        window.requestAnimationFrame(function () { applyParallax(); pTicking = false; });
+        pTicking = true;
+      }
+    }, { passive: true });
+    applyParallax();
+  }
+
+  /* ---- Split-word stagger on section headlines -------------------------- */
+  /* Wraps each word in a <span class="split-word"> with computed delay.    */
+  document.querySelectorAll("[data-split-words]").forEach(function (el) {
+    var text = el.textContent.trim();
+    var words = text.split(/\s+/);
+    el.innerHTML = "";
+    words.forEach(function (word, i) {
+      var span = document.createElement("span");
+      span.className = "split-word";
+      span.style.transitionDelay = (0.04 + i * 0.055) + "s";
+      span.textContent = word;
+      el.appendChild(span);
+      // Add a text space between words
+      if (i < words.length - 1) {
+        el.appendChild(document.createTextNode(" "));
+      }
+    });
+  });
+
+  /* Observe split-word parents for intersection */
+  var splitParents = document.querySelectorAll("[data-split-words]");
+  if ("IntersectionObserver" in window && splitParents.length) {
+    var swio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-visible");
+          swio.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    splitParents.forEach(function (el) { swio.observe(el); });
+  }
+
+  /* ---- Magnetic button hover tracking (Crency btn-bubble) -------------- */
+  /* On hover, buttons' ::after pseudo tracks the mouse position.           */
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.addEventListener("mousemove", function (e) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      btn.style.setProperty("--mx", x + "px");
+      btn.style.setProperty("--my", y + "px");
+    });
+  });
+
+  /* ---- Scroll progress for ambient background orb intensity ------------ */
+  var ambientBg = document.querySelector(".ambient-bg");
+  if (ambientBg) {
+    var updateAmbient = function () {
+      var p = Math.min(1, window.scrollY / (document.documentElement.scrollHeight - window.innerHeight));
+      ambientBg.style.opacity = (0.7 + p * 0.3).toFixed(2);
+    };
+    var aTicking = false;
+    window.addEventListener("scroll", function () {
+      if (!aTicking) {
+        window.requestAnimationFrame(function () { updateAmbient(); aTicking = false; });
+        aTicking = true;
+      }
+    }, { passive: true });
+    updateAmbient();
+  }
+})();

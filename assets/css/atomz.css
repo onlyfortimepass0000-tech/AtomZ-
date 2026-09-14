@@ -1330,16 +1330,17 @@ html {
 .more-posts .eyebrow { margin-bottom: var(--s-3); }
 
 /* --------------------------------------------------------------------------
-   17. REVEAL ANIMATIONS  (progressive enhancement)
+   17. REVEAL ANIMATIONS  (progressive enhancement — Crency-style)
    Content is fully visible by default (no-JS / reduced-motion safe).
    .js-anim on <html> opts hidden-then-revealed elements in.
    -------------------------------------------------------------------------- */
 
 .js-anim [data-reveal] {
-  opacity: 0.85;
-  transform: translateY(14px);
-  transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1), transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: min(var(--reveal-delay, 0s), 0.15s);
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
 .js-anim [data-reveal].is-visible {
@@ -1347,11 +1348,165 @@ html {
   transform: translateY(0);
 }
 
+/* Staggered children: each direct child in a [data-reveal-stagger] parent
+   gets an increasing entrance delay (Crency's cascading effect). */
+.js-anim [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.04s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.10s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.22s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.28s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.34s; }
+.js-anim [data-reveal-stagger].is-visible > *:nth-child(n+7) { opacity: 1; transform: none; transition-delay: 0.40s; }
+
+/* Split-word headline reveal (Crency-style per-word stagger) */
+.js-anim .split-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%) rotateX(-10deg);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.js-anim .is-visible .split-word,
+.js-anim .split-word.is-visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Parallax-ready sections: controlled via JS --parallax-y custom property */
+.js-anim [data-parallax] {
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+/* Button bubble hover expand (Crency style) */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: var(--my, 50%);
+  left: var(--mx, 50%);
+  width: 0;
+  height: 0;
+  background: rgba(255, 77, 46, 0.12);
+  border-radius: 50%;
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+.btn:hover::after {
+  width: 320px;
+  height: 320px;
+}
+.btn > * { position: relative; z-index: 1; }
+.btn__label-full, .btn__label-short, .btn__icon { position: relative; z-index: 1; }
+
+/* Service number counter animation */
+.svc-num {
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js-anim .svc-row[data-reveal]:not(.is-visible) .svc-num {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+.js-anim .svc-row.is-visible .svc-num {
+  opacity: 0.4;
+  transform: translateY(0) scale(1);
+}
+
+/* Horizontal ticker (Crency-style footer marquee) */
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.ticker__track {
+  display: inline-flex;
+  gap: var(--s-6);
+  animation: tickerScroll 32s linear infinite;
+}
+.ticker__item {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-shrink: 0;
+}
+.ticker__item .accent {
+  color: var(--accent);
+}
+.ticker__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Essay card enhanced hover (Crency-style left border + lift) */
+.essay {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+}
+.essay::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+.essay:hover::before {
+  transform: scaleY(1);
+}
+
+/* Step number animated counter pulse */
+.step.is-visible .step__num {
+  animation: numPulse 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes numPulse {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 @media (max-width: 640px) {
   .js-anim [data-reveal] {
-    opacity: 0.92;
-    transform: translateY(8px);
-    transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1), transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
@@ -1364,8 +1519,11 @@ html {
     scroll-behavior: auto !important;
   }
   .js-anim [data-reveal] { opacity: 1; transform: none; }
+  .js-anim [data-reveal-stagger] > * { opacity: 1; transform: none; }
+  .js-anim .split-word { opacity: 1; transform: none; }
   .stair__bar::after { transition: none; }
   .btn:hover, .card:hover, .el:hover { transform: none; }
+  .ticker__track { animation: none; }
 }
 
 /* --------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000;
+  /* ... */
+  transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.site-header[data-scrolled="true"] {
+  top: 12px;
+  max-width: 960px;
+  /* no left/transform needed because margin: 0 auto centers it if left:0 and right:0 are set */
+}
