@@ -129,6 +129,12 @@
   <link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
 <body>
+  <!-- Ambient slow-moving background animation -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-bg__orb ambient-bg__orb--1"></div>
+    <div class="ambient-bg__orb ambient-bg__orb--2"></div>
+  </div>
+
   <!-- ======================================================= RESTORED INTRO SCREEN: DUO-STYLE 3D FLIP + FLY TO LOGO -->
   <div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
     <div class="intro-loader-content">
@@ -156,6 +162,10 @@
   </div>
 
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Signature: the compound (built by JS) -->
+  <div class="compound compound--top" aria-hidden="true"></div>
+  <aside class="compound compound--rail" aria-hidden="true"><span class="compound__cap">Z</span></aside>
 
   <!-- ======================================================= HEADER -->
   <header class="site-header" id="siteHeader">
