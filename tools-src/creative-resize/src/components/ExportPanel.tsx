@@ -2,6 +2,7 @@ import React from 'react';
 import { ExportConfig, ExportFormat } from '../types';
 import { Download, Archive, FileCode, Sliders, Loader2 } from 'lucide-react';
 import { sanitizeSlug } from '../utils/filename';
+import { Tooltip } from './Tooltip';
 
 interface ExportPanelProps {
   config: ExportConfig;
@@ -84,7 +85,8 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({
           <div className="flex items-center justify-between text-xs">
             <span className="font-medium text-gray-300 flex items-center gap-1.5">
               <Sliders className="w-3.5 h-3.5 text-orange-400" />
-              Quality Compression
+              <span>Quality Compression</span>
+              <Tooltip text="Lower quality creates a smaller file." />
             </span>
             <span className="font-mono text-orange-400 font-bold">
               {Math.round(config.quality * 100)}%

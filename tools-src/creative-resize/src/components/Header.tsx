@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, ArrowLeft, Image as ImageIcon } from 'lucide-react';
+import { HelpAssistant } from './HelpAssistant';
 
 export const Header: React.FC = () => {
   return (
@@ -27,12 +28,13 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1.5 rounded-full">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-400" />
-          <span className="hidden md:inline font-medium">
-            100% Client-Side Privacy: Images processed in browser
-          </span>
-          <span className="md:hidden font-medium">Local Processing</span>
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs px-3 py-1.5 rounded-full">
+            <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-400" />
+            <span className="font-medium">Client-Side Privacy</span>
+          </div>
+
+          <HelpAssistant />
         </div>
       </div>
     </header>

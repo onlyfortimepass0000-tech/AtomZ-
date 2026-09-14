@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageAdjustment } from '../types';
 import { ZoomIn, RotateCcw, Maximize2, Minimize2, Eye, Palette } from 'lucide-react';
+import { Tooltip } from './Tooltip';
 
 interface EditorControlsProps {
   adjustment: ImageAdjustment;
@@ -41,7 +42,7 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
           <button
             type="button"
             onClick={() => onChange({ ...adjustment, fitMode: 'crop' })}
-            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
+            className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all ${
               adjustment.fitMode === 'crop'
                 ? 'bg-orange-600 border-orange-500 text-white shadow-md shadow-orange-600/20'
                 : 'bg-gray-950/60 border-gray-800 text-gray-400 hover:text-gray-200 hover:border-gray-700'
@@ -49,19 +50,21 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
           >
             <Maximize2 className="w-4 h-4" />
             <span>Crop to Fill</span>
+            <Tooltip text="Fills the entire size. Some edges may be cropped." />
           </button>
 
           <button
             type="button"
             onClick={() => onChange({ ...adjustment, fitMode: 'fit' })}
-            className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-semibold transition-all ${
+            className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all ${
               adjustment.fitMode === 'fit'
                 ? 'bg-orange-600 border-orange-500 text-white shadow-md shadow-orange-600/20'
                 : 'bg-gray-950/60 border-gray-800 text-gray-400 hover:text-gray-200 hover:border-gray-700'
             }`}
           >
             <Minimize2 className="w-4 h-4" />
-            <span>Fit with Background</span>
+            <span>Fit with BG</span>
+            <Tooltip text="Shows the full image and fills unused space." />
           </button>
         </div>
       </div>
@@ -133,7 +136,8 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
         <div>
           <span className="text-xs font-semibold text-gray-200 flex items-center gap-1.5">
             <Eye className="w-4 h-4 text-blue-400" />
-            Story/Reel Safe Zones Overlay
+            <span>Story/Reel Safe Zones</span>
+            <Tooltip text="Shows areas where platform buttons or text may cover your design." />
           </span>
           <p className="text-[10px] text-gray-400 mt-0.5">
             Visual guide only — omitted during export

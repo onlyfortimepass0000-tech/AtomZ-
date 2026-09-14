@@ -14,6 +14,7 @@ import {
   List,
 } from 'lucide-react';
 import { generateCSVContent, generateTXTContent, processUrlLine } from '../utils/utmEngine';
+import { Tooltip } from './Tooltip';
 
 interface ResultsViewProps {
   urlItems: URLItem[];
@@ -108,6 +109,7 @@ export const ResultsView: React.FC<ResultsViewProps> = ({
         <div>
           <h2 className="text-xl font-bold text-white font-display flex items-center gap-2">
             <span>Generated Tracked Links</span>
+            <Tooltip text="This link tells your analytics where the visitor came from." />
             <span className="text-xs font-mono text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-full border border-orange-500/20">
               {validItems.length} Links Ready
             </span>

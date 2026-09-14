@@ -14,6 +14,7 @@ import {
   Info,
 } from 'lucide-react';
 import { getSavedPresets, savePreset, deleteSavedPreset } from '../utils/presetStorage';
+import { Tooltip } from './Tooltip';
 
 interface StepFormProps {
   rawUrlsText: string;
@@ -191,6 +192,7 @@ export const StepForm: React.FC<StepFormProps> = ({
           <label className="text-lg font-bold text-white flex items-center gap-2 font-display">
             <Tag className="w-5 h-5 text-orange-500" />
             <span>STEP 3: What is this campaign called?</span>
+            <Tooltip text="A simple name that helps you identify this campaign later." />
           </label>
           <p className="text-xs text-gray-400 mt-1">
             Give your promotion or ad launch a simple name to group your analytics.
@@ -227,7 +229,8 @@ export const StepForm: React.FC<StepFormProps> = ({
         >
           <div className="flex items-center gap-2">
             <span>Advanced Settings & Saved Presets</span>
-            <span className="text-[10px] text-gray-500 font-mono font-normal">
+            <Tooltip text="Only use this if you already work with UTM settings." />
+            <span className="text-[10px] text-gray-500 font-mono font-normal hidden sm:inline">
               (Manual UTM fields, sanitization & preset manager)
             </span>
           </div>
@@ -247,7 +250,10 @@ export const StepForm: React.FC<StepFormProps> = ({
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs">
                 <div>
-                  <label className="text-gray-400 block mb-1 font-mono">utm_source</label>
+                  <label className="text-gray-400 block mb-1 font-mono flex items-center">
+                    <span>utm_source (Source)</span>
+                    <Tooltip text="Where the traffic comes from." />
+                  </label>
                   <input
                     type="text"
                     value={utmConfig.source}
@@ -256,7 +262,10 @@ export const StepForm: React.FC<StepFormProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="text-gray-400 block mb-1 font-mono">utm_medium</label>
+                  <label className="text-gray-400 block mb-1 font-mono flex items-center">
+                    <span>utm_medium (Medium)</span>
+                    <Tooltip text="The type of traffic, such as email or paid social." />
+                  </label>
                   <input
                     type="text"
                     value={utmConfig.medium}
@@ -265,7 +274,10 @@ export const StepForm: React.FC<StepFormProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="text-gray-400 block mb-1 font-mono">utm_campaign</label>
+                  <label className="text-gray-400 block mb-1 font-mono flex items-center">
+                    <span>utm_campaign</span>
+                    <Tooltip text="A simple name that helps you identify this campaign later." />
+                  </label>
                   <input
                     type="text"
                     value={utmConfig.campaign}
@@ -274,7 +286,10 @@ export const StepForm: React.FC<StepFormProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="text-gray-400 block mb-1 font-mono">utm_content (optional)</label>
+                  <label className="text-gray-400 block mb-1 font-mono flex items-center">
+                    <span>utm_content (optional)</span>
+                    <Tooltip text="Optional label for different ads or posts." />
+                  </label>
                   <input
                     type="text"
                     value={utmConfig.content}
@@ -284,7 +299,10 @@ export const StepForm: React.FC<StepFormProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="text-gray-400 block mb-1 font-mono">utm_term (optional)</label>
+                  <label className="text-gray-400 block mb-1 font-mono flex items-center">
+                    <span>utm_term (optional)</span>
+                    <Tooltip text="Optional field mainly used for keywords or extra labeling." />
+                  </label>
                   <input
                     type="text"
                     value={utmConfig.term}
