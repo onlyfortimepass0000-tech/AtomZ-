@@ -20,7 +20,7 @@
   <!-- Fonts: preconnect + swap for fast first paint -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
   <!-- Tailwind CSS & Configuration for Creator Dossier -->
@@ -129,76 +129,42 @@
   <link rel="stylesheet" href="assets/css/atomz.css" />
 </head>
 <body>
-  <!-- ======================================================= INTRO LOADING SCREEN (Reference 2) -->
+  <!-- ======================================================= RESTORED INTRO SCREEN: DUO-STYLE 3D FLIP + FLY TO LOGO -->
   <div id="introLoaderOverlay" class="intro-loader-overlay" aria-hidden="true">
     <div class="intro-loader-content">
-      <div id="introLoaderLogoWrap" class="intro-loader-logo-wrap">
-        <img src="assets/images/logo.png" alt="ATOMZ Logo" id="introLoaderLogo" class="intro-loader-logo" />
+      <div class="duo-perspective-wrap">
+        <div id="duoLogoCard" class="duo-logo-card">
+          <!-- Face A: Solid Signature Mark -->
+          <div class="duo-face duo-face--solid">
+            <img src="assets/images/logo.png" alt="ATOMZ Logo" class="intro-loader-logo" />
+          </div>
+          <!-- Face B: Luminous Stencil Contour Echo -->
+          <div class="duo-face duo-face--contour">
+            <svg viewBox="0 0 100 100" class="duo-contour-svg" fill="none">
+              <!-- Outer Glow Layer -->
+              <path d="M 20 80 L 20 20 L 80 20 L 80 40 L 40 40 L 80 80 L 20 80 Z" stroke="#FF4D2E" stroke-width="4" stroke-linejoin="round" opacity="0.35" filter="drop-shadow(0 0 12px #FF4D2E)"/>
+              <!-- Mid Accent Layer -->
+              <path d="M 24 76 L 24 24 L 76 24 L 76 38 L 44 38 L 76 76 L 24 76 Z" stroke="#FF6644" stroke-width="3" stroke-linejoin="round" opacity="0.8"/>
+              <!-- Core Bright Layer -->
+              <path d="M 28 72 L 28 28 L 72 28 L 72 36 L 48 36 L 72 72 L 28 72 Z" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
       </div>
       <div id="introLoaderBrandText" class="intro-loader-brand-text">ATOM<span class="accent">Z</span></div>
     </div>
   </div>
 
   <a class="skip-link" href="#main">Skip to content</a>
-  <!-- CONTINUOUS SCULPTED RIBBON ARTWORK (Spec 6) -->
-  <div class="ribbon-wrapper" aria-hidden="true">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="brand-ribbon-svg" id="brand-ribbon">
-      <defs>
-        <!-- Fine tactile micro-grain texture -->
-        <filter id="ribbonGrain" x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.85 0.85" numOctaves="3" result="noise" />
-          <feColorMatrix type="matrix" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.16 0" result="coloredNoise" />
-          <feComposite in="SourceGraphic" in2="coloredNoise" operator="arithmetic" k1="0.15" k2="0.9" k3="0.1" k4="0" />
-        </filter>
-
-        <!-- Sculpted ribbon linear gradients for depth and lighting -->
-        <linearGradient id="sculptedRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FF5B38" />
-          <stop offset="40%" stop-color="#FF4D2E" />
-          <stop offset="80%" stop-color="#E63B1C" />
-          <stop offset="100%" stop-color="#C83014" />
-        </linearGradient>
-
-        <linearGradient id="sculptedRibbonFold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A6220B" />
-          <stop offset="50%" stop-color="#BF2A0E" />
-          <stop offset="100%" stop-color="#8A1B07" />
-        </linearGradient>
-      </defs>
-
-      <!-- Soft dimensional ambient drop shadow -->
-      <path class="ribbon-soft-shadow" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
-
-      <!-- Folded underside segments (sculpted shadows giving dimensional turn) -->
-      <path class="ribbon-sculpted-fold" d="M 80,18 C 65,20 48,22 36,24 M 14,35 C 22,39 34,44 44,47 M 86,58 C 84,65 78,72 70,78" />
-
-      <!-- Main sculpted ribbon strip -->
-      <path id="ribbon-main-path" class="ribbon-sculpted-main" filter="url(#ribbonGrain)" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
-
-      <!-- Refined silk specular upper edge highlight -->
-      <path class="ribbon-sculpted-edge" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
-
-      <!-- Controlled cycling train pulses along the exact track -->
-      <path id="ribbon-train-path" class="ribbon-train-cycle" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
-      <path id="ribbon-beads-path" class="ribbon-train-beads" d="M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103" />
-    </svg>
-  </div>
-
-
-  <!-- Signature: the compound (built by JS; harmless if absent) -->
-  <div class="compound compound--top" aria-hidden="true"></div>
-  <aside class="compound compound--rail" aria-hidden="true">
-    <span class="compound__cap">Z</span>
-  </aside>
 
   <!-- ======================================================= HEADER -->
-  <header class="site-header">
+  <header class="site-header" id="siteHeader">
     <div class="wrap nav">
       <a class="brand" href="/" aria-label="ATOMZ home"><img src="assets/images/logo.png" alt="ATOMZ Logo" class="brand__logo" />ATOM<span class="brand__z">Z</span></a>
 
       <nav class="nav__links" aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="tools.html">Tools</a>
+        <a href="#services" class="nav-roll-link" data-text="Services"><span class="roll-inner"><span class="roll-main">Services</span><span class="roll-hover" aria-hidden="true">Services</span></span></a>
+        <a href="tools.html" class="nav-roll-link" data-text="Tools"><span class="roll-inner"><span class="roll-main">Tools</span><span class="roll-hover" aria-hidden="true">Tools</span></span></a>
         <a href="horizon-preview.html" class="nav__horizon-link">
           <span class="nav__horizon-title">Horizon</span>
           <span class="nav__horizon-desc">Client Portal</span>
@@ -207,8 +173,8 @@
           <span style="font-family:'Space Grotesk', 'Sora', sans-serif; font-size:12px; font-weight:800; color:#FFFFFF; letter-spacing:0.05em; line-height:1;">AROHA</span>
           <span style="font-family:'JetBrains Mono', monospace; font-size:8.5px; font-weight:700; color:#00F5A0; letter-spacing:0.08em; text-transform:uppercase; line-height:1.2; margin-top:2px;">by ATOMZ</span>
         </a>
-        <a href="#writing">Writing</a>
-        <a href="#contact">Contact</a>
+        <a href="#writing" class="nav-roll-link" data-text="Writing"><span class="roll-inner"><span class="roll-main">Writing</span><span class="roll-hover" aria-hidden="true">Writing</span></span></a>
+        <a href="#contact" class="nav-roll-link" data-text="Contact"><span class="roll-inner"><span class="roll-main">Contact</span><span class="roll-hover" aria-hidden="true">Contact</span></span></a>
       </nav>
 
       <div class="nav__right">
@@ -227,43 +193,69 @@
   <main id="main">
 
     <!-- ======================================================= HERO -->
-    <section class="section hero" aria-labelledby="hero-title" style="padding-top: 180px; padding-bottom: 120px;">
-      <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
-        <div class="hero__left" style="flex: 1 1 60%; min-width: 300px;" data-reveal>
-          <p class="eyebrow" style="font-family: var(--font-body); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; font-weight: 600; color: var(--accent); margin-bottom: 12px; display: block;">Growth partner for creators</p>
-          <h1 class="hero__title" id="hero-title" style="font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 24px;">
-            Precision ecommerce operations.
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="wrap hero__layout">
+        <div class="hero__content" data-reveal>
+          <p class="eyebrow">Growth Partner for Creators & Founders</p>
+          <h1 class="hero__headline" id="hero-title">
+            <span class="line-mask"><span class="line-inner">WE MAKE</span></span>
+            <span class="line-mask"><span class="line-inner accent">GROWTH</span></span>
+            <span class="line-mask"><span class="line-inner">INEVITABLE.</span></span>
           </h1>
-          <p class="hero__sub" style="font-family: var(--font-body); font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--fg); opacity: 0.8; max-width: 90%; margin-bottom: 40px; line-height: 1.6;">
-            We turn your content and attention into a personal brand — and a business that keeps growing after the post stops trending.
+          <p class="hero__sub">
+            Precision ecommerce operations and strategic brand compounding. We turn content and attention into high-margin businesses that keep growing long after the post stops trending.
           </p>
-          <div class="hero__cta-row" style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
-            <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
-              <a class="btn btn--lg" href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20talk%20about%20growth." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background-color: var(--accent); color: #fff; text-decoration: none; font-family: var(--font-body); font-weight: 600; border-radius: 4px;">
+          <div class="hero__cta-row">
+            <div class="hero__cta-group">
+              <a class="btn btn--lg" href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20talk%20about%20growth." target="_blank" rel="noopener">
                 Talk to us on WhatsApp
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width: 20px; height: 20px; margin-left: 8px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
               </a>
-              <a class="btn btn--lg btn--horizon-bold" href="horizon-preview.html" style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background-color: var(--surface); color: var(--fg); border: 1px solid var(--hairline); text-decoration: none; font-family: var(--font-body); font-weight: 600; border-radius: 4px;">
+              <a class="btn btn--lg btn--horizon-bold" href="horizon-preview.html">
                 <span>Horizon Client Portal</span>
-                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width: 20px; height: 20px; margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
           </div>
         </div>
         
-        <div class="hero__right" style="flex: 1 1 30%; min-width: 250px; display: flex; justify-content: center; align-items: center; position: relative; height: 300px;">
-           <!-- The continuous ribbon starts here, it's visually aligned with this area via the SVG coordinates -->
+        <!-- Recurring Central Visual Motif: Sculpted ATOMZ Contour Echoes -->
+        <div class="hero__motif-col" data-reveal>
+          <div class="atomz-sculpted-motif">
+            <div class="motif-halo"></div>
+            <!-- Multi-layer contour echoes -->
+            <div class="motif-layer motif-layer--echo-2">
+              <img src="assets/images/logo.png" alt="" aria-hidden="true" />
+            </div>
+            <div class="motif-layer motif-layer--echo-1">
+              <img src="assets/images/logo.png" alt="" aria-hidden="true" />
+            </div>
+            <div class="motif-layer motif-layer--core">
+              <img src="assets/images/logo.png" alt="ATOMZ Core Brand Symbol" />
+            </div>
+            <div class="motif-badge">
+              <span class="motif-badge__dot"></span>
+              <span>100% OPERATIONAL GROWTH</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Organic Curved Section Divider 1: Hero into Services -->
+    <div class="curved-divider curved-divider--to-services" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,0 C380,95 1060,95 1440,0 L1440,120 L0,120 Z" fill="currentColor"></path>
+      </svg>
+    </div>
+
     <!-- ======================================================= SERVICES -->
-    <section class="section" id="services" aria-labelledby="services-title" style="padding: 120px 0;">
+    <section class="section section--services" id="services" aria-labelledby="services-title">
       <div class="wrap">
-        <div class="sec-head" data-reveal style="margin-bottom: 80px;">
-          <p class="eyebrow" style="font-family: var(--font-body); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; font-weight: 600; color: var(--accent); margin-bottom: 12px; display: block;">What you get</p>
-          <h2 id="services-title" style="font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 24px;">Outcomes, not deliverables.</h2>
-          <p class="svc-intro" style="font-family: var(--font-body); font-size: clamp(1.125rem, 2vw, 1.25rem); color: var(--fg); opacity: 0.8; max-width: 600px;">We don't sell you a number of posts. We sell you what actually needs to happen — and that's different for every creator.</p>
+        <div class="sec-head" data-reveal>
+          <p class="eyebrow">What you get</p>
+          <h2 id="services-title" class="sec-headline">OUTCOMES, NOT DELIVERABLES.</h2>
+          <p class="svc-intro">We don't sell you a quota of generic posts. We build what actually transforms audience attention into enterprise value.</p>
         </div>
 
         <div class="services__list" style="display: flex; flex-direction: column; gap: 120px;">
@@ -383,6 +375,13 @@
       </div>
     </section>
 
+    <!-- Organic Curved Section Divider 2: Band into Next Biz -->
+    <div class="curved-divider curved-divider--band-bottom" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path d="M0,0 L1440,0 C1060,75 380,75 0,0 Z" fill="var(--band-bg)"></path>
+      </svg>
+    </div>
+
     <!-- ======================================================= WHAT'S NEXT: BUSINESSES -->
     <section class="section next-biz" id="next" aria-labelledby="next-title">
       <div class="wrap">
@@ -482,6 +481,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Organic Curved Section Divider 3: Elements into Contact Band -->
+    <div class="curved-divider curved-divider--to-contact" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path d="M0,90 C420,10 1020,10 1440,90 L1440,90 L0,90 Z" fill="var(--band-bg)"></path>
+      </svg>
+    </div>
 
     <!-- ======================================================= CONTACT (dark band) -->
     <section class="section band" id="contact" aria-labelledby="contact-title">

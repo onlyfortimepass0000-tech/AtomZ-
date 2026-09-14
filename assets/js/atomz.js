@@ -405,21 +405,25 @@
 })();
 
 /* ==========================================================================
-   PROGRESSIVE-BLUR LOGO TRANSITION (Reference 2 Spec)
-   - Centred together
-   - Softness/blur resolves smoothly into sharp state
-   - Shallow dimensional movement settling into static state
-   - Fully removes overlay and never replays on every navigation
+   RESTORED SIGNATURE LOGO INTRO: DUO-STYLE 3D FLIP + FLY TO BRAND LOGO
+   - Duo-Style 3D Turn: Solid face flips 180° into luminous contour echo
+   - Progressive blur resolves into sharp focus
+   - Signature Fly: Staged in center, then smoothly flies directly into the 
+     top-left `.brand__logo` header position.
+   - Cleans up and stores session key so internal navigation remains snappy.
    ========================================================================== */
-function runProgressiveBlurLogoIntro() {
+function runDuoLogoIntro() {
   const overlay = document.getElementById('introLoaderOverlay');
-  const logoWrap = document.getElementById('introLoaderLogoWrap') || document.querySelector('.intro-loader-logo-wrap');
+  const duoCard = document.getElementById('duoLogoCard');
   const brandText = document.getElementById('introLoaderBrandText');
+  const targetLogo = document.querySelector('.brand__logo') || 
+                     document.querySelector('.brand img') || 
+                     document.querySelector('header img') || 
+                     document.querySelector('header a.brand');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!overlay) return;
 
-  // Don't replay if already visited in this session
   const INTRO_SHOWN_KEY = 'atomz-intro-completed';
   if (sessionStorage.getItem(INTRO_SHOWN_KEY) || reduceMotion) {
     overlay.classList.add('done');
@@ -427,34 +431,63 @@ function runProgressiveBlurLogoIntro() {
     return;
   }
 
-  // Initial stage: slight softness around logo, shallow offset translateY(8px), scale 0.98
   requestAnimationFrame(() => {
+    // 1. Center reveal: progressive blur cleans up
     setTimeout(() => {
-      if (logoWrap) logoWrap.classList.add('resolved');
+      overlay.classList.add('stage-sharp');
       if (brandText) brandText.classList.add('resolved');
-    }, 80);
+    }, 100);
 
-    // After focus resolves over 450ms, clean exit over 200ms
+    // 2. Duo-Style 3D flip (solid to luminous contour echo)
+    setTimeout(() => {
+      if (duoCard) duoCard.classList.add('flipped');
+    }, 450);
+
+    // 3. Signature Fly to top-left brand logo
+    setTimeout(() => {
+      overlay.classList.add('flying');
+
+      if (duoCard && targetLogo) {
+        const cardRect = duoCard.getBoundingClientRect();
+        const targetRect = targetLogo.getBoundingClientRect();
+
+        const dx = targetRect.left + (targetRect.width / 2) - (cardRect.left + (cardRect.width / 2));
+        const dy = targetRect.top + (targetRect.height / 2) - (cardRect.top + (cardRect.height / 2));
+        const scale = Math.max(0.18, targetRect.width / cardRect.width);
+
+        duoCard.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(${scale})`;
+      }
+
+      if (brandText) {
+        brandText.style.opacity = '0';
+        brandText.style.transform = 'translateY(-12px)';
+      }
+    }, 1050);
+
+    // 4. Settling into header & fade out overlay
     setTimeout(() => {
       overlay.classList.add('exiting');
       try { sessionStorage.setItem(INTRO_SHOWN_KEY, 'true'); } catch (e) {}
 
+      const brandEl = document.querySelector('.brand');
+      if (brandEl) brandEl.classList.add('brand-revealed');
+
       setTimeout(() => {
         overlay.classList.add('done');
         overlay.remove();
-      }, 220);
-    }, 650);
+      }, 260);
+    }, 1550);
   });
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', runProgressiveBlurLogoIntro);
+  document.addEventListener('DOMContentLoaded', runDuoLogoIntro);
 } else {
-  runProgressiveBlurLogoIntro();
+  runDuoLogoIntro();
 }
 
 /* ==========================================================================
-   PAGE ENTRANCE & COORDINATED INTERNAL NAVIGATION TRANSITIONS (Spec 8)
+   PAGE ENTRANCE & COORDINATED INTERNAL NAVIGATION TRANSITIONS
    ========================================================================== */
 (function initPageTransitions() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -462,7 +495,7 @@ if (document.readyState === 'loading') {
 
   document.body.classList.add('page-entered');
 
-  // Intercept internal page link clicks for smooth 110ms exit
+  // Intercept internal page link clicks for smooth exit
   document.addEventListener('click', function (e) {
     const link = e.target.closest('a');
     if (!link) return;
@@ -504,54 +537,3 @@ if (document.readyState === 'loading') {
   });
 })();
 
-/* Silent site per Spec 14 */
-
-/* ==========================================================================
-   CONTINUOUS BRAND RIBBON: STATIC ANCHOR + SUBTLE TRAIN CYCLING PROGRESS
-   ========================================================================== */
-function initRibbonScroll() {
-  const svg = document.getElementById('brand-ribbon');
-  if (!svg) return;
-  const paths = svg.querySelectorAll('path');
-  if (!paths.length) return;
-
-  // The stationary path stays locked in position (no wild wobble or sway)
-  const basePath = "M 82,-3 C 90,8 80,18 48,22 C 16,26 12,36 34,44 C 58,51 86,58 78,72 C 70,84 28,88 42,103";
-  paths.forEach(path => path.setAttribute('d', basePath));
-
-  // Pre-calculate length for static paths
-  const baseTrack = document.getElementById('ribbon-base-path');
-  const mainTrack = document.getElementById('ribbon-main-path');
-  const len = baseTrack ? baseTrack.getTotalLength() : 200;
-
-  if (baseTrack) {
-    baseTrack.style.strokeDasharray = len;
-    baseTrack.style.strokeDashoffset = 0;
-  }
-  if (mainTrack) {
-    mainTrack.style.strokeDasharray = len;
-    mainTrack.style.strokeDashoffset = 0;
-  }
-
-  // Minimal, subtle scroll micro-parallax (barely perceptible)
-  function onScroll() {
-    const docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-    const winHeight = window.innerHeight;
-    const maxScroll = Math.max(1, docHeight - winHeight);
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-    const scrollRatio = scrollY / maxScroll;
-    
-    // Very tiny 0.5% drift over entire page scroll so it feels anchored
-    const microY = (scrollY * 0.008).toFixed(1);
-    svg.style.transform = 'translate3d(0, ' + microY + 'px, 0)';
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initRibbonScroll);
-} else {
-  initRibbonScroll();
-}
