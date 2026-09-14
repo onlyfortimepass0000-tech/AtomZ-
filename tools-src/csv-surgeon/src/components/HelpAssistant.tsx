@@ -1,108 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { HelpCircle, X, CheckCircle2 } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { HelpCircle, X, Check } from 'lucide-react';
 
 export const HelpAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasSeenHelp, setHasSeenHelp] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const seen = localStorage.getItem('csvsurgeon_help_seen');
-    if (!seen) {
-      setHasSeenHelp(false);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
     }
-  }, []);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-    setHasSeenHelp(true);
-    localStorage.setItem('csvsurgeon_help_seen', 'true');
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
 
   return (
-    <div className="relative inline-block z-40">
+    <div className="relative">
       <button
-        onClick={handleOpen}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition-all shadow-sm relative group"
+        onClick={() => setIsOpen(!isOpen)}
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#151518] hover:bg-[#24242A] border border-[#24242A] text-xs font-semibold text-gray-300 hover:text-white transition-all shadow-sm"
+        aria-label="How to use"
       >
-        <HelpCircle className="w-3.5 h-3.5 text-emerald-400" />
+        <HelpCircle className="w-3.5 h-3.5 text-[#FF5722]" />
         <span>How to use</span>
-        {!hasSeenHelp && (
-          <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-          </span>
-        )}
       </button>
 
       {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={handleClose}
-          />
-          <div className="absolute right-0 top-full mt-2 w-80 p-5 bg-slate-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-700/80 text-slate-200 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-700/60">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xs">
-                  ?
-                </div>
-                <h4 className="font-semibold text-sm text-white">How to use</h4>
-              </div>
-              <button
-                onClick={handleClose}
-                className="text-slate-400 hover:text-white p-1 rounded-md hover:bg-slate-700/50 transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
+        <div
+          ref={cardRef}
+          className="absolute right-0 mt-2 w-80 sm:w-88 p-4 rounded-2xl bg-[#151518] border border-[#24242A] shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 text-left"
+        >
+          <div className="flex items-start justify-between gap-2 pb-3 border-b border-[#24242A]">
+            <div className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-[#FF5722]/10 text-[#FF5722] flex items-center justify-center text-xs font-bold">
+                ?
+              </span>
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+                CSV Surgeon Guide
+              </h3>
             </div>
-
-            <p className="text-xs text-slate-300 mb-4 leading-relaxed font-medium">
-              Give us the file that is failing.
-            </p>
-
-            <div className="space-y-3 mb-4 text-xs">
-              <div className="flex items-start gap-2.5">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-[10px]">1</span>
-                <div>
-                  <span className="font-medium text-white">Upload your file</span>
-                  <p className="text-slate-400 text-[11px]">Upload your CSV or spreadsheet file.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-[10px]">2</span>
-                <div>
-                  <span className="font-medium text-white">Choose destination</span>
-                  <p className="text-slate-400 text-[11px]">Choose Shopify, Meta, Google, or Generic CSV.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-[10px]">3</span>
-                <div>
-                  <span className="font-medium text-white">Repair & download</span>
-                  <p className="text-slate-400 text-[11px]">Fix the few things needing input, then download.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300 mb-4 flex items-start gap-2">
-              <span className="font-bold">Tip:</span> Most formatting & currency problems can be repaired automatically.
-            </div>
-
             <button
-              onClick={handleClose}
-              className="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md transition-all flex items-center justify-center gap-1.5"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-[#24242A] transition-colors"
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Got it</span>
+              <X className="w-4 h-4" />
             </button>
           </div>
-        </>
+
+          <p className="text-xs font-semibold text-gray-200 my-3 leading-relaxed">
+            “Fix broken catalog CSVs in seconds.”
+          </p>
+
+          <ul className="space-y-2 mb-4">
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>1. Upload broken CSV or XLSX spreadsheet.</span>
+            </li>
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>2. Choose destination platform (Shopify / Meta / Google).</span>
+            </li>
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>3. Auto-fix safe issues & download your repaired file.</span>
+            </li>
+          </ul>
+
+          <button
+            onClick={() => setIsOpen(false)}
+            className="w-full py-2 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-xs shadow-md shadow-[#FF5722]/20 flex items-center justify-center gap-1.5 transition-all"
+          >
+            <Check className="w-3.5 h-3.5" />
+            <span>Got it</span>
+          </button>
+        </div>
       )}
     </div>
   );

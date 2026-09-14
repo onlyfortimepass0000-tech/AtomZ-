@@ -12,10 +12,10 @@ export const Header: React.FC<HeaderProps> = ({ toolName, tagline }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <a href="../../tools.html" className="flex items-center gap-2 text-white font-extrabold text-xl tracking-tight">
-            <span className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-[#2563EB]/30">
+            <span className="w-8 h-8 rounded-lg bg-[#FF5722] flex items-center justify-center text-white font-black text-sm shadow-lg shadow-[#FF5722]/30">
               A
             </span>
-            <span>ATOM<span className="text-[#2563EB]">Z</span></span>
+            <span>ATOM<span className="text-[#FF5722]">Z</span></span>
           </a>
           <div className="h-4 w-px bg-[#24242A]"></div>
           <div>

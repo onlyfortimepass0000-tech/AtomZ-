@@ -128,7 +128,7 @@ export const App: React.FC = () => {
         {/* STEP 1: UPLOAD */}
         {step === 1 && (
           <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-8 text-center space-y-6 max-w-2xl mx-auto shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-[#10B981] flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] flex items-center justify-center mx-auto">
               <DollarSign className="w-8 h-8" />
             </div>
 
@@ -139,7 +139,7 @@ export const App: React.FC = () => {
               </p>
             </div>
 
-            <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#10B981] hover:bg-[#10b981]/90 text-white font-bold text-sm shadow-xl shadow-[#10B981]/20 cursor-pointer transition-all gap-2">
+            <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#FF5722] hover:bg-[#10b981]/90 text-white font-bold text-sm shadow-xl shadow-[#FF5722]/20 cursor-pointer transition-all gap-2">
               <Upload className="w-4 h-4" />
               <span>Select Catalog File</span>
               <input type="file" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} className="hidden" />
@@ -158,7 +158,7 @@ export const App: React.FC = () => {
             <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-6 space-y-6 shadow-2xl">
               <div className="flex items-center justify-between border-b border-[#24242A] pb-3">
                 <h3 className="text-sm font-bold text-white">Select Pricing Rule</h3>
-                <span className="text-xs font-mono text-[#10B981]">{currentItems.length} Products Loaded</span>
+                <span className="text-xs font-mono text-[#FF5722]">{currentItems.length} Products Loaded</span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -177,12 +177,12 @@ export const App: React.FC = () => {
                       onClick={() => setRuleType(r.type as RuleType)}
                       className={`p-4 rounded-xl border text-left transition-all ${
                         ruleType === r.type
-                          ? 'bg-[#10B981]/10 border-[#10B981] text-white shadow-lg shadow-[#10B981]/10'
+                          ? 'bg-[#FF5722]/10 border-[#FF5722] text-white shadow-lg shadow-[#FF5722]/10'
                           : 'bg-[#0E0E10] border-[#24242A] text-gray-400 hover:border-gray-600'
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <IconComp className="w-4 h-4 text-[#10B981]" />
+                        <IconComp className="w-4 h-4 text-[#FF5722]" />
                         <span className="font-bold text-xs">{r.title}</span>
                       </div>
                       <p className="text-[10px] text-gray-500">{r.desc}</p>
@@ -203,7 +203,7 @@ export const App: React.FC = () => {
                       type="number"
                       value={ruleValue}
                       onChange={(e) => setRuleValue(parseFloat(e.target.value) || 0)}
-                      className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#10B981] focus:outline-none font-mono"
+                      className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#FF5722] focus:outline-none font-mono"
                     />
                   </div>
                 )}
@@ -214,7 +214,7 @@ export const App: React.FC = () => {
                   <select
                     value={roundingType}
                     onChange={(e) => setRoundingType(e.target.value as RoundingType)}
-                    className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#10B981] focus:outline-none"
+                    className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#FF5722] focus:outline-none"
                   >
                     <option value="ENDING_99">Round to ₹X99</option>
                     <option value="ENDING_49">Round to ₹X49</option>
@@ -229,7 +229,7 @@ export const App: React.FC = () => {
                   <select
                     value={filterField}
                     onChange={(e) => setFilterField(e.target.value as any)}
-                    className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#10B981] focus:outline-none"
+                    className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#FF5722] focus:outline-none"
                   >
                     <option value="ALL">All Products</option>
                     <option value="Category">Category</option>
@@ -247,7 +247,7 @@ export const App: React.FC = () => {
                       value={filterValue}
                       onChange={(e) => setFilterValue(e.target.value)}
                       placeholder="Type filter keyword..."
-                      className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#10B981] focus:outline-none font-mono"
+                      className="w-full bg-[#151518] border border-[#24242A] text-white px-3 py-2 rounded-lg focus:border-[#FF5722] focus:outline-none font-mono"
                     />
                   </div>
                 )}
@@ -275,7 +275,7 @@ export const App: React.FC = () => {
 
                 <button
                   onClick={handleApplyRule}
-                  className="px-6 py-3 rounded-xl bg-[#10B981] hover:bg-[#10b981]/90 text-white font-bold text-xs shadow-lg shadow-[#10B981]/20 flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-[#FF5722] hover:bg-[#10b981]/90 text-white font-bold text-xs shadow-lg shadow-[#FF5722]/20 flex items-center gap-2"
                 >
                   <span>Apply Pricing Rule</span>
                   <ArrowRight className="w-4 h-4" />

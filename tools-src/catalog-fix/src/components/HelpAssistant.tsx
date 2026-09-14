@@ -1,165 +1,77 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { HelpCircle, X, Check } from 'lucide-react';
-
-const STORAGE_KEY = 'atomz_catalog_help_seen';
 
 export const HelpAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showHint, setShowHint] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    try {
-      const seen = localStorage.getItem(STORAGE_KEY);
-      if (!seen) {
-        setShowHint(true);
-      }
-    } catch (err) {
-      // fallback
-    }
-  }, []);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-    if (showHint) {
-      setShowHint(false);
-      try {
-        localStorage.setItem(STORAGE_KEY, 'true');
-      } catch (err) {}
-    }
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-    buttonRef.current?.focus();
-  };
-
-  // Close on Escape or Click Outside
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
       }
     };
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        isOpen &&
-        modalRef.current &&
-        !modalRef.current.contains(e.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(e.target as Node)
-      ) {
-        handleClose();
-      }
-    };
-
     if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
       document.addEventListener('mousedown', handleClickOutside);
     }
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block">
-      {/* First-time visit hint */}
-      {showHint && !isOpen && (
-        <div className="absolute -top-7 right-0 animate-bounce bg-orange-500 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full shadow-lg pointer-events-none flex items-center gap-1 z-30 whitespace-nowrap">
-          <span>New here?</span>
-        </div>
-      )}
-
-      {/* "How to use" Button */}
+    <div className="relative">
       <button
-        ref={buttonRef}
-        type="button"
-        onClick={handleOpen}
-        aria-label="How to use assistant"
-        aria-expanded={isOpen}
-        className="flex items-center gap-1.5 text-xs font-semibold text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-800 px-3 py-1.5 rounded-xl border border-gray-800 transition-colors shadow-sm"
+        onClick={() => setIsOpen(!isOpen)}
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#151518] hover:bg-[#24242A] border border-[#24242A] text-xs font-semibold text-gray-300 hover:text-white transition-all shadow-sm"
+        aria-label="How to use"
       >
-        <HelpCircle className="w-4 h-4 text-orange-400" />
+        <HelpCircle className="w-3.5 h-3.5 text-[#FF5722]" />
         <span>How to use</span>
       </button>
 
-      {/* Floating Assistant Popover */}
       {isOpen && (
         <div
-          ref={modalRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="How to use assistant"
-          className="fixed sm:absolute right-4 sm:right-0 bottom-4 sm:bottom-auto sm:top-full mt-2 w-[calc(100vw-32px)] sm:w-80 p-5 bg-gray-900/95 border border-gray-700/80 rounded-2xl shadow-2xl backdrop-blur-xl z-50 text-left text-gray-200 animate-fadeIn space-y-4"
+          ref={cardRef}
+          className="absolute right-0 mt-2 w-80 sm:w-88 p-4 rounded-2xl bg-[#151518] border border-[#24242A] shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 text-left"
         >
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-800 pb-3">
+          <div className="flex items-start justify-between gap-2 pb-3 border-b border-[#24242A]">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 text-xs font-bold">
+              <span className="w-6 h-6 rounded-full bg-[#FF5722]/10 text-[#FF5722] flex items-center justify-center text-xs font-bold">
                 ?
-              </div>
-              <h3 className="text-sm font-bold text-white tracking-wide">How to use</h3>
+              </span>
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+                CatalogFix Guide
+              </h3>
             </div>
             <button
-              type="button"
-              onClick={handleClose}
-              className="text-gray-400 hover:text-white p-1 rounded-lg transition-colors"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-[#24242A] transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <p className="text-xs text-gray-300 font-medium leading-relaxed">
-            Turn a messy catalog file into one that is ready to upload.
+          <p className="text-xs font-semibold text-gray-200 my-3 leading-relaxed">
+            “Turn messy product spreadsheets into upload-ready catalogs.”
           </p>
 
-          {/* 3 Steps */}
-          <div className="space-y-3 text-xs">
-            <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 font-bold flex items-center justify-center text-[10px] shrink-0 border border-orange-500/30">
-                1
-              </span>
-              <div>
-                <span className="font-bold text-white block">Upload</span>
-                <span className="text-gray-400 text-[11px]">Upload your product spreadsheet.</span>
-              </div>
-            </div>
+          <ul className="space-y-2 mb-4">
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>1. Upload product CSV/XLSX file.</span>
+            </li>
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>2. Choose target platform (Meta / Google Merchant).</span>
+            </li>
+            <li className="text-xs text-gray-300 flex items-start gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
+              <span>3. Fix errors and download your ready file.</span>
+            </li>
+          </ul>
 
-            <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 font-bold flex items-center justify-center text-[10px] shrink-0 border border-orange-500/30">
-                2
-              </span>
-              <div>
-                <span className="font-bold text-white block">Choose destination</span>
-                <span className="text-gray-400 text-[11px]">Choose where you want to upload it.</span>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 font-bold flex items-center justify-center text-[10px] shrink-0 border border-orange-500/30">
-                3
-              </span>
-              <div>
-                <span className="font-bold text-white block">Fix & Download</span>
-                <span className="text-gray-400 text-[11px]">Fix anything highlighted, then download.</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Tip Callout */}
-          <div className="p-2.5 bg-orange-500/10 border border-orange-500/20 rounded-xl text-[11px] text-orange-300">
-            <strong>Tip:</strong> We’ll automatically clean the things we can safely fix.
-          </div>
-
-          {/* "Got it" Button */}
           <button
-            type="button"
-            onClick={handleClose}
-            className="w-full py-2 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-orange-600/20 transition-colors flex items-center justify-center gap-1.5"
+            onClick={() => setIsOpen(false)}
+            className="w-full py-2 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-xs shadow-md shadow-[#FF5722]/20 flex items-center justify-center gap-1.5 transition-all"
           >
             <Check className="w-3.5 h-3.5" />
             <span>Got it</span>

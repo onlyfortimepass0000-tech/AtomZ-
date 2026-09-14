@@ -115,13 +115,13 @@ export const App: React.FC = () => {
                 onClick={() => setMode('MODE_A_SALES')}
                 className={`p-6 rounded-2xl border text-left transition-all relative overflow-hidden ${
                   mode === 'MODE_A_SALES'
-                    ? 'bg-[#2563EB]/10 border-[#2563EB] shadow-lg shadow-[#2563EB]/20'
+                    ? 'bg-[#FF5722]/10 border-[#FF5722] shadow-lg shadow-[#FF5722]/20'
                     : 'bg-[#151518] border-[#24242A] hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-bold text-[#2563EB] uppercase">Mode A</span>
-                  {mode === 'MODE_A_SALES' && <CheckCircle className="w-5 h-5 text-[#2563EB]" />}
+                  <span className="text-xs font-mono font-bold text-[#FF5722] uppercase">Mode A</span>
+                  {mode === 'MODE_A_SALES' && <CheckCircle className="w-5 h-5 text-[#FF5722]" />}
                 </div>
                 <h3 className="text-lg font-bold text-white">Opening + Sales / Restocks</h3>
                 <p className="text-xs text-gray-400 mt-2 leading-relaxed">
@@ -133,13 +133,13 @@ export const App: React.FC = () => {
                 onClick={() => setMode('MODE_B_PHYSICAL')}
                 className={`p-6 rounded-2xl border text-left transition-all relative overflow-hidden ${
                   mode === 'MODE_B_PHYSICAL'
-                    ? 'bg-[#2563EB]/10 border-[#2563EB] shadow-lg shadow-[#2563EB]/20'
+                    ? 'bg-[#FF5722]/10 border-[#FF5722] shadow-lg shadow-[#FF5722]/20'
                     : 'bg-[#151518] border-[#24242A] hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-mono font-bold text-[#2563EB] uppercase">Mode B</span>
-                  {mode === 'MODE_B_PHYSICAL' && <CheckCircle className="w-5 h-5 text-[#2563EB]" />}
+                  <span className="text-xs font-mono font-bold text-[#FF5722] uppercase">Mode B</span>
+                  {mode === 'MODE_B_PHYSICAL' && <CheckCircle className="w-5 h-5 text-[#FF5722]" />}
                 </div>
                 <h3 className="text-lg font-bold text-white">System vs Physical Audit</h3>
                 <p className="text-xs text-gray-400 mt-2 leading-relaxed">
@@ -159,7 +159,7 @@ export const App: React.FC = () => {
                     1. {mode === 'MODE_A_SALES' ? 'Opening Inventory' : 'System Inventory'} (CSV/XLSX)
                   </label>
                   <label className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#24242A] hover:bg-gray-700 text-xs font-bold text-white cursor-pointer transition-all">
-                    <Upload className="w-4 h-4 text-[#2563EB]" />
+                    <Upload className="w-4 h-4 text-[#FF5722]" />
                     <span>{file1Name || 'Upload Inventory File'}</span>
                     <input
                       type="file"
@@ -180,7 +180,7 @@ export const App: React.FC = () => {
                     2. {mode === 'MODE_A_SALES' ? 'Sales / Orders File' : 'Physical Count Audit'} (CSV/XLSX)
                   </label>
                   <label className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#24242A] hover:bg-gray-700 text-xs font-bold text-white cursor-pointer transition-all">
-                    <Upload className="w-4 h-4 text-[#2563EB]" />
+                    <Upload className="w-4 h-4 text-[#FF5722]" />
                     <span>{file2Name || (mode === 'MODE_A_SALES' ? 'Upload Sales File' : 'Upload Physical Audit')}</span>
                     <input
                       type="file"
@@ -203,7 +203,7 @@ export const App: React.FC = () => {
                     3. Returns / Restocks File (Optional)
                   </label>
                   <label className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#24242A] hover:bg-gray-700 text-xs font-bold text-white cursor-pointer transition-all">
-                    <Upload className="w-4 h-4 text-[#2563EB]" />
+                    <Upload className="w-4 h-4 text-[#FF5722]" />
                     <span>{file3Name || 'Upload Restocks (Optional)'}</span>
                     <input
                       type="file"
@@ -222,7 +222,7 @@ export const App: React.FC = () => {
               <button
                 onClick={runReconciliation}
                 disabled={file1Rows.length === 0 || file2Rows.length === 0}
-                className="w-full py-4 rounded-2xl bg-[#2563EB] hover:bg-[#3b82f6] disabled:opacity-50 text-white font-bold text-sm shadow-xl shadow-[#2563EB]/20 flex items-center justify-center gap-2 transition-all"
+                className="w-full py-4 rounded-2xl bg-[#FF5722] hover:bg-[#3b82f6] disabled:opacity-50 text-white font-bold text-sm shadow-xl shadow-[#FF5722]/20 flex items-center justify-center gap-2 transition-all"
               >
                 <span>Reconcile Inventory</span>
                 <ArrowRight className="w-4 h-4" />
@@ -308,7 +308,7 @@ export const App: React.FC = () => {
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <button
                   onClick={() => handleExport('corrected', 'csv')}
-                  className="px-5 py-3 rounded-xl bg-[#2563EB] hover:bg-[#3b82f6] text-white font-bold text-xs shadow-lg shadow-[#2563EB]/20 flex items-center gap-1.5"
+                  className="px-5 py-3 rounded-xl bg-[#FF5722] hover:bg-[#3b82f6] text-white font-bold text-xs shadow-lg shadow-[#FF5722]/20 flex items-center gap-1.5"
                 >
                   <Download className="w-4 h-4" />
                   <span>Corrected Stock CSV</span>

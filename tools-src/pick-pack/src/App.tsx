@@ -81,7 +81,7 @@ export const App: React.FC = () => {
         {/* STEP 1: UPLOAD */}
         {step === 1 && (
           <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-8 text-center space-y-6 max-w-2xl mx-auto shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#F59E0B] flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] flex items-center justify-center mx-auto">
               <Package className="w-8 h-8" />
             </div>
 
@@ -92,7 +92,7 @@ export const App: React.FC = () => {
               </p>
             </div>
 
-            <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#F59E0B] hover:bg-[#f59e0b]/90 text-white font-bold text-sm shadow-xl shadow-[#F59E0B]/20 cursor-pointer transition-all gap-2">
+            <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#FF5722] hover:bg-[#f59e0b]/90 text-white font-bold text-sm shadow-xl shadow-[#FF5722]/20 cursor-pointer transition-all gap-2">
               <Upload className="w-4 h-4" />
               <span>Select Order File</span>
               <input type="file" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} className="hidden" />
@@ -114,8 +114,8 @@ export const App: React.FC = () => {
                 <span className="text-3xl font-extrabold text-white font-mono">{packingOrders.length}</span>
                 <p className="text-xs text-gray-400 font-mono mt-1">Total Orders</p>
               </div>
-              <div className="bg-[#151518] border border-[#F59E0B]/30 p-5 rounded-2xl text-center">
-                <span className="text-3xl font-extrabold text-[#F59E0B] font-mono">{pickingList.length}</span>
+              <div className="bg-[#151518] border border-[#FF5722]/30 p-5 rounded-2xl text-center">
+                <span className="text-3xl font-extrabold text-[#FF5722] font-mono">{pickingList.length}</span>
                 <p className="text-xs text-gray-400 font-mono mt-1">Unique SKUs to Pick</p>
               </div>
               <div className="bg-[#151518] border border-[#00F5A0]/30 p-5 rounded-2xl text-center">
@@ -128,7 +128,7 @@ export const App: React.FC = () => {
             <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-6 space-y-4 shadow-2xl">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[#24242A] pb-4 gap-3">
                 <div className="flex items-center gap-2">
-                  <ListChecks className="w-5 h-5 text-[#F59E0B]" />
+                  <ListChecks className="w-5 h-5 text-[#FF5722]" />
                   <h3 className="text-lg font-bold text-white">Warehouse Picking List</h3>
                 </div>
 
@@ -137,7 +137,7 @@ export const App: React.FC = () => {
                   <select
                     value={sortField}
                     onChange={(e) => setSortField(e.target.value as SortField)}
-                    className="bg-[#0E0E10] border border-[#24242A] text-xs text-white px-3 py-1.5 rounded-lg focus:border-[#F59E0B] focus:outline-none"
+                    className="bg-[#0E0E10] border border-[#24242A] text-xs text-white px-3 py-1.5 rounded-lg focus:border-[#FF5722] focus:outline-none"
                   >
                     <option value="SKU">SKU</option>
                     <option value="PRODUCT">Product Name</option>
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
                   </button>
                   <button
                     onClick={() => window.print()}
-                    className="px-3 py-1.5 rounded-lg bg-[#F59E0B] hover:bg-[#f59e0b]/90 text-white font-bold text-xs flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-lg bg-[#FF5722] hover:bg-[#f59e0b]/90 text-white font-bold text-xs flex items-center gap-1"
                   >
                     <Printer className="w-3.5 h-3.5" />
                     <span>Print List</span>
@@ -191,7 +191,7 @@ export const App: React.FC = () => {
 
                     <div className="text-right font-mono">
                       <span className="text-gray-400 text-[10px] block">TOTAL TO PICK</span>
-                      <span className="text-xl font-extrabold text-[#F59E0B]">{item.totalQuantity}</span>
+                      <span className="text-xl font-extrabold text-[#FF5722]">{item.totalQuantity}</span>
                     </div>
                   </div>
                 ))}
@@ -201,7 +201,7 @@ export const App: React.FC = () => {
             {/* PRINTABLE PACKING SLIPS GENERATOR */}
             <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-6 space-y-6 shadow-2xl">
               <div className="flex items-center gap-2 border-b border-[#24242A] pb-3">
-                <FileText className="w-5 h-5 text-[#F59E0B]" />
+                <FileText className="w-5 h-5 text-[#FF5722]" />
                 <h3 className="text-lg font-bold text-white">Packing Slips Generator</h3>
               </div>
 
@@ -212,7 +212,7 @@ export const App: React.FC = () => {
                   <select
                     value={slipLayout}
                     onChange={(e) => setSlipLayout(e.target.value as SlipLayout)}
-                    className="w-full bg-[#0E0E10] border border-[#24242A] text-white p-2.5 rounded-lg focus:border-[#F59E0B] focus:outline-none"
+                    className="w-full bg-[#0E0E10] border border-[#24242A] text-white p-2.5 rounded-lg focus:border-[#FF5722] focus:outline-none"
                   >
                     <option value="1_PER_PAGE">1 Slip Per Page (Full A4 Sheet)</option>
                     <option value="2_PER_PAGE">2 Slips Per Page (Half A4 Sheet)</option>
@@ -229,7 +229,7 @@ export const App: React.FC = () => {
                         type="checkbox"
                         checked={includeAddress}
                         onChange={(e) => setIncludeAddress(e.target.checked)}
-                        className="rounded border-[#24242A] text-[#F59E0B] focus:ring-0 bg-[#0E0E10]"
+                        className="rounded border-[#24242A] text-[#FF5722] focus:ring-0 bg-[#0E0E10]"
                       />
                       <span>Include Address</span>
                     </label>
@@ -238,7 +238,7 @@ export const App: React.FC = () => {
                         type="checkbox"
                         checked={includePhone}
                         onChange={(e) => setIncludePhone(e.target.checked)}
-                        className="rounded border-[#24242A] text-[#F59E0B] focus:ring-0 bg-[#0E0E10]"
+                        className="rounded border-[#24242A] text-[#FF5722] focus:ring-0 bg-[#0E0E10]"
                       />
                       <span>Include Phone</span>
                     </label>

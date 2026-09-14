@@ -28,18 +28,18 @@ export const HelpAssistant: React.FC<HelpAssistantProps> = ({ toolName }) => {
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#151518] hover:bg-[#24242A] border border-[#24242A] text-xs font-semibold text-gray-300 hover:text-white transition-all shadow-sm"
         aria-label="How to use"
       >
-        <HelpCircle className="w-3.5 h-3.5 text-[#2563EB]" />
+        <HelpCircle className="w-3.5 h-3.5 text-[#FF5722]" />
         <span>How to use</span>
       </button>
 
       {isOpen && (
         <div
           ref={cardRef}
-          className="absolute right-0 mt-2 w-80 sm:w-88 p-4 rounded-2xl bg-[#151518] border border-[#24242A] shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150"
+          className="absolute right-0 mt-2 w-80 sm:w-88 p-4 rounded-2xl bg-[#151518] border border-[#24242A] shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 text-left"
         >
           <div className="flex items-start justify-between gap-2 pb-3 border-b border-[#24242A]">
             <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center text-xs font-bold">
+              <span className="w-6 h-6 rounded-full bg-[#FF5722]/10 text-[#FF5722] flex items-center justify-center text-xs font-bold">
                 ?
               </span>
               <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono">
@@ -60,22 +60,22 @@ export const HelpAssistant: React.FC<HelpAssistantProps> = ({ toolName }) => {
 
           <ul className="space-y-2 mb-4">
             <li className="text-xs text-gray-300 flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-1.5 shrink-0"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
               <span>1. Upload inventory.</span>
             </li>
             <li className="text-xs text-gray-300 flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-1.5 shrink-0"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
               <span>2. Add sales/returns or physical stock.</span>
             </li>
             <li className="text-xs text-gray-300 flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] mt-1.5 shrink-0"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5722] mt-1.5 shrink-0"></span>
               <span>3. Download corrected quantities.</span>
             </li>
           </ul>
 
           <button
             onClick={() => setIsOpen(false)}
-            className="w-full py-2 rounded-xl bg-[#2563EB] hover:bg-[#3b82f6] text-white font-bold text-xs shadow-md shadow-[#2563EB]/20 flex items-center justify-center gap-1.5 transition-all"
+            className="w-full py-2 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-xs shadow-md shadow-[#FF5722]/20 flex items-center justify-center gap-1.5 transition-all"
           >
             <Check className="w-3.5 h-3.5" />
             <span>Got it</span>

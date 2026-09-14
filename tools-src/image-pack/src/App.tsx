@@ -93,7 +93,7 @@ export const App: React.FC = () => {
         {step === 1 && (
           <div className="space-y-6 max-w-3xl mx-auto">
             <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-8 text-center space-y-6 shadow-2xl">
-              <div className="w-16 h-16 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 text-[#A855F7] flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] flex items-center justify-center mx-auto">
                 <ImageIcon className="w-8 h-8" />
               </div>
 
@@ -104,7 +104,7 @@ export const App: React.FC = () => {
                 </p>
               </div>
 
-              <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#A855F7] hover:bg-[#b56ef8] text-white font-bold text-sm shadow-xl shadow-[#A855F7]/20 cursor-pointer transition-all gap-2">
+              <label className="inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-[#FF5722] hover:bg-[#b56ef8] text-white font-bold text-sm shadow-xl shadow-[#FF5722]/20 cursor-pointer transition-all gap-2">
                 <Upload className="w-4 h-4" />
                 <span>Select Images</span>
                 <input
@@ -128,7 +128,7 @@ export const App: React.FC = () => {
             {rawFiles.length > 0 && (
               <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-6 space-y-6 shadow-2xl">
                 <div className="flex items-center gap-2 border-b border-[#24242A] pb-3 text-sm font-bold text-white">
-                  <Sliders className="w-4 h-4 text-[#A855F7]" />
+                  <Sliders className="w-4 h-4 text-[#FF5722]" />
                   <span>Image Settings & Rename Rules</span>
                 </div>
 
@@ -139,7 +139,7 @@ export const App: React.FC = () => {
                     <select
                       value={options.outputFormat}
                       onChange={(e) => setOptions({ ...options, outputFormat: e.target.value as OutputFormat })}
-                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#A855F7] focus:outline-none"
+                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#FF5722] focus:outline-none"
                     >
                       <option value="image/jpeg">JPG (Web Optimized)</option>
                       <option value="image/webp">WebP (Next-Gen Smallest)</option>
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
                     <select
                       value={options.maxDimension}
                       onChange={(e) => setOptions({ ...options, maxDimension: e.target.value as MaxDimension })}
-                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#A855F7] focus:outline-none"
+                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#FF5722] focus:outline-none"
                     >
                       <option value="ORIGINAL">Original Dimensions</option>
                       <option value="2000">2000px (High Res Catalog)</option>
@@ -167,7 +167,7 @@ export const App: React.FC = () => {
                   <div className="space-y-1 sm:col-span-2">
                     <div className="flex justify-between font-bold text-gray-300">
                       <span>Image Quality Compression</span>
-                      <span className="text-[#A855F7] font-mono">{Math.round(options.quality * 100)}%</span>
+                      <span className="text-[#FF5722] font-mono">{Math.round(options.quality * 100)}%</span>
                     </div>
                     <input
                       type="range"
@@ -176,7 +176,7 @@ export const App: React.FC = () => {
                       step="0.05"
                       value={options.quality}
                       onChange={(e) => setOptions({ ...options, quality: parseFloat(e.target.value) })}
-                      className="w-full accent-[#A855F7]"
+                      className="w-full accent-[#FF5722]"
                     />
                   </div>
 
@@ -196,7 +196,7 @@ export const App: React.FC = () => {
                           onClick={() => setOptions({ ...options, namingPattern: p.id as NamingPattern })}
                           className={`p-3 rounded-xl border text-left transition-all ${
                             options.namingPattern === p.id
-                              ? 'bg-[#A855F7]/10 border-[#A855F7] text-white'
+                              ? 'bg-[#FF5722]/10 border-[#FF5722] text-white'
                               : 'bg-[#0E0E10] border-[#24242A] text-gray-400 hover:border-gray-600'
                           }`}
                         >
@@ -215,14 +215,14 @@ export const App: React.FC = () => {
                       value={options.customPrefix}
                       onChange={(e) => setOptions({ ...options, customPrefix: e.target.value })}
                       placeholder="e.g. TEE-BLK-M"
-                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#A855F7] focus:outline-none text-xs font-mono"
+                      className="w-full bg-[#0E0E10] border border-[#24242A] text-white rounded-lg p-2.5 focus:border-[#FF5722] focus:outline-none text-xs font-mono"
                     />
                   </div>
                 </div>
 
                 <button
                   onClick={handleStartProcessing}
-                  className="w-full py-4 rounded-2xl bg-[#A855F7] hover:bg-[#b56ef8] text-white font-bold text-sm shadow-xl shadow-[#A855F7]/20 flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-2xl bg-[#FF5722] hover:bg-[#b56ef8] text-white font-bold text-sm shadow-xl shadow-[#FF5722]/20 flex items-center justify-center gap-2"
                 >
                   <span>Process {rawFiles.length} Images</span>
                   <ArrowRight className="w-4 h-4" />
@@ -235,7 +235,7 @@ export const App: React.FC = () => {
         {/* STEP 2: PROCESSING ANIMATION */}
         {step === 2 && isProcessing && (
           <div className="bg-[#151518] border border-[#24242A] rounded-3xl p-12 text-center space-y-6 max-w-xl mx-auto shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 text-[#A855F7] flex items-center justify-center mx-auto animate-spin">
+            <div className="w-16 h-16 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] flex items-center justify-center mx-auto animate-spin">
               <RefreshCw className="w-8 h-8" />
             </div>
 
@@ -246,7 +246,7 @@ export const App: React.FC = () => {
 
             <div className="w-full bg-[#0E0E10] rounded-full h-3 overflow-hidden border border-[#24242A]">
               <div
-                className="bg-gradient-to-r from-[#A855F7] to-[#00F5A0] h-full transition-all duration-200"
+                className="bg-gradient-to-r from-[#FF5722] to-[#00F5A0] h-full transition-all duration-200"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
