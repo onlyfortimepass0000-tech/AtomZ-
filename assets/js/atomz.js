@@ -405,59 +405,85 @@
 })();
 
 /* ==========================================================================
-   INTRO LOADING ANIMATION (Center Logo Shrink & Fly to Top-Left)
+   PROGRESSIVE-BLUR LOGO TRANSITION (Reference 2 Spec)
+   - Centred together
+   - Softness/blur resolves smoothly into sharp state
+   - Shallow dimensional movement settling into static state
+   - Fully removes overlay and never replays on every navigation
    ========================================================================== */
-function runIntroLoader() {
+function runProgressiveBlurLogoIntro() {
   const overlay = document.getElementById('introLoaderOverlay');
-  const loaderLogo = document.getElementById('introLoaderLogo');
-  const targetLogo = document.querySelector('.brand__logo') || 
-                     document.querySelector('.brand img') || 
-                     document.querySelector('header img') || 
-                     document.querySelector('header a.brand') || 
-                     document.querySelector('header .portal-logo') || 
-                     document.querySelector('header a');
+  const logoWrap = document.getElementById('introLoaderLogoWrap') || document.querySelector('.intro-loader-logo-wrap');
+  const brandText = document.getElementById('introLoaderBrandText');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!overlay || !loaderLogo) return;
+  if (!overlay) return;
 
-  // Reveal brand text in center loader briefly
-  setTimeout(() => {
-    overlay.classList.add('show-text');
-  }, 150);
-
-  // Logo starts flying to top-left corner
-  setTimeout(() => {
-    overlay.classList.add('animating');
-
-    if (targetLogo) {
-      const loaderRect = loaderLogo.getBoundingClientRect();
-      const targetRect = targetLogo.getBoundingClientRect();
-
-      const dx = targetRect.left + (targetRect.width / 2) - (loaderRect.left + (loaderRect.width / 2));
-      const dy = targetRect.top + (targetRect.height / 2) - (loaderRect.top + (loaderRect.height / 2));
-      const scale = Math.max(0.12, targetRect.width / loaderRect.width);
-
-      loaderLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
-    } else {
-      loaderLogo.style.transform = `translate(calc(-50vw + 60px), calc(-50vh + 35px)) scale(0.15)`;
-    }
-  }, 450);
-
-  // As logo reaches top-left corner: fade out overlay and trigger brand text slide-in animation
-  setTimeout(() => {
+  // Don't replay if already visited in this session
+  const INTRO_SHOWN_KEY = 'atomz-intro-completed';
+  if (sessionStorage.getItem(INTRO_SHOWN_KEY) || reduceMotion) {
     overlay.classList.add('done');
+    overlay.remove();
+    return;
+  }
 
-    const brandEl = document.querySelector('.brand') || document.querySelector('header .font-headline-md');
-    if (brandEl) {
-      brandEl.classList.add('brand-text-reveal');
-    }
-  }, 1150);
+  // Initial stage: slight softness around logo, shallow offset translateY(8px), scale 0.98
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      if (logoWrap) logoWrap.classList.add('resolved');
+      if (brandText) brandText.classList.add('resolved');
+    }, 80);
+
+    // After focus resolves over 450ms, clean exit over 200ms
+    setTimeout(() => {
+      overlay.classList.add('exiting');
+      try { sessionStorage.setItem(INTRO_SHOWN_KEY, 'true'); } catch (e) {}
+
+      setTimeout(() => {
+        overlay.classList.add('done');
+        overlay.remove();
+      }, 220);
+    }, 650);
+  });
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', runIntroLoader);
+  document.addEventListener('DOMContentLoaded', runProgressiveBlurLogoIntro);
 } else {
-  runIntroLoader();
+  runProgressiveBlurLogoIntro();
 }
+
+/* ==========================================================================
+   PAGE ENTRANCE & COORDINATED INTERNAL NAVIGATION TRANSITIONS (Spec 8)
+   ========================================================================== */
+(function initPageTransitions() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  document.body.classList.add('page-entered');
+
+  // Intercept internal page link clicks for smooth 110ms exit
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+    if (link.getAttribute('target') === '_blank' || link.hasAttribute('download')) return;
+
+    try {
+      const targetUrl = new URL(href, window.location.href);
+      if (targetUrl.origin === window.location.origin) {
+        e.preventDefault();
+        document.documentElement.classList.add('page-transitioning');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 110);
+      }
+    } catch (err) {}
+  });
+})();
 
 /* ==========================================================================
    ATOMZ atom ↔ legend highlight sync (progressive enhancement)
@@ -478,37 +504,7 @@ if (document.readyState === 'loading') {
   });
 })();
 
-/* ==========================================================================
-   SUBTLE CLICK SOUND EFFECT GENERATOR (WEB AUDIO API)
-   ========================================================================== */
-function playClickSound() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(1200, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(240, ctx.currentTime + 0.03);
-    
-    gain.gain.setValueAtTime(0.08, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
-    
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.03);
-  } catch (e) {}
-}
-
-document.addEventListener('click', function(e) {
-  const target = e.target.closest('button, a, .portal-card, [role="button"], input[type="submit"]');
-  if (target) {
-    playClickSound();
-  }
-});
+/* Silent site per Spec 14 */
 
 /* ==========================================================================
    CONTINUOUS BRAND RIBBON: STATIC ANCHOR + SUBTLE TRAIN CYCLING PROGRESS

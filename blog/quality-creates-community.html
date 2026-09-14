@@ -1,144 +1,114 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Opportunities in Agency Delivery — ATOMZ Research</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #1f2937;
-        }
-        h1, h2, h3, h4, h5 {
-            font-family: 'Instrument Sans', sans-serif;
-            color: #111827;
-        }
-        p {
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            color: #374151;
-        }
-        /* Custom Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            font-size: 0.875rem;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-            vertical-align: top;
-        }
-        th {
-            background-color: rgba(249, 250, 251, 0.8);
-            font-weight: 600;
-            color: #111827;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .toc-link {
-            transition: all 0.2s ease;
-        }
-        .toc-link:hover {
-            color: #2563eb;
-            transform: translateX(4px);
-        }
-        .citation {
-            color: #4b5563;
-            font-size: 0.85em;
-            vertical-align: super;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .citation:hover {
-            color: #2563eb;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
-    </style>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Software Opportunities in Agency Delivery — ATOMZ Research</title>
+  <meta name="description" content="An investigation into unpriced client changes, content readiness, and campaign link verification in agency delivery workflows." />
+  <meta name="theme-color" content="#F5F5F0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://atomz.online/blog/quality-creates-community.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/css/atomz.css" />
+  <style>
+    /* Specific table styles inside research paper */
+    .research-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+    }
+    .research-body th, .research-body td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--hairline-soft);
+      vertical-align: top;
+    }
+    .research-body th {
+      background: rgba(0, 0, 0, 0.03);
+      font-weight: 700;
+      color: var(--fg);
+    }
+    [data-theme="dark"] .research-body th {
+      background: rgba(255, 255, 255, 0.03);
+    }
+  </style>
 </head>
-<body class="relative min-h-screen antialiased bg-gray-50 selection:bg-blue-100 selection:text-blue-900">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Interactive Background Canvas -->
-    <canvas id="network-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html" aria-label="ATOMZ home">ATOM<span class="brand__z">Z</span></a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../index.html#services">Services</a>
+        <a href="../tools.html">Tools</a>
+        <a href="../horizon-preview.html">Horizon</a>
+        <a href="../aroha.html">AROHA</a>
+        <a href="../index.html#writing">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__right">
+        <button class="theme-toggle" type="button" aria-label="Toggle dark theme" aria-pressed="false">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a class="btn nav__cta" href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20talk%20about%20growth." target="_blank" rel="noopener">
+          <span class="btn__label-full">Talk on WhatsApp</span>
+          <span class="btn__label-short">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <div class="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-10 relative z-10 max-w-7xl">
-        
+  <main id="main">
+    <article class="research-article wrap">
+      <!-- Article Header -->
+      <header class="research-header">
+        <div class="research-kicker-badge">
+          <span>Research Paper · Agency Workflows</span>
+        </div>
+        <h1 class="research-title">Software Opportunities in Agency Delivery</h1>
+        <p class="research-subtitle">
+          An investigation into unpriced client changes, content readiness, and campaign link verification in modern agency delivery workflows.
+        </p>
+      </header>
+
+      <!-- Layout: Sticky TOC + Reading Column -->
+      <div class="research-layout">
         <!-- Sidebar Navigation -->
-        <aside class="w-full lg:w-1/4 hidden lg:block">
-            <div class="sticky top-8 p-6 glass-panel rounded-2xl shadow-xl">
-                <a href="../index.html#writing" class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-white transition-colors mb-6">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to ATOMZ
-                </a>
-                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-6">Contents</h3>
-                <nav class="flex flex-col space-y-3 text-sm font-medium text-gray-600">
-                    <a href="#introduction" class="toc-link">Opportunities in Agency Delivery</a>
-                    <a href="#market-screen" class="toc-link">Market Screen & Evidence Limits</a>
-                    <a href="#candidate-rejection" class="toc-link">Candidate Rejection & Opening</a>
-                    <a href="#problem-1" class="toc-link">Problem 1: Extra Work Approval</a>
-                    <a href="#problem-1-economics" class="toc-link ml-4 text-gray-500">Economics & Intervention</a>
-                    <a href="#problem-1-validation" class="toc-link ml-4 text-gray-500">Validation & Failure Conditions</a>
-                    <a href="#problem-2" class="toc-link">Problem 2: Content Readiness</a>
-                    <a href="#problem-2-economics" class="toc-link ml-4 text-gray-500">Economics & Intervention</a>
-                    <a href="#problem-2-validation" class="toc-link ml-4 text-gray-500">Validation & Failure Conditions</a>
-                    <a href="#problem-3" class="toc-link">Problem 3: Campaign Links</a>
-                    <a href="#problem-3-economics" class="toc-link ml-4 text-gray-500">Economics & Intervention</a>
-                    <a href="#problem-3-validation" class="toc-link ml-4 text-gray-500">Validation & Failure Conditions</a>
-                    <a href="#locating-buyers" class="toc-link">Locating Potential Buyers</a>
-                    <a href="#finalist-scoring" class="toc-link">Finalist Scoring</a>
-                    <a href="#infrastructure" class="toc-link">Infrastructure & Costs</a>
-                    <a href="#execution" class="toc-link">Three-Week Execution</a>
-                    <a href="#sources" class="toc-link">Sources</a>
-                </nav>
-            </div>
+        <aside class="research-toc" aria-label="Table of contents">
+          <div class="research-toc-title">Contents</div>
+          <nav class="research-toc-nav">
+            <a class="research-toc-link" href="#introduction">1. Executive Overview</a>
+            <a class="research-toc-link" href="#market-screen">2. Market Screen &amp; Evidence</a>
+            <a class="research-toc-link" href="#candidate-rejection">3. Candidate Rejection</a>
+            <a class="research-toc-link" href="#problem-1">4. Extra Work Approval</a>
+            <a class="research-toc-link" href="#problem-2">5. Content Readiness</a>
+            <a class="research-toc-link" href="#problem-3">6. Campaign Links</a>
+            <a class="research-toc-link" href="#locating-buyers">7. Locating Potential Buyers</a>
+            <a class="research-toc-link" href="#finalist-scoring">8. Finalist Scoring</a>
+            <a class="research-toc-link" href="#infrastructure">9. Infrastructure &amp; Costs</a>
+            <a class="research-toc-link" href="#execution">10. Three-Week Execution</a>
+            <a class="research-toc-link" href="#sources">11. Research Sources</a>
+          </nav>
         </aside>
 
-        <!-- Main Content Canvas -->
-        <main class="w-full lg:w-3/4">
-            <!-- Mobile Back Link -->
-            <div class="lg:hidden mb-6">
-                <a href="../index.html#writing" class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 text-white transition-colors">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to ATOMZ
-                </a>
-            </div>
-
-            <article class="glass-panel rounded-3xl shadow-2xl p-8 md:p-16 lg:p-20">
+        <!-- Reading Content -->
+        <div class="research-body">
+          <div id="introduction"></div>
+          
                 
-                <header class="mb-16 border-b border-gray-200 pb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-900" id="introduction">Software Opportunities in Agency Delivery</h1>
-                    <p class="text-xl text-gray-600 font-light font-serif">Research paper based on the file <em>Agency_Workflow_Opportunity_Research.pdf</em></p>
-                </header>
+                
 
                 <!-- Section: Introduction -->
                 <section class="mb-16">
@@ -874,106 +844,33 @@
                         <li id="source-39">Reddit r/Digital Marketing. Agency owners: how are you handling client onboarding and reporting?. 3 October 2025.</li>
                     </ol>
                 </section>
-            </article>
-            <div class="h-24"></div> <!-- Padding at bottom -->
-        </main>
+            
+
+          <div style="margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--hairline);">
+            <a class="back-link" href="../index.html#writing">
+              <svg width="20" height="14" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M25 7H2M8 1 2 7l6 6"/></svg>
+              <span>Back to Writing &amp; Research</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__bottom" style="border-top: none;">
+        <span>© 2026 ATOMZ · atomz.online</span>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="../index.html#services">Services</a>
+          <a href="../tools.html">Tools</a>
+          <a href="../index.html#writing">Writing</a>
+          <a href="https://wa.me/919099939034" target="_blank" rel="noopener">WhatsApp</a>
+        </nav>
+      </div>
     </div>
+  </footer>
 
-    <!-- Script for Background Particle Canvas -->
-    <script>
-        const canvas = document.getElementById('network-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        let particlesArray = [];
-        const numberOfParticles = 80;
-
-        // Set Canvas Size
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Create Particle Class
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = (Math.random() * 1) - 0.5;
-                this.speedY = (Math.random() * 1) - 0.5;
-                this.color = 'rgba(148, 163, 184, 0.6)'; // Slate gray
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Bounce off edges
-                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        // Initialize particles
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        // Connect particles with lines
-        function connect() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) 
-                                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = `rgba(148, 163, 184, ${opacityValue * 0.15})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        // Animate loop
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connect();
-        }
-
-        // Setup mouse interactivity
-        let mouse = { x: null, y: null, radius: 150 }
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
-
-        init();
-        animate();
-    </script>
+  <script src="../assets/js/atomz.js" defer></script>
 </body>
 </html>

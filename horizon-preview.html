@@ -10,7 +10,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Hanken+Grotesk:wght@400..700&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600;700&family=Sora:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" />
 
   <link rel="stylesheet" href="assets/css/atomz.css" />
   <style>
@@ -67,7 +67,7 @@
     }
     .preview-title {
       font-size: clamp(2rem, 4vw, 3.5rem);
-      font-family: 'Sora', sans-serif;
+      font-family: var(--font-display);
       font-weight: 800;
       letter-spacing: -0.03em;
       margin-bottom: var(--s-2);
@@ -98,7 +98,7 @@
       max-width: 580px;
       margin: 0 auto;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 102, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      animation: floatPortal 8s ease-in-out infinite alternate;
+      /* Stationary dimensional surface */
     }
 
     @keyframes floatPortal {
@@ -143,7 +143,7 @@
       background: #FF6600 !important;
       color: #000000 !important;
       font-weight: 800 !important;
-      font-family: 'Sora', sans-serif;
+      font-family: var(--font-display);
       padding: 16px 24px;
       border-radius: 12px;
       border: none;
@@ -289,9 +289,9 @@
       </div>
 
       <!-- Floating Passkey Access Card ("Access Yourself") -->
-      <div class="preview-passkey-card" data-reveal style="--reveal-delay:.12s">
-        <h2 style="font-size:1.8rem; font-family:'Sora', sans-serif; font-weight:700; margin:0 0 6px 0; color:#FFFFFF;">Access Yourself</h2>
-        <p style="color:#A0A0A0; font-size:0.95rem; margin:0 0 20px 0;">Type your assigned client passkey to view your personalized performance stats report.</p>
+      <div class="preview-passkey-card raised-surface" data-reveal style="--reveal-delay:.12s">
+        <h2 style="font-size:1.8rem; font-family:var(--font-display); font-weight:700; margin:0 0 6px 0; color:#FFFFFF;">Client Portal Access</h2>
+        <p style="color:#A0A0A0; font-size:0.95rem; margin:0 0 20px 0;">Enter your client access code to view your ATOMZ report.</p>
         
         <form id="passkeyForm" onsubmit="return false;">
           <div class="passkey-input-box">
