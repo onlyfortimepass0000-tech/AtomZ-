@@ -3,41 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-<title>AROHA by ATOMZ — Brand Enterprise Console (Novu Athletic)</title>
-<!-- Google Fonts: Sora, Montserrat, JetBrains Mono, Geist, Newsreader -->
+<title>AROHA Brand Console — Campaign & Creator Operations</title>
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Montserrat:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-
-<style>
-@layer base {
-  html, body { width: 100vw; margin: 0; padding: 0; background-color: #121318; font-family: 'Montserrat', 'Geist', sans-serif; }
-  body { overscroll-behavior: none; }
-  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
-  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
-  main > :first-child { margin-top: 0 !important; }
-  main > :last-child { margin-bottom: 0 !important; }
-}
-::-webkit-scrollbar { display: none; }
-.font-sora { font-family: 'Sora', sans-serif; }
-.font-mono-code { font-family: 'JetBrains Mono', monospace; }
-
-.key-input-box {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #1a1b21;
-  border: 1px solid #3b4a40;
-  border-radius: 16px;
-  padding: 6px 8px 6px 16px;
-  transition: all 0.2s;
-}
-.key-input-box:focus-within {
-  border-color: #00f5a0;
-  box-shadow: 0 0 20px rgba(0, 245, 160, 0.2);
-}
-</style>
 
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -46,753 +17,743 @@ tailwind.config = {
   darkMode: "class",
   theme: {
     extend: {
-      "colors": {
-        "on-tertiary": "#2f3132",
-        "tertiary-container": "#d7d7d9",
-        "inverse-on-surface": "#2f3036",
-        "on-primary-container": "#006b43",
-        "surface-container": "#1e1f25",
-        "surface-bright": "#38393f",
-        "on-tertiary-container": "#5c5d5f",
-        "on-error-container": "#ffdad6",
-        "on-primary": "#003921",
-        "on-background": "#e3e1e9",
-        "outline": "#849588",
-        "tertiary": "#f3f3f5",
+      colors: {
         "primary": "#cdffde",
-        "error-container": "#93000a",
+        "primary-container": "#00f5a0",
+        "on-primary-container": "#006b43",
+        "on-primary": "#003921",
+        "surface": "#121318",
+        "surface-container": "#1e1f25",
         "surface-container-low": "#1a1b21",
+        "surface-container-high": "#292a2f",
         "surface-container-highest": "#34343a",
         "on-surface": "#e3e1e9",
-        "tertiary-fixed-dim": "#c6c6c8",
-        "primary-container": "#00f5a0",
-        "tertiary-fixed": "#e2e2e4",
-        "secondary": "#c2c1ff",
         "on-surface-variant": "#b9cbbd",
-        "on-secondary-fixed": "#0c006b",
-        "on-primary-fixed": "#002111",
-        "error": "#ffb4ab",
-        "inverse-primary": "#006c44",
-        "surface-container-lowest": "#0d0e13",
-        "surface-container-high": "#292a2f",
-        "on-tertiary-fixed": "#1a1c1d",
-        "background": "#121318",
-        "on-primary-fixed-variant": "#005232",
-        "primary-fixed": "#50ffaf",
+        "outline": "#849588",
         "outline-variant": "#3b4a40",
-        "secondary-fixed-dim": "#c2c1ff",
-        "on-secondary-container": "#b1b1ff",
-        "surface-dim": "#121318",
-        "primary-fixed-dim": "#00e293",
-        "secondary-container": "#3630bf",
-        "surface-variant": "#34343a",
-        "on-secondary-fixed-variant": "#332dbc",
-        "on-tertiary-fixed-variant": "#454749",
-        "on-error": "#690005",
-        "surface-tint": "#00e293",
-        "secondary-fixed": "#e2dfff",
-        "on-secondary": "#1800a7",
-        "surface": "#121318",
-        "inverse-surface": "#e3e1e9"
+        "secondary": "#c2c1ff",
+        "secondary-container": "#3630bf"
       },
-      "borderRadius": {
-        "DEFAULT": "1rem",
-        "lg": "2rem",
-        "xl": "3rem",
-        "full": "9999px"
-      },
-      "spacing": {
-        "spacing-sm": "0.75rem",
-        "spacing-2xl": "3rem",
-        "spacing-3xl": "4.5rem",
-        "spacing-md": "1rem",
-        "margin-desktop": "3rem",
-        "spacing-lg": "1.5rem",
-        "gutter-desktop": "1.5rem",
-        "margin-mobile": "1.25rem",
-        "spacing-xs": "0.5rem",
-        "gutter-mobile": "1rem",
-        "spacing-xl": "2rem",
-        "spacing-3xs": "0.125rem",
-        "spacing-2xs": "0.25rem"
-      },
-      "fontFamily": {
-        "metric-sm": ["Geist", "Sora"],
-        "display-md": ["Newsreader", "Sora"],
-        "display-lg": ["Newsreader", "Sora"],
-        "title-md": ["Sora", "Geist"],
-        "body-lg": ["Montserrat", "Geist"],
-        "headline-lg": ["Sora", "Newsreader"],
-        "headline-sm": ["Sora", "Geist"],
-        "label-md": ["JetBrains Mono", "Geist"],
-        "body-md": ["Montserrat", "Geist"],
-        "display-md-mobile": ["Newsreader", "Sora"],
-        "metric-xl": ["Geist", "Sora"],
-        "label-xs": ["JetBrains Mono", "Geist"],
-        "display-lg-mobile": ["Newsreader", "Sora"]
-      },
-      "fontSize": {
-        "metric-sm": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
-        "display-md": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
-        "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "400"}],
-        "title-md": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "500"}],
-        "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400"}],
-        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "500"}],
-        "headline-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-        "body-md": ["14px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400"}],
-        "display-md-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
-        "metric-xl": ["44px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "300"}],
-        "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
-        "display-lg-mobile": ["38px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "400"}]
+      fontFamily: {
+        "headline": ["Instrument Sans", "Sora", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"]
       }
     }
   }
 }
 </script>
+
+<style>
+body {
+  background-color: #121318;
+  color: #e3e1e9;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.tab-btn.active {
+  background: #00f5a0;
+  color: #003921;
+  font-weight: 700;
+}
+.status-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.status-Invited { background: rgba(0, 245, 160, 0.12); color: #00f5a0; border: 1px solid rgba(0, 245, 160, 0.3); }
+.status-Accepted { background: rgba(194, 193, 255, 0.12); color: #c2c1ff; border: 1px solid rgba(194, 193, 255, 0.3); }
+.status-ContentDue, .status-Content_Due { background: rgba(255, 181, 150, 0.12); color: #ffb596; border: 1px solid rgba(255, 181, 150, 0.3); }
+.status-Submitted { background: rgba(255, 215, 0, 0.12); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
+.status-RevisionRequired, .status-Revision_Required { background: rgba(255, 77, 77, 0.12); color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.3); }
+.status-Approved { background: rgba(0, 245, 160, 0.2); color: #00f5a0; border: 1px solid #00f5a0; }
+.status-Published { background: rgba(0, 156, 252, 0.15); color: #009cfc; border: 1px solid rgba(0, 156, 252, 0.3); }
+.status-Paid { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid #22c55e; }
+.status-Declined { background: rgba(100, 100, 100, 0.2); color: #888; border: 1px solid #444; }
+</style>
 </head>
-<body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-fixed">
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col">
 
-<!-- Top Fixed Header -->
-<header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.35)] border-b border-outline-variant/40">
-  <div class="h-16 px-margin-mobile flex items-center justify-between">
-    
-    <div class="flex items-center gap-spacing-sm">
-      <a href="aroha.html" class="brand flex items-center gap-2 text-on-surface no-underline">
-        <div class="flex flex-col">
-          <div class="flex items-center gap-spacing-xs">
-            <span class="font-sora text-headline-sm text-on-surface tracking-tight leading-none font-bold">Aroha <span class="text-primary-container text-xs font-mono font-normal">by ATOMZ</span></span>
-            <span class="font-mono text-label-xs uppercase tracking-widest text-on-surface-variant/80 px-spacing-2xs py-spacing-3xs rounded-full bg-surface-container-high border border-outline-variant/60">Brand Portal</span>
-          </div>
-          <div class="flex items-center gap-spacing-3xs mt-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_#00f5a0]"></span>
-            <span class="font-mono text-[10px] text-primary-container font-semibold tracking-wide uppercase">Novu Athletic Enterprise</span>
-          </div>
-        </div>
-      </a>
-    </div>
+<!-- Switcher / Demo Role Bar -->
+<div class="bg-surface-container-highest border-b border-outline-variant px-4 py-2 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+  <div class="flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+    <span class="text-primary-container font-bold">PORTAL ACTIVE:</span>
+    <span class="text-white font-bold">BRAND & AGENCY CONSOLE</span>
+    <span class="text-on-surface-variant hidden sm:inline">| Demo Client: Novu Athletic</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="aroha-creator.html" class="inline-flex items-center gap-1.5 bg-surface-container hover:bg-surface-container-high border border-outline px-2.5 py-1 rounded-lg text-white hover:text-primary-container transition-all">
+      <span class="material-symbols-outlined text-sm">swap_horiz</span>
+      <span>Switch to Creator Portal</span>
+    </a>
+    <a href="aroha.html" class="text-on-surface-variant hover:text-white transition-colors">Exit</a>
+  </div>
+</div>
 
-    <!-- Navigation Switchers -->
-    <div class="flex items-center gap-spacing-xs">
-      <a href="aroha.html" class="px-spacing-xs py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-mono text-[11px] border border-outline-variant transition-all">
-        ← Hub
-      </a>
-    </div>
+<!-- Main Top Header -->
+<header class="border-b border-outline-variant bg-surface-container-low/90 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <a href="aroha.html" class="flex items-center gap-2 no-underline">
+      <span class="font-headline font-extrabold text-lg text-white">AROHA</span>
+      <span class="font-mono text-[9px] font-bold bg-primary-container/10 text-primary-container border border-primary-container/30 px-2 py-0.5 rounded">BRAND CONSOLE</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 bg-surface-container-high p-1 rounded-xl">
+      <button onclick="switchTab('campaigns')" id="tab-btn-campaigns" class="tab-btn active px-3.5 py-1.5 rounded-lg text-xs font-headline transition-all">
+        Campaign Pipeline
+      </button>
+      <button onclick="switchTab('creators')" id="tab-btn-creators" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-headline text-on-surface-variant hover:text-white transition-all">
+        Creator Discovery & Vetting
+      </button>
+      <button onclick="switchTab('report')" id="tab-btn-report" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs font-headline text-on-surface-variant hover:text-white transition-all">
+        Campaign Reports
+      </button>
+    </nav>
+  </div>
 
+  <div class="flex items-center gap-3">
+    <button onclick="openNewBriefModal()" class="bg-primary-container hover:bg-[#00d98e] text-on-primary font-headline font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 shadow-lg shadow-primary-container/20">
+      <span class="material-symbols-outlined text-sm">add_circle</span>
+      <span>Create Brief</span>
+    </button>
   </div>
 </header>
 
-<main class="flex-1 flex flex-col relative w-full pt-28 pb-24 bg-surface max-w-4xl mx-auto">
+<!-- Mobile Sub-Navigation -->
+<div class="md:hidden flex items-center justify-around border-b border-outline-variant bg-surface-container-high p-1 text-xs font-headline">
+  <button onclick="switchTab('campaigns')" id="mob-tab-btn-campaigns" class="tab-btn active flex-1 py-2 text-center rounded-lg">
+    Campaigns
+  </button>
+  <button onclick="switchTab('creators')" id="mob-tab-btn-creators" class="tab-btn flex-1 py-2 text-center text-on-surface-variant rounded-lg">
+    Creators
+  </button>
+  <button onclick="switchTab('report')" id="mob-tab-btn-report" class="tab-btn flex-1 py-2 text-center text-on-surface-variant rounded-lg">
+    Reports
+  </button>
+</div>
 
-  <!-- ================= BRAND DASHBOARD CONTENT ================= -->
-  <div id="brandDashboardContent" class="flex flex-col w-full">
+<!-- Main Content Area -->
+<main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8">
+
+  <!-- ==================== TAB 1: CAMPAIGN PIPELINE ==================== -->
+  <section id="tab-campaigns" class="space-y-6">
     
-    <!-- Editorial Top Canvas Context -->
-    <section class="px-margin-mobile pt-spacing-sm pb-spacing-md">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-spacing-xs">
-          <span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_#00f5a0]"></span>
-          <span class="font-mono text-label-xs uppercase tracking-widest text-primary-container">Live Intelligence Deck</span>
+    <!-- Executive KPI Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-4">
+        <span class="text-xs font-mono text-on-surface-variant">ACTIVE COLLABORATIONS</span>
+        <div id="brandActiveCount" class="text-2xl font-bold font-headline text-white mt-1">3</div>
+        <span class="text-[11px] font-mono text-primary-container">In flight across creators</span>
+      </div>
+      <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-4">
+        <span class="text-xs font-mono text-on-surface-variant">DRAFTS AWAITING REVIEW</span>
+        <div id="brandReviewCount" class="text-2xl font-bold font-headline text-yellow-400 mt-1">1</div>
+        <span class="text-[11px] font-mono text-yellow-400">Requires brand feedback</span>
+      </div>
+      <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-4">
+        <span class="text-xs font-mono text-on-surface-variant">DELIVERED VIEWS</span>
+        <div id="brandDeliveredViews" class="text-2xl font-bold font-headline text-[#c2c1ff] mt-1">284K</div>
+        <span class="text-[11px] font-mono text-on-surface-variant">Across published content</span>
+      </div>
+      <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-4">
+        <span class="text-xs font-mono text-on-surface-variant">BLENDED CPV</span>
+        <div id="brandBlendedCPV" class="text-2xl font-bold font-headline text-primary-container mt-1">₹0.12</div>
+        <span class="text-[11px] font-mono text-on-surface-variant">Cost per verified view</span>
+      </div>
+    </div>
+
+    <!-- Campaigns List -->
+    <div class="bg-surface-container-low border border-outline-variant rounded-2xl overflow-hidden">
+      <div class="p-4 sm:p-5 border-b border-outline-variant flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="font-headline text-lg font-bold text-white">All Brand Campaigns</h2>
+          <p class="text-xs font-mono text-on-surface-variant">Review video submissions, timestamp revision requests & approve payouts</p>
         </div>
-        <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant/70">Q3 Enterprise Cohort</span>
+        <div class="flex items-center gap-2">
+          <select id="brandStatusFilter" onchange="renderBrandCampaigns()" class="bg-surface-container-high border border-outline-variant text-xs font-mono text-white rounded-xl px-3 py-1.5 focus:border-primary-container outline-none">
+            <option value="ALL">All Stages</option>
+            <option value="Invited">Invited (Pending Response)</option>
+            <option value="Accepted">Accepted / In Production</option>
+            <option value="Submitted">Draft Submitted</option>
+            <option value="Revision Required">Revision Requested</option>
+            <option value="Approved">Approved</option>
+            <option value="Published">Published</option>
+            <option value="Paid">Paid (Archived)</option>
+          </select>
+        </div>
       </div>
 
-      <div class="mt-spacing-xs">
-        <h1 class="font-sora text-headline-lg text-on-surface tracking-tight leading-tight font-extrabold">
-          Campaign Mandate & Creator Parity
-        </h1>
-        <p class="font-body-md text-body-md text-on-surface-variant mt-spacing-2xs">
-          Algorithmic matching engine calibrated for Novu Athletic high-retention performance allocations.
-        </p>
+      <div id="brandCampaignsList" class="divide-y divide-outline-variant">
+        <!-- Rendered by JS -->
       </div>
+    </div>
 
-      <!-- Live Telemetry KPI Bar -->
-      <div class="mt-spacing-md grid grid-cols-2 gap-spacing-xs">
-        <div class="bg-surface-container-low rounded-DEFAULT p-spacing-sm shadow-sm flex flex-col justify-between border border-outline-variant/40">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Active Escrow</span>
-            <span class="material-symbols-outlined text-primary-container text-[16px]">account_balance</span>
-          </div>
-          <div class="mt-spacing-xs flex items-baseline gap-spacing-2xs">
-            <span class="font-sora text-metric-sm text-on-surface font-light">$142.5K</span>
-            <span class="font-mono text-label-xs text-primary-container">+14.2%</span>
-          </div>
-          <span class="font-mono text-label-xs text-on-surface-variant/70 mt-spacing-3xs">19 contracted nodes</span>
-        </div>
+  </section>
 
-        <div class="bg-surface-container-low rounded-DEFAULT p-spacing-sm shadow-sm flex flex-col justify-between border border-outline-variant/40">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Target Accuracy</span>
-            <span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
-          </div>
-          <div class="mt-spacing-xs flex items-baseline gap-spacing-2xs">
-            <span class="font-sora text-metric-sm text-on-surface font-light">118%</span>
-            <span class="font-mono text-label-xs text-primary-container">Over-indexed</span>
-          </div>
-          <span class="font-mono text-label-xs text-on-surface-variant/70 mt-spacing-3xs">Benchmark 4.8x ROAS</span>
-        </div>
+  <!-- ==================== TAB 2: CREATOR DISCOVERY & VETTING ==================== -->
+  <section id="tab-creators" class="hidden space-y-6">
+    
+    <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h2 class="font-headline text-xl font-bold text-white">Verified Creator Directory</h2>
+        <p class="text-xs font-mono text-on-surface-variant">Transparent performance statistics: Avg Views, Reach, ER%, and Calculated CPV</p>
       </div>
-    </section>
+      <div class="flex items-center gap-2">
+        <input type="text" id="creatorSearchInput" oninput="renderCreatorsDirectory()" placeholder="Filter by niche, name, city..." class="bg-surface-container-high border border-outline-variant text-xs font-mono text-white rounded-xl px-3.5 py-2 w-48 sm:w-64 focus:border-primary-container outline-none"/>
+      </div>
+    </div>
 
-    <!-- Section 01: Criteria Setup Card (Criteria Builder) -->
-    <section class="px-margin-mobile py-spacing-xs">
-      <div class="bg-surface-container-low rounded-lg p-spacing-md shadow-md border border-outline-variant/40">
-        <div class="flex items-center justify-between pb-spacing-xs">
-          <div class="flex items-center gap-spacing-xs">
-            <div class="w-6 h-6 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
-              <span class="material-symbols-outlined text-[14px]">tune</span>
-            </div>
-            <span class="font-sora text-headline-sm text-on-surface font-bold">Criteria Specification</span>
-          </div>
-          <span class="font-mono text-label-xs bg-surface-container-high text-primary-container px-spacing-2xs py-spacing-3xs rounded-full uppercase tracking-wider border border-primary-container/30">Active Policy</span>
+    <!-- Creator Cards Grid -->
+    <div id="creatorsDirectoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Rendered by JS -->
+    </div>
+
+  </section>
+
+  <!-- ==================== TAB 3: CAMPAIGN REPORTS ==================== -->
+  <section id="tab-report" class="hidden space-y-6">
+    
+    <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-outline-variant">
+        <div>
+          <span class="text-xs font-mono text-primary-container uppercase font-bold">AUTOMATED EXECUTIVE REPORT</span>
+          <h2 class="font-headline text-2xl font-bold text-white mt-1">Campaign Performance Summary</h2>
+          <p class="text-xs font-mono text-on-surface-variant">Novu Athletic · Q3 Growth Collaborations</p>
         </div>
-
-        <!-- Criteria Item: Target Views -->
-        <div class="mt-spacing-sm pt-spacing-sm bg-surface-container/60 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-          <div class="flex justify-between items-baseline">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Min Target Reach / Reel</span>
-            <span class="font-sora text-title-md text-primary-container font-bold" id="views-label">30,000 avg</span>
-          </div>
-          <div class="mt-spacing-2xs relative flex items-center">
-            <input class="w-full h-1.5 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary-container" id="views-slider" max="60000" min="15000" step="5000" type="range" value="30000"/>
-          </div>
-          <div class="flex justify-between text-on-surface-variant/60 font-mono text-label-xs mt-spacing-3xs">
-            <span>Tier 3 (15k)</span>
-            <span class="text-primary-container font-semibold">Tier 2 Benchmark (30k)</span>
-            <span>Tier 1 (60k+)</span>
-          </div>
-        </div>
-
-        <!-- Criteria Item: Engagement Floor -->
-        <div class="mt-spacing-xs bg-surface-container/60 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-          <div class="flex justify-between items-center mb-spacing-2xs">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Engagement Rate Floor</span>
-            <span class="font-mono text-label-xs text-secondary">Cohort Avg: 3.2%</span>
-          </div>
-          <div class="grid grid-cols-3 gap-spacing-2xs" id="eng-selector">
-            <button class="eng-btn py-spacing-2xs px-spacing-xs rounded-full bg-surface-container-high text-on-surface-variant font-mono text-label-md transition-all text-center" data-eng="3.5" type="button">3.5%</button>
-            <button class="eng-btn py-spacing-2xs px-spacing-xs rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all text-center shadow-[0_0_12px_rgba(0,245,160,0.3)]" data-eng="4.0" type="button">4.0% Strict</button>
-            <button class="eng-btn py-spacing-2xs px-spacing-xs rounded-full bg-surface-container-high text-on-surface-variant font-mono text-label-md transition-all text-center" data-eng="4.5" type="button">4.5% High</button>
-          </div>
-        </div>
-
-        <!-- Category & Geo Matrix Tags -->
-        <div class="mt-spacing-xs grid grid-cols-1 gap-spacing-2xs">
-          <div class="bg-surface-container/60 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Sector Alignment</span>
-            <div class="flex flex-wrap gap-spacing-2xs mt-spacing-2xs">
-              <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-highest text-on-surface flex items-center gap-spacing-3xs">
-                <span class="w-1 h-1 rounded-full bg-primary-container"></span>Fitness & Apparel
-              </span>
-              <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-highest text-on-surface flex items-center gap-spacing-3xs">
-                <span class="w-1 h-1 rounded-full bg-secondary"></span>Recovery & Biometrics
-              </span>
-            </div>
-          </div>
-
-          <div class="bg-surface-container/60 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Demographic Clustering</span>
-              <span class="font-mono text-label-xs text-primary-container font-bold">Verified 64%</span>
-            </div>
-            <p class="font-body-md text-body-md text-on-surface mt-spacing-3xs">
-              US Metro Tier 1 (Austin, LA, NYC) • Age 25–34
-            </p>
-          </div>
-        </div>
-
-        <!-- Deliverables & Fixed Slot Escrow -->
-        <div class="mt-spacing-xs flex items-center justify-between bg-surface-container-high/60 rounded-DEFAULT p-spacing-sm border border-outline-variant/40">
-          <div>
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Contract Deliverable Unit</span>
-            <p class="font-body-md text-body-md text-on-surface font-medium mt-spacing-3xs">2x IG Reels (Hook-First) + 3x Stories</p>
-          </div>
-          <div class="text-right">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Slot Guarantee</span>
-            <p class="font-sora text-title-md text-primary-container font-bold mt-spacing-3xs">$4,500 <span class="text-on-surface-variant font-mono text-label-xs">/ creator</span></p>
-          </div>
-        </div>
-
-        <button class="w-full mt-spacing-sm py-spacing-xs px-spacing-md rounded-full bg-surface-container-highest hover:bg-surface-bright text-on-surface font-mono text-label-md uppercase tracking-wider transition-all flex items-center justify-center gap-spacing-xs border border-outline-variant cursor-pointer" id="sync-engine-btn" type="button">
-          <span class="material-symbols-outlined text-[16px] text-primary-container">sync</span>
-          <span>Sync Algorithmic Engine</span>
+        <button onclick="window.print()" class="border border-outline-variant hover:border-primary-container text-white text-xs font-mono px-4 py-2 rounded-xl transition-all flex items-center gap-2 self-start sm:self-auto">
+          <span class="material-symbols-outlined text-sm">print</span>
+          Print / Export Report
         </button>
       </div>
-    </section>
 
-    <!-- Section 02: Algorithmic Creator Matches -->
-    <section class="px-margin-mobile py-spacing-sm">
-      <div class="flex items-center justify-between mb-spacing-xs">
-        <div>
-          <div class="flex items-center gap-spacing-xs">
-            <h2 class="font-sora text-headline-sm text-on-surface font-bold">Algorithmic Creator Matches</h2>
-            <span class="font-mono text-label-xs px-spacing-2xs py-spacing-3xs rounded-full bg-primary-container text-on-primary-container font-bold" id="match-counter">3 Calibrated</span>
-          </div>
-          <p class="font-mono text-label-xs text-on-surface-variant uppercase tracking-wider mt-spacing-3xs">Parity matching Novu specifications</p>
+      <!-- Aggregated Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-surface-container p-4 rounded-xl border border-outline-variant">
+          <span class="text-[11px] font-mono text-on-surface-variant">TOTAL AD SPEND</span>
+          <div class="text-2xl font-bold font-headline text-white mt-1">₹95,000</div>
+          <span class="text-[10px] font-mono text-on-surface-variant">3 creator briefs</span>
+        </div>
+        <div class="bg-surface-container p-4 rounded-xl border border-outline-variant">
+          <span class="text-[11px] font-mono text-on-surface-variant">TOTAL GENERATED VIEWS</span>
+          <div class="text-2xl font-bold font-headline text-primary-container mt-1">449,000</div>
+          <span class="text-[10px] font-mono text-primary-container">Organic verified</span>
+        </div>
+        <div class="bg-surface-container p-4 rounded-xl border border-outline-variant">
+          <span class="text-[11px] font-mono text-on-surface-variant">AVERAGE CPV</span>
+          <div class="text-2xl font-bold font-headline text-[#c2c1ff] mt-1">₹0.21</div>
+          <span class="text-[10px] font-mono text-on-surface-variant">Per 100% video view</span>
+        </div>
+        <div class="bg-surface-container p-4 rounded-xl border border-outline-variant">
+          <span class="text-[11px] font-mono text-on-surface-variant">AVERAGE ENGAGEMENT</span>
+          <div class="text-2xl font-bold font-headline text-emerald-400 mt-1">5.1%</div>
+          <span class="text-[10px] font-mono text-on-surface-variant">Industry benchmark: 2.8%</span>
         </div>
       </div>
 
-      <!-- Creator Card 1 (Ethan R.) -->
-      <div class="creator-card relative mt-spacing-xs bg-surface-container-low rounded-lg p-spacing-md shadow-md transition-all border border-outline-variant/40" data-creator-id="ethan" data-selected="true">
-        <div class="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-primary-container/40 to-transparent"></div>
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-spacing-sm">
-            <div class="relative w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0 border border-primary-container/40">
-              <img class="w-full h-full object-cover" alt="Ethan R." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuD9aazxX_0aAG6X03JsZ0-6BxnpLPSpBWoysuD-JBgAkYNiLQJsbJQKrEcRpr-h9x1g3PP4Vxi6K_HEaPV21UE4pWbEHb2lc5SvLMkKQFF90JnXAwL2aBTEsYpOjpf7uqB4J0chkVCkdvRRaTYXfvCdQd9bwEgNVO9IUXE0IwiDqWmoZcJA6UYSLMC4EQOnH4AtBqdkTMV8VKmjSbEWYqOBYgREo3wyfCDZxPpQqoEDp5TPsgGtKnLQ"/>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-spacing-2xs">
-                <span class="font-sora text-title-md text-on-surface font-bold truncate">Ethan R.</span>
-                <span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-              </div>
-              <span class="font-mono text-label-md text-on-surface-variant">@ethan_fit • Austin, TX</span>
-            </div>
-          </div>
-          <div class="flex flex-col items-end">
-            <span class="font-mono text-label-xs uppercase tracking-widest text-primary-container font-bold px-spacing-2xs py-spacing-3xs bg-primary-container/10 border border-primary-container/30 rounded-full">96% Parity</span>
-            <span class="font-mono text-label-xs text-on-surface-variant mt-spacing-3xs">Tier 1 Verified</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-sm grid grid-cols-3 gap-spacing-2xs bg-surface-container/70 rounded-DEFAULT p-spacing-xs border border-outline-variant/30">
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">30D Avg Reach</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">24.3K</span>
-            <span class="font-mono text-label-xs text-primary-container">81% of Target</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Audience Eng</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">3.8%</span>
-            <span class="font-mono text-label-xs text-on-surface-variant/80">Target 4.0%</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Consistency</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">4.2/wk</span>
-            <span class="font-mono text-label-xs text-secondary font-semibold">100% On-Time</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-xs flex flex-wrap gap-spacing-2xs">
-          <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-on-surface-variant">
-            Perf Fit: <strong class="text-on-surface">91%</strong>
-          </span>
-          <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-on-surface-variant">
-            Cohort Fit: <strong class="text-on-surface">98%</strong> (58% M 25-34)
-          </span>
-          <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-on-surface-variant">
-            Completed Deals: <strong class="text-primary-container">8</strong>
-          </span>
-        </div>
-
-        <div class="mt-spacing-sm pt-spacing-xs flex items-center justify-between">
-          <div class="flex items-center gap-spacing-2xs">
-            <span class="material-symbols-outlined text-primary-container text-[16px]">lock_clock</span>
-            <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
-          </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)] cursor-pointer" data-target="esteban" type="button">
-            <span class="material-symbols-outlined text-[16px]">check</span>
-            <span>Selected</span>
-          </button>
+      <!-- Deliverables Completed Table -->
+      <div class="space-y-3">
+        <h3 class="font-headline text-base font-bold text-white">Campaign Deliverables Breakdown</h3>
+        <div class="border border-outline-variant rounded-xl overflow-hidden">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-surface-container-high text-on-surface-variant border-b border-outline-variant">
+              <tr>
+                <th class="p-3">Creator</th>
+                <th class="p-3">Deliverable</th>
+                <th class="p-3">Fee</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Views Delivered</th>
+                <th class="p-3">CPV</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant text-white">
+              <tr>
+                <td class="p-3 font-bold">@rahuljawatwala</td>
+                <td class="p-3">1x Seamless Tee Durability Reel</td>
+                <td class="p-3 text-primary-container">₹35,000</td>
+                <td class="p-3"><span class="status-pill status-Paid">Paid</span></td>
+                <td class="p-3">284,000</td>
+                <td class="p-3 text-emerald-400">₹0.12</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">@rahuljawatwala</td>
+                <td class="p-3">1x Pro Compression Reel</td>
+                <td class="p-3 text-primary-container">₹35,000</td>
+                <td class="p-3"><span class="status-pill status-Submitted">Submitted</span></td>
+                <td class="p-3">In Review</td>
+                <td class="p-3">—</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">@fitharsh__15</td>
+                <td class="p-3">1x Heavyweight Hoodie Reel</td>
+                <td class="p-3 text-primary-container">₹25,000</td>
+                <td class="p-3"><span class="status-pill status-Invited">Invited</span></td>
+                <td class="p-3">Pending Accept</td>
+                <td class="p-3">—</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <!-- Creator Card 2 (Maya Lin) -->
-      <div class="creator-card relative mt-spacing-sm bg-surface-container-low rounded-lg p-spacing-md shadow-md transition-all border border-outline-variant/40" data-creator-id="maya" data-selected="true">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-spacing-sm">
-            <div class="relative w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0 border border-primary-container/40">
-              <img class="w-full h-full object-cover" alt="Maya Lin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAakwoM4dU_WCAWncULlJXE1thgyjVqNgwkB-hfVKuSTQ-rEM0M23qbS2DURfnbLnu_zLqBtsx9CibUpd8XPqLhRHthEYzdPforM3loWj2-Zi7uQrnwoHCpX_Xj_jdLlCRQNxw2PewaSTsZC9YqrIvH8qPZy2EgpDHYyFvW0KKTYh-8QCG7pcTE_scCZvTK0HVdeAqwh9ArprAzNvUG-__row5V3SDTy-L-OtL-SSeUaEEEbX1BQDuifg"/>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-spacing-2xs">
-                <span class="font-sora text-title-md text-on-surface font-bold truncate">Maya Lin</span>
-                <span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-              </div>
-              <span class="font-mono text-label-md text-on-surface-variant">@mayalactive • Los Angeles, CA</span>
-            </div>
-          </div>
-          <div class="flex flex-col items-end">
-            <span class="font-mono text-label-xs uppercase tracking-widest text-primary-container font-bold px-spacing-2xs py-spacing-3xs bg-primary-container/10 border border-primary-container/30 rounded-full">98% Parity</span>
-            <span class="font-mono text-label-xs text-secondary mt-spacing-3xs">Exceeds Benchmark</span>
-          </div>
-        </div>
+    </div>
 
-        <div class="mt-spacing-sm grid grid-cols-3 gap-spacing-2xs bg-surface-container/70 rounded-DEFAULT p-spacing-xs border border-outline-variant/30">
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">30D Avg Reach</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">32.8K</span>
-            <span class="font-mono text-label-xs text-primary-container">109% of Target</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Audience Eng</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">4.4%</span>
-            <span class="font-mono text-label-xs text-primary-container font-medium">+0.4% Delta</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Consistency</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">3.8/wk</span>
-            <span class="font-mono text-label-xs text-secondary font-semibold">100% On-Time</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-xs flex flex-wrap gap-spacing-2xs">
-          <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-on-surface-variant">
-            Purchasing Index: <strong class="text-on-surface">Very High</strong>
-          </span>
-          <span class="font-mono text-label-xs px-spacing-xs py-spacing-3xs rounded-full bg-surface-container-high text-on-surface-variant">
-            Delivery Rate: <strong class="text-primary-container">100% (6 Deals)</strong>
-          </span>
-        </div>
-
-        <div class="mt-spacing-sm pt-spacing-xs flex items-center justify-between">
-          <div class="flex items-center gap-spacing-2xs">
-            <span class="material-symbols-outlined text-primary-container text-[16px]">lock_clock</span>
-            <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
-          </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)] cursor-pointer" data-target="maya" type="button">
-            <span class="material-symbols-outlined text-[16px]">check</span>
-            <span>Selected</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Creator Card 3 (Marcus Vance) -->
-      <div class="creator-card relative mt-spacing-sm bg-surface-container-low rounded-lg p-spacing-md shadow-md transition-all opacity-85 border border-outline-variant/40" data-creator-id="marcus" data-selected="false">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-spacing-sm">
-            <div class="relative w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0 border border-outline-variant">
-              <img class="w-full h-full object-cover" alt="Marcus Vance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCYGlD7JBPV4rcTZobjHGum3OfWLeJHjPFoDQhfotuAeVUWKBSpuRD4PXeNpVKCQniaeP4l4SbPwPZ4-dpgEG9WARgmYg5O-Q2CQFYbuLD4MnNS2nLStEeptrT425sTLqmDurBbB0AD8LZiJ-mPfFL1hj2DxZOBIpEtIj_Ctlw-x0QozLiED_vPAQuYWMEs5VKinCHKyOGLFoAIRd-ZuWdMGgHqF3rj1Lt4wADtnVz_zi19ltys1JmQA"/>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-spacing-2xs">
-                <span class="font-sora text-title-md text-on-surface font-bold truncate">Marcus Vance</span>
-                <span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
-              </div>
-              <span class="font-mono text-label-md text-on-surface-variant">@marcusv_mobility • New York, NY</span>
-            </div>
-          </div>
-          <div class="flex flex-col items-end">
-            <span class="font-mono text-label-xs uppercase tracking-widest text-on-surface-variant font-medium px-spacing-2xs py-spacing-3xs bg-surface-container-highest rounded-full">92% Parity</span>
-            <span class="font-mono text-label-xs text-on-surface-variant/70 mt-spacing-3xs">Tier 2 Qualified</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-sm grid grid-cols-3 gap-spacing-2xs bg-surface-container/70 rounded-DEFAULT p-spacing-xs border border-outline-variant/30">
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">30D Avg Reach</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">28.5K</span>
-            <span class="font-mono text-label-xs text-on-surface-variant/80">95% of Target</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Audience Eng</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">4.1%</span>
-            <span class="font-mono text-label-xs text-primary-container font-medium">Valid</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Consistency</span>
-            <span class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">4.5/wk</span>
-            <span class="font-mono text-label-xs text-on-surface-variant/80">Active</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-sm pt-spacing-xs flex items-center justify-between">
-          <div class="flex items-center gap-spacing-2xs">
-            <span class="material-symbols-outlined text-on-surface-variant text-[16px]">lock_clock</span>
-            <span class="font-mono text-label-xs text-on-surface-variant">Escrow hold: $4,500</span>
-          </div>
-          <button class="select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-surface-container-highest text-on-surface font-mono text-label-md transition-all flex items-center gap-spacing-2xs hover:bg-surface-bright cursor-pointer" data-target="marcus" type="button">
-            <span class="material-symbols-outlined text-[16px]">add</span>
-            <span>Add to Campaign</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 03: Fast Campaign Creation / Deal Setup Box -->
-    <section class="px-margin-mobile py-spacing-sm">
-      <div class="relative bg-surface-container-high rounded-lg p-spacing-md shadow-xl overflow-hidden border border-outline-variant/60">
-        <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
-        <div class="flex items-center justify-between">
-          <span class="font-mono text-label-xs uppercase tracking-widest text-primary-container font-bold">Immediate Escrow Allocation</span>
-          <span class="font-mono text-label-xs px-spacing-2xs py-spacing-3xs rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant/40">Smart Protocol</span>
-        </div>
-        <div class="mt-spacing-xs">
-          <h3 class="font-sora text-headline-sm text-on-surface font-extrabold">Deploy Target Campaign</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mt-spacing-3xs">
-            Batch: <strong class="text-on-surface">Q3 Endurance Line Launch</strong>
-          </p>
-        </div>
-
-        <div class="mt-spacing-sm bg-surface-container-lowest rounded-DEFAULT p-spacing-sm space-y-spacing-xs border border-outline-variant/30">
-          <div class="flex justify-between items-center text-body-md">
-            <span class="text-on-surface-variant font-mono text-label-md">Assigned Creators</span>
-            <span class="text-on-surface font-semibold" id="summary-creators">2 Creators (Ethan R., Maya Lin)</span>
-          </div>
-          <div class="flex justify-between items-center text-body-md">
-            <span class="text-on-surface-variant font-mono text-label-md">Total Contract Deliverables</span>
-            <span class="text-on-surface font-semibold" id="summary-deliverables">4 IG Reels • 6 Stories</span>
-          </div>
-          <div class="flex justify-between items-center text-body-md pt-spacing-2xs">
-            <span class="text-on-surface-variant font-mono text-label-md">Total Escrow Reserved</span>
-            <div class="text-right">
-              <span class="font-sora text-headline-sm text-primary-container font-extrabold leading-none" id="summary-escrow">$9,000</span>
-              <span class="block font-mono text-label-xs text-on-surface-variant">Guaranteed release upon parity verification</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-spacing-md">
-          <button class="w-full py-spacing-sm px-spacing-md rounded-full bg-primary-container text-on-primary-container font-sora text-title-md font-extrabold tracking-wide transition-all shadow-[0_0_24px_rgba(0,245,160,0.35)] hover:shadow-[0_0_32px_rgba(0,245,160,0.5)] flex items-center justify-center gap-spacing-xs cursor-pointer" id="deploy-campaign-btn" type="button">
-            <span>Deploy Campaign & Lock Escrow</span>
-            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 04: Active Campaign Performance Telemetry (Deal Room) -->
-    <section class="px-margin-mobile pt-spacing-sm pb-spacing-xl">
-      <div class="flex items-center justify-between mb-spacing-xs">
-        <div>
-          <div class="flex items-center gap-spacing-xs">
-            <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse shadow-[0_0_6px_#00f5a0]"></span>
-            <h2 class="font-sora text-headline-sm text-on-surface font-bold">Active Campaign Telemetry</h2>
-          </div>
-          <p class="font-mono text-label-xs text-on-surface-variant uppercase tracking-wider mt-spacing-3xs">Target versus actual performance metrics</p>
-        </div>
-        <span class="font-mono text-label-xs text-secondary font-bold">Live Audit</span>
-      </div>
-
-      <div class="bg-surface-container-low rounded-lg p-spacing-md shadow-md mt-spacing-xs border border-outline-variant/40">
-        <div class="flex items-start justify-between">
-          <div>
-            <span class="font-mono text-label-xs uppercase tracking-widest text-primary-container font-bold">Active • Settlement in 6 Days</span>
-            <h3 class="font-sora text-title-md text-on-surface font-bold mt-spacing-3xs">Novu Recovery Protocol (Batch 02)</h3>
-            <span class="font-mono text-label-xs text-on-surface-variant">8 Contracted Creators • $36,000 Escrow Total</span>
-          </div>
-          <div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container border border-primary-container/30">
-            <span class="material-symbols-outlined text-[16px]">equalizer</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-md bg-surface-container/70 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-          <div class="flex justify-between items-baseline">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Gross Views Parity</span>
-            <div class="flex items-baseline gap-spacing-2xs">
-              <span class="font-sora text-title-md text-primary-container font-extrabold">63,400</span>
-              <span class="font-mono text-label-xs text-on-surface-variant">/ 50,000 Target</span>
-            </div>
-          </div>
-
-          <div class="mt-spacing-2xs w-full bg-surface-container-highest h-2.5 rounded-full overflow-hidden flex relative">
-            <div class="absolute left-[78%] top-0 bottom-0 w-[2px] bg-surface-container-lowest z-10"></div>
-            <div class="h-full bg-primary-container rounded-full shadow-[0_0_10px_#00f5a0]" style="width: 96%;"></div>
-          </div>
-          <div class="mt-spacing-2xs flex justify-between items-center text-on-surface-variant font-mono text-label-xs">
-            <span class="text-primary-container font-semibold flex items-center gap-spacing-3xs">
-              <span class="material-symbols-outlined text-[14px]">trending_up</span>
-              +13.4K (+126.8%) Over-delivering
-            </span>
-            <span>Target hit 4 days early</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-xs grid grid-cols-2 gap-spacing-2xs">
-          <div class="bg-surface-container/70 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Effective CPV</span>
-            <div class="mt-spacing-3xs flex items-baseline gap-spacing-2xs">
-              <span class="font-sora text-metric-sm text-on-surface font-light">$0.071</span>
-              <span class="font-mono text-label-xs text-primary-container">-21% savings</span>
-            </div>
-            <span class="font-mono text-label-xs text-on-surface-variant/70">Budget plan: $0.090</span>
-          </div>
-
-          <div class="bg-surface-container/70 rounded-DEFAULT p-spacing-sm border border-outline-variant/30">
-            <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Engagement Delta</span>
-            <div class="mt-spacing-3xs flex items-baseline gap-spacing-2xs">
-              <span class="font-sora text-metric-sm text-on-surface font-light">4.2%</span>
-              <span class="font-mono text-label-xs text-primary-container">+0.4% lift</span>
-            </div>
-            <span class="font-mono text-label-xs text-on-surface-variant/70">Benchmark: 3.8%</span>
-          </div>
-        </div>
-
-        <div class="mt-spacing-xs bg-surface-container/70 rounded-DEFAULT p-spacing-sm flex items-center justify-between border border-outline-variant/30">
-          <div class="flex items-center gap-spacing-xs">
-            <span class="material-symbols-outlined text-secondary text-[20px]">smart_display</span>
-            <div>
-              <span class="font-mono text-label-xs uppercase tracking-wider text-on-surface-variant">Deliverables Audit</span>
-              <p class="font-body-md text-body-md text-on-surface font-medium">8 of 8 Reels Verified • 12/16 Stories</p>
-            </div>
-          </div>
-          <span class="font-mono text-label-xs px-spacing-2xs py-spacing-3xs rounded-full bg-primary-container/15 text-primary-container font-semibold border border-primary-container/30">Ready to Settle</span>
-        </div>
-
-        <div class="mt-spacing-sm space-y-spacing-2xs">
-          <span class="font-mono text-label-xs uppercase tracking-widest text-on-surface-variant">Node Telemetry Logs</span>
-          <div class="flex items-center justify-between py-spacing-2xs px-spacing-xs bg-surface-container/40 rounded-DEFAULT border border-outline-variant/20">
-            <div class="flex items-center gap-spacing-xs">
-              <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-mono text-label-xs text-on-surface">ER</div>
-              <div>
-                <span class="font-body-md text-label-md text-on-surface font-semibold block">Ethan R.</span>
-                <span class="font-mono text-label-xs text-primary-container">34.2K views (136% Target)</span>
-              </div>
-            </div>
-            <span class="font-mono text-label-xs px-spacing-2xs py-spacing-3xs rounded-full bg-surface-container-highest text-primary-container uppercase font-semibold">Deliverable Verified</span>
-          </div>
-
-          <div class="flex items-center justify-between py-spacing-2xs px-spacing-xs bg-surface-container/40 rounded-DEFAULT border border-outline-variant/20">
-            <div class="flex items-center gap-spacing-xs">
-              <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-mono text-label-xs text-on-surface">ML</div>
-              <div>
-                <span class="font-body-md text-label-md text-on-surface font-semibold block">Maya Lin</span>
-                <span class="font-mono text-label-xs text-primary-container">29.2K views (116% Target)</span>
-              </div>
-            </div>
-            <span class="font-mono text-label-xs px-spacing-2xs py-spacing-3xs rounded-full bg-surface-container-highest text-primary-container uppercase font-semibold">Deliverable Verified</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
+  </section>
 
 </main>
 
+<!-- ==================== MODAL: CREATE CAMPAIGN BRIEF ==================== -->
+<div id="newBriefModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div class="bg-surface-container border border-outline-variant rounded-2xl max-w-xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+      <h3 class="font-headline text-lg font-bold text-white">Create New Campaign Brief</h3>
+      <button onclick="closeNewBriefModal()" class="text-on-surface-variant hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <form id="newBriefForm" onsubmit="event.preventDefault(); submitNewBrief();" class="space-y-4">
+      <div>
+        <label class="block text-xs font-mono text-on-surface-variant mb-1">Campaign Title *</label>
+        <input type="text" id="briefTitle" placeholder="e.g. Apex Performance Gym Bag Launch" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none" required/>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-mono text-on-surface-variant mb-1">Target Creator *</label>
+          <select id="briefCreatorSelect" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-xs font-mono text-white focus:border-primary-container outline-none">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-on-surface-variant mb-1">Deliverable Budget (INR ₹) *</label>
+          <input type="number" id="briefBudget" placeholder="35000" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none" required/>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-mono text-on-surface-variant mb-1">Target Niche</label>
+          <input type="text" id="briefNiche" placeholder="Fitness & Training" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none"/>
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-on-surface-variant mb-1">Content Delivery Deadline *</label>
+          <input type="date" id="briefDeadline" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-xs font-mono text-white focus:border-primary-container outline-none" required/>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-on-surface-variant mb-1">Campaign Goal / Objective *</label>
+        <textarea id="briefGoal" rows="2" placeholder="e.g. Drive brand awareness and high-retention reel engagement for athletic audience" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none" required></textarea>
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-on-surface-variant mb-1">Deliverables Breakdown *</label>
+        <input type="text" id="briefDeliverables" placeholder="1x Instagram Reel (45-60s) + 2x Story Set" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none" required/>
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-on-surface-variant mb-1">Usage Rights</label>
+        <input type="text" id="briefUsage" placeholder="90 days organic usage + Meta Ads whitelisting" class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none"/>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button type="button" onclick="closeNewBriefModal()" class="px-4 py-2 rounded-xl text-xs font-mono text-on-surface-variant hover:text-white">Cancel</button>
+        <button type="submit" class="bg-primary-container hover:bg-[#00d98e] text-on-primary font-headline font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Send Campaign Invite</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== MODAL: REQUEST REVISION ==================== -->
+<div id="revisionModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div class="bg-surface-container border border-outline-variant rounded-2xl max-w-lg w-full p-6 space-y-4">
+    <div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+      <h3 class="font-headline text-lg font-bold text-white">Request Video Revision</h3>
+      <button onclick="closeRevisionModal()" class="text-on-surface-variant hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <input type="hidden" id="modalRevCampId"/>
+
+    <div>
+      <label class="block text-xs font-mono text-on-surface-variant mb-1">Specific Revision Feedback for Creator *</label>
+      <textarea id="modalRevNote" rows="4" placeholder="e.g. Please zoom in on the compression waist seam around 0:14 and increase background music volume slightly..." class="w-full bg-surface-container-high border border-outline-variant rounded-xl px-3.5 py-2 text-sm text-white focus:border-primary-container outline-none" required></textarea>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 pt-2">
+      <button type="button" onclick="closeRevisionModal()" class="px-4 py-2 rounded-xl text-xs font-mono text-on-surface-variant hover:text-white">Cancel</button>
+      <button type="button" onclick="submitRevisionAction()" class="bg-red-500 hover:bg-red-600 text-white font-headline font-bold text-xs px-5 py-2.5 rounded-xl transition-all">Send Revision Request</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/aroha-store.js"></script>
 <script>
-// Check Access Key Unlock State (Code: testing)
-function checkBrandKeyUnlockState() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const codeParam = urlParams.get('code');
-  const isUnlocked = sessionStorage.getItem('aroha_brand_unlocked') === 'true' || (codeParam && codeParam.toLowerCase() === 'testing');
+// Brand Portal Controller
+const CURRENT_BRAND_ID = "br_1"; // Novu Athletic demo
 
-  if (isUnlocked) {
-    document.getElementById('brandAccessGate').classList.add('hidden');
-    document.getElementById('brandDashboardContent').classList.remove('hidden');
-    document.getElementById('brandDashboardContent').classList.add('flex');
-    sessionStorage.setItem('aroha_brand_unlocked', 'true');
+function switchTab(tabId) {
+  ['campaigns', 'creators', 'report'].forEach(t => {
+    document.getElementById(`tab-${t}`)?.classList.toggle('hidden', t !== tabId);
+    document.getElementById(`tab-btn-${t}`)?.classList.toggle('active', t === tabId);
+    document.getElementById(`tab-btn-${t}`)?.classList.toggle('text-on-surface-variant', t !== tabId);
+    document.getElementById(`mob-tab-btn-${t}`)?.classList.toggle('active', t === tabId);
+    document.getElementById(`mob-tab-btn-${t}`)?.classList.toggle('text-on-surface-variant', t !== tabId);
+  });
+}
+
+function renderBrandCampaigns() {
+  const store = window.ArohaStore;
+  const filter = document.getElementById('brandStatusFilter')?.value || 'ALL';
+  const campaigns = store.getCampaignsByBrand(CURRENT_BRAND_ID);
+  const container = document.getElementById('brandCampaignsList');
+  if (!container) return;
+
+  const filtered = campaigns.filter(c => {
+    if (filter === 'ALL') return true;
+    if (filter === 'Accepted') return c.status === 'Accepted' || c.status === 'Content Due';
+    return c.status === filter;
+  });
+
+  // Calculate KPIs
+  const activeCount = campaigns.filter(c => c.status !== 'Paid' && c.status !== 'Declined').length;
+  const reviewCount = campaigns.filter(c => c.status === 'Submitted').length;
+  const totalViews = campaigns.filter(c => c.metrics?.views > 0).reduce((sum, c) => sum + (c.metrics.views || 0), 0);
+  const totalPaid = campaigns.filter(c => c.status === 'Paid' || c.status === 'Published').reduce((sum, c) => sum + (c.budget || 0), 0);
+  const blendedCPV = store.calcCPV(totalPaid, totalViews);
+
+  document.getElementById('brandActiveCount').textContent = activeCount;
+  document.getElementById('brandReviewCount').textContent = reviewCount;
+  document.getElementById('brandDeliveredViews').textContent = store.formatCompact(totalViews);
+  document.getElementById('brandBlendedCPV').textContent = blendedCPV;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="p-8 text-center text-on-surface-variant font-mono text-xs">
+        No campaigns found matching filter "${filter}".
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = filtered.map(camp => {
+    const statusClass = 'status-' + camp.status.replace(/\s+/g, '');
+    const isSubmitted = camp.status === 'Submitted';
+    const isApproved = camp.status === 'Approved';
+    const isPublished = camp.status === 'Published';
+    const isPaid = camp.status === 'Paid';
+
+    return `
+      <div class="p-5 sm:p-6 hover:bg-surface-container-high/40 transition-colors">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+          
+          <div class="space-y-3 flex-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="status-pill ${statusClass}">
+                <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                ${camp.status}
+              </span>
+              <span class="text-xs font-mono text-on-surface-variant">Deadline: ${camp.deadline}</span>
+              <span class="text-xs font-mono text-primary-container font-bold bg-primary-container/10 px-2 py-0.5 rounded">
+                ${store.formatCurrency(camp.budget)}
+              </span>
+            </div>
+
+            <div>
+              <h3 class="font-headline text-lg font-bold text-white">${camp.title}</h3>
+              <p class="text-xs text-on-surface-variant font-mono mt-0.5">Assigned Creator: <b class="text-white">${camp.creatorName}</b> (${camp.creatorHandle})</p>
+            </div>
+
+            <!-- Deliverables summary -->
+            <div class="bg-surface-container border border-outline-variant/60 rounded-xl p-3.5 space-y-1.5 text-xs font-mono">
+              <div class="text-white font-bold">Goal: ${camp.goal}</div>
+              <ul class="list-disc list-inside space-y-1 text-on-surface-variant">
+                ${camp.deliverables.map(d => `<li><span class="text-white">${d.count}x ${d.type}</span> — ${d.requirement}</li>`).join('')}
+              </ul>
+            </div>
+
+            ${camp.draftUrl ? `
+              <div class="bg-surface-container-high/60 border border-outline-variant rounded-xl p-3 space-y-2 text-xs font-mono">
+                <div class="flex items-center justify-between">
+                  <span class="text-yellow-400 font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">video_file</span> Creator Draft Submission:
+                  </span>
+                  <a href="${camp.draftUrl}" target="_blank" class="text-primary-container hover:underline font-bold flex items-center gap-1">
+                    <span>Open Video Draft</span>
+                    <span class="material-symbols-outlined text-xs">open_in_new</span>
+                  </a>
+                </div>
+                ${camp.draftNotes ? `<p class="text-on-surface-variant text-[11px]">Creator Notes: "${camp.draftNotes}"</p>` : ''}
+              </div>
+            ` : ''}
+
+            ${camp.publishedUrl ? `
+              <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-3 text-xs font-mono space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="text-[#009cfc] font-bold">Live Published Reel:</span>
+                  <a href="${camp.publishedUrl}" target="_blank" class="text-white hover:underline flex items-center gap-1">
+                    <span>View on Instagram</span>
+                    <span class="material-symbols-outlined text-xs">open_in_new</span>
+                  </a>
+                </div>
+                <div class="text-on-surface-variant flex items-center gap-3 pt-1">
+                  <span>Views: <b class="text-white">${store.formatCompact(camp.metrics?.views)}</b></span>
+                  <span>Likes: <b class="text-white">${store.formatCompact(camp.metrics?.likes)}</b></span>
+                  <span>CPV: <b class="text-primary-container">${store.calcCPV(camp.budget, camp.metrics?.views)}</b></span>
+                </div>
+              </div>
+            ` : ''}
+
+          </div>
+
+          <!-- Right Action Panel -->
+          <div class="flex flex-row md:flex-col items-end gap-2 shrink-0 pt-2 md:pt-0">
+            ${isSubmitted ? `
+              <button onclick="approveDraftAction('${camp.id}')" class="bg-primary-container hover:bg-[#00d98e] text-on-primary font-headline font-bold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Approve Draft
+              </button>
+              <button onclick="openRevisionModal('${camp.id}')" class="border border-red-500/50 hover:bg-red-500/10 text-red-400 font-mono text-xs px-3 py-1.5 rounded-xl transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">edit</span> Request Revision
+              </button>
+            ` : ''}
+
+            ${isApproved ? `
+              <span class="text-xs font-mono text-primary-container bg-primary-container/10 border border-primary-container/30 px-3 py-1.5 rounded-xl flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">schedule</span> Waiting for Creator to Post
+              </span>
+            ` : ''}
+
+            ${isPublished ? `
+              <button onclick="markPaidAction('${camp.id}')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-headline font-bold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1 shadow-lg shadow-emerald-500/20">
+                <span class="material-symbols-outlined text-sm">payments</span> Release Payment (${store.formatCurrency(camp.budget)})
+              </button>
+            ` : ''}
+
+            ${isPaid ? `
+              <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl flex items-center gap-1 font-bold">
+                <span class="material-symbols-outlined text-sm">verified</span> Campaign Paid & Closed
+              </span>
+            ` : ''}
+
+            ${camp.status === 'Invited' ? `
+              <span class="text-xs font-mono text-on-surface-variant bg-surface-container border border-outline-variant px-3 py-1.5 rounded-xl">
+                Awaiting Creator Response
+              </span>
+            ` : ''}
+          </div>
+
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderCreatorsDirectory() {
+  const store = window.ArohaStore;
+  const query = (document.getElementById('creatorSearchInput')?.value || '').toLowerCase().trim();
+  const creators = store.getCreators();
+  const container = document.getElementById('creatorsDirectoryGrid');
+  if (!container) return;
+
+  const filtered = creators.filter(c => {
+    if (!query) return true;
+    return c.name.toLowerCase().includes(query) ||
+           c.handle.toLowerCase().includes(query) ||
+           c.niche.toLowerCase().includes(query) ||
+           c.location.toLowerCase().includes(query);
+  });
+
+  container.innerHTML = filtered.map(creator => {
+    const cpvEst = store.calcCPV(creator.pricing.reel, creator.avgViews);
+    const cpeEst = store.calcCPE(creator.pricing.reel, creator.avgViews * (creator.engagementRate / 100));
+
+    return `
+      <div class="bg-surface-container-low border border-outline-variant hover:border-primary-container rounded-2xl p-5 space-y-4 transition-all flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <img src="${creator.avatar}" alt="${creator.name}" class="w-12 h-12 rounded-full object-cover border border-outline-variant"/>
+            <div>
+              <h3 class="font-headline font-bold text-white text-base">${creator.name}</h3>
+              <p class="text-xs font-mono text-primary-container">${creator.handle}</p>
+              <p class="text-[11px] font-mono text-on-surface-variant">${creator.location}</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-on-surface-variant line-clamp-2">${creator.bio}</p>
+
+          <!-- Core Metrics Matrix -->
+          <div class="grid grid-cols-3 gap-2 bg-surface-container p-2.5 rounded-xl border border-outline-variant text-center font-mono">
+            <div>
+              <span class="text-[10px] text-on-surface-variant block">AVG VIEWS</span>
+              <span class="text-xs font-bold text-white">${store.formatCompact(creator.avgViews)}</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant block">ENG. RATE</span>
+              <span class="text-xs font-bold text-primary-container">${creator.engagementRate}%</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant block">EST. CPV</span>
+              <span class="text-xs font-bold text-[#c2c1ff]">${cpvEst}</span>
+            </div>
+          </div>
+
+          <!-- Engagement Breakdown -->
+          <div class="text-[11px] font-mono text-on-surface-variant space-y-1">
+            <div class="flex justify-between">
+              <span>Avg Likes / Comments:</span>
+              <span class="text-white">${store.formatCompact(creator.likesAvg)} / ${creator.commentsAvg}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Avg Saves / Shares:</span>
+              <span class="text-white">${store.formatCompact(creator.savesAvg)} / ${store.formatCompact(creator.sharesAvg)}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Top Audience:</span>
+              <span class="text-white truncate max-w-[140px]">${creator.demographics.topLocations[0]}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rate Card & Direct Invite Action -->
+        <div class="pt-3 border-t border-outline-variant space-y-2.5">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-on-surface-variant">1x Reel Rate:</span>
+            <span class="text-primary-container font-bold">${store.formatCurrency(creator.pricing.reel)}</span>
+          </div>
+          <button onclick="openInviteForCreator('${creator.id}')" class="w-full bg-surface-container-high hover:bg-primary-container hover:text-on-primary border border-outline-variant text-white font-headline font-bold text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-1">
+            <span class="material-symbols-outlined text-sm">send</span>
+            <span>Invite to Campaign</span>
+          </button>
+        </div>
+
+      </div>
+    `;
+  }).join('');
+}
+
+function openNewBriefModal(preselectedCreatorId = '') {
+  const store = window.ArohaStore;
+  const select = document.getElementById('briefCreatorSelect');
+  if (select) {
+    select.innerHTML = store.getCreators().map(c => `
+      <option value="${c.id}" ${c.id === preselectedCreatorId ? 'selected' : ''}>
+        ${c.name} (${c.handle}) — ${store.formatCurrency(c.pricing.reel)}/Reel
+      </option>
+    `).join('');
+  }
+
+  // Set default deadline 10 days from today
+  const d = new Date();
+  d.setDate(d.getDate() + 10);
+  document.getElementById('briefDeadline').value = d.toISOString().split('T')[0];
+
+  document.getElementById('newBriefModal').classList.remove('hidden');
+}
+
+function closeNewBriefModal() {
+  document.getElementById('newBriefModal').classList.add('hidden');
+}
+
+function openInviteForCreator(creatorId) {
+  openNewBriefModal(creatorId);
+  const creator = window.ArohaStore.getCreator(creatorId);
+  if (creator) {
+    document.getElementById('briefBudget').value = creator.pricing.reel;
+    document.getElementById('briefNiche').value = creator.niche;
   }
 }
 
-function handleBrandKeySubmit(e) {
-  e.preventDefault();
-  const input = document.getElementById('brandKeyInput').value.trim().toLowerCase();
-  const status = document.getElementById('brandKeyStatus');
+function submitNewBrief() {
+  const store = window.ArohaStore;
+  const creatorId = document.getElementById('briefCreatorSelect').value;
+  const creator = store.getCreator(creatorId);
 
-  if (input === 'testing') {
-    status.innerHTML = '<span style="color:#00F5A0; font-weight:700;">✓ Access Key Accepted — Unlocking Brand Console...</span>';
-    sessionStorage.setItem('aroha_brand_unlocked', 'true');
-    setTimeout(() => {
-      document.getElementById('brandAccessGate').classList.add('hidden');
-      document.getElementById('brandDashboardContent').classList.remove('hidden');
-      document.getElementById('brandDashboardContent').classList.add('flex');
-    }, 450);
-  } else {
-    status.innerHTML = '<span style="color:#FF4A4A; font-weight:700;">❌ Invalid Access Key. Contact ATOMZ for your key.</span>';
+  const title = document.getElementById('briefTitle').value.trim();
+  const budget = Number(document.getElementById('briefBudget').value);
+  const niche = document.getElementById('briefNiche').value.trim();
+  const deadline = document.getElementById('briefDeadline').value;
+  const goal = document.getElementById('briefGoal').value.trim();
+  const deliverablesRaw = document.getElementById('briefDeliverables').value.trim();
+  const usageRights = document.getElementById('briefUsage').value.trim() || '90 days organic rights';
+
+  store.createCampaign({
+    brandId: CURRENT_BRAND_ID,
+    brandName: "Novu Athletic",
+    title,
+    niche: niche || "Athletic & Fitness",
+    goal,
+    budget,
+    deadline,
+    creatorId: creator.id,
+    creatorName: creator.name,
+    creatorHandle: creator.handle,
+    creatorAvatar: creator.avatar,
+    deliverables: [
+      { type: "Instagram Reel", count: 1, requirement: deliverablesRaw }
+    ],
+    usageRights,
+    dosAndDonts: { dos: ["Showcase product in action"], donts: ["No competing brand logos"] }
+  });
+
+  closeNewBriefModal();
+  renderBrandCampaigns();
+  alert(`Campaign brief sent! Creator (${creator.handle}) can now review and accept in their Creator Portal.`);
+}
+
+function openRevisionModal(campId) {
+  document.getElementById('modalRevCampId').value = campId;
+  document.getElementById('modalRevNote').value = '';
+  document.getElementById('revisionModal').classList.remove('hidden');
+}
+
+function closeRevisionModal() {
+  document.getElementById('revisionModal').classList.add('hidden');
+}
+
+function submitRevisionAction() {
+  const campId = document.getElementById('modalRevCampId').value;
+  const note = document.getElementById('modalRevNote').value.trim();
+  if (!note) {
+    alert('Please enter your specific revision feedback for the creator.');
+    return;
+  }
+  window.ArohaStore.requestRevision(campId, note);
+  closeRevisionModal();
+  renderBrandCampaigns();
+}
+
+function approveDraftAction(campId) {
+  if (confirm('Approve this video draft for final publishing?')) {
+    window.ArohaStore.approveDraft(campId);
+    renderBrandCampaigns();
   }
 }
 
-document.addEventListener('DOMContentLoaded', checkBrandKeyUnlockState);
-
-(function() {
-  const slider = document.getElementById('views-slider');
-  const viewsLabel = document.getElementById('views-label');
-  if (slider && viewsLabel) {
-    slider.addEventListener('input', function(e) {
-      const val = Number(e.target.value).toLocaleString();
-      viewsLabel.textContent = val + ' avg';
-    });
+function markPaidAction(campId) {
+  if (confirm('Mark this campaign as Paid and issue payment confirmation to the creator?')) {
+    window.ArohaStore.markPaid(campId);
+    renderBrandCampaigns();
   }
+}
 
-  const engButtons = document.querySelectorAll('.eng-btn');
-  engButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      engButtons.forEach(b => {
-        b.className = 'eng-btn py-spacing-2xs px-spacing-xs rounded-full bg-surface-container-high text-on-surface-variant font-mono text-label-md transition-all text-center';
-      });
-      btn.className = 'eng-btn py-spacing-2xs px-spacing-xs rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all text-center shadow-[0_0_12px_rgba(0,245,160,0.3)]';
-    });
+// Init & Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  renderBrandCampaigns();
+  renderCreatorsDirectory();
+  window.ArohaStore.onDataChange(() => {
+    renderBrandCampaigns();
+    renderCreatorsDirectory();
   });
-
-  const selectButtons = document.querySelectorAll('.select-creator-btn');
-  const selectedCreators = new Set(['ethan', 'maya']);
-
-  function updateDealRoomSummary() {
-    const summaryCreators = document.getElementById('summary-creators');
-    const summaryDeliverables = document.getElementById('summary-deliverables');
-    const summaryEscrow = document.getElementById('summary-escrow');
-    const matchCounter = document.getElementById('match-counter');
-
-    const count = selectedCreators.size;
-    const names = [];
-    if (selectedCreators.has('ethan')) names.push('Ethan R.');
-    if (selectedCreators.has('maya')) names.push('Maya Lin');
-    if (selectedCreators.has('marcus')) names.push('Marcus Vance');
-
-    if (summaryCreators) {
-      summaryCreators.textContent = count + ' Creators' + (names.length ? ' (' + names.join(', ') + ')' : ' (None)');
-    }
-    if (summaryDeliverables) {
-      summaryDeliverables.textContent = (count * 2) + ' IG Reels • ' + (count * 3) + ' Stories';
-    }
-    if (summaryEscrow) {
-      summaryEscrow.textContent = '$' + (count * 4500).toLocaleString();
-    }
-    if (matchCounter) {
-      matchCounter.textContent = count + ' Active in Batch';
-    }
-  }
-
-  selectButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const target = this.getAttribute('data-target');
-      const card = document.querySelector(`.creator-card[data-creator-id="${target}"]`);
-      
-      if (selectedCreators.has(target)) {
-        selectedCreators.delete(target);
-        this.className = 'select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-surface-container-highest text-on-surface font-mono text-label-md transition-all flex items-center gap-spacing-2xs hover:bg-surface-bright';
-        this.innerHTML = '<span class="material-symbols-outlined text-[16px]">add</span><span>Add to Campaign</span>';
-        if (card) {
-          card.classList.add('opacity-85');
-          card.setAttribute('data-selected', 'false');
-        }
-      } else {
-        selectedCreators.add(target);
-        this.className = 'select-creator-btn py-spacing-2xs px-spacing-sm rounded-full bg-primary-container text-on-primary-container font-mono text-label-md font-semibold transition-all flex items-center gap-spacing-2xs shadow-[0_0_12px_rgba(0,245,160,0.25)]';
-        this.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span><span>Selected</span>';
-        if (card) {
-          card.classList.remove('opacity-85');
-          card.setAttribute('data-selected', 'true');
-        }
-      }
-      updateDealRoomSummary();
-    });
-  });
-
-  const deployBtn = document.getElementById('deploy-campaign-btn');
-  if (deployBtn) {
-    deployBtn.addEventListener('click', function() {
-      const originalText = this.innerHTML;
-      this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span><span>Escrow Locking...</span>';
-      setTimeout(() => {
-        this.innerHTML = '<span class="material-symbols-outlined text-[20px]">verified</span><span>Escrow Verified & Deployed</span>';
-        this.classList.remove('bg-primary-container', 'text-on-primary-container');
-        this.classList.add('bg-surface-container-highest', 'text-primary-container');
-      }, 800);
-    });
-  }
-
-  const syncBtn = document.getElementById('sync-engine-btn');
-  if (syncBtn) {
-    syncBtn.addEventListener('click', function() {
-      const icon = this.querySelector('.material-symbols-outlined');
-      if (icon) icon.classList.add('animate-spin');
-      setTimeout(() => {
-        if (icon) icon.classList.remove('animate-spin');
-      }, 600);
-    });
-  }
-})();
+});
 </script>
-<script src="assets/js/atomz.js" defer></script>
+
 </body>
 </html>
