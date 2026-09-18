@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "business": {
+    "name": "QA Studio",
+    "handle": "",
+    "terms": "Booking is confirmed once the agreed deposit is received."
+  },
+  "orders": [
+    {
+      "id": "958e8af0-152b-478c-88fc-c26fd0c49e3c",
+      "customer": "QA Customer, \"quoted\"",
+      "handle": "qa.customer",
+      "phone": "",
+      "due": "2026-09-19",
+      "product": "Custom box",
+      "qty": 2,
+      "price": 999.5,
+      "delivery": 100,
+      "deposit": 50,
+      "paid": 500,
+      "status": "quoted",
+      "followup": "2026-09-17",
+      "cost": 1011,
+      "notes": "A note, with commas\nand a second line.",
+      "number": 1001,
+      "createdAt": "2026-09-16T10:52:47.105Z",
+      "updatedAt": "2026-09-16T10:52:47.337Z",
+      "lastFollowupAt": ""
+    }
+  ],
+  "sequence": 1002
+}

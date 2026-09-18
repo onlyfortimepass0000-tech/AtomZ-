@@ -1,0 +1,118 @@
+{
+  "sampleOrders": 24,
+  "sampleBytes": 7881,
+  "simulatedOrders": 44,
+  "simulatedBytes": 15846,
+  "largeStore": {
+    "orders": 10000,
+    "recordBytes": 3195051,
+    "validateMs": 43,
+    "summaryAndSearchMs": 26
+  },
+  "interactionCounts": {
+    "newOrder": 6,
+    "quote": 3,
+    "deposit": 3,
+    "balance": 2,
+    "delivery": 1,
+    "followup": 3,
+    "edit": 4,
+    "cancel": 4
+  },
+  "week": [
+    {
+      "day": 1,
+      "newOrder": 2,
+      "quote": 2,
+      "deposit": 2,
+      "balance": 2,
+      "delivery": 2,
+      "followup": 2,
+      "edit": 1,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 44
+    },
+    {
+      "day": 2,
+      "newOrder": 4,
+      "quote": 4,
+      "deposit": 4,
+      "balance": 4,
+      "delivery": 4,
+      "followup": 2,
+      "edit": 0,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 70
+    },
+    {
+      "day": 3,
+      "newOrder": 4,
+      "quote": 4,
+      "deposit": 4,
+      "balance": 4,
+      "delivery": 4,
+      "followup": 1,
+      "edit": 1,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 71
+    },
+    {
+      "day": 4,
+      "newOrder": 2,
+      "quote": 2,
+      "deposit": 2,
+      "balance": 2,
+      "delivery": 2,
+      "followup": 3,
+      "edit": 0,
+      "cancel": 1,
+      "navigation": 4,
+      "taps": 47
+    },
+    {
+      "day": 5,
+      "newOrder": 2,
+      "quote": 2,
+      "deposit": 2,
+      "balance": 2,
+      "delivery": 2,
+      "followup": 1,
+      "edit": 1,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 41
+    },
+    {
+      "day": 6,
+      "newOrder": 4,
+      "quote": 4,
+      "deposit": 4,
+      "balance": 4,
+      "delivery": 4,
+      "followup": 1,
+      "edit": 0,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 67
+    },
+    {
+      "day": 7,
+      "newOrder": 2,
+      "quote": 2,
+      "deposit": 2,
+      "balance": 2,
+      "delivery": 2,
+      "followup": 1,
+      "edit": 1,
+      "cancel": 0,
+      "navigation": 4,
+      "taps": 41
+    }
+  ],
+  "averageInteractionsPerDay": 54.4,
+  "totalInteractions": 381,
+  "assumptions": "Seeded scenario, not a survey or observed average. Counts are control activations plus one field-entry interaction per field; individual keystrokes, scrolling, date-picker steps, and sending messages in Instagram/WhatsApp are excluded. Per-order actions start with the relevant row visible. Four navigation actions per day are included. Deposits are 50%, payments verified externally. Same-day fulfilment is a simplification; future-dated simulation steps test storage, not historical financial reporting."
+}

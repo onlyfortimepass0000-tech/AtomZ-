@@ -9,9 +9,12 @@ const bytesLabel = n => n < 1024 * 1024 ? (n / 1024).toFixed(1) + ' KB' : (n / 1
 const icons = { today: '<rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 5 2 2 4-4"/>', orders: '<rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6m-6 4h6m-6 4h3"/>', chart: '<path d="M4 4v16h17M9 15v-4m5 4V6m5 9v-6"/>', settings: '<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="white"/><circle cx="15" cy="17" r="3" fill="white"/>', search: '<circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>' };
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || ''}</svg>`;
 $$('[data-icon]').forEach(e => e.innerHTML = icon(e.dataset.icon));
-let state, db, mode = 'sample', revision = 0, view = 'today', filter = 'active', query = '', dayFilter = '', page = 0, taskTab = 'deliveries', taskExpanded = false, selectedId = '', pendingConfirm, toastTimer, undoAction, busy = false, stale = false, storageLocked = false, sourceSnapshot = '';
+let state, db, mode = 'sample', revision = 0, view = 'today', filter = 'active', query = '', dayFilter = '', page = 0, taskTab = 'deliveries', taskExpanded = false, selectedId = '', pendingConfirm, toastTimer, undoAction, busy = false, stale = false, storageLocked = false, sourceSnapshot = '', tourStep = 0;
 const PAGE_SIZE = 30;
+// Public links open as a safe, sample-only product tour. The paid build can use ?full=1.
+const demoMode = new URLSearchParams(location.search).get('full') !== '1';
 try { mode = localStorage.getItem('atomz-orderdesk-mode') === 'own' ? 'own' : 'sample'; } catch {}
+if (demoMode) mode = 'sample';
 const legacyKey = () => 'atomz-orderdesk-v1-' + mode;
 const key = () => 'atomz-orderdesk-v2-' + mode;
 const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('atomz-orderdesk-updates') : null;
@@ -73,6 +76,7 @@ async function load() {
   }
 }
 async function commit(next, message, undo) {
+  if (demoMode) { showPurchase(); return false; }
   if (busy) return false;
   if (storageLocked) { notify('Saving is paused. Resolve the storage notice first.'); return false; }
   busy = true; document.body.setAttribute('aria-busy', 'true');
@@ -101,6 +105,7 @@ function goOrders(nextFilter, day = '') { filter = nextFilter; dayFilter = day; 
 function render() {
   if (!state) return;
   $('#shop-name').textContent = state.business.name; $('#sample-pill').hidden = mode !== 'sample'; $('#demo-line').hidden = mode !== 'sample';
+  $$('.add-top,.mobile-add').forEach(button => { button.textContent = demoMode ? 'Unlock ₹299' : '+ New order'; button.dataset.action = demoMode ? 'purchase' : 'new'; });
   const s = Desk.summary(state), count = s.deliveries.length + s.followups.length;
   $('#today-count').textContent = count; $('#today-count').hidden = count === 0;
   $$('.nav [data-nav]').forEach(b => { b.classList.toggle('active', b.dataset.nav === view); b.setAttribute('aria-current', b.dataset.nav === view ? 'page' : 'false'); });
@@ -153,48 +158,12 @@ function renderOverview(s) {
 }
 function renderSettings() {
   const size = Desk.size(state); let last; try { last = localStorage.getItem('atomz-orderdesk-backup-' + mode); } catch {}
-  let optedIn = false; try { optedIn = localStorage.getItem('atomz-orderdesk-optin-' + mode) === 'true'; } catch {}
-  
-  $('#content').innerHTML = `<div class="heading"><div><h1>Settings</h1><p>Your shop. Your data.</p></div></div><div class="settings-stack">
-
-<section class="panel">
-  <h2>Custom Sheet &amp; Insights</h2>
-  <p>Share your Order Desk data with ATOMZ to receive a custom Google Sheet with automated dashboards and business insights.</p>
-  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:18px; margin-top:16px;">
-    <label class="check-label" style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-weight:600;">
-      <input type="checkbox" id="optin-share-atomz" ${optedIn ? 'checked' : ''} style="margin-top:3px; transform:scale(1.2);">
-      <span>Share my Order Desk data with ATOMZ to receive a custom Google Sheet and business insights.</span>
-    </label>
-    <div style="margin-top:12px; font-size:13px; line-height:1.55; color:#a0a0ab;">
-      • <strong>100% Optional:</strong> ATOMZ only receives data when you actively generate and send your export.<br>
-      • <strong>What you get:</strong> We will build a tailored Google Sheet for your shop with visual summaries of total orders, revenue, unpaid balances, top-selling products, upcoming delivery calendar, and customer follow-up workloads.<br>
-      • <strong>Your privacy:</strong> Your orders remain on your device. No cloud database or automatic sync is used.
-    </div>
-    <div id="insights-export-area" style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); display:${optedIn ? 'block' : 'none'};">
-      <div class="actions">
-        <button class="button primary" data-action="download-insights-pack">Download Insights Pack (.json)</button>
-        <button class="button" data-action="whatsapp-insights">Share via WhatsApp ↗</button>
-      </div>
-      <p class="hint" style="margin-top:8px;">Ready to export ${state.orders.length} orders for your custom Google Sheet.</p>
-    </div>
-  </div>
-</section>
-
-<section class="panel"><h2>Saved on this device</h2><p>Your orders stay in this browser. Back up to a file to keep a copy or move them to another device.</p><div class="storage-meter"><span style="width:${Math.max(1, size / Desk.MAX_BYTES * 100)}%"></span></div><div class="storage-label"><span>${state.orders.length.toLocaleString()} / 10,000 orders</span><span>${bytesLabel(size)} / 12 MB of record data</span></div><div class="actions"><button class="button primary" data-action="backup">Download backup</button><button class="button" data-action="restore">Restore</button><button class="button" data-action="csv">Export CSV</button></div><p class="hint">${last ? 'Last backup download: ' + new Date(Number(last)).toLocaleString('en-IN') : 'No backup downloaded yet.'}</p><details><summary>How storage works</summary><div class="storage-details">Only text, dates and amounts are saved; no photos or chat histories. Existing orders are saved individually when possible. Clearing browser data removes this copy. Private browsing is temporary. Different browsers, devices and website addresses do not sync.<br><br>The limit above measures record data, not the browser database’s disk overhead. Backups contain customer details; keep them private.</div><div class="actions"><button class="button" data-action="protect">Request persistent storage</button><button class="button" data-action="offline">Download offline app</button></div><p class="hint" id="persist-result">Browser protection is best effort. A downloaded backup is still needed.</p></details></section>
-
-<section class="panel"><h2>Shop details</h2><form id="business-form"><div class="fields" style="margin-top:20px"><div class="field"><label for="business-name">Shop name</label><input id="business-name" name="name" value="${esc(state.business.name)}" maxlength="100" required></div><div class="field"><label for="business-handle">Instagram handle</label><input id="business-handle" name="handle" value="${esc(state.business.handle)}" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" autocapitalize="none"></div><div class="field full"><label for="business-terms">Terms on your quotes</label><textarea id="business-terms" name="terms" maxlength="2000" rows="3">${esc(state.business.terms)}</textarea></div></div><div class="actions"><button class="button">Save shop details</button></div></form></section>
-
-<section class="panel"><h2>${mode === 'sample' ? 'Try your own shop' : 'Explore the sample shop'}</h2><p>Sample orders and your own orders are kept separately.</p><div class="actions"><button class="button" data-action="switch">${mode === 'sample' ? 'Use my own orders' : 'View sample shop'}</button>${mode === 'sample' ? '<button class="button quiet" data-action="reset-sample">Reload sample shop</button>' : ''}</div></section></div>`;
-
+  const unlock = `<section class="panel"><h2>Ready for your real orders?</h2><p>Use your own shop, save real customer details and keep every order in one place.</p><div class="actions"><button class="button primary" data-action="purchase">Get Order Desk · ₹299</button></div></section>`;
+  const dataOptions = `<section class="panel"><h2>Data &amp; insights</h2><p>Keep a Google Sheets backup or choose to share a data pack with ATOMZ for a custom Sheet and insights.</p><div class="actions"><button class="button" data-action="data-options">Data options</button></div></section>`;
+  $('#content').innerHTML = `<div class="heading"><div><h1>Settings</h1><p>${demoMode ? 'Demo data only. Your details are never saved here.' : 'Your shop. Your data.'}</p></div></div><div class="settings-stack">${demoMode ? unlock : ''}${!demoMode ? dataOptions : ''}<section class="panel"><h2>Saved on this device</h2><p>Your orders stay in this browser. Back up to a file to keep a copy or move them to another device.</p><div class="storage-meter"><span style="width:${Math.max(1, size / Desk.MAX_BYTES * 100)}%"></span></div><div class="storage-label"><span>${state.orders.length.toLocaleString()} / 10,000 orders</span><span>${bytesLabel(size)} / 12 MB of record data</span></div><div class="actions"><button class="button primary" data-action="backup">Download backup</button><button class="button" data-action="restore">Restore</button><button class="button" data-action="csv">Export CSV</button></div><p class="hint">${last ? 'Last backup download: ' + new Date(Number(last)).toLocaleString('en-IN') : 'No backup downloaded yet.'}</p><details><summary>How storage works</summary><div class="storage-details">Only text, dates and amounts are saved; no photos or chat histories. Existing orders are saved individually when possible. Clearing browser data removes this copy. Private browsing is temporary. Different browsers, devices and website addresses do not sync.<br><br>The limit above measures record data, not the browser database’s disk overhead. Backups contain customer details; keep them private.</div><div class="actions"><button class="button" data-action="protect">Request persistent storage</button><button class="button" data-action="offline">Download offline app</button></div><p class="hint" id="persist-result">Browser protection is best effort. A downloaded backup is still needed.</p></details></section><section class="panel"><h2>Shop details</h2><form id="business-form"><div class="fields" style="margin-top:20px"><div class="field"><label for="business-name">Shop name</label><input id="business-name" name="name" value="${esc(state.business.name)}" maxlength="100" required></div><div class="field"><label for="business-handle">Instagram handle</label><input id="business-handle" name="handle" value="${esc(state.business.handle)}" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" autocapitalize="none"></div><div class="field full"><label for="business-terms">Terms on your quotes</label><textarea id="business-terms" name="terms" maxlength="2000" rows="3">${esc(state.business.terms)}</textarea></div></div><div class="actions"><button class="button">Save shop details</button></div></form></section><section class="panel"><h2>${demoMode ? 'Explore the sample shop' : mode === 'sample' ? 'Try your own shop' : 'Explore the sample shop'}</h2><p>${demoMode ? 'Open orders, quotes, payment tracking and follow-ups with fictional data.' : 'Sample orders and your own orders are kept separately.'}</p><div class="actions"><button class="button" data-action="${demoMode ? 'demo-guide' : 'switch'}">${demoMode ? 'How the demo works' : mode === 'sample' ? 'Use my own orders' : 'View sample shop'}</button>${mode === 'sample' ? '<button class="button quiet" data-action="reset-sample">Reload sample shop</button>' : ''}</div></section></div>`;
+  const storagePanel = [...$('#content').querySelectorAll('.panel')].find(panel => panel.querySelector('h2')?.textContent === 'Saved on this device');
+  storagePanel?.insertAdjacentHTML('beforeend', `<section class="sheet-backup"><div><h3>Google Sheets backup</h3><p>Keep an organised copy in a Sheet you control.</p></div><button class="button" data-action="sheet-export">Save to Google Sheets</button></section>`);
   $('#business-form').addEventListener('submit', async e => { e.preventDefault(); const f = new FormData(e.currentTarget); await commit({ ...state, business: { name: String(f.get('name')).trim(), handle: String(f.get('handle')).trim().replace(/^@/, ''), terms: String(f.get('terms')).trim() } }, 'Shop details saved.'); });
-  
-  $('#optin-share-atomz')?.addEventListener('change', e => {
-    const isChecked = e.target.checked;
-    try { localStorage.setItem('atomz-orderdesk-optin-' + mode, String(isChecked)); } catch {}
-    const area = $('#insights-export-area');
-    if (area) area.style.display = isChecked ? 'block' : 'none';
-    notify(isChecked ? 'Opt-in enabled. You can now download or send your insights pack to ATOMZ.' : 'Opt-in disabled.');
-  });
 }
 function find(id = selectedId) { return state.orders.find(o => o.id === id); }
 function openDetail(id) {
@@ -203,6 +172,36 @@ function openDetail(id) {
   $('#detail-dialog').showModal();
 }
 function closeAll() { $$('dialog[open]').forEach(d => d.close()); }
+const tourSteps = [
+  { view:'today', selector:'.nav [data-nav="today"]', title:'Today', text:'Start here. See deliveries, follow-ups and unpaid balances that need attention.' },
+  { view:'orders', selector:'.nav [data-nav="orders"]', title:'Every order, searchable', text:'Open any order to update its stage, record a payment, create a quote or prepare a follow-up.' },
+  { view:'overview', selector:'.nav [data-nav="overview"]', title:'Your numbers', text:'See collected payments, outstanding money and completed order value at a glance.' },
+  { view:'settings', selector:'.nav [data-nav="settings"]', title:'Your data', text:'Back up your orders here. Paid users can also export to Google Sheets or choose to share a data pack with ATOMZ.' },
+  { view:'today', selector:'.add-top', title:'New order', text:'Add an enquiry in seconds. The desk tracks the deposit, balance, delivery date and next follow-up.' }
+];
+function clearTourFocus() { $$('.tour-focus').forEach(element => element.classList.remove('tour-focus')); }
+function showTour(step = 0) {
+  tourStep = step;
+  const current = tourSteps[tourStep];
+  if (view !== current.view) { view = current.view; render(); }
+  requestAnimationFrame(() => {
+    clearTourFocus(); const target = $(current.selector); target?.classList.add('tour-focus');
+    $('#tour-count').textContent = `${tourStep + 1} of ${tourSteps.length}`;
+    $('#tour-title').textContent = current.title; $('#tour-text').textContent = current.text;
+    $('#tour').hidden = false; $('#tour-card [data-action="tour-next"]').textContent = tourStep === tourSteps.length - 1 ? 'Unlock ₹299' : 'Next';
+  });
+}
+function endTour() { clearTourFocus(); $('#tour').hidden = true; }
+function showGuide() { showTour(0); }
+function showPurchase() { closeAll(); $('#purchase-dialog').showModal(); }
+function showDataOptions() { $('#data-dialog').showModal(); }
+async function shareData() {
+  const file = new File([JSON.stringify(state, null, 2)], `atomz-order-desk-${dateKey()}.json`, { type:'application/json' });
+  try {
+    if (navigator.canShare?.({ files:[file] })) { await navigator.share({ title:'Order Desk data pack', text:'Data pack for ATOMZ custom Sheets and insights.', files:[file] }); notify('Data pack shared.'); }
+    else { download(file, file.name, file.type); notify('Data pack downloaded. Attach it when you contact ATOMZ.'); }
+  } catch (error) { if (error.name !== 'AbortError') notify('Could not share the data pack.'); }
+}
 function openOrder(id, duplicate = false) {
   const old = id ? find(id) : undefined; closeAll(); $('#order-form').reset(); $('#more-order').open = false;
   $('#order-title').textContent = duplicate ? 'Repeat order' : old ? 'Edit order #' + old.number : 'New order'; $('#order-error').textContent = '';
@@ -284,59 +283,6 @@ async function quotePNG(o) {
   if (y > 2500) { notify('These notes need more space. Use Print / PDF for the complete quote.'); return; }
   const out = document.createElement('canvas'); out.width = 1080; out.height = Math.ceil(y + 50); out.getContext('2d').drawImage(canvas, 0, 0); const blob = await new Promise(resolve => out.toBlob(resolve, 'image/png')); if (blob) { download(blob, 'Quote-' + o.number + '.png'); notify('Quote image downloaded.'); }
 }
-function generateInsightsPack() {
-  const s = Desk.summary(state);
-  const confirmedOrders = state.orders.filter(Desk.confirmed);
-  const productsMap = {};
-  state.orders.forEach(o => {
-    productsMap[o.product] = (productsMap[o.product] || 0) + (o.qty || 1);
-  });
-  const topProducts = Object.entries(productsMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
-
-  return {
-    generatedAt: new Date().toISOString(),
-    tool: 'ATOMZ Order Desk v2.0',
-    shop: {
-      name: state.business.name,
-      handle: state.business.handle,
-      terms: state.business.terms
-    },
-    metrics: {
-      totalOrders: state.orders.length,
-      confirmedOrdersCount: confirmedOrders.length,
-      confirmedRevenue: s.confirmedValue,
-      totalCollected: s.paid,
-      outstandingBalance: s.outstanding,
-      openDeliveriesCount: s.deliveries.length,
-      pendingFollowupsCount: s.followups.length,
-      topProducts: topProducts.map(([name, qty]) => ({ product: name, totalUnits: qty }))
-    },
-    orders: state.orders
-  };
-}
-
-function downloadInsightsPack() {
-  const pack = generateInsightsPack();
-  const safeName = (state.business.name || 'shop').toLowerCase().replace(/[^a-z0-9]/g, '-');
-  download(JSON.stringify(pack, null, 2), `atomz-order-desk-insights-${safeName}-${Desk.dateKey()}.json`, 'application/json');
-  notify('Insights Pack downloaded! You can now send this file to ATOMZ for your custom Google Sheet.');
-}
-
-function shareInsightsWhatsApp() {
-  const pack = generateInsightsPack();
-  const summaryText = `Hi ATOMZ! Here is my Order Desk export for setting up my custom Google Sheet & business insights:\n\n` +
-    `• Shop: ${pack.shop.name} ${pack.shop.handle ? '(@' + pack.shop.handle + ')' : ''}\n` +
-    `• Total Orders: ${pack.metrics.totalOrders}\n` +
-    `• Revenue: ₹${pack.metrics.confirmedRevenue.toLocaleString('en-IN')}\n` +
-    `• Collected: ₹${pack.metrics.totalCollected.toLocaleString('en-IN')}\n` +
-    `• Unpaid Balance: ₹${pack.metrics.outstandingBalance.toLocaleString('en-IN')}\n` +
-    `• Open Deliveries: ${pack.metrics.openDeliveriesCount}\n\n` +
-    `I am attaching my downloaded insights JSON file.`;
-  const url = `https://wa.me/919099939034?text=${encodeURIComponent(summaryText)}`;
-  window.open(url, '_blank');
-  downloadInsightsPack();
-}
-
 async function offlineDownload() {
   try {
     if (location.protocol === 'file:') { notify('You are already using the offline file. Keep this HTML file and a separate data backup.'); return; }
@@ -351,10 +297,19 @@ document.addEventListener('click', async e => {
   try {
     switch (b.dataset.action) {
       case 'new': openOrder(); break;
+      case 'demo-guide': showGuide(); break;
+      case 'tour-next': if (tourStep === tourSteps.length - 1) { endTour(); showPurchase(); } else showTour(tourStep + 1); break;
+      case 'tour-close': endTour(); break;
+      case 'purchase': showPurchase(); break;
+      case 'data-options': showDataOptions(); break;
+      case 'sheet-export': download(Desk.csv(state), `atomz-orders-${dateKey()}.csv`, 'text/csv;charset=utf-8'); window.open('https://sheets.new','_blank','noopener'); notify('CSV downloaded. Import it into the new Google Sheet.'); break;
+      case 'share-data': await shareData(); break;
+      case 'copy-upi': await copy(b.dataset.upi); notify('UPI ID copied.'); break;
+      case 'payment-done': b.hidden = true; $('#access-request-form').hidden = false; $('#access-request-form input[name="email"]').focus(); break;
       case 'detail': openDetail(id); break;
       case 'edit': openOrder(id); break;
       case 'duplicate': openOrder(id, true); break;
-      case 'switch': await setMode(mode === 'sample' ? 'own' : 'sample'); break;
+      case 'switch': if (demoMode) showPurchase(); else await setMode(mode === 'sample' ? 'own' : 'sample'); break;
       case 'filter': goOrders(b.dataset.filter); break;
       case 'tasks': taskTab = b.dataset.task; taskExpanded = false; view = 'today'; render(); break;
       case 'more-tasks': if (taskExpanded) goOrders('attention'); else { taskExpanded = true; render(); } break;
@@ -381,8 +336,6 @@ document.addEventListener('click', async e => {
       case 'backup': backup(); break;
       case 'restore': $('#restore-file').click(); break;
       case 'csv': download(Desk.csv(state), `atomz-orders-${dateKey()}.csv`, 'text/csv;charset=utf-8'); notify('CSV exported.'); break;
-      case 'download-insights-pack': downloadInsightsPack(); break;
-      case 'whatsapp-insights': shareInsightsWhatsApp(); break;
       case 'protect': { const ok = await navigator.storage?.persist?.(); $('#persist-result').textContent = ok ? 'Persistent storage granted. Clearing browser data can still remove orders; keep backups.' : 'This browser did not grant protection. Keep downloaded backups.'; break; }
       case 'offline': await offlineDownload(); break;
       case 'undo': { const undo = undoAction; undoAction = null; await undo?.(); break; }
@@ -391,7 +344,15 @@ document.addEventListener('click', async e => {
   } catch (err) { notify(err.message || 'That action could not be completed.'); }
 });
 $$('dialog').forEach(dialog => dialog.addEventListener('close', async () => { if (stale && !$('dialog[open]') && !busy) { await load(); render(); } }));
-document.addEventListener('keydown', e => { if (e.metaKey || e.ctrlKey || e.altKey || e.target.matches('input,textarea,select') || $('dialog[open]')) return; if (e.key.toLowerCase() === 'n') { e.preventDefault(); openOrder(); } if (e.key === '/') { e.preventDefault(); navigate('orders'); $('#search').focus(); } });
+document.addEventListener('keydown', e => { if (e.metaKey || e.ctrlKey || e.altKey || e.target.matches('input,textarea,select') || $('dialog[open]')) return; if (e.key.toLowerCase() === 'n') { e.preventDefault(); demoMode ? showGuide() : openOrder(); } if (e.key === '/') { e.preventDefault(); navigate('orders'); $('#search').focus(); } });
 $('.brand').addEventListener('click', e => { e.preventDefault(); navigate('today'); });
 async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
+$('#access-request-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget), email = String(form.get('email')).trim(), keyName = String(form.get('keyName')).trim();
+  const reference = 'OD-' + crypto.randomUUID().replaceAll('-', '').slice(0, 10).toUpperCase();
+  localStorage.setItem('atomz-orderdesk-access-request', JSON.stringify({ reference, email, keyName, createdAt:new Date().toISOString() }));
+  $('#access-request-result').textContent = `Checking payment for ${keyName}. Giving you access shortly—please keep this page open.`;
+  event.currentTarget.querySelectorAll('input,button').forEach(element => element.disabled = true);
+});
 start();

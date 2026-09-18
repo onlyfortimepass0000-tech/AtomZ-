@@ -343,6 +343,23 @@ main {
 .storage-meter span { height: 100%; display: block; background: var(--orange); }
 .storage-label { display: flex; justify-content: space-between; gap: 15px; font-size: .8125rem; color: var(--muted); }
 .storage-details { font-size: .875rem; line-height: 1.7; color: var(--muted); margin-top: 14px; }
+.payment-qr { display: block; width: min(100%, 250px); margin: 16px auto 10px; border-radius: 16px; border: 1px solid var(--line); }
+.payment-link { display: flex; justify-content: center; text-decoration: none; margin: 16px 0; }
+.payment-id { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); font-size: .875rem; flex-wrap: wrap; }
+.payment-id span { color: var(--muted); }
+.payment-id .button { margin-left: auto; }
+.access-request { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+.access-request h3 { margin: 0 0 6px; font-size: 1rem; }
+.access-request label { display: block; margin: 14px 0; font-size: .85rem; font-weight: 650; }
+.access-request input { width: 100%; margin-top: 6px; }
+.tour-button { white-space: nowrap; }
+.tour-focus { position: relative; z-index: 20; outline: 3px solid var(--orange); outline-offset: 4px; border-radius: 10px; box-shadow: 0 0 0 9999px rgba(22,26,35,.22); }
+#tour { position: fixed; z-index: 30; inset: 0; pointer-events: none; }
+#tour-card { pointer-events: auto; position: fixed; left: max(16px, env(safe-area-inset-left)); right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); margin: auto; max-width: 440px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: 0 18px 50px rgba(15,18,25,.25); }
+#tour-count { color: var(--orange); font-size: .8rem; font-weight: 700; }
+#tour-card h2 { margin: 8px 0; font-size: 1.2rem; }
+#tour-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+.tour-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 
 /* --- FORM FIELDS --- */
 .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
@@ -644,3 +661,7 @@ dialog form { margin: 0; }
   body { background: white; }
   @page { margin: 14mm; size: A4; }
 }
+.sheet-backup { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.sheet-backup h3 { margin: 0 0 4px; font-size: .95rem; }
+.sheet-backup p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.4; }
+@media (max-width: 520px) { .sheet-backup { align-items: flex-start; flex-direction: column; } .sheet-backup .button { width: 100%; } }

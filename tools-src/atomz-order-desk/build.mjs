@@ -1,18 +1,26 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const srcDir = new URL('./src/', import.meta.url);
-const read = name => fs.readFile(new URL(name, srcDir), 'utf8');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const read = name => fs.readFile(path.join(__dirname, 'src', name), 'utf8');
 const [html, css, core, app] = await Promise.all(['index.html', 'style.css', 'core.js', 'app.js'].map(read));
 
 const output = html
-  .replace('<!-- STYLE -->', () => `<style>${css}</style>`)
-  .replace('<!-- CORE -->', () => `<script id="desk-core">${core}</script>`)
-  .replace('<!-- APP -->', () => `<script>${app}</script>`);
+  .replace(/<!-- STYLE --><link data-source-style[^>]*>/, () => `<style>${css}</style>`)
+  .replace(/<!-- CORE --><script data-source-core[^>]*><\/script>/, () => `<script id="desk-core">${core}</script>`)
+  .replace(/<!-- APP --><script data-source-app[^>]*><\/script>/, () => `<script>${app}</script>`);
 
-const outDir = new URL('../../tools/order-desk/', import.meta.url);
-await fs.mkdir(outDir, { recursive: true });
-await fs.writeFile(new URL('index.html', outDir), output);
+// Write to local dist
+await fs.mkdir(path.join(__dirname, 'dist'), { recursive: true });
+await fs.writeFile(path.join(__dirname, 'dist', 'index.html'), output);
+await fs.copyFile(path.join(__dirname, 'src', 'GooglePay_QR.png'), path.join(__dirname, 'dist', 'GooglePay_QR.png'));
 
-console.log(`Built standalone Order Desk to tools/order-desk/index.html: ${Buffer.byteLength(output).toLocaleString()} bytes.`);
+// Write to website tools directory
+const targetDir = path.join(__dirname, '..', '..', 'tools', 'order-desk');
+await fs.mkdir(targetDir, { recursive: true });
+await fs.writeFile(path.join(targetDir, 'index.html'), output);
+await fs.copyFile(path.join(__dirname, 'src', 'GooglePay_QR.png'), path.join(targetDir, 'GooglePay_QR.png'));
+
+console.log(`Built standalone Order Desk: ${Buffer.byteLength(output).toLocaleString()} bytes.`);
