@@ -447,13 +447,16 @@ body:has(#cap-high:checked) .pace-high{display:block}
   </a>
   <div class="flex items-center gap-3">
     <button onclick="showScreen('matrix')" class="text-[12px] font-mono text-primary bg-surface-container border border-outline-variant hover:border-primary-container px-3 py-1.5 rounded-lg transition-all cursor-pointer">
-      📊 Creator Matrix
+      📊 Matrix
     </button>
     <button onclick="showScreen('insights')" class="text-[12px] font-mono text-[#3B82F6] bg-surface-container border border-outline-variant hover:border-[#3B82F6] px-3 py-1.5 rounded-lg transition-all cursor-pointer">
-      📈 Content Strategy Analysis
+      📈 Analysis (14)
+    </button>
+    <button onclick="showScreen('tweaks')" class="text-[12px] font-mono text-[#00F5A0] bg-surface-container border border-outline-variant hover:border-[#00F5A0] px-3 py-1.5 rounded-lg transition-all cursor-pointer">
+      ⚡ Tweaks & Formats
     </button>
     <button id="btnBackToHub" onclick="showScreen('hub')" class="hidden text-[12px] font-mono text-on-surface-variant bg-surface-container hover:bg-surface-container-high border border-outline-variant px-3 py-1.5 rounded-lg transition-all cursor-pointer">
-      ← Modules Hub
+      ← Hub Menu
     </button>
     <a href="aroha.html" class="inline-flex flex-col items-start justify-center bg-[rgba(0,245,160,0.08)] border border-[rgba(0,245,160,0.35)] px-3 py-1 rounded-xl no-underline transition-all hover:bg-[rgba(0,245,160,0.15)]">
       <span class="font-headline font-extrabold text-[12px] text-white tracking-wide leading-none">AROHA</span>
@@ -467,18 +470,18 @@ body:has(#cap-high:checked) .pace-high{display:block}
 SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB (AFTER ENTERING CODE)
 ============================================================ -->
 <div id="hubScreen" class="hub-screen">
-  <div class="hub-container">
+  <div class="hub-container max-w-5xl">
     <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container-high border border-primary-container/40 mb-4">
       <span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#ff6b00]"></span>
       <span class="font-mono text-[11px] font-bold text-primary-container uppercase tracking-widest">CLIENT 116 DOSSIER HUB</span>
     </div>
     
     <h1 class="hub-title text-3xl sm:text-4xl font-extrabold text-white mb-2">Select Your Client Dossier</h1>
-    <p class="hub-sub text-sm sm:text-base text-on-surface-variant max-w-lg mx-auto mb-8">
-      Welcome Esteban. Choose between your Interactive Creator Matrix and your 14-Visualization Content Strategy Analysis below.
+    <p class="hub-sub text-sm sm:text-base text-on-surface-variant max-w-2xl mx-auto mb-8">
+      Welcome Esteban (<span class="text-white font-semibold">@esteban.lifts</span>). Choose between your 2×2 Growth Matrix, 14-Visualization Content Strategy Analysis, and your 8 Account Strategy Tweaks & Permanent Formats below.
     </p>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full mx-auto">
       
       <!-- Option 1: Creator Growth Matrix -->
       <div onclick="showScreen('matrix')" class="hub-card group cursor-pointer bg-[#111115] border border-[#2a2b35] hover:border-[#ff6b00] rounded-2xl p-6 transition-all text-left flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(255,107,0,0.2)]">
@@ -487,14 +490,14 @@ SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB (AFTER ENTERING CODE)
             <span class="material-symbols-outlined text-[26px]">grid_view</span>
           </div>
           <span class="font-mono text-[10px] font-bold text-[#ff6b00] uppercase tracking-wider block mb-1">MODULE 01</span>
-          <h2 class="font-headline text-2xl font-bold text-white mb-2">Creator Growth Matrix</h2>
-          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
-            Interactive diagnostic tool mapping your identity stack, position baseline, goal-fit audit, and weekly action moves.
+          <h2 class="font-headline text-xl font-bold text-white mb-2">Creator Growth Matrix</h2>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed mb-6">
+            The Esteban 2×2 Matrix mapping Specific vs Generic ideas against Low vs High Personality lanes and your evidence baseline.
           </p>
         </div>
         <div class="pt-4 border-t border-outline-variant/40 flex items-center justify-between">
-          <span class="font-mono text-[12px] font-bold text-[#ff6b00] uppercase tracking-wider">Launch Creator Matrix</span>
-          <span class="material-symbols-outlined text-[#ff6b00] text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          <span class="font-mono text-[11px] font-bold text-[#ff6b00] uppercase tracking-wider">Launch 2×2 Matrix</span>
+          <span class="material-symbols-outlined text-[#ff6b00] text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </div>
       </div>
 
@@ -505,14 +508,32 @@ SCREEN 1: CENTRAL PORTAL OPTION SELECTOR HUB (AFTER ENTERING CODE)
             <span class="material-symbols-outlined text-[26px]">bar_chart</span>
           </div>
           <span class="font-mono text-[10px] font-bold text-[#3b82f6] uppercase tracking-wider block mb-1">MODULE 02</span>
-          <h2 class="font-headline text-2xl font-bold text-white mb-2">Content Strategy Analysis</h2>
-          <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
-            Comprehensive 14-visualization breakdown analyzing quantitative evidence, narrative engines, and the 4-pillar growth model.
+          <h2 class="font-headline text-xl font-bold text-white mb-2">Strategy Analysis</h2>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed mb-6">
+            Comprehensive 14-visualization breakdown analyzing quantitative metrics, resonance ratios, and narrative mechanics.
           </p>
         </div>
         <div class="pt-4 border-t border-outline-variant/40 flex items-center justify-between">
-          <span class="font-mono text-[12px] font-bold text-[#3b82f6] uppercase tracking-wider">Launch Strategy Analysis</span>
-          <span class="material-symbols-outlined text-[#3b82f6] text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          <span class="font-mono text-[11px] font-bold text-[#3b82f6] uppercase tracking-wider">Launch 14 Visualizations</span>
+          <span class="material-symbols-outlined text-[#3b82f6] text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+
+      <!-- Option 3: Account Tweaks & Formats -->
+      <div onclick="showScreen('tweaks')" class="hub-card group cursor-pointer bg-[#111115] border border-[#2a2b35] hover:border-[#00F5A0] rounded-2xl p-6 transition-all text-left flex flex-col justify-between hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,245,160,0.2)]">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-[#00F5A0]/10 border border-[#00F5A0]/30 flex items-center justify-center text-[#00F5A0] mb-4 group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[26px]">tune</span>
+          </div>
+          <span class="font-mono text-[10px] font-bold text-[#00F5A0] uppercase tracking-wider block mb-1">MODULE 03</span>
+          <h2 class="font-headline text-xl font-bold text-white mb-2">Account Tweaks</h2>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed mb-6">
+            8 actionable evidence-based strategy tweaks and 3 permanent recurring formats (Asks The Gym, Gymbro Life, Becoming Gymshark).
+          </p>
+        </div>
+        <div class="pt-4 border-t border-outline-variant/40 flex items-center justify-between">
+          <span class="font-mono text-[11px] font-bold text-[#00F5A0] uppercase tracking-wider">Launch Account Tweaks</span>
+          <span class="material-symbols-outlined text-[#00F5A0] text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </div>
       </div>
 
@@ -530,15 +551,19 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
       <h1 class="headline">Where You Actually Stand</h1>
       <div class="insta-handle-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        <span>@esteban · Creator Diagnostic (atomz116)</span>
+        <span>@esteban.lifts · Creator Diagnostic (atomz116)</span>
       </div>
-      <div class="mt-4 flex flex-wrap gap-3">
-        <button onclick="showScreen('insights')" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] text-white font-headline font-bold text-sm px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-all cursor-pointer">
-          <span>📈 Switch to Content Strategy Analysis (14 Visualizations)</span>
-          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+      <div class="mt-4 flex flex-wrap gap-2.5">
+        <button onclick="showScreen('insights')" class="inline-flex items-center gap-1.5 bg-[#111115] hover:bg-[#1a1a24] text-[#3b82f6] border border-[#3b82f6]/40 font-headline font-bold text-xs px-3.5 py-2 rounded-xl transition-all cursor-pointer">
+          <span>📈 Module 02: Strategy Analysis</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
         </button>
-        <button onclick="showScreen('hub')" class="inline-flex items-center gap-2 bg-surface-container text-on-surface-variant hover:text-white font-mono text-sm px-4 py-2.5 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer">
-          <span>← Modules Hub</span>
+        <button onclick="showScreen('tweaks')" class="inline-flex items-center gap-1.5 bg-[#111115] hover:bg-[#1a1a24] text-[#00F5A0] border border-[#00F5A0]/40 font-headline font-bold text-xs px-3.5 py-2 rounded-xl transition-all cursor-pointer">
+          <span>⚡ Module 03: Account Tweaks</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+        <button onclick="showScreen('hub')" class="inline-flex items-center gap-1.5 bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs px-3 py-2 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer">
+          <span>← Hub Menu</span>
         </button>
       </div>
     </div>
@@ -546,29 +571,134 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
     <section>
       <h2>What the data already proves</h2>
       <div class="proof-card">
-        <span class="proof-tag">Pulled from your audit</span>
-        <p class="proof-title">159x Multiplier on Base & 10.66% Peak Resonance</p>
-        <p class="proof-stat">Top reach hit <b>918.6K views</b> (159x follower baseline), while your 199K Reel achieved <b>10.66% Likes-per-View</b> connection density.</p>
+        <span class="proof-tag">Empirical Audit Evidence</span>
+        <p class="proof-title">Three Distinct Types of Winning Formats</p>
+        <p class="proof-stat mb-3">Esteban's audit reveals three clear reasons people watch and engage:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-3">
+          <div class="bg-surface p-3.5 rounded-xl border border-outline-variant">
+            <span class="font-mono text-[10px] font-bold text-electric-blue uppercase tracking-wider block mb-1">1. REACH / CURIOSITY</span>
+            <p class="text-xs font-semibold text-white mb-1">“I'm doing 110 and I think it's not impressive”</p>
+            <p class="font-mono text-sm font-extrabold text-[#FF6B00]">918K+ views <span class="text-[11px] font-normal text-on-surface-variant">(6s duration)</span></p>
+          </div>
+          <div class="bg-surface p-3.5 rounded-xl border border-outline-variant">
+            <span class="font-mono text-[10px] font-bold text-pink-accent uppercase tracking-wider block mb-1">2. PERSONALITY / RELATABILITY</span>
+            <p class="text-xs font-semibold text-white mb-1">“At least I got a date 😭”</p>
+            <p class="font-mono text-sm font-extrabold text-pink-accent">199K+ views <span class="text-[11px] font-normal text-on-surface-variant">(10.66% like density)</span></p>
+          </div>
+          <div class="bg-surface p-3.5 rounded-xl border border-outline-variant">
+            <span class="font-mono text-[10px] font-bold text-electric-green uppercase tracking-wider block mb-1">3. CONVERSATION</span>
+            <p class="text-xs font-semibold text-white mb-1">“Is 90lb good? What do you think?”</p>
+            <p class="font-mono text-sm font-extrabold text-electric-green">171 comments <span class="text-[11px] font-normal text-on-surface-variant">(29K views)</span></p>
+          </div>
+        </div>
+
+        <p class="proof-why">
+          <b>The Core Funnel:</b> <span class="text-white font-semibold">Curiosity → Personality → Participation</span>.
+        </p>
+        <p class="proof-source text-xs text-on-surface-variant mt-2">
+          Meanwhile, recent generic journey captions like <i>“Road to success. Follow along”</i>, <i>“Road to Gymshark edits”</i>, generic motivation, and 169s vlog-style uploads were considerably weaker than short, immediately understandable gym/personality situations.
+        </p>
+      </div>
+    </section>
+
+    <!-- ESTEBAN 2x2 MATRIX VISUAL FRAMEWORK -->
+    <section class="mt-6">
+      <h2>The Esteban 2×2 Matrix</h2>
+      <p class="text-xs text-on-surface-variant mb-4">
+        Vertical axis: <b class="text-white">Specific / Instantly Understandable Idea</b> vs Generic · Horizontal axis: <b class="text-white">Low Personality</b> vs <b class="text-white">High Personality / Audience Involvement</b>
+      </p>
+
+      <div class="bg-[#111115] border border-[#2a2b35] rounded-2xl p-5 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Top-Left: Gym Curiosity -->
+          <div class="bg-surface/80 p-4 rounded-xl border border-[#3b82f6]/30 relative">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] font-bold text-[#3b82f6] uppercase tracking-wider">SPECIFIC + LOW PERSONALITY</span>
+              <span class="text-[11px] bg-[#3b82f6]/10 text-[#3b82f6] px-2 py-0.5 rounded font-mono">REACH</span>
+            </div>
+            <h3 class="font-headline text-base font-bold text-white mb-1">GYM CURIOSITY</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-2">Instant curiosity and gym lift metrics that stop the feed immediately.</p>
+            <div class="font-mono text-[11px] text-[#3b82f6] bg-[#3b82f6]/10 p-2 rounded-lg">
+              Example: “I’m doing 110 and I think it's not impressive...”
+            </div>
+          </div>
+
+          <!-- Top-Right: Esteban's Best Lane (GOLD/PRIMARY TARGET) -->
+          <div class="bg-surface/80 p-4 rounded-xl border-2 border-primary relative shadow-[0_0_20px_rgba(255,107,0,0.15)]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] font-bold text-primary uppercase tracking-wider flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                SPECIFIC + HIGH PERSONALITY
+              </span>
+              <span class="text-[10px] bg-primary text-black font-extrabold px-2 py-0.5 rounded-full uppercase font-mono">ESTEBAN'S BEST LANE</span>
+            </div>
+            <h3 class="font-headline text-base font-bold text-white mb-1">SPECIFIC GYM SITUATION + HIS PERSONALITY</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-2">Specific gym situation + his real personality + opinion / direct question.</p>
+            <div class="font-mono text-[11px] text-primary bg-primary/10 p-2 rounded-lg">
+              Examples: “Is 90lb good?”, “At least I got a date 😭”
+            </div>
+          </div>
+
+          <!-- Bottom-Left: Motivation Content -->
+          <div class="bg-surface/80 p-4 rounded-xl border border-outline-variant relative opacity-70">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">GENERIC + LOW PERSONALITY</span>
+              <span class="text-[11px] bg-white/5 text-on-surface-variant px-2 py-0.5 rounded font-mono">WEAK SIGNAL</span>
+            </div>
+            <h3 class="font-headline text-base font-bold text-white mb-1">MOTIVATION CONTENT</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-2">Generic inspirational audio/quotes with no distinctive conflict.</p>
+            <div class="font-mono text-[11px] text-on-surface-variant bg-white/5 p-2 rounded-lg">
+              Example: “Road to success. Follow along.”
+            </div>
+          </div>
+
+          <!-- Bottom-Right: Life Update / Vlog -->
+          <div class="bg-surface/80 p-4 rounded-xl border border-outline-variant relative opacity-70">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">GENERIC + HIGH PERSONALITY</span>
+              <span class="text-[11px] bg-white/5 text-on-surface-variant px-2 py-0.5 rounded font-mono">LOW RETENTION</span>
+            </div>
+            <h3 class="font-headline text-base font-bold text-white mb-1">LIFE UPDATE / LONG VLOG</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-2">Audience likes him, but there isn't an instant reason to stop scrolling.</p>
+            <div class="font-mono text-[11px] text-on-surface-variant bg-white/5 p-2 rounded-lg">
+              Example: 169s vlog with no single focused story premise.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-outline-variant/60 flex flex-col gap-3">
+          <div class="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-1">
+              <b class="text-white">Where Esteban currently moves between:</b> <span class="text-[#FF2A7A] font-semibold">All four boxes.</span> That inconsistency is the primary bottleneck.
+            </p>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              <b class="text-white">Where the strongest evidence points:</b> <span class="text-[#00FF41] font-semibold">SPECIFIC + PERSONAL.</span> When Esteban says <i>“Is 90lb good?”</i> or <i>“At least I got a date”</i>, he sounds like a real person talking to a friend—not a manufactured content strategy.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Now, tell us the rest</h2>
+      <h2>Interactive Diagnostic</h2>
       <div class="q-block">
         <p class="q-text">1. What do you think your content is mainly about right now?</p>
         <div class="opts">
-          <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Fitness / natural lifting</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-fitness"><span class="card">Specific gym situations & lifts</span></label>
           <label class="opt"><input type="radio" name="identity" id="id-travel"><span class="card">Gymshark aspiration & lifestyle</span></label>
           <label class="opt"><input type="radio" name="identity" id="id-mix"><span class="card">A mix of both</span></label>
-          <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Something else</span></label>
+          <label class="opt"><input type="radio" name="identity" id="id-other"><span class="card">Generic gym motivation</span></label>
         </div>
       </div>
       <div class="q-block">
         <p class="q-text">2. What's your main goal right now?</p>
         <div class="opts">
           <label class="opt"><input type="radio" name="goal" id="goal-followers"><span class="card">Followers & reach</span></label>
-          <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Sponsorships & brand deals</span></label>
-          <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Building a loyal cult audience</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-branddeals"><span class="card">Sponsorships & Gymshark</span></label>
+          <label class="opt"><input type="radio" name="goal" id="goal-clients"><span class="card">Active community & comments</span></label>
           <label class="opt"><input type="radio" name="goal" id="goal-consistency"><span class="card">Just consistency for now</span></label>
         </div>
       </div>
@@ -593,26 +723,26 @@ SCREEN 2A: CREATOR MATRIX DIAGNOSTIC
         <div class="mini wrongdest">Right lane, wrong destination</div>
       </div>
 
-      <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>What you think is working, what the data proves, and what you actually want all point the same direction. Lean in — don't add complexity you don't need.</p></div>
-      <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You already know what's working — the data agrees with you. But that format alone won't get you to your stated goal without narrative structure.</p></div>
-      <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>You don't think this is your primary lane — but it's both what's proven AND what would actually serve your goal. Worth reconsidering your content DNA.</p></div>
-      <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Neither your self-image nor your current output lines up with what actually works or what you want. This is worth a real conversation before shooting next.</p></div>
+      <div class="verdict v-aligned"><span class="badge badge-green">FULLY ALIGNED</span><p>You're targeting Specific Gym Situations + Personality. What you think is working, what the data proves, and your Gymshark goals all align. Keep your hooks 1-sentence sharp.</p></div>
+      <div class="verdict v-wrongdest"><span class="badge badge-coral">RIGHT LANE, WRONG DESTINATION</span><p>You have high reach on curiosity clips, but without opinion questions or clear conflict, views won't convert into a dedicated cult following or brand sponsorships.</p></div>
+      <div class="verdict v-blindspot"><span class="badge badge-gold">BLIND SPOT</span><p>Focusing on generic lifestyle or long vlogs dilutes your advantage. Your massive upside is short, punchy, judgeable opinion questions and relatable gym moments.</p></div>
+      <div class="verdict v-reset"><span class="badge badge-grey">RESET NEEDED</span><p>Generic motivation captions like 'Road to success' underperform severely. Pivot to specific conflict hooks immediately.</p></div>
 
-      <p class="goalnote gn-followers">High-distribution short-form hooks (7-15s) drive non-follower reach — 159x multiplier proven in audit.</p>
-      <p class="goalnote gn-branddeals">Gymshark narrative story arcs turn basic views into high-value brand alignment.</p>
-      <p class="goalnote gn-clients">High conversation density (71.4 comments/1k) builds deep audience loyalty and brand equity.</p>
-      <p class="goalnote gn-consistency">Documenting the journey systematically eliminates burnout while keeping narrative momentum high.</p>
+      <p class="goalnote gn-followers">Short-form conflict hooks (6–12s) drive non-follower reach — 918K view multiplier proven in audit.</p>
+      <p class="goalnote gn-branddeals">Make 'Becoming Gymshark' an ongoing conflict arc rather than a generic hashtag stack.</p>
+      <p class="goalnote gn-clients">Opinion questions ('Is 90lb good?') generate 171+ comments, turning passive viewers into active community.</p>
+      <p class="goalnote gn-consistency">Batching 3 specific formats eliminates shooting fatigue and keeps narrative continuity high.</p>
     </section>
 
     <section class="move-wrap">
       <h2>This week's move</h2>
-      <div class="move move-aligned">Ship 3–5 short-form reels combining high-distribution hooks with narrative story hooks.</div>
-      <div class="move move-wrongdest">Keep shooting short-form reels, but add ONE thing: turn 'Dream as a Topic' into an ongoing 'Dream as a Story' arc.</div>
-      <div class="move move-blindspot">Leverage your international student + natural lifter identity stack to unlock high-resonance conversation reels.</div>
-      <div class="move move-reset">Get on a call with us — let's align your content engine before shooting further.</div>
-      <p class="pace pace-low">At 1–2 reels/week, expect the growth trajectory to stretch closer to 120–150 days.</p>
-      <p class="pace pace-mid">3–5 reels/week is right on pace for rapid compounding.</p>
-      <p class="pace pace-high">5+ reels/week could beat the target timeline dramatically.</p>
+      <div class="move move-aligned">Ship 3–5 reels in Esteban's Best Lane: 1-sentence conflict hook + opinion question CTA.</div>
+      <div class="move move-wrongdest">Add one specific judgeable question to every lift reel: 'Is this depth good?' or 'Would you count this rep?'.</div>
+      <div class="move move-blindspot">Replace 169s long vlogs with 15s single-story conflict clips ('I trained with the strongest guy in my gym').</div>
+      <div class="move move-reset">Stop generic motivation captions and replace with tension hooks: 'I wasted 6 months training like this'.</div>
+      <p class="pace pace-low">At 1–2 reels/week, focus 100% on Format A ('Esteban Asks The Gym').</p>
+      <p class="pace pace-mid">3–5 reels/week is the sweet spot: 2 Asks The Gym, 2 Gymbro Life, 1 Becoming Gymshark.</p>
+      <p class="pace pace-high">5+ reels/week lets you dominate the fitness feed fast.</p>
     </section>
   </div>
 </div>
@@ -1138,6 +1268,326 @@ SCREEN 2B: CONTENT STRATEGY ANALYSIS (14 VISUALIZATIONS)
   </div>
 </div>
 
+<!-- ============================================================
+SCREEN 2C: MODULE 03: ACCOUNT TWEAKS & PERMANENT FORMATS
+============================================================ -->
+<div id="tweaksScreen" class="hidden relative pt-24 pb-16">
+  <div class="max-w-4xl mx-auto px-4 relative z-10">
+    
+    <!-- Header Banner -->
+    <div class="hero mb-8 border-l-4 border-l-[#00F5A0]">
+      <div class="flex justify-between items-start flex-wrap gap-3">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00F5A0]/10 border border-[#00F5A0]/30 text-[#00F5A0] font-mono text-xs font-bold uppercase tracking-wider mb-3">
+            <span>MODULE 03 · ACCOUNT STRATEGY TWEAKS</span>
+          </div>
+          <h1 class="headline text-3xl sm:text-4xl font-extrabold text-white">@esteban.lifts Account Tweaks</h1>
+          <p class="text-[14px] text-on-surface-variant max-w-xl leading-relaxed mt-2">
+            8 actionable evidence-based strategy tweaks and 3 permanent repeatable formats derived directly from your winning content signals.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2.5">
+            <button onclick="showScreen('matrix')" class="inline-flex items-center gap-1.5 bg-[#111115] hover:bg-[#1a1a24] text-primary border border-primary/40 font-headline font-bold text-xs px-3.5 py-2 rounded-xl transition-all cursor-pointer">
+              <span>📊 Module 01: Creator Matrix</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+            <button onclick="showScreen('insights')" class="inline-flex items-center gap-1.5 bg-[#111115] hover:bg-[#1a1a24] text-[#3b82f6] border border-[#3b82f6]/40 font-headline font-bold text-xs px-3.5 py-2 rounded-xl transition-all cursor-pointer">
+              <span>📈 Module 02: Strategy Analysis</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+            <button onclick="showScreen('hub')" class="inline-flex items-center gap-1.5 bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs px-3 py-2 rounded-xl border border-outline-variant hover:border-primary transition-all cursor-pointer">
+              <span>← Modules Hub</span>
+            </button>
+          </div>
+        </div>
+        <span class="portal-badge">CLIENT 116: ESTEBAN</span>
+      </div>
+    </div>
+
+    <!-- STRATEGY DISTINCTION CALLOUT BANNER -->
+    <div class="bg-gradient-to-r from-[#FF6B00]/15 via-[#111115] to-[#00F5A0]/15 border border-outline-variant/60 rounded-2xl p-5 mb-8">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="font-mono text-xs font-extrabold text-[#00F5A0] uppercase tracking-wider">STRATEGIC NORTH STAR</span>
+      </div>
+      <p class="text-sm font-semibold text-white leading-relaxed">
+        “Esteban should turn his gym journey into <span class="text-[#00F5A0]">specific, relatable situations people can react to</span>—not generic motivation or endless hashtag piles.”
+      </p>
+    </div>
+
+    <!-- 8 ACTIONABLE TWEAKS GRID -->
+    <div class="space-y-6 mb-12">
+      
+      <!-- TWEAK 1 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#FF6B00]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#FF6B00]/10 border border-[#FF6B00]/30 text-[#FF6B00] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            01
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Stop making “Road to Gymshark” the hook</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              The journey itself is useful, but the phrase <b>“Road to Gymshark”</b> is not enough of a standalone Reel idea. Instead of relying on generic titles like <i>“Road to Gymshark Day 18”</i>, frame the Reel around that specific day's actual conflict.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">❌ WEAK (GENERIC)</span>
+                <p class="text-xs text-white">“Road to Gymshark Day 18. Keep pushing.”</p>
+              </div>
+              <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1">✓ STRONGER (CONFLICT HOOK)</span>
+                <p class="text-xs text-white">“Gymshark probably isn't signing me after this set.” / “I said I'd become a Gymshark athlete. There's one problem.”</p>
+              </div>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-3 italic">
+              Then the Road to Gymshark becomes the recurring story underneath the Reel—meaning the episode works even for someone discovering Esteban for the very first time.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 2 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#3b82f6]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#3b82f6]/10 border border-[#3b82f6]/30 text-[#3b82f6] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            02
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Every Reel needs one sentence that explains the entire video</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              His huge 6-second winner (<b class="text-[#FF6B00]">918K views</b>) is the clearest evidence: <span class="text-white font-semibold">“I'm doing 110 and I think it's not impressive.”</span> You understand the entire conflict instantly. Do that consistently on every single upload.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">❌ WEAK (VAGUE)</span>
+                <p class="text-xs text-white">“Keep going.” / “Road to success.”</p>
+              </div>
+              <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1">✓ STRONGER (CLEAR PREMISE)</span>
+                <p class="text-xs text-white">“My bench went up but somehow I feel weaker.” / “I've been trying to hit this weight for three weeks.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 3 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#00F5A0]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#00F5A0]/10 border border-[#00F5A0]/30 text-[#00F5A0] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            03
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Bring back opinion questions aggressively</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              He has already proven people will answer him: <b class="text-[#00F5A0]">29K views generated 171 comments</b> on <i>“Is 90lb good?”</i>. Make this a permanent recurring format. Never ask a generic <i>“Thoughts?”</i>; give viewers something specific to judge.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div class="p-2.5 bg-surface rounded-lg border border-outline-variant text-white flex items-center gap-2">
+                <span class="text-[#00F5A0]">💬</span> “Is this actually good depth?”
+              </div>
+              <div class="p-2.5 bg-surface rounded-lg border border-outline-variant text-white flex items-center gap-2">
+                <span class="text-[#00F5A0]">💬</span> “Would you count this rep?”
+              </div>
+              <div class="p-2.5 bg-surface rounded-lg border border-outline-variant text-white flex items-center gap-2">
+                <span class="text-[#00F5A0]">💬</span> “Which physique looks better, bulk or lean?”
+              </div>
+              <div class="p-2.5 bg-surface rounded-lg border border-outline-variant text-white flex items-center gap-2">
+                <span class="text-[#00F5A0]">💬</span> “Am I cheating this rep?”
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 4 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#FF2A7A]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#FF2A7A]/10 border border-[#FF2A7A]/30 text-[#FF2A7A] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            04
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Use his personality more than generic motivation</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+              His audience responds enthusiastically to: <span class="text-white font-medium">dates, jokes, gym embarrassment, relatable situations, spiders/random personality moments, opinions, and gymbro banter</span>.
+            </p>
+            <div class="p-4 bg-gradient-to-r from-[#FF2A7A]/10 to-transparent border-l-2 border-[#FF2A7A] rounded-r-xl">
+              <span class="font-mono text-[11px] font-bold text-[#FF2A7A] uppercase tracking-wider block mb-1">CORE DIFFERENTIATOR</span>
+              <p class="text-sm text-white font-medium">
+                “A gymbro you follow because you're interested in him, with fitness being the world the story happens inside.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 5 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#F2B705]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#F2B705]/10 border border-[#F2B705]/30 text-[#F2B705] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            05
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Compress the vlogs</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              One of his recent <i>“5 thousand followers special vlog”</i> uploads ran <b>169 seconds</b> and performed far below his 10–30 second posts. Do not eliminate vlogs—change their structure.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">❌ DAY VLOG (LOW RETENTION)</span>
+                <p class="text-xs text-white">Showing everything that happened throughout the day without a focal story arc.</p>
+              </div>
+              <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
+                <span class="font-mono text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1">✓ SINGLE PAYOFF VLOG (HIGH HOOK)</span>
+                <p class="text-xs text-white"><b>One event → One story → One payoff.</b> Example: <i>“I tried training with the strongest guy in my gym.”</i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 6 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-primary/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-primary/10 border border-primary/30 text-primary font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            06
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Stop leading with generic motivation captions</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              His strongest hooks have unresolved tension. Always substitute generic motivational platitudes with an intriguing open narrative loop.
+            </p>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between p-2.5 bg-surface rounded-lg border border-outline-variant text-xs">
+                <span class="text-red-400">Weak: “Do it man. You're already late.”</span>
+                <span class="text-emerald-400 font-medium">Stronger: “I wasted 6 months training like this.”</span>
+              </div>
+              <div class="flex items-center justify-between p-2.5 bg-surface rounded-lg border border-outline-variant text-xs">
+                <span class="text-red-400">Weak: “We aiming to the moon.”</span>
+                <span class="text-emerald-400 font-medium">Stronger: “I told everyone I'd become a Gymshark athlete. Now I have to prove it.”</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 7 -->
+      <div class="bg-[#111115] border border-[#2a2b35] hover:border-[#3b82f6]/50 rounded-2xl p-6 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="w-9 h-9 rounded-xl bg-[#3b82f6]/10 border border-[#3b82f6]/30 text-[#3b82f6] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            07
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-lg font-bold text-white mb-2">Clean up the hashtag behaviour</h3>
+            <p class="text-sm text-on-surface-variant leading-relaxed mb-3">
+              Earlier posts repeatedly featured spam stacks like <code class="text-xs bg-white/10 px-1 py-0.5 rounded text-white">#viral #fyp #motivation #fitness #gym</code>. His breakout personality Reel <i>“Fat baby”</i> worked completely without relying on that type of hashtag stack.
+            </p>
+            <div class="p-3 bg-surface rounded-xl border border-outline-variant text-xs text-white">
+              <b>Strategic Hierarchy:</b> <span class="text-primary font-semibold">Premise → First Frame → Punchline / Question</span> &gt; Caption Hashtag Pile.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWEAK 8: THREE PERMANENT FORMATS -->
+      <div class="bg-[#111115] border-2 border-[#00F5A0]/40 rounded-2xl p-6 transition-all shadow-[0_0_24px_rgba(0,245,160,0.1)]">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-9 h-9 rounded-xl bg-[#00F5A0]/15 border border-[#00F5A0]/40 text-[#00F5A0] font-mono font-bold flex items-center justify-center flex-shrink-0 text-sm">
+            08
+          </div>
+          <div>
+            <h3 class="font-headline text-xl font-bold text-white mb-1">Create Three Permanent Esteban Formats</h3>
+            <p class="text-sm text-on-surface-variant">
+              Rather than posting completely different ideas every day, establish a predictable, compounding 3-format architecture.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          
+          <!-- FORMAT A -->
+          <div class="bg-surface p-4 rounded-xl border border-outline-variant flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-[10px] font-bold text-[#3b82f6] uppercase">FORMAT A</span>
+                <span class="text-[10px] bg-[#3b82f6]/10 text-[#3b82f6] px-2 py-0.5 rounded font-mono">7–12 SEC</span>
+              </div>
+              <h4 class="font-headline text-base font-bold text-white mb-2">“ESTEBAN ASKS THE GYM”</h4>
+              <div class="space-y-1 text-xs text-on-surface-variant mb-4">
+                <p>• “Is 90lb actually good?”</p>
+                <p>• “Would you count this?”</p>
+                <p>• “Which one looks better?”</p>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/60 flex items-center justify-between">
+              <span class="font-mono text-[10px] text-on-surface-variant uppercase">PRIMARY METRIC:</span>
+              <span class="font-mono text-xs font-bold text-[#00F5A0]">COMMENTS</span>
+            </div>
+          </div>
+
+          <!-- FORMAT B -->
+          <div class="bg-surface p-4 rounded-xl border border-outline-variant flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-[10px] font-bold text-pink-accent uppercase">FORMAT B</span>
+                <span class="text-[10px] bg-pink-accent/10 text-pink-accent px-2 py-0.5 rounded font-mono">8–15 SEC</span>
+              </div>
+              <h4 class="font-headline text-base font-bold text-white mb-2">“GYMBRO LIFE”</h4>
+              <div class="space-y-1 text-xs text-on-surface-variant mb-4">
+                <p>• Dating & gym life</p>
+                <p>• Awkward moments & jokes</p>
+                <p>• Relatable gym situations</p>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/60 flex items-center justify-between">
+              <span class="font-mono text-[10px] text-on-surface-variant uppercase">PRIMARY METRIC:</span>
+              <span class="font-mono text-xs font-bold text-pink-accent">SHARES + LIKES</span>
+            </div>
+          </div>
+
+          <!-- FORMAT C -->
+          <div class="bg-surface p-4 rounded-xl border border-outline-variant flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-[10px] font-bold text-primary uppercase">FORMAT C</span>
+                <span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded font-mono">15–30 SEC</span>
+              </div>
+              <h4 class="font-headline text-base font-bold text-white mb-2">“BECOMING GYMSHARK”</h4>
+              <div class="space-y-1 text-xs text-on-surface-variant mb-4">
+                <p>• One specific obstacle per Reel</p>
+                <p>• Real physical progression</p>
+                <p>• Overcoming training plateaus</p>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-outline-variant/60 flex items-center justify-between">
+              <span class="font-mono text-[10px] text-on-surface-variant uppercase">PRIMARY METRIC:</span>
+              <span class="font-mono text-xs font-bold text-primary">FOLLOWERS</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CLOSING NAVIGATION CTA -->
+    <div class="text-center p-6 bg-[#111115] border border-outline-variant rounded-2xl">
+      <h3 class="font-headline text-xl font-bold text-white mb-2">Ready to Film Next Week's Batch?</h3>
+      <p class="text-xs text-on-surface-variant max-w-md mx-auto mb-4">
+        Review your 2×2 Matrix or 14-visualization strategy analysis anytime to maintain clean content alignment.
+      </p>
+      <div class="flex justify-center gap-3">
+        <button onclick="showScreen('matrix')" class="inline-flex items-center gap-2 bg-primary text-black font-headline font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">
+          <span>📊 View Creator Matrix</span>
+        </button>
+        <button onclick="showScreen('hub')" class="inline-flex items-center gap-2 bg-surface-container text-white font-mono text-xs px-4 py-2.5 rounded-xl border border-outline-variant hover:border-primary cursor-pointer">
+          <span>← Back to Modules Hub</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // Background Motion Graphics Canvas
 const bgCanvas = document.getElementById('matrixBgCanvas');
@@ -1183,6 +1633,8 @@ function showScreen(screenId) {
   document.getElementById('hubScreen').classList.add('hidden');
   document.getElementById('matrixScreen').classList.add('hidden');
   document.getElementById('insightsScreen').classList.add('hidden');
+  const tweaks = document.getElementById('tweaksScreen');
+  if (tweaks) tweaks.classList.add('hidden');
   document.getElementById('btnBackToHub').classList.remove('hidden');
 
   if (screenId === 'hub') {
@@ -1194,6 +1646,9 @@ function showScreen(screenId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (screenId === 'insights') {
     document.getElementById('insightsScreen').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (screenId === 'tweaks') {
+    if (tweaks) tweaks.classList.remove('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

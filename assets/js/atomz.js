@@ -406,7 +406,8 @@
     "atomz113": { name: "Aum", handle: "@aum.creation", format: "Aum (atomz113)" },
     "atomz114": { name: "Toxic Somo", handle: "@fitwithtoxic_somo", format: "Toxic Somo (atomz114)" },
     "atomz115": { name: "Train With Tas", handle: "@trainwithtas_", format: "Train With Tas (atomz115)" },
-    "atomz116": { name: "Esteban", handle: "@esteban", format: "Esteban (atomz116)" }
+    "atomz116": { name: "Esteban", handle: "@esteban.lifts", format: "Esteban (atomz116)" },
+    "atomz117": { name: "Deep", handle: "@deepfits2_2", format: "Deep (atomz117)" }
   };
 
   function processCodeAccess(enteredCode) {
@@ -426,6 +427,8 @@
       targetUrl = "horizon-115.html?code=" + encodeURIComponent(enteredCode);
     } else if (cleanedCode === "atomz116" || cleanedCode === "116" || cleanedCode.indexOf("esteban") !== -1) {
       targetUrl = "horizon-116.html?code=" + encodeURIComponent(enteredCode);
+    } else if (cleanedCode === "atomz117" || cleanedCode === "117" || cleanedCode.indexOf("deep") !== -1) {
+      targetUrl = "horizon-117.html?code=" + encodeURIComponent(enteredCode);
     } else if (cleanedCode === "atomztrial" || cleanedCode === "trial" || cleanedCode.indexOf("trial") !== -1) {
       targetUrl = "horizon-trial.html?code=" + encodeURIComponent(enteredCode);
     }
