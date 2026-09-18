@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff9514">
+<meta name="description" content="Your orders, payments and deliveries, simply organised. ATOMZ Order Desk works on your device without AI.">
+<title>Order Desk · ATOMZ</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23f07020'/%3E%3Cpath d='m11 28 9-17 9 17m-14-6h10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<style>/* ============================================
+   ATOMZ ORDER DESK — ORANGE THEME REDESIGN
+   ============================================ */
+
+/* --- DESIGN TOKENS --- */
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-synthesis: none;
+  color: #1c1007;
+
+  /* Orange palette */
+  --orange:       #e8590c;
+  --orange-deep:  #b83e00;
+  --orange-light: #ff8c42;
+  --orange-glow:  #ff6b1a;
+
+  /* Surfaces */
+  --bg:       #fdf3e7;          /* warm cream — the canvas */
+  --surface:  #ffffff;          /* card / dialog surface */
+  --topbar:   #1c0e04;          /* dark espresso topbar */
+
+  /* Text */
+  --ink:   #1c1007;
+  --muted: #7a5f48;
+
+  /* UI chrome */
+  --line:   #f0d9c0;
+  --soft:   #fef6ee;
+  --radius: 14px;
+
+  /* Semantic */
+  --green: #1a6b4a;
+  --red:   #a33030;
+
+  background: var(--bg);
+}
+
+/* --- GLOBAL RESET --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; position: relative; overflow-x: hidden; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: wait; }
+a { color: var(--orange); }
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+button { touch-action: manipulation; }
+svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: 2rem; letter-spacing: -1.2px; font-weight: 700; line-height: 1.2; }
+h2 { font-size: 1.125rem; letter-spacing: -.25px; font-weight: 650; }
+h3 { font-size: 1rem; }
+.muted, .hint { color: var(--muted); }
+.hint { font-size: .8125rem; line-height: 1.65; }
+.error { color: var(--red); font-size: .875rem; line-height: 1.5; }
+.error:empty { display: none; }
+
+/* --- AMBIENT BACKGROUND GLOWS (behind all content) --- */
+/* These are fixed radial gradients that drift slowly,
+   giving the cream background a warm living quality */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.blob-1 {
+  width: 700px; height: 700px;
+  top: -200px; left: -150px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,140,66,0.22) 0%, transparent 68%);
+  animation: glow1 30s ease-in-out infinite alternate;
+}
+.blob-2 {
+  width: 800px; height: 800px;
+  bottom: -300px; right: -200px;
+  background: radial-gradient(circle at 50% 50%, rgba(232,89,12,0.16) 0%, transparent 65%);
+  animation: glow2 38s ease-in-out infinite alternate-reverse;
+}
+.blob-3 {
+  width: 500px; height: 500px;
+  top: 40%; left: 42%;
+  background: radial-gradient(circle at 50% 50%, rgba(255,180,80,0.14) 0%, transparent 70%);
+  animation: glow3 24s ease-in-out infinite alternate;
+}
+@keyframes glow1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, 60px) scale(1.12); }
+}
+@keyframes glow2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-70px, -90px) scale(1.08); }
+}
+@keyframes glow3 {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(-90px, 70px) scale(1.18) rotate(15deg); }
+}
+
+/* --- TOPBAR (dark espresso strip) --- */
+.topbar {
+  position: relative;
+  z-index: 10;
+  background: var(--topbar);
+  /* Very subtle fiber texture baked into the topbar */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.topbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 32px;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; font-size: 1rem; font-weight: 650; line-height: 1.25; }
+.brand small { display: block; font-size: .6875rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.45); font-weight: 500; margin-top: 3px; text-transform: uppercase; }
+.brand-mark {
+  width: 38px; height: 38px;
+  background: var(--orange);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  border-radius: 11px;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 1.65rem;
+  letter-spacing: -3px;
+  padding-right: 3px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(232,89,12,0.5);
+}
+.shop { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: .875rem; color: rgba(255,255,255,0.6); }
+.sample-pill { font-size: .75rem; background: rgba(232,89,12,0.25); color: var(--orange-light); padding: 4px 9px; border-radius: 6px; border: 1px solid rgba(232,89,12,0.3); }
+
+/* The topbar wraps <.topbar-inner>, but the HTML has .topbar directly.
+   We keep backward compat: topbar IS the row. */
+.topbar { max-width: 100%; display: flex; align-items: center; gap: 20px; padding: 16px 32px; }
+.topbar > * { position: relative; z-index: 1; }
+
+/* --- NAVIGATION TAB BAR --- */
+.nav {
+  position: relative;
+  z-index: 9;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 var(--line), 0 4px 20px rgba(120,60,0,0.06);
+}
+.nav-inner-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 0;
+}
+/* The HTML uses .nav directly with buttons inside */
+.nav { display: block; }
+.nav > button, .nav button[data-nav] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  background: none;
+  padding: 16px 18px 14px;
+  font-size: .875rem;
+  font-weight: 550;
+  color: var(--muted);
+  min-height: 52px;
+  transition: color .15s;
+}
+.nav > button:first-child, .nav button[data-nav]:first-child { margin-left: calc((100vw - min(1180px, 100vw)) / 2 + 32px); }
+.nav button[data-nav].active { color: var(--orange); border-bottom-color: var(--orange); }
+.nav button[data-nav]:hover:not(.active) { color: var(--ink); }
+.nav-icon { display: flex; }
+.count {
+  font-size: .6875rem;
+  min-width: 20px; height: 20px;
+  display: grid; place-items: center;
+  background: rgba(232,89,12,0.12);
+  color: var(--orange);
+  border-radius: 5px;
+  padding: 0 4px;
+  font-weight: 600;
+}
+
+/* --- MAIN CONTENT AREA --- */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 32px 80px;
+}
+
+/* --- DEMO LINE --- */
+.demo-line { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: .8125rem; color: var(--muted); margin-bottom: 22px; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; }
+.demo-line button { border: 0; background: none; color: var(--orange); font-size: .8125rem; padding: 4px 0; min-height: 34px; font-weight: 550; }
+
+/* --- PAGE HEADING --- */
+.heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 6px 0 24px; }
+.heading p { margin-top: 8px; font-size: .875rem; line-height: 1.5; color: var(--muted); }
+.heading .date { font-size: .875rem; color: var(--muted); }
+
+/* --- STAT STRIP --- */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 0 0 28px; }
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow .2s, border-color .2s;
+  box-shadow: 0 1px 3px rgba(120,60,0,0.05);
+}
+.stat:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(232,89,12,0.1); }
+.stat span { display: block; color: var(--muted); font-size: .8125rem; margin-bottom: 10px; font-weight: 500; }
+.stat strong { font-size: 1.9rem; letter-spacing: -1px; font-weight: 700; line-height: 1.15; display: block; color: var(--ink); }
+.stat:hover strong { color: var(--orange); }
+
+/* --- TODAY LAYOUT --- */
+.today-layout { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(260px,1fr); gap: 20px; align-items: start; }
+
+/* --- PANELS (white cards) --- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-width: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(120,60,0,0.06);
+}
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 22px; }
+.panel-head p { color: var(--muted); font-size: .8125rem; line-height: 1.5; margin-top: 5px; }
+
+/* --- TABS --- */
+.tabs { display: flex; gap: 4px; padding: 4px; background: var(--soft); border-radius: 10px; border: 1px solid var(--line); }
+.tabs button { border: 0; background: none; padding: 8px 14px; border-radius: 7px; color: var(--muted); font-size: .875rem; min-height: 38px; transition: background .15s, color .15s; }
+.tabs button.active { background: white; color: var(--ink); font-weight: 600; box-shadow: 0 1px 4px rgba(120,60,0,0.1); }
+.tabs b { font-size: .75rem; font-weight: 500; margin-left: 5px; }
+.task-tabs { margin: 0 22px 12px; width: fit-content; max-width: calc(100% - 44px); }
+
+/* --- ORDER ROWS --- */
+.order-row { display: flex; align-items: center; gap: 14px; padding: 16px 22px; border-top: 1px solid var(--soft); min-width: 0; transition: background .12s; }
+.order-row:hover { background: #fffbf7; }
+.order-open { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; padding: 0; border: 0; background: none; text-align: left; min-height: 48px; }
+.initial { height: 38px; width: 38px; border-radius: 11px; display: grid; place-items: center; background: rgba(232,89,12,0.1); color: var(--orange-deep); flex-shrink: 0; font-size: .8125rem; font-weight: 700; }
+.order-info { min-width: 0; flex: 1; }
+.order-info strong { display: block; font-size: .9375rem; font-weight: 600; }
+.order-info p { font-size: .8125rem; color: var(--muted); margin-top: 4px; line-height: 1.45; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.order-info .row-note { font-size: .8125rem; color: var(--muted); margin-top: 5px; display: block; }
+.row-amount { font-size: .875rem; font-weight: 600; white-space: nowrap; text-align: right; }
+.row-amount small { display: block; font-size: .75rem; color: var(--muted); font-weight: 400; margin-top: 4px; }
+.row-action { flex-shrink: 0; }
+
+/* --- STATUS PILLS --- */
+.status { font-size: .75rem; line-height: 1.4; padding: 4px 9px; border-radius: 6px; font-weight: 500; background: var(--soft); color: var(--muted); white-space: nowrap; }
+.status.booked { color: #b84d00; background: rgba(232,89,12,0.1); }
+.status.completed { color: var(--green); background: rgba(26,107,74,0.08); }
+.status.quoted { color: #8c6519; background: rgba(180,130,25,0.1); }
+.status.cancelled, .overdue { color: var(--red) !important; }
+
+/* --- LIST FOOTER --- */
+.list-foot { padding: 12px 20px; border-top: 1px solid var(--line); text-align: center; }
+.list-foot button { color: var(--orange); font-weight: 550; }
+
+/* --- EMPTY STATE --- */
+.empty { text-align: center; padding: 48px 24px; color: var(--muted); font-size: .875rem; line-height: 1.6; }
+.empty strong { display: block; color: var(--ink); font-size: 1rem; font-weight: 650; margin-bottom: 8px; }
+.empty .button { margin-top: 20px; }
+
+/* --- SIDE STACK --- */
+.side-stack { display: grid; gap: 18px; }
+
+/* --- MONEY CARD --- */
+.money-card { padding: 22px; }
+.money-card h2 { margin-bottom: 4px; }
+.money-graphic { display: flex; align-items: center; gap: 24px; margin: 20px 0; }
+.donut { --pct:0; position: relative; border: 0; flex-shrink: 0; width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(var(--orange) calc(var(--pct)*1%), #f0d9c0 0); display: grid; place-items: center; padding: 0; box-shadow: 0 0 0 1px var(--line); }
+.donut:before { content: ""; position: absolute; inset: 11px; background: white; border-radius: 50%; }
+.donut span { position: relative; font-size: 1.15rem; font-weight: 700; letter-spacing: -.5px; }
+.money-legend { display: grid; gap: 14px; flex: 1; min-width: 0; }
+.money-legend button { text-align: left; border: 0; background: none; padding: 0; min-height: 44px; }
+.money-legend small { color: var(--muted); font-size: .8125rem; display: flex; gap: 7px; align-items: center; margin-bottom: 5px; }
+.money-legend strong { font-size: 1.125rem; font-weight: 600; letter-spacing: -.3px; }
+.key { height: 7px; width: 7px; border-radius: 2px; background: var(--orange); display: inline-block; }
+.key.unpaid { background: #f0d9c0; border: 1px solid #ddb898; }
+
+/* --- CHART PANEL --- */
+.chart-panel { padding: 22px; }
+.chart-value { font-size: 1.6rem; letter-spacing: -.7px; margin: 14px 0 4px; font-weight: 700; }
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 144px; margin-top: 16px; }
+.bar-column { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border: 0; background: none; padding: 0; color: var(--muted); font-size: .75rem; transition: color .15s; }
+.bar-space { height: 112px; display: flex; align-items: flex-end; width: 100%; justify-content: center; }
+.bar-fill { display: block; width: 100%; max-width: 32px; height: var(--bar); min-height: 3px; background: #f0d9c0; border-radius: 5px 5px 2px 2px; transition: background .2s; }
+.bar-column:last-child .bar-fill { background: var(--orange); }
+.bar-column:hover .bar-fill, .bar-column.selected .bar-fill { background: var(--orange-glow); }
+.bar-day { margin-top: 9px; min-height: 22px; }
+.chart-detail { font-size: .8125rem; line-height: 1.5; color: var(--muted); margin-top: 14px; min-height: 22px; }
+.chart-detail a { font-weight: 550; text-decoration: none; color: var(--orange); }
+.quiet-line { margin-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); font-size: .8125rem; }
+.quiet-line button { font-size: .8125rem; color: var(--orange); }
+
+/* --- SECTION GRID (Overview) --- */
+.section-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.section-grid .panel { padding: 24px; }
+.section-grid .chart-panel { padding: 24px; }
+.stage-bars { display: grid; gap: 18px; margin-top: 24px; }
+.stage-button { display: grid; grid-template-columns: 104px 1fr 32px; align-items: center; gap: 12px; font-size: .875rem; border: 0; background: none; text-align: left; padding: 0; min-height: 35px; cursor: pointer; }
+.track { height: 6px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); overflow: hidden; }
+.track span { display: block; background: var(--orange); height: 100%; border-radius: 4px; }
+.stage-button b { text-align: right; font-weight: 600; }
+.overview-note { font-size: .8125rem; color: var(--muted); line-height: 1.6; margin-top: 20px; }
+
+/* --- SEARCH / TOOLS --- */
+.tools { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.search-wrap { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line); background: var(--surface); padding: 0 14px; border-radius: 10px; flex: 1; min-width: 200px; transition: border-color .15s, box-shadow .15s; }
+.search-wrap:focus-within { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,89,12,0.1); }
+.search-wrap svg { color: var(--muted); width: 18px; }
+.search-wrap input { width: 100%; min-width: 0; border: 0; background: transparent; padding: 13px 0; outline: none; font-size: 1rem; }
+.tools select { border: 1px solid var(--line); border-radius: 10px; padding: 13px; background: var(--surface); font-size: .875rem; min-height: 46px; transition: border-color .15s; }
+.tools select:focus { border-color: var(--orange); outline: none; }
+.result-note { font-size: .8125rem; color: var(--muted); margin: 0 0 16px; display: flex; align-items: center; gap: 12px; }
+.pagination { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; font-size: .8125rem; color: var(--muted); border-top: 1px solid var(--line); }
+.pagination .actions { margin: 0; }
+
+/* --- SETTINGS --- */
+.settings-stack { display: grid; gap: 18px; max-width: 760px; }
+.settings-stack .panel { padding: 24px; }
+.settings-stack .panel > p { line-height: 1.65; font-size: .875rem; color: var(--muted); margin-top: 10px; }
+.settings-stack details summary { font-size: 1rem; }
+.settings-stack .actions { margin-top: 18px; }
+.storage-meter { height: 5px; background: var(--soft); border-radius: 5px; margin: 16px 0 10px; overflow: hidden; border: 1px solid var(--line); }
+.storage-meter span { height: 100%; display: block; background: var(--orange); }
+.storage-label { display: flex; justify-content: space-between; gap: 15px; font-size: .8125rem; color: var(--muted); }
+.storage-details { font-size: .875rem; line-height: 1.7; color: var(--muted); margin-top: 14px; }
+
+/* --- FORM FIELDS --- */
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+.field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: .875rem; font-weight: 550; color: var(--ink); }
+.field input, .field select, .field textarea {
+  width: 100%; min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 13px;
+  background: var(--surface);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,89,12,0.1);
+}
+.field textarea { resize: vertical; }
+.field input[type=date] { min-height: 46px; appearance: none; -webkit-appearance: none; }
+.check-label { display: flex; align-items: center; gap: 10px; margin: 20px 0 14px; min-height: 34px; }
+.check-label input { width: 17px; height: 17px; accent-color: var(--orange); }
+details { margin-top: 20px; }
+summary { cursor: pointer; font-size: .875rem; color: var(--muted); min-height: 44px; padding: 12px 0; }
+details[open] > summary { margin-bottom: 14px; color: var(--ink); }
+.actions { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+.calculation { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 20px; display: flex; justify-content: space-between; gap: 14px; font-size: .875rem; color: var(--muted); }
+.calculation strong { display: block; font-size: 1.125rem; color: var(--ink); margin-top: 6px; font-weight: 650; }
+.error { margin-top: 12px; }
+
+/* --- BUTTONS --- */
+.button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: .875rem;
+  font-weight: 550;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+.button:hover { border-color: #d4b89a; background: var(--soft); }
+.button.primary {
+  /* Rich orange base + fiber texture */
+  background-color: var(--orange);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  border-color: var(--orange-deep);
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(232,89,12,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.button.primary:hover {
+  background-color: var(--orange-deep);
+  border-color: #8a2e00;
+  box-shadow: 0 4px 14px rgba(232,89,12,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.button.quiet { background: transparent; border-color: transparent; color: var(--muted); }
+.button.quiet:hover { background: var(--soft); border-color: var(--line); color: var(--ink); }
+.button.danger { color: var(--red); }
+.button.small { padding: 7px 12px; min-height: 38px; }
+.icon-button { width: 40px; height: 40px; border: 0; background: transparent; border-radius: 9px; flex-shrink: 0; font-size: 1.5rem; color: var(--muted); transition: background .15s; }
+.icon-button:hover { background: var(--soft); color: var(--ink); }
+
+/* --- DIALOGS --- */
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 0;
+  width: 610px;
+  max-width: calc(100vw - 36px);
+  max-height: 90dvh;
+  color: var(--ink);
+  box-shadow: 0 20px 80px rgba(100,40,0,0.2), 0 4px 16px rgba(100,40,0,0.1);
+}
+dialog::backdrop { background: rgba(28,14,4,0.55); backdrop-filter: blur(5px); }
+dialog form { margin: 0; }
+.small-dialog { width: 430px; }
+.dialog-header { padding: 16px 22px 14px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; background: white; z-index: 1; border-radius: 18px 18px 0 0; }
+.dialog-header h2 { font-size: 1.125rem; }
+.dialog-body { padding: 22px; }
+.dialog-body > p:first-child { margin-bottom: 18px; line-height: 1.6; font-size: .875rem; }
+.dialog-footer { position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; padding: 14px 22px; border-top: 1px solid var(--line); background: white; border-radius: 0 0 18px 18px; }
+
+/* --- DETAIL DIALOG --- */
+.detail-product { font-size: 1.3rem; line-height: 1.4; font-weight: 650; margin: 14px 0 22px; letter-spacing: -.4px; }
+.detail-amounts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.detail-amounts small { display: block; color: var(--muted); font-size: .8125rem; margin-bottom: 7px; }
+.detail-amounts strong { font-size: 1.15rem; font-weight: 650; }
+.detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 18px; margin: 22px 0; font-size: .875rem; line-height: 1.5; }
+.detail-meta dt { color: var(--muted); font-size: .8125rem; margin-bottom: 4px; }
+.detail-meta dd { margin: 0; overflow-wrap: anywhere; }
+.detail-notes { font-size: .875rem; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.more-actions { border-top: 1px solid var(--line); padding-top: 4px; margin-top: 20px; }
+.more-actions .actions { margin-top: 0; }
+
+/* --- QUOTE SHEET --- */
+.quote-sheet { padding: 6px; color: var(--ink); }
+.quote-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.quote-brand { font-size: 1.125rem; font-weight: 700; }
+.quote-head small { display: block; color: var(--muted); font-size: .75rem; line-height: 1.7; }
+.quote-sheet h3 { font-size: 1.5rem; letter-spacing: -.7px; font-weight: 650; margin: 22px 0 18px; }
+.quote-meta { display: flex; justify-content: space-between; gap: 16px; font-size: .875rem; line-height: 1.7; margin-bottom: 22px; }
+.quote-meta small { display: block; color: var(--muted); font-size: .75rem; }
+.quote-product { display: flex; justify-content: space-between; gap: 15px; padding: 16px 0; border-block: 1px solid var(--line); font-size: .875rem; line-height: 1.7; overflow-wrap: anywhere; }
+.quote-total { display: grid; gap: 12px; margin: 20px 0; font-size: .875rem; }
+.quote-total > div { display: flex; justify-content: space-between; gap: 14px; }
+.quote-total .grand { font-size: 1.2rem; font-weight: 700; padding-top: 14px; border-top: 1px solid var(--line); color: var(--orange); }
+.quote-notes { font-size: .8125rem; color: var(--muted); white-space: pre-wrap; line-height: 1.7; overflow-wrap: anywhere; margin-top: 18px; }
+
+/* --- NOTICE BANNER --- */
+.notice { border: 1px solid #f0d080; background: #fffce8; color: #7a5800; border-radius: 10px; padding: 13px 16px; font-size: .875rem; line-height: 1.6; margin-bottom: 18px; }
+.notice button { margin-left: 12px; }
+
+/* --- TOAST --- */
+.toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); border-radius: 12px; background: var(--topbar); color: white; padding: 13px 18px; max-width: min(550px,90vw); font-size: .875rem; line-height: 1.5; box-shadow: 0 8px 30px rgba(0,0,0,0.2); z-index: 100; display: flex; gap: 18px; align-items: center; border: 1px solid rgba(255,255,255,0.07); }
+.toast button { color: rgba(255,200,140,1); border: 0; background: none; text-decoration: underline; padding: 4px; font-size: .875rem; min-height: 34px; }
+
+/* --- MOBILE ADD / PRINT --- */
+.mobile-add, #print-root { display: none; }
+[hidden] { display: none !important; }
+
+/* --- WATER RIPPLE CLICK EFFECT --- */
+.water-ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 80px; height: 80px;
+  margin: -40px 0 0 -40px;
+  background: rgba(255,255,255,0.5);
+  transform: scale(0);
+  animation: rippleOut .5s cubic-bezier(0.22,0.61,0.36,1) forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+.button.primary .water-ripple { background: rgba(255,255,255,0.3); }
+@keyframes rippleOut {
+  to { transform: scale(6); opacity: 0; }
+}
+
+/* ==========================================
+   RESPONSIVE — 900px
+   ========================================== */
+@media(max-width:900px) {
+  .topbar { padding-inline: 24px; }
+  .nav > button:first-child, .nav button[data-nav]:first-child { margin-left: 24px; }
+  main { padding-inline: 24px; }
+  .today-layout { grid-template-columns: 1fr; }
+  .side-stack { grid-template-columns: 1fr 1fr; }
+  .money-graphic { gap: 18px; }
+  .heading { margin-top: 0; }
+  .shop { max-width: 40%; min-width: 0; }
+  .shop > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* ==========================================
+   RESPONSIVE — 600px
+   ========================================== */
+@media(max-width:600px) {
+  .topbar { padding: 13px 18px; gap: 12px; }
+  .brand { font-size: .9375rem; }
+  .brand-mark { width: 34px; height: 34px; border-radius: 9px; font-size: 1.55rem; }
+  .brand small { font-size: .625rem; }
+  .shop { font-size: .8125rem; gap: 6px; }
+  .sample-pill { font-size: .6875rem; padding: 4px 7px; }
+  .add-top { display: none; }
+
+  /* Mobile bottom nav */
+  .nav {
+    position: fixed; z-index: 50; bottom: 0; left: 0; right: 0;
+    background: rgba(255,252,248,0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    border-bottom: none;
+    box-shadow: 0 -4px 20px rgba(120,60,0,0.08);
+    padding: 6px 8px max(10px, env(safe-area-inset-bottom));
+    display: flex; justify-content: space-around;
+  }
+  .nav > button:first-child, .nav button[data-nav]:first-child { margin-left: 0; }
+  .nav button[data-nav] {
+    flex-direction: column; gap: 4px; padding: 6px 8px;
+    border-bottom: none; border-radius: 10px;
+    min-width: 56px; min-height: 48px; font-size: .72rem;
+  }
+  .nav button[data-nav].active { color: var(--orange); border-bottom: none; background: rgba(232,89,12,0.07); }
+  .nav button[data-nav] .count { position: absolute; top: 2px; right: 4px; height: 15px; min-width: 15px; font-size: .6rem; border-radius: 5px; }
+  .nav-icon svg { width: 22px; height: 22px; }
+
+  .mobile-add { display: flex; position: fixed; z-index: 40; right: 18px; bottom: calc(80px + env(safe-area-inset-bottom)); border-radius: 14px; min-height: 48px; box-shadow: 0 6px 20px rgba(232,89,12,0.45); padding: 12px 18px; }
+  main { padding: 16px 18px 160px; }
+
+  .demo-line { font-size: .75rem; margin-bottom: 16px; gap: 8px; }
+  .demo-line button { font-size: .75rem; }
+  .heading { margin-bottom: 20px; align-items: flex-start; }
+  .heading .date { font-size: .8125rem; padding-top: 9px; }
+  h1 { font-size: 1.7rem; }
+  .heading p { font-size: .8125rem; margin-top: 6px; }
+
+  .stats { grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
+  .stat { padding: 16px 18px; }
+  .stat strong { font-size: 1.6rem; }
+
+  .today-layout { gap: 16px; }
+  .panel-head { padding: 16px 18px; }
+  .task-tabs { margin-inline: 16px; margin-bottom: 10px; max-width: calc(100% - 32px); }
+  .tabs button { font-size: .8125rem; padding: 7px 10px; min-height: 38px; }
+  .order-row { padding: 14px 16px; gap: 10px; flex-wrap: wrap; }
+  .initial { display: none; }
+  .order-open { min-width: 0; gap: 10px; flex-basis: calc(100% - 118px); }
+  .order-info strong { font-size: .9375rem; }
+  .order-info p { font-size: .8125rem; }
+  .row-action { max-width: 120px; font-size: .8125rem; padding-inline: 10px; }
+  .order-row.regular .order-open { flex-basis: calc(100% - 80px); }
+  .row-amount { font-size: .875rem; }
+  .row-amount small { font-size: .75rem; }
+
+  .side-stack, .section-grid { grid-template-columns: 1fr; }
+  .money-card, .chart-panel, .section-grid .panel { padding: 18px; }
+  .money-graphic { gap: 22px; margin: 16px 0; }
+  .donut { width: 100px; height: 100px; }
+  .money-legend strong { font-size: 1.1rem; }
+  .chart-panel .bar-chart { height: 120px; }
+  .bar-space { height: 90px; }
+  .chart-value { font-size: 1.45rem; }
+
+  .tools { gap: 8px; display: grid; grid-template-columns: minmax(0,1fr) 120px; }
+  .search-wrap { min-width: 0; padding-inline: 11px; }
+  .tools select { width: 100%; font-size: .875rem; padding: 11px 8px; }
+  .quiet-line { flex-wrap: wrap; line-height: 1.5; }
+  .settings-stack .panel { padding: 18px; }
+  .fields { gap: 16px 12px; }
+  .fields > .field:nth-child(-n+2) { grid-column: 1 / -1; }
+
+  .dialog-header { padding: 12px 18px; border-radius: 18px 18px 0 0; }
+  .dialog-body { padding: 18px; }
+  .dialog-footer { padding: 12px 18px max(16px, env(safe-area-inset-bottom)); gap: 8px; border-radius: 0; }
+  .dialog-footer .button { flex: 1; white-space: nowrap; padding-inline: 10px; }
+  dialog { position: fixed; bottom: 0; top: auto; margin: 0; width: 100%; max-width: 100%; max-height: 94dvh; border-radius: 18px 18px 0 0; border-bottom: 0; }
+  .small-dialog { width: 100%; }
+
+  .detail-amounts strong { font-size: 1.05rem; }
+  .detail-meta { gap: 18px 12px; }
+  .toast { bottom: calc(144px + env(safe-area-inset-bottom)); max-width: calc(100vw - 28px); width: max-content; font-size: .8125rem; }
+  .quote-head { flex-wrap: wrap; }
+  .quote-meta { font-size: .8125rem; }
+  .quote-product { font-size: .8125rem; }
+  .result-note { line-height: 1.5; }
+  .pagination { padding: 11px 14px; }
+  .storage-label { flex-wrap: wrap; }
+  .actions { gap: 8px; }
+  .settings-stack .actions > .button { flex: 1; }
+  .list-foot { padding: 10px; }
+  .stage-button { grid-template-columns: 96px 1fr 24px; gap: 10px; }
+  .empty { padding: 28px 18px; }
+}
+@media(max-width:600px) {
+  .order-row.task { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+  .task .row-action { max-width: none; white-space: nowrap; font-size: .75rem; padding: 10px; }
+  .heading .date { white-space: nowrap; }
+  .heading > div { min-width: 0; }
+  .heading p { max-width: 220px; }
+}
+@media(max-width:360px) {
+  main { padding-inline: 13px; }
+  .topbar { padding-inline: 13px; }
+  .shop { max-width: 43%; }
+  .shop .sample-pill { display: none; }
+  .stats { gap: 8px; }
+  .stat strong { font-size: 1.4rem; }
+  .order-row { padding: 12px; }
+  .row-action { font-size: .75rem; max-width: 105px; }
+  .tools { grid-template-columns: minmax(0,1fr) 105px; }
+  .heading { flex-wrap: wrap; gap: 8px; }
+  .heading .date { padding-top: 0; }
+}
+@media(prefers-reduced-motion:no-preference) {
+  button, a { transition: background-color .15s, color .15s, border-color .15s, box-shadow .15s; }
+  dialog[open] { animation: appear .18s ease-out; }
+  @keyframes appear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+}
+@media print {
+  body > * { display: none !important; }
+  body > #print-root { display: block !important; }
+  #print-root .quote-sheet { padding: 15px; }
+  body { background: white; }
+  @page { margin: 14mm; size: A4; }
+}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<header class="topbar"><div style="display:flex; align-items:center; gap:8px;"><a class="brand" href="../../tools.html" aria-label="ATOMZ Tools home"><span class="brand-mark">a.</span><span>Order Desk<small>by ATOMZ</small></span></a><a href="../../tools.html" style="font-size:11px; color:#999; text-decoration:none; border:1px solid rgba(255,255,255,0.12); padding:3px 8px; border-radius:8px; display:inline-flex; align-items:center; gap:4px; font-weight:600;">← Tools</a></div><div class="shop"><span id="shop-name">Your shop</span><span class="sample-pill" id="sample-pill" hidden>Sample</span></div><button class="button primary add-top" data-action="new">+ New order</button></header>
+<nav class="nav" aria-label="Main navigation"><button data-nav="today" class="active"><span class="nav-icon" data-icon="today"></span>Today<span id="today-count" class="count" hidden></span></button><button data-nav="orders"><span class="nav-icon" data-icon="orders"></span>Orders</button><button data-nav="overview"><span class="nav-icon" data-icon="chart"></span>Overview</button><button data-nav="settings"><span class="nav-icon" data-icon="settings"></span>Settings</button></nav>
+<main><div class="notice error-notice" id="storage-warning" role="alert" hidden></div><div class="demo-line" id="demo-line" hidden><span>Explore a sample shop.</span><button data-action="switch">Use my own orders <span aria-hidden="true">→</span></button></div><div id="content" aria-live="off"><p class="empty">Opening your desk…</p></div></main>
+<button class="button primary mobile-add" data-action="new" aria-label="New order">+ New order</button>
+<dialog id="order-dialog" aria-labelledby="order-title"><form id="order-form"><div class="dialog-header"><h2 id="order-title">New order</h2><button type="button" class="icon-button" data-close="order-dialog" aria-label="Close order">×</button></div><div class="dialog-body"><input type="hidden" name="id"><div class="fields"><div class="field"><label for="customer">Customer name</label><input id="customer" name="customer" required maxlength="100" placeholder="e.g. Priya Nair" autocomplete="off"></div><div class="field"><label for="product">Order / product</label><input id="product" name="product" required maxlength="180" placeholder="e.g. Birthday cake · 1 kg" list="product-list" autocomplete="off"><datalist id="product-list"></datalist></div><div class="field"><label for="price">Price per item (₹)</label><input id="price" name="price" type="number" inputmode="decimal" min="0.01" max="10000000" step="0.01" required placeholder="1500"></div><div class="field"><label for="due">Delivery / pickup date</label><input id="due" name="due" type="date" required></div></div><details id="more-order"><summary>Payment, contact &amp; other details</summary><div class="fields"><div class="field"><label for="qty">Quantity</label><input id="qty" name="qty" type="number" inputmode="numeric" min="1" max="10000" step="1" value="1" required></div><div class="field"><label for="delivery">Delivery charge (₹)</label><input id="delivery" name="delivery" type="number" inputmode="decimal" min="0" max="10000000" step="0.01" value="0" required></div><div class="field"><label for="paid">Received so far (₹)</label><input id="paid" name="paid" type="number" inputmode="decimal" min="0" max="100000000000" step="0.01" value="0" required></div><div class="field"><label for="deposit">Booking deposit (%)</label><input id="deposit" name="deposit" type="number" inputmode="numeric" min="0" max="100" step="1" value="50" required></div><div class="field"><label for="status">Order stage</label><select id="status" name="status"><option value="enquiry">Enquiry</option><option value="quoted">Quoted</option><option value="booked">In progress</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div><div class="field"><label for="followup">Follow-up date</label><input id="followup" name="followup" type="date"></div><div class="field"><label for="handle">Instagram handle</label><input id="handle" name="handle" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" placeholder="@customer" autocapitalize="none"></div><div class="field"><label for="phone">WhatsApp number</label><input id="phone" name="phone" type="tel" maxlength="22" placeholder="+91…"></div><div class="field"><label for="cost">Your total cost (₹)</label><input id="cost" name="cost" type="number" inputmode="decimal" min="0" max="100000000000" step="0.01" placeholder="Optional · kept private"></div><div class="field full"><label for="notes">Customer notes</label><textarea id="notes" name="notes" maxlength="2000" rows="3" placeholder="Design, flavour, pickup time…"></textarea></div></div></details><div class="calculation" id="order-calculation"></div><p id="order-error" class="error" role="alert"></p></div><div class="dialog-footer"><button type="button" class="button" data-close="order-dialog">Close</button><button class="button primary" type="submit">Save order</button></div></form></dialog>
+<dialog id="detail-dialog" aria-labelledby="detail-title"><div id="detail-content"></div></dialog>
+<dialog id="payment-dialog" class="small-dialog" aria-labelledby="payment-title"><form id="payment-form"><div class="dialog-header"><h2 id="payment-title">Record payment</h2><button type="button" class="icon-button" data-close="payment-dialog" aria-label="Close payment">×</button></div><div class="dialog-body"><p id="payment-context" class="muted"></p><div class="field"><label for="payment-amount">Amount received now (₹)</label><input id="payment-amount" name="amount" type="number" inputmode="decimal" min="0.01" step="0.01" required></div><div id="payment-presets" class="actions"></div><label class="check-label" id="book-option"><input id="book-after-payment" type="checkbox"> Confirm this booking</label><p class="hint">Record a payment after checking that you received it.</p><p class="error" id="payment-error" role="alert"></p></div><div class="dialog-footer"><button type="button" class="button" data-close="payment-dialog">Close</button><button class="button primary">Save payment</button></div></form></dialog>
+<dialog id="quote-dialog" aria-labelledby="quote-title"><div class="dialog-header"><h2 id="quote-title">Customer quote</h2><button class="icon-button" data-close="quote-dialog" aria-label="Close quote">×</button></div><div class="dialog-body" id="quote-preview"></div><div class="dialog-footer"><button class="button" data-action="quote-copy">Copy text</button><button class="button" data-action="quote-png">Save image</button><button class="button" data-action="quote-print">Print / PDF</button><button class="button primary" data-action="quote-sent">Mark quote sent</button></div></dialog>
+<dialog id="message-dialog" aria-labelledby="message-title"><div class="dialog-header"><h2 id="message-title">Follow up</h2><button class="icon-button" data-close="message-dialog" aria-label="Close message">×</button></div><div class="dialog-body"><p id="message-caption" class="muted"></p><div class="field"><label for="message-text">Message</label><textarea id="message-text" rows="7"></textarea></div><div class="actions"><button class="button" data-action="message-copy">Copy message</button><a class="button" id="message-instagram" target="_blank" rel="noopener noreferrer" hidden>Instagram ↗</a><a class="button" id="message-whatsapp" target="_blank" rel="noopener noreferrer" hidden>WhatsApp ↗</a></div><p class="hint">You send the message in your chat.</p></div><div class="dialog-footer"><button class="button" data-action="snooze">Remind tomorrow</button><button class="button primary" data-action="message-done">Sent · remind in 2 days</button></div></dialog>
+<dialog id="confirm-dialog" class="small-dialog" aria-labelledby="confirm-title"><div class="dialog-header"><h2 id="confirm-title">Confirm</h2></div><div class="dialog-body"><p id="confirm-text"></p></div><div class="dialog-footer"><button class="button" data-close="confirm-dialog">Go back</button><button class="button primary" id="confirm-yes">Continue</button></div></dialog>
+<input type="file" id="restore-file" accept="application/json,.json" hidden><div class="toast" id="toast" role="status" hidden></div><div id="print-root"></div>
+<script id="desk-core">'use strict';
+const Desk = (() => {
+  const LIMIT = 10000, MAX_BYTES = 12 * 1024 * 1024;
+  const stages = { enquiry: 'Enquiry', quoted: 'Quoted', booked: 'In progress', completed: 'Completed', cancelled: 'Cancelled' };
+  const round = n => Math.round((n + Number.EPSILON) * 100) / 100;
+  const dateKey = (delta = 0, base = new Date()) => { const d = new Date(base); d.setDate(d.getDate() + delta); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+  const total = o => round(o.qty * o.price + o.delivery);
+  const balance = o => round(Math.max(0, total(o) - o.paid));
+  const depositDue = o => round(Math.max(0, round(total(o) * o.deposit / 100) - o.paid));
+  const active = o => !['completed', 'cancelled'].includes(o.status);
+  const confirmed = o => ['booked', 'completed'].includes(o.status);
+  const blank = () => ({ version: 2, business: { name: 'Your shop', handle: '', terms: 'A 50% advance confirms your booking. Balance is due before delivery.' }, orders: [], sequence: 1001 });
+  const validDate = s => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && !isNaN(Date.parse(s + 'T12:00:00Z')) && new Date(s + 'T12:00:00Z').toISOString().slice(0, 10) === s;
+  const size = s => new TextEncoder().encode(JSON.stringify(s)).length;
+  function normalize(input) {
+    if (!input || ![1, 2].includes(input.version) || !input.business || !Array.isArray(input.orders) || input.orders.length > LIMIT || !Number.isSafeInteger(input.sequence)) throw Error('Choose a valid Order Desk backup (up to 10,000 orders).');
+    const text = (v, max, required = false) => { if (typeof v !== 'string' || v.length > max || (required && !v.trim())) throw Error('A text field is missing or too long.'); return v; };
+    const handle = value => { const v = text(value, 31).replace(/^@/, ''); if (v && !/^[A-Za-z0-9_.]{1,30}$/.test(v)) throw Error('Check the Instagram handle.'); return v; };
+    const business = { name: text(input.business.name, 100, true), handle: handle(input.business.handle), terms: text(input.business.terms, 2000) };
+    const ids = new Set(), numbers = new Set();
+    const orders = input.orders.map(o => {
+      if (!o || typeof o.id !== 'string' || !o.id || o.id.length > 100 || ids.has(o.id) || !Number.isSafeInteger(o.number) || o.number < 1 || numbers.has(o.number) || !Object.hasOwn(stages, o.status)) throw Error('An order ID or stage is invalid.');
+      ids.add(o.id); numbers.add(o.number);
+      const n = { id: o.id, number: o.number, status: o.status };
+      for (const [k, max] of Object.entries({ customer: 100, product: 180, phone: 22, notes: 2000 })) n[k] = text(o[k], max, ['customer', 'product'].includes(k));
+      n.handle = handle(o.handle);
+      for (const [k, max] of Object.entries({ qty: 10000, price: 1e7, delivery: 1e7, deposit: 100, paid: 1e11 })) { if (typeof o[k] !== 'number' || !Number.isFinite(o[k]) || o[k] < 0 || o[k] > max) throw Error('An order amount is invalid.'); n[k] = o[k]; }
+      if (!Number.isInteger(n.qty) || n.qty < 1 || n.price <= 0 || n.paid > total(n)) throw Error('Received payments cannot exceed the order total.');
+      n.cost = o.cost ?? null;
+      if (n.cost !== null && (typeof n.cost !== 'number' || !Number.isFinite(n.cost) || n.cost < 0 || n.cost > 1e11)) throw Error('Check the order cost.');
+      if (!validDate(o.due) || (o.followup !== '' && !validDate(o.followup))) throw Error('Check the delivery and follow-up dates.');
+      n.due = o.due; n.followup = o.followup;
+      for (const k of ['createdAt', 'updatedAt', 'lastFollowupAt']) if (o[k]) { if (typeof o[k] !== 'string' || o[k].length > 40 || isNaN(Date.parse(o[k]))) throw Error('An order timestamp is invalid.'); n[k] = o[k]; }
+      return n;
+    });
+    if (input.sequence < 1 || orders.some(o => o.number >= input.sequence)) throw Error('Order numbering is invalid.');
+    const result = { version: 2, business, orders, sequence: input.sequence };
+    if (size(result) > MAX_BYTES) throw Error('This workspace is over 12 MB. Export a backup and shorten long notes.');
+    return result;
+  }
+  function reason(o, today = dateKey()) {
+    if (o.status === 'cancelled') return '';
+    if (o.status === 'booked' && o.due <= today) return o.due === today ? 'Delivery today' : 'Delivery overdue';
+    if (o.lastFollowupAt && o.followup > today) return '';
+    if (o.status === 'completed' && balance(o)) return 'Balance to collect';
+    if (!active(o)) return '';
+    if (o.followup && o.followup <= today) return o.status === 'enquiry' ? 'Reply to enquiry' : depositDue(o) ? 'Deposit to collect' : balance(o) ? 'Balance to collect' : 'Follow up';
+    if (o.due < today) return 'Confirm new date';
+    return '';
+  }
+  function summary(s, today = dateKey()) {
+    const confirmedOrders = s.orders.filter(confirmed);
+    return {
+      open: s.orders.filter(active).length,
+      deliveries: s.orders.filter(o => o.status === 'booked' && o.due <= today),
+      followups: s.orders.filter(o => reason(o, today) && !(o.status === 'booked' && o.due <= today)),
+      paid: round(confirmedOrders.reduce((n, o) => n + o.paid, 0)),
+      outstanding: round(confirmedOrders.reduce((n, o) => n + balance(o), 0)),
+      confirmedValue: round(confirmedOrders.reduce((n, o) => n + total(o), 0)),
+      days: Array.from({ length: 7 }, (_, i) => { const date = dateKey(i - 6, new Date(today + 'T12:00:00')); const rows = s.orders.filter(o => o.status === 'completed' && o.due === date); return { date, value: round(rows.reduce((n, o) => n + total(o), 0)), count: rows.length }; })
+    };
+  }
+  function filtered(s, filter = 'active', query = '', day = '') {
+    return s.orders.filter(o => {
+      if (query && !`${o.customer} ${o.product} ${o.handle} ${o.number}`.toLowerCase().includes(query.toLowerCase())) return false;
+      if (day && o.due !== day) return false;
+      if (filter === 'active') return active(o);
+      if (filter === 'all') return o.status !== 'cancelled';
+      if (filter === 'attention') return !!reason(o);
+      if (filter === 'outstanding') return confirmed(o) && balance(o) > 0;
+      if (filter === 'paid') return confirmed(o) && o.paid > 0;
+      return o.status === filter;
+    }).sort((a, b) => (a.due.localeCompare(b.due)) || (b.number - a.number));
+  }
+  function changeOrder(s, id, patch) { return normalize({ ...s, orders: s.orders.map(o => o.id === id ? { ...o, ...patch, updatedAt: new Date().toISOString() } : o) }); }
+  function sample() {
+    const s = blank(); s.business = { name: 'Petal & Sugar', handle: '', terms: '50% advance confirms your booking. Balance due before pickup. Please confirm your design and pickup time before paying.' };
+    const names = ['Priya Nair', 'Ananya Shah', 'Rohan Mehta', 'Meera Kapoor', 'Kavya Rao', 'Dev & Isha', 'Studio Olive', 'Aditi Sen', 'Neha Das', 'Arjun Roy', 'Tara Bose', 'Ria Saha', 'Mira Ali', 'Nisha Jain', 'Sana Khan', 'Ishaan Dey', 'Reva Pal', 'Anika Deb'];
+    const products = ['Lemon bento cake', 'Floral birthday cake · 1 kg', 'Brownie gift box', 'Custom birthday hamper', 'Cookie box · 12 pieces', 'Anniversary dessert box'];
+    for (let i = 0; i < 24; i++) {
+      const status = i < 3 ? 'booked' : i < 5 ? 'quoted' : i < 7 ? 'enquiry' : i < 10 ? 'booked' : i === 23 ? 'cancelled' : 'completed';
+      const delta = i < 3 ? (i === 2 ? -1 : 0) : i < 10 ? i - 3 : -(1 + (i % 7));
+      const price = [1600, 1850, 750, 2400, 650, 950][i % 6], qty = i % 6 === 2 ? 3 : 1, delivery = i % 3 === 0 ? 100 : 0;
+      const value = qty * price + delivery;
+      s.orders.push({ id: 'sample-' + i, number: 1001 + i, customer: names[i % names.length], handle: '', phone: '', product: products[i % 6], qty, price, delivery, deposit: 50, paid: status === 'completed' ? (i === 12 ? value / 2 : value) : status === 'booked' ? (i === 1 ? value : value / 2) : 0, cost: Math.round(value * .43), status, due: dateKey(delta), followup: status === 'completed' ? '' : dateKey(i < 7 ? 0 : 2), notes: i === 0 ? 'Pickup at 5 pm. Eggless. Blue and white design.' : 'Confirm pickup time in chat.', createdAt: new Date(dateKey(delta - 5) + 'T09:00:00').toISOString() });
+    }
+    s.sequence = 1025; return normalize(s);
+  }
+  const csv = s => {
+    const cell = v => { let x = String(v ?? ''); if (/^[=+@\-\t\r]/.test(x)) x = "'" + x; return '"' + x.replaceAll('"', '""') + '"'; };
+    const rows = [['Order', 'Customer', 'Instagram', 'WhatsApp', 'Product', 'Quantity', 'Unit price INR', 'Delivery INR', 'Total INR', 'Deposit percent', 'Received INR', 'Balance INR', 'Stage', 'Delivery date', 'Follow-up date', 'Private cost INR', 'Customer notes']];
+    s.orders.slice().sort((a, b) => b.number - a.number).forEach(o => rows.push([o.number, o.customer, o.handle, o.phone, o.product, o.qty, o.price, o.delivery, total(o), o.deposit, o.paid, balance(o), stages[o.status], o.due, o.followup, o.cost, o.notes]));
+    return '\uFEFF' + rows.map(row => row.map(cell).join(',')).join('\r\n');
+  };
+  return { LIMIT, MAX_BYTES, stages, round, dateKey, total, balance, depositDue, active, confirmed, blank, normalize, size, reason, summary, filtered, changeOrder, sample, csv };
+})();
+</script>
+<script>'use strict';
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const { dateKey, total, balance, depositDue, active, stages, round } = Desk;
+const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = n => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(n || 0);
+const compactMoney = n => n >= 100000 ? '₹' + (n / 100000).toFixed(1).replace(/\.0$/, '') + 'L' : money(n);
+const prettyDate = d => d ? new Date(d + 'T12:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Not set';
+const bytesLabel = n => n < 1024 * 1024 ? (n / 1024).toFixed(1) + ' KB' : (n / 1024 / 1024).toFixed(2) + ' MB';
+const icons = { today: '<rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 5 2 2 4-4"/>', orders: '<rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6m-6 4h6m-6 4h3"/>', chart: '<path d="M4 4v16h17M9 15v-4m5 4V6m5 9v-6"/>', settings: '<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="white"/><circle cx="15" cy="17" r="3" fill="white"/>', search: '<circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>' };
+const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || ''}</svg>`;
+$$('[data-icon]').forEach(e => e.innerHTML = icon(e.dataset.icon));
+let state, db, mode = 'sample', revision = 0, view = 'today', filter = 'active', query = '', dayFilter = '', page = 0, taskTab = 'deliveries', taskExpanded = false, selectedId = '', pendingConfirm, toastTimer, undoAction, busy = false, stale = false, storageLocked = false, sourceSnapshot = '';
+const PAGE_SIZE = 30;
+try { mode = localStorage.getItem('atomz-orderdesk-mode') === 'own' ? 'own' : 'sample'; } catch {}
+const legacyKey = () => 'atomz-orderdesk-v1-' + mode;
+const key = () => 'atomz-orderdesk-v2-' + mode;
+const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('atomz-orderdesk-updates') : null;
+const reqResult = req => new Promise((resolve, reject) => { req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+
+async function openDatabase() {
+  if (!globalThis.indexedDB) return null;
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('atomz-orderdesk', 1);
+    req.onupgradeneeded = () => { const d = req.result; d.createObjectStore('workspaces', { keyPath: 'mode' }); const orders = d.createObjectStore('orders', { keyPath: ['workspace', 'id'] }); orders.createIndex('workspace', 'workspace'); };
+    req.onsuccess = () => { req.result.onversionchange = () => { req.result.close(); warning('The app was updated in another tab. Reload this page before making changes.'); storageLocked = true; }; resolve(req.result); };
+    req.onerror = () => reject(req.error);
+    req.onblocked = () => warning('Close other Order Desk tabs, then reload to finish the storage upgrade.');
+  });
+}
+function warning(message) { $('#storage-warning').hidden = false; $('#storage-warning').textContent = message; }
+function notify(message, undo) {
+  clearTimeout(toastTimer); undoAction = undo;
+  $('#toast').innerHTML = `<span>${esc(message)}</span>${undo ? '<button data-action="undo">Undo</button>' : ''}`;
+  $('#toast').hidden = false; toastTimer = setTimeout(() => { $('#toast').hidden = true; undoAction = null; }, undo ? 10000 : 5000);
+}
+async function writeState(next, previous, expectedRevision) {
+  if (!db) {
+    const current = localStorage.getItem(key());
+    if (current !== sourceSnapshot && sourceSnapshot) throw Error('Another tab changed this shop. Close this form and refresh before saving.');
+    const raw = JSON.stringify(next); localStorage.setItem(key(), raw); sourceSnapshot = raw; return expectedRevision + 1;
+  }
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(['workspaces', 'orders'], 'readwrite'), meta = tx.objectStore('workspaces'), records = tx.objectStore('orders');
+    let conflict = false;
+    tx.oncomplete = () => resolve(expectedRevision + 1);
+    tx.onerror = () => reject(tx.error || Error('Could not save. Your previous data is still intact.'));
+    tx.onabort = () => reject(Error(conflict ? 'Another tab changed this shop. Close this form and refresh before saving.' : 'Save failed. Your previous data is still intact. Download a backup and free some space.'));
+    const check = meta.get(mode);
+    check.onsuccess = () => {
+      if ((check.result?.revision || 0) !== expectedRevision) { conflict = true; stale = true; tx.abort(); return; }
+      const old = new Map((previous?.orders || []).map(o => [o.id, o]));
+      for (const o of next.orders) { if (!old.has(o.id) || JSON.stringify(old.get(o.id)) !== JSON.stringify(o)) records.put({ workspace: mode, ...o }); old.delete(o.id); }
+      for (const id of old.keys()) records.delete([mode, id]);
+      meta.put({ mode, version: 2, business: next.business, sequence: next.sequence, revision: expectedRevision + 1 });
+    };
+  });
+}
+async function load() {
+  storageLocked = false; stale = false; $('#storage-warning').hidden = true;
+  try {
+    if (db) {
+      const tx = db.transaction(['workspaces', 'orders'], 'readonly');
+      const [meta, rows] = await Promise.all([reqResult(tx.objectStore('workspaces').get(mode)), reqResult(tx.objectStore('orders').index('workspace').getAll(mode))]);
+      if (meta) { state = Desk.normalize({ ...meta, orders: rows }); revision = meta.revision; return; }
+    }
+    const raw = localStorage.getItem(key()) || localStorage.getItem(legacyKey());
+    state = raw ? Desk.normalize(JSON.parse(raw)) : mode === 'sample' ? Desk.sample() : Desk.blank();
+    revision = 0; sourceSnapshot = localStorage.getItem(key());
+    revision = await writeState(state, null, 0);
+  } catch (err) {
+    state ||= mode === 'sample' ? Desk.sample() : Desk.blank();
+    storageLocked = true; warning('Saved data could not be opened. Changes are paused to protect it. Your existing records have not been replaced. Restore a backup or reload. ' + err.message);
+  }
+}
+async function commit(next, message, undo) {
+  if (busy) return false;
+  if (storageLocked) { notify('Saving is paused. Resolve the storage notice first.'); return false; }
+  busy = true; document.body.setAttribute('aria-busy', 'true');
+  try {
+    const clean = Desk.normalize(next);
+    revision = await writeState(clean, state, revision); state = clean;
+    render(); channel?.postMessage({ mode, revision });
+    notify(message, undo); return true;
+  } catch (err) { warning(err.message); notify(err.message); return false; }
+  finally { busy = false; document.body.removeAttribute('aria-busy'); }
+}
+async function refreshFromOtherTab() {
+  if (busy || $('dialog[open]')) { stale = true; warning('Another tab updated this shop. Close this form to load the latest changes.'); return; }
+  await load(); render();
+}
+if (channel) channel.onmessage = e => { if (e.data.mode === mode && e.data.revision !== revision) refreshFromOtherTab(); };
+window.addEventListener('storage', e => { if (!db && e.key === key()) refreshFromOtherTab(); });
+window.addEventListener('focus', () => { if (state && !busy && !$('dialog[open]')) refreshFromOtherTab(); });
+async function setMode(nextMode) {
+  if (busy) return; mode = nextMode;
+  try { localStorage.setItem('atomz-orderdesk-mode', mode); } catch {}
+  state = undefined; await load(); view = 'today'; query = ''; filter = 'active'; dayFilter = ''; page = 0; render();
+}
+function navigate(next) { view = next; render(); window.scrollTo({ top: 0 }); }
+function goOrders(nextFilter, day = '') { filter = nextFilter; dayFilter = day; query = ''; page = 0; navigate('orders'); }
+function render() {
+  if (!state) return;
+  $('#shop-name').textContent = state.business.name; $('#sample-pill').hidden = mode !== 'sample'; $('#demo-line').hidden = mode !== 'sample';
+  const s = Desk.summary(state), count = s.deliveries.length + s.followups.length;
+  $('#today-count').textContent = count; $('#today-count').hidden = count === 0;
+  $$('.nav [data-nav]').forEach(b => { b.classList.toggle('active', b.dataset.nav === view); b.setAttribute('aria-current', b.dataset.nav === view ? 'page' : 'false'); });
+  if (view === 'today') renderToday(s); else if (view === 'orders') renderOrders(); else if (view === 'overview') renderOverview(s); else renderSettings();
+}
+function statusTag(o) { return `<span class="status ${o.status}">${stages[o.status]}</span>`; }
+function initials(name) { return esc(name.split(/\s+/).filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase()); }
+function orderRow(o, task = false) {
+  const r = Desk.reason(o), late = o.due < dateKey() && active(o);
+  let action = '';
+  if (task) {
+    if (o.status === 'booked' && o.due <= dateKey()) action = balance(o) ? `<button class="button small row-action" data-action="pay" data-id="${esc(o.id)}">Record payment</button>` : `<button class="button small row-action" data-action="complete" data-id="${esc(o.id)}">Complete</button>`;
+    else action = `<button class="button small row-action" data-action="remind" data-id="${esc(o.id)}">Follow up</button>`;
+  }
+  return `<article class="order-row ${task ? 'task' : 'regular'}"><button class="order-open" data-action="detail" data-id="${esc(o.id)}" aria-label="Open order ${o.number} for ${esc(o.customer)}"><span class="initial">${initials(o.customer)}</span><span class="order-info"><strong>${esc(o.customer)}</strong><p>${esc(o.product)}${o.qty > 1 ? ' × ' + o.qty : ''}</p><span class="row-note ${late ? 'overdue' : ''}">${task ? esc(r) + (balance(o) ? ' · ' + money(balance(o)) + ' left' : ' · Paid') : prettyDate(o.due) + ' · ' + stages[o.status]}</span></span></button>${task ? action : `<div class="row-amount">${money(total(o))}<small>${balance(o) ? money(balance(o)) + ' left' : 'Paid'}</small></div>`}</article>`;
+}
+function moneyCard(s) {
+  const pct = s.confirmedValue ? Math.round(s.paid / s.confirmedValue * 100) : 0;
+  return `<section class="panel money-card"><h2>Payments</h2><div class="money-graphic"><button class="donut" style="--pct:${pct}" data-action="filter" data-filter="outstanding" aria-label="${pct}% collected. Show outstanding payments"><span>${pct}%</span></button><div class="money-legend"><button data-action="filter" data-filter="paid"><small><i class="key"></i>Received</small><strong>${money(s.paid)}</strong></button><button data-action="filter" data-filter="outstanding"><small><i class="key unpaid"></i>Still to collect</small><strong>${money(s.outstanding)}</strong></button></div></div><p class="hint">In-progress and completed orders only.</p></section>`;
+}
+function weeklyChart(s) {
+  const max = Math.max(1, ...s.days.map(d => d.value)), value = s.days.reduce((n, d) => n + d.value, 0);
+  return `<section class="panel chart-panel"><h2>Completed this week</h2><div class="chart-value">${money(value)}</div><p class="hint">Order value · last 7 delivery dates</p><div class="bar-chart" role="group" aria-label="Completed order value by delivery date">${s.days.map(d => `<button class="bar-column" data-action="chart-day" data-date="${d.date}" aria-label="${prettyDate(d.date)}: ${money(d.value)}, ${d.count} completed orders" title="${prettyDate(d.date)} · ${money(d.value)}"><span class="bar-space"><span class="bar-fill" style="--bar:${Math.round(d.value / max * 100)}%"></span></span><span class="bar-day">${new Date(d.date + 'T12:00:00').toLocaleDateString('en-IN', { weekday: 'short' }).slice(0, 2)}</span></button>`).join('')}</div><p class="chart-detail" id="chart-detail">Tap a day to see its orders.</p></section>`;
+}
+function renderToday(s) {
+  const rows = (taskTab === 'deliveries' ? s.deliveries : s.followups).slice().sort((a, b) => a.due.localeCompare(b.due));
+  const shown = taskExpanded ? rows.slice(0, PAGE_SIZE) : rows.slice(0, 5);
+  $('#content').innerHTML = `<div class="heading"><div><h1>Today</h1><p>${s.deliveries.length + s.followups.length ? 'A little attention. Everything in hand.' : 'All caught up. Enjoy the breathing room.'}</p></div><span class="date">${new Date().toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div><div class="stats"><button class="stat" data-action="tasks" data-task="deliveries"><span>Deliveries due</span><strong>${s.deliveries.length}</strong></button><button class="stat" data-action="filter" data-filter="outstanding"><span>To collect</span><strong>${compactMoney(s.outstanding)}</strong></button><button class="stat" data-action="filter" data-filter="active"><span>Open orders</span><strong>${s.open}</strong></button></div><div class="today-layout"><section class="panel"><div class="panel-head"><h2>Next up</h2><span class="hint">${rows.length} ${rows.length === 1 ? 'order' : 'orders'}</span></div><div class="tabs task-tabs"><button data-action="tasks" data-task="deliveries" class="${taskTab === 'deliveries' ? 'active' : ''}" aria-pressed="${taskTab === 'deliveries'}">Deliveries <b>${s.deliveries.length}</b></button><button data-action="tasks" data-task="followups" class="${taskTab === 'followups' ? 'active' : ''}" aria-pressed="${taskTab === 'followups'}">Follow-ups <b>${s.followups.length}</b></button></div>${shown.length ? shown.map(o => orderRow(o, true)).join('') : `<div class="empty"><strong>${taskTab === 'deliveries' ? 'Nothing due today' : 'No follow-ups due'}</strong>${taskTab === 'deliveries' ? 'Upcoming deliveries are in Orders.' : 'New reminders will appear here on their due date.'}${!state.orders.length ? '<br><button class="button primary" data-action="new">Add your first order</button>' : ''}</div>`}${rows.length > shown.length ? '<div class="list-foot"><button class="button quiet" data-action="more-tasks">' + (taskExpanded ? 'View all in Orders' : 'Show more') + '</button></div>' : ''}</section><div class="side-stack">${moneyCard(s)}${weeklyChart(s)}</div></div>${backupNudge()}`;
+}
+function backupNudge() {
+  let last; try { last = localStorage.getItem('atomz-orderdesk-backup-' + mode); } catch {}
+  const due = state.orders.length > 0 && (!last || Date.now() - Number(last) > 7 * 86400000);
+  return `<div class="quiet-line"><span>${storageLocked ? 'Saving paused' : 'Saved on this device'}${mode === 'sample' ? ' · Sample data' : ''}</span>${mode === 'own' && due ? '<button class="button quiet" data-action="backup">Save a backup ↗</button>' : '<button class="button quiet" data-nav="settings">Data & backup ↗</button>'}</div>`;
+}
+function renderOrders() {
+  $('#content').innerHTML = `<div class="heading"><div><h1>Orders</h1><p>Find an order. Keep it moving.</p></div></div><div class="tools"><label class="search-wrap">${icon('search')}<input type="search" id="search" aria-label="Search orders" value="${esc(query)}" placeholder="Customer or order" autocomplete="off"></label><select id="filter" aria-label="Filter orders">${Object.entries({ active: 'Open orders', all: 'All orders', enquiry: 'Enquiries', quoted: 'Quoted', booked: 'In progress', completed: 'Completed', outstanding: 'Unpaid', paid: 'Received', attention: 'Needs attention', cancelled: 'Cancelled' }).map(([k, v]) => `<option value="${k}" ${filter === k ? 'selected' : ''}>${v}</option>`).join('')}</select></div><div id="order-results"></div>${backupNudge()}`;
+  let debounce; $('#search').addEventListener('input', e => { query = e.target.value; page = 0; clearTimeout(debounce); debounce = setTimeout(renderOrderResults, 100); });
+  $('#filter').addEventListener('change', e => { filter = e.target.value; page = 0; renderOrderResults(); });
+  renderOrderResults();
+}
+function renderOrderResults() {
+  if (!$('#order-results')) return;
+  const rows = Desk.filtered(state, filter, query, dayFilter), pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE)); page = Math.min(page, pages - 1);
+  $('#order-results').innerHTML = `<div class="result-note">${rows.length} ${rows.length === 1 ? 'order' : 'orders'}${dayFilter ? ' · ' + prettyDate(dayFilter) + '<button class="button small quiet" data-action="clear-day">Clear date ×</button>' : ''}</div><section class="panel">${rows.length ? rows.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map(o => orderRow(o)).join('') : `<div class="empty"><strong>${query || dayFilter ? 'No matching orders' : 'No orders here yet'}</strong>${query ? 'Try a customer name, product or order number.' : 'Your orders will appear here as you add them.'}${!state.orders.length ? '<br><button class="button primary" data-action="new">New order</button>' : ''}</div>`}${pages > 1 ? `<div class="pagination"><span>${page * PAGE_SIZE + 1}–${Math.min(rows.length, (page + 1) * PAGE_SIZE)} of ${rows.length}</span><div class="actions"><button class="button small" data-action="previous" ${page === 0 ? 'disabled' : ''}>Previous</button><button class="button small" data-action="next" ${page === pages - 1 ? 'disabled' : ''}>Next</button></div></div>` : ''}</section>`;
+}
+function renderOverview(s) {
+  const counts = Object.keys(stages).filter(k => k !== 'cancelled').map(k => ({ k, n: state.orders.filter(o => o.status === k).length })), max = Math.max(1, ...counts.map(x => x.n));
+  const costs = state.orders.filter(o => o.status === 'completed' && o.cost !== null), profit = round(costs.reduce((n, o) => n + total(o) - o.cost, 0));
+  $('#content').innerHTML = `<div class="heading"><div><h1>Overview</h1><p>Your numbers, connected to your orders.</p></div></div><div class="section-grid">${weeklyChart(s)}${moneyCard(s)}<section class="panel"><h2>Order stages</h2><div class="stage-bars">${counts.map(x => `<button class="stage-button" data-action="filter" data-filter="${x.k}"><span>${stages[x.k]}</span><span class="track"><span style="width:${x.n / max * 100}%"></span></span><b>${x.n}</b></button>`).join('')}</div><p class="overview-note">Tap a stage to open those orders.</p></section><section class="panel"><h2>Estimated profit</h2><div class="chart-value">${costs.length ? money(profit) : '—'}</div><p class="hint">Order value minus the total costs you entered.</p><p class="overview-note">${costs.length} of ${state.orders.filter(o => o.status === 'completed').length} completed orders include costs. This estimate excludes orders without costs; it is not a cash-flow or tax report.</p><button class="button quiet" data-action="filter" data-filter="completed">Review completed orders →</button></section></div>${backupNudge()}`;
+}
+function renderSettings() {
+  const size = Desk.size(state); let last; try { last = localStorage.getItem('atomz-orderdesk-backup-' + mode); } catch {}
+  let optedIn = false; try { optedIn = localStorage.getItem('atomz-orderdesk-optin-' + mode) === 'true'; } catch {}
+  
+  $('#content').innerHTML = `<div class="heading"><div><h1>Settings</h1><p>Your shop. Your data.</p></div></div><div class="settings-stack">
+
+<section class="panel">
+  <h2>Custom Sheet &amp; Insights</h2>
+  <p>Share your Order Desk data with ATOMZ to receive a custom Google Sheet with automated dashboards and business insights.</p>
+  <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:18px; margin-top:16px;">
+    <label class="check-label" style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-weight:600;">
+      <input type="checkbox" id="optin-share-atomz" ${optedIn ? 'checked' : ''} style="margin-top:3px; transform:scale(1.2);">
+      <span>Share my Order Desk data with ATOMZ to receive a custom Google Sheet and business insights.</span>
+    </label>
+    <div style="margin-top:12px; font-size:13px; line-height:1.55; color:#a0a0ab;">
+      • <strong>100% Optional:</strong> ATOMZ only receives data when you actively generate and send your export.<br>
+      • <strong>What you get:</strong> We will build a tailored Google Sheet for your shop with visual summaries of total orders, revenue, unpaid balances, top-selling products, upcoming delivery calendar, and customer follow-up workloads.<br>
+      • <strong>Your privacy:</strong> Your orders remain on your device. No cloud database or automatic sync is used.
+    </div>
+    <div id="insights-export-area" style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); display:${optedIn ? 'block' : 'none'};">
+      <div class="actions">
+        <button class="button primary" data-action="download-insights-pack">Download Insights Pack (.json)</button>
+        <button class="button" data-action="whatsapp-insights">Share via WhatsApp ↗</button>
+      </div>
+      <p class="hint" style="margin-top:8px;">Ready to export ${state.orders.length} orders for your custom Google Sheet.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel"><h2>Saved on this device</h2><p>Your orders stay in this browser. Back up to a file to keep a copy or move them to another device.</p><div class="storage-meter"><span style="width:${Math.max(1, size / Desk.MAX_BYTES * 100)}%"></span></div><div class="storage-label"><span>${state.orders.length.toLocaleString()} / 10,000 orders</span><span>${bytesLabel(size)} / 12 MB of record data</span></div><div class="actions"><button class="button primary" data-action="backup">Download backup</button><button class="button" data-action="restore">Restore</button><button class="button" data-action="csv">Export CSV</button></div><p class="hint">${last ? 'Last backup download: ' + new Date(Number(last)).toLocaleString('en-IN') : 'No backup downloaded yet.'}</p><details><summary>How storage works</summary><div class="storage-details">Only text, dates and amounts are saved; no photos or chat histories. Existing orders are saved individually when possible. Clearing browser data removes this copy. Private browsing is temporary. Different browsers, devices and website addresses do not sync.<br><br>The limit above measures record data, not the browser database’s disk overhead. Backups contain customer details; keep them private.</div><div class="actions"><button class="button" data-action="protect">Request persistent storage</button><button class="button" data-action="offline">Download offline app</button></div><p class="hint" id="persist-result">Browser protection is best effort. A downloaded backup is still needed.</p></details></section>
+
+<section class="panel"><h2>Shop details</h2><form id="business-form"><div class="fields" style="margin-top:20px"><div class="field"><label for="business-name">Shop name</label><input id="business-name" name="name" value="${esc(state.business.name)}" maxlength="100" required></div><div class="field"><label for="business-handle">Instagram handle</label><input id="business-handle" name="handle" value="${esc(state.business.handle)}" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" autocapitalize="none"></div><div class="field full"><label for="business-terms">Terms on your quotes</label><textarea id="business-terms" name="terms" maxlength="2000" rows="3">${esc(state.business.terms)}</textarea></div></div><div class="actions"><button class="button">Save shop details</button></div></form></section>
+
+<section class="panel"><h2>${mode === 'sample' ? 'Try your own shop' : 'Explore the sample shop'}</h2><p>Sample orders and your own orders are kept separately.</p><div class="actions"><button class="button" data-action="switch">${mode === 'sample' ? 'Use my own orders' : 'View sample shop'}</button>${mode === 'sample' ? '<button class="button quiet" data-action="reset-sample">Reload sample shop</button>' : ''}</div></section></div>`;
+
+  $('#business-form').addEventListener('submit', async e => { e.preventDefault(); const f = new FormData(e.currentTarget); await commit({ ...state, business: { name: String(f.get('name')).trim(), handle: String(f.get('handle')).trim().replace(/^@/, ''), terms: String(f.get('terms')).trim() } }, 'Shop details saved.'); });
+  
+  $('#optin-share-atomz')?.addEventListener('change', e => {
+    const isChecked = e.target.checked;
+    try { localStorage.setItem('atomz-orderdesk-optin-' + mode, String(isChecked)); } catch {}
+    const area = $('#insights-export-area');
+    if (area) area.style.display = isChecked ? 'block' : 'none';
+    notify(isChecked ? 'Opt-in enabled. You can now download or send your insights pack to ATOMZ.' : 'Opt-in disabled.');
+  });
+}
+function find(id = selectedId) { return state.orders.find(o => o.id === id); }
+function openDetail(id) {
+  const o = find(id); if (!o) return; selectedId = id;
+  $('#detail-content').innerHTML = `<div class="dialog-header"><h2 id="detail-title">${esc(o.customer)}</h2><button class="icon-button" data-close="detail-dialog" aria-label="Close details">×</button></div><div class="dialog-body"><div class="quiet-line" style="margin-top:0">${statusTag(o)}<span>#${o.number}</span></div><div class="detail-product">${esc(o.product)}${o.qty > 1 ? ' × ' + o.qty : ''}</div><div class="detail-amounts"><div><small>Total</small><strong>${money(total(o))}</strong></div><div><small>Received</small><strong>${money(o.paid)}</strong></div><div><small>Remaining</small><strong>${money(balance(o))}</strong></div></div><dl class="detail-meta"><div><dt>Delivery / pickup</dt><dd>${prettyDate(o.due)} ${o.due.slice(0, 4)}</dd></div><div><dt>Follow-up</dt><dd>${prettyDate(o.followup)}</dd></div><div><dt>Booking deposit</dt><dd>${o.deposit}% · ${money(depositDue(o))} pending</dd></div><div><dt>Contact</dt><dd>${o.handle ? '@' + esc(o.handle) : o.phone ? esc(o.phone) : 'Not added'}</dd></div></dl>${o.notes ? `<p class="detail-notes">${esc(o.notes)}</p>` : ''}<div class="actions"><button class="button" data-action="quote" data-id="${esc(id)}">View quote</button><button class="button" data-action="remind" data-id="${esc(id)}">Follow up</button><button class="button quiet" data-action="edit" data-id="${esc(id)}">Edit details</button></div><details class="more-actions"><summary>More options</summary><div class="actions"><button class="button" data-action="duplicate" data-id="${esc(id)}">Repeat order</button>${o.status !== 'cancelled' ? `<button class="button danger" data-action="cancel" data-id="${esc(id)}">Cancel order</button>` : `<button class="button" data-action="reopen" data-id="${esc(id)}">Reopen enquiry</button>`}</div><p class="hint" style="margin-top:14px">Cancelled orders remain available in the Cancelled filter. ${o.cost !== null ? 'Private cost: ' + money(o.cost) + '.' : ''}</p></details></div><div class="dialog-footer">${o.status !== 'cancelled' && balance(o) ? `<button class="button primary" data-action="pay" data-id="${esc(id)}">Record payment</button>` : ''}${o.status === 'booked' ? `<button class="button ${balance(o) ? '' : 'primary'}" data-action="complete" data-id="${esc(id)}">Complete order</button>` : ['enquiry', 'quoted'].includes(o.status) ? `<button class="button" data-action="book" data-id="${esc(id)}">Confirm booking</button>` : '<button class="button" data-close="detail-dialog">Done</button>'}</div>`;
+  $('#detail-dialog').showModal();
+}
+function closeAll() { $$('dialog[open]').forEach(d => d.close()); }
+function openOrder(id, duplicate = false) {
+  const old = id ? find(id) : undefined; closeAll(); $('#order-form').reset(); $('#more-order').open = false;
+  $('#order-title').textContent = duplicate ? 'Repeat order' : old ? 'Edit order #' + old.number : 'New order'; $('#order-error').textContent = '';
+  const defaults = { id: '', customer: '', product: '', price: '', due: dateKey(1), qty: 1, delivery: 0, paid: 0, deposit: 50, status: 'enquiry', followup: dateKey(1), handle: '', phone: '', cost: '', notes: '' };
+  const values = old ? { ...old } : defaults;
+  if (duplicate) Object.assign(values, { id: '', paid: 0, status: 'enquiry', due: dateKey(1), followup: dateKey(1) });
+  for (const k of Object.keys(defaults)) $('#order-form').elements[k].value = values[k] ?? '';
+  $('#product-list').innerHTML = [...new Set(state.orders.map(o => o.product))].slice(0, 80).map(p => `<option value="${esc(p)}"></option>`).join('');
+  calculate(); $('#order-dialog').showModal();
+}
+function readOrder() {
+  const o = Object.fromEntries(new FormData($('#order-form')));
+  for (const k of ['qty', 'price', 'delivery', 'paid', 'deposit']) o[k] = Number(o[k]); o.cost = o.cost === '' ? null : Number(o.cost);
+  o.customer = o.customer.trim(); o.product = o.product.trim(); o.handle = o.handle.trim().replace(/^@/, ''); o.phone = o.phone.trim(); return o;
+}
+function calculate() { const o = readOrder(); $('#order-calculation').innerHTML = `<div>Total<strong>${money(total(o))}</strong></div><div>Deposit due<strong>${money(depositDue(o))}</strong></div><div>Balance<strong>${money(balance(o))}</strong></div>`; }
+$('#order-form').addEventListener('input', calculate);
+$('#order-form').addEventListener('invalid', e => { if (e.target.closest('details')) $('#more-order').open = true; }, true);
+$('#order-form').addEventListener('submit', async e => {
+  e.preventDefault(); if (busy) return;
+  const o = readOrder(), old = find(o.id); o.id = old?.id || crypto.randomUUID(); o.number = old?.number || state.sequence; o.createdAt = old?.createdAt || new Date().toISOString(); o.updatedAt = new Date().toISOString(); if (old?.lastFollowupAt) o.lastFollowupAt = old.lastFollowupAt;
+  const next = { ...state, sequence: old ? state.sequence : state.sequence + 1, orders: old ? state.orders.map(row => row.id === o.id ? o : row) : [...state.orders, o] };
+  try { Desk.normalize(next); } catch (err) { $('#order-error').textContent = err.message; return; }
+  if (await commit(next, 'Order saved.')) { $('#order-dialog').close(); openDetail(o.id); }
+});
+function openPayment(id) {
+  const o = find(id); if (!o || !balance(o) || o.status === 'cancelled') return;
+  selectedId = id; closeAll(); $('#payment-form').reset(); $('#payment-error').textContent = '';
+  $('#payment-context').textContent = `${o.customer} · ${money(balance(o))} remaining`;
+  $('#payment-amount').value = depositDue(o) || balance(o); $('#payment-amount').max = balance(o);
+  $('#payment-presets').innerHTML = `${depositDue(o) > 0 && depositDue(o) !== balance(o) ? `<button type="button" class="button small" data-action="payment-preset" data-value="${depositDue(o)}">Deposit · ${money(depositDue(o))}</button>` : ''}<button type="button" class="button small" data-action="payment-preset" data-value="${balance(o)}">Full balance · ${money(balance(o))}</button>`;
+  $('#book-option').hidden = !['enquiry', 'quoted'].includes(o.status); $('#book-after-payment').checked = ['enquiry', 'quoted'].includes(o.status); $('#payment-dialog').showModal();
+}
+$('#payment-form').addEventListener('submit', async e => {
+  e.preventDefault(); if (busy) return; const o = find(), amount = Number($('#payment-amount').value);
+  if (!o || !Number.isFinite(amount) || amount <= 0 || amount > balance(o)) { $('#payment-error').textContent = 'Enter an amount between ₹0.01 and the remaining balance.'; return; }
+  const patch = { paid: round(o.paid + amount) };
+  if (['enquiry', 'quoted'].includes(o.status) && $('#book-after-payment').checked) patch.status = 'booked';
+  const previous = { ...o };
+  if (await commit(Desk.changeOrder(state, o.id, patch), 'Payment recorded.', () => undoOrder(previous))) $('#payment-dialog').close();
+});
+async function undoOrder(previous) { await commit(Desk.changeOrder(state, previous.id, previous), 'Change undone.'); }
+async function changeStage(id, status) { const old = find(id); if (!old) return; const previous = { ...old }; if (await commit(Desk.changeOrder(state, id, { status }), status === 'completed' ? 'Order completed.' : status === 'cancelled' ? 'Order moved to Cancelled.' : 'Order updated.', () => undoOrder(previous))) closeAll(); }
+function confirmChange(title, text, fn) { $('#confirm-title').textContent = title; $('#confirm-text').textContent = text; pendingConfirm = fn; $('#confirm-dialog').showModal(); }
+$('#confirm-yes').addEventListener('click', async () => { if (busy) return; const fn = pendingConfirm; pendingConfirm = null; $('#confirm-dialog').close(); await fn?.(); });
+function quoteHTML(o) {
+  return `<div class="quote-sheet"><div class="quote-head"><div class="quote-brand">${esc(state.business.name)}<small>${state.business.handle ? '@' + esc(state.business.handle) : ''}</small></div><small>QUOTATION<br>#${o.number}</small></div><h3>Your order, made personal.</h3><div class="quote-meta"><div><small>Prepared for</small>${esc(o.customer)}</div><div><small>Delivery / pickup</small>${prettyDate(o.due)} ${o.due.slice(0, 4)}</div></div><div class="quote-product"><span>${esc(o.product)}<br><span class="muted">${o.qty} × ${money(o.price)}</span></span><strong>${money(round(o.qty * o.price))}</strong></div><div class="quote-total"><div><span>Delivery</span><span>${money(o.delivery)}</span></div><div class="grand"><span>Order total</span><span>${money(total(o))}</span></div><div><span>Booking deposit (${o.deposit}%)</span><span>${money(round(total(o) * o.deposit / 100))}</span></div><div><span>Received</span><span>${money(o.paid)}</span></div><div><strong>Balance</strong><strong>${money(balance(o))}</strong></div></div>${o.notes ? `<p class="quote-notes">${esc(o.notes)}</p>` : ''}<p class="quote-notes">${esc(state.business.terms)}</p><p class="quote-notes">Quotation only. Not a tax invoice or payment receipt.</p></div>`;
+}
+function quoteText(o) { return `${state.business.name}\nQUOTATION #${o.number}\n\nHi ${o.customer}, here are your order details:\n${o.product}\n${o.qty} × ${money(o.price)}\nDelivery: ${money(o.delivery)}\nTotal: ${money(total(o))}\nBooking deposit (${o.deposit}%): ${money(round(total(o) * o.deposit / 100))}\nReceived: ${money(o.paid)}\nBalance: ${money(balance(o))}\nDelivery / pickup: ${prettyDate(o.due)} ${o.due.slice(0, 4)}\n${o.notes ? '\n' + o.notes + '\n' : ''}\n${state.business.terms}\n\nQuotation only; not a tax invoice or payment receipt.`; }
+function openQuote(id) { const o = find(id); if (!o) return; selectedId = id; closeAll(); $('#quote-preview').innerHTML = quoteHTML(o); $('#quote-dialog [data-action="quote-sent"]').hidden = o.status !== 'enquiry'; $('#quote-dialog').showModal(); }
+async function copy(text) { try { if (!navigator.clipboard) throw Error(); await navigator.clipboard.writeText(text); notify('Copied. Ready to paste.'); } catch { const input = document.createElement('textarea'); input.value = text; ($('dialog[open]') || document.body).append(input); input.select(); const ok = document.execCommand('copy'); input.remove(); notify(ok ? 'Copied. Ready to paste.' : 'Select the visible text to copy it.'); } }
+function download(value, name, type) { const url = URL.createObjectURL(value instanceof Blob ? value : new Blob([value], { type })), a = document.createElement('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 3000); }
+function backup() { download(JSON.stringify(state), `atomz-${mode}-${dateKey()}.json`, 'application/json'); try { localStorage.setItem('atomz-orderdesk-backup-' + mode, String(Date.now())); } catch {} notify('Backup download started. Keep it in your Files or Drive.'); if (view === 'settings') render(); }
+$('#restore-file').addEventListener('change', async e => {
+  const file = e.target.files[0]; e.target.value = ''; if (!file) return;
+  try {
+    if (file.size > Desk.MAX_BYTES * 2) throw Error('Backup exceeds the supported size.');
+    const next = Desk.normalize(JSON.parse(await file.text()));
+    confirmChange('Restore backup?', `Replace the ${mode === 'sample' ? 'sample' : 'personal'} shop with ${next.orders.length} orders from ${next.business.name}? Your current shop will download as a backup first.`, async () => { backup(); const wasLocked = storageLocked; storageLocked = false; const ok = await commit(next, 'Backup restored.'); if (!ok) storageLocked = wasLocked; else $('#storage-warning').hidden = true; });
+  } catch (err) { notify('Restore failed: ' + err.message); }
+});
+function openReminder(id) {
+  const o = find(id); if (!o) return; selectedId = id; closeAll(); let message;
+  if (o.status === 'enquiry') message = `Hi ${o.customer}, are you still looking for ${o.product} for ${prettyDate(o.due)}? Happy to help with the details.`;
+  else if (o.status !== 'completed' && depositDue(o)) message = `Hi ${o.customer}, a quick reminder about ${o.product} for ${prettyDate(o.due)}. Your remaining booking deposit is ${money(depositDue(o))}. Would you like to go ahead?`;
+  else if (balance(o)) message = `Hi ${o.customer}, checking in about ${o.product}. The remaining balance is ${money(balance(o))}. ${o.status === 'completed' ? 'Hope you enjoyed your order!' : 'Delivery / pickup is on ' + prettyDate(o.due) + '.'} Thank you!`;
+  else message = `Hi ${o.customer}, checking in about your ${o.product} order for ${prettyDate(o.due)}. Are there any final details to confirm?`;
+  $('#message-text').value = message + ' — ' + state.business.name; $('#message-caption').textContent = o.customer + ' · ' + (Desk.reason(o) || 'Follow-up');
+  $('#message-instagram').hidden = !o.handle; $('#message-instagram').href = o.handle ? 'https://www.instagram.com/' + encodeURIComponent(o.handle) + '/' : '#'; updateWhatsApp(o); $('#message-dialog').showModal();
+}
+function updateWhatsApp(o) { let phone = o.phone.replace(/\D/g, ''); if (phone.length === 10) phone = '91' + phone; $('#message-whatsapp').hidden = !/^\d{10,15}$/.test(phone); $('#message-whatsapp').href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent($('#message-text').value); }
+$('#message-text').addEventListener('input', () => { const o = find(); if (o) updateWhatsApp(o); });
+async function quotePNG(o) {
+  const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d'); canvas.width = 1080; canvas.height = 2600; let y = 85;
+  ctx.fillStyle = 'white'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  function line(text, size = 27, bold = false, color = '#202431') { ctx.font = `${bold ? 600 : 400} ${size}px -apple-system, sans-serif`; ctx.fillStyle = color; for (const paragraph of String(text).split('\n')) { let row = ''; for (const word of paragraph.split(/\s+/)) { if (ctx.measureText(row + word).width > 920 && row) { ctx.fillText(row, 80, y); y += size * 1.5; row = ''; } row += word + ' '; } ctx.fillText(row, 80, y); y += size * 1.65; } }
+  line(state.business.name, 40, true); if (state.business.handle) line('@' + state.business.handle, 23); y += 30; line('QUOTATION #' + o.number, 24); y += 25; line('Prepared for ' + o.customer, 31, true); line('Delivery / pickup: ' + prettyDate(o.due) + ' ' + o.due.slice(0, 4)); y += 25; line(o.product, 30, true); line(o.qty + ' × ' + money(o.price)); line('Delivery: ' + money(o.delivery)); y += 20; line('Order total: ' + money(total(o)), 38, true, '#ff7e27'); line('Booking deposit (' + o.deposit + '%): ' + money(round(total(o) * o.deposit / 100))); line('Received: ' + money(o.paid)); line('Balance: ' + money(balance(o)), 30, true); y += 30;
+  for (const p of [o.notes, state.business.terms, 'Quotation only. Not a tax invoice or payment receipt.']) if (p) { line(p, 23, false, '#687180'); y += 18; }
+  if (y > 2500) { notify('These notes need more space. Use Print / PDF for the complete quote.'); return; }
+  const out = document.createElement('canvas'); out.width = 1080; out.height = Math.ceil(y + 50); out.getContext('2d').drawImage(canvas, 0, 0); const blob = await new Promise(resolve => out.toBlob(resolve, 'image/png')); if (blob) { download(blob, 'Quote-' + o.number + '.png'); notify('Quote image downloaded.'); }
+}
+function generateInsightsPack() {
+  const s = Desk.summary(state);
+  const confirmedOrders = state.orders.filter(Desk.confirmed);
+  const productsMap = {};
+  state.orders.forEach(o => {
+    productsMap[o.product] = (productsMap[o.product] || 0) + (o.qty || 1);
+  });
+  const topProducts = Object.entries(productsMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  return {
+    generatedAt: new Date().toISOString(),
+    tool: 'ATOMZ Order Desk v2.0',
+    shop: {
+      name: state.business.name,
+      handle: state.business.handle,
+      terms: state.business.terms
+    },
+    metrics: {
+      totalOrders: state.orders.length,
+      confirmedOrdersCount: confirmedOrders.length,
+      confirmedRevenue: s.confirmedValue,
+      totalCollected: s.paid,
+      outstandingBalance: s.outstanding,
+      openDeliveriesCount: s.deliveries.length,
+      pendingFollowupsCount: s.followups.length,
+      topProducts: topProducts.map(([name, qty]) => ({ product: name, totalUnits: qty }))
+    },
+    orders: state.orders
+  };
+}
+
+function downloadInsightsPack() {
+  const pack = generateInsightsPack();
+  const safeName = (state.business.name || 'shop').toLowerCase().replace(/[^a-z0-9]/g, '-');
+  download(JSON.stringify(pack, null, 2), `atomz-order-desk-insights-${safeName}-${Desk.dateKey()}.json`, 'application/json');
+  notify('Insights Pack downloaded! You can now send this file to ATOMZ for your custom Google Sheet.');
+}
+
+function shareInsightsWhatsApp() {
+  const pack = generateInsightsPack();
+  const summaryText = `Hi ATOMZ! Here is my Order Desk export for setting up my custom Google Sheet & business insights:\n\n` +
+    `• Shop: ${pack.shop.name} ${pack.shop.handle ? '(@' + pack.shop.handle + ')' : ''}\n` +
+    `• Total Orders: ${pack.metrics.totalOrders}\n` +
+    `• Revenue: ₹${pack.metrics.confirmedRevenue.toLocaleString('en-IN')}\n` +
+    `• Collected: ₹${pack.metrics.totalCollected.toLocaleString('en-IN')}\n` +
+    `• Unpaid Balance: ₹${pack.metrics.outstandingBalance.toLocaleString('en-IN')}\n` +
+    `• Open Deliveries: ${pack.metrics.openDeliveriesCount}\n\n` +
+    `I am attaching my downloaded insights JSON file.`;
+  const url = `https://wa.me/919099939034?text=${encodeURIComponent(summaryText)}`;
+  window.open(url, '_blank');
+  downloadInsightsPack();
+}
+
+async function offlineDownload() {
+  try {
+    if (location.protocol === 'file:') { notify('You are already using the offline file. Keep this HTML file and a separate data backup.'); return; }
+    const response = await fetch('./index.html'); if (!response.ok) throw Error(); const html = await response.text(); if (!html.includes('id="desk-core"')) throw Error(); download(html, 'ATOMZ-Order-Desk.html', 'text/html'); notify('App downloaded. Orders need a separate backup.');
+  } catch { notify('Could not download the app. Keep a data backup and try again while connected.'); }
+}
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-action],[data-nav],[data-close]'); if (!b || !state || busy) return;
+  if (b.dataset.close) { $('#' + b.dataset.close).close(); if (stale && !$('dialog[open]')) { await load(); render(); } return; }
+  if (b.dataset.nav) { navigate(b.dataset.nav); return; }
+  const id = b.dataset.id || selectedId, o = find(id);
+  try {
+    switch (b.dataset.action) {
+      case 'new': openOrder(); break;
+      case 'detail': openDetail(id); break;
+      case 'edit': openOrder(id); break;
+      case 'duplicate': openOrder(id, true); break;
+      case 'switch': await setMode(mode === 'sample' ? 'own' : 'sample'); break;
+      case 'filter': goOrders(b.dataset.filter); break;
+      case 'tasks': taskTab = b.dataset.task; taskExpanded = false; view = 'today'; render(); break;
+      case 'more-tasks': if (taskExpanded) goOrders('attention'); else { taskExpanded = true; render(); } break;
+      case 'previous': page = Math.max(0, page - 1); renderOrderResults(); window.scrollTo({ top: 0 }); break;
+      case 'next': page++; renderOrderResults(); window.scrollTo({ top: 0 }); break;
+      case 'clear-day': dayFilter = ''; page = 0; renderOrderResults(); break;
+      case 'chart-day': { const d = Desk.summary(state).days.find(x => x.date === b.dataset.date); $$('.bar-column').forEach(x => x.classList.toggle('selected', x === b)); $('#chart-detail').innerHTML = `${prettyDate(d.date)} · ${money(d.value)} · <a href="#orders" data-action="chart-orders" data-date="${d.date}">${d.count} completed ${d.count === 1 ? 'order' : 'orders'} →</a>`; break; }
+      case 'chart-orders': e.preventDefault(); goOrders('completed', b.dataset.date); break;
+      case 'pay': openPayment(id); break;
+      case 'payment-preset': $('#payment-amount').value = b.dataset.value; break;
+      case 'complete': if (o) { if (balance(o)) confirmChange('Complete with balance due?', `${money(balance(o))} is still outstanding. The order will remain in follow-ups until it is paid.`, () => changeStage(id, 'completed')); else await changeStage(id, 'completed'); } break;
+      case 'cancel': confirmChange('Cancel this order?', 'It will leave your active list. Its details and payments remain in Cancelled, where you can reopen it.', () => changeStage(id, 'cancelled')); break;
+      case 'reopen': await changeStage(id, 'enquiry'); break;
+      case 'book': await changeStage(id, 'booked'); break;
+      case 'quote': openQuote(id); break;
+      case 'quote-copy': await copy(quoteText(o)); break;
+      case 'quote-png': await quotePNG(o); break;
+      case 'quote-print': $('#print-root').innerHTML = quoteHTML(o); window.print(); break;
+      case 'quote-sent': if (await commit(Desk.changeOrder(state, id, { status: 'quoted', followup: dateKey(2) }), 'Quote marked sent.')) closeAll(); break;
+      case 'remind': openReminder(id); break;
+      case 'message-copy': await copy($('#message-text').value); break;
+      case 'message-done': if (await commit(Desk.changeOrder(state, id, { followup: dateKey(2), lastFollowupAt: new Date().toISOString() }), 'Follow-up saved. Next reminder in 2 days.')) closeAll(); break;
+      case 'snooze': if (await commit(Desk.changeOrder(state, id, { followup: dateKey(1), lastFollowupAt: new Date().toISOString() }), 'Reminder moved to tomorrow.')) closeAll(); break;
+      case 'backup': backup(); break;
+      case 'restore': $('#restore-file').click(); break;
+      case 'csv': download(Desk.csv(state), `atomz-orders-${dateKey()}.csv`, 'text/csv;charset=utf-8'); notify('CSV exported.'); break;
+      case 'download-insights-pack': downloadInsightsPack(); break;
+      case 'whatsapp-insights': shareInsightsWhatsApp(); break;
+      case 'protect': { const ok = await navigator.storage?.persist?.(); $('#persist-result').textContent = ok ? 'Persistent storage granted. Clearing browser data can still remove orders; keep backups.' : 'This browser did not grant protection. Keep downloaded backups.'; break; }
+      case 'offline': await offlineDownload(); break;
+      case 'undo': { const undo = undoAction; undoAction = null; await undo?.(); break; }
+      case 'reset-sample': if (mode === 'sample') confirmChange('Reload sample shop?', 'This refreshes the fictional sample orders. Your personal shop is not changed.', async () => { await commit(Desk.sample(), 'Sample shop reloaded.'); navigate('today'); }); break;
+    }
+  } catch (err) { notify(err.message || 'That action could not be completed.'); }
+});
+$$('dialog').forEach(dialog => dialog.addEventListener('close', async () => { if (stale && !$('dialog[open]') && !busy) { await load(); render(); } }));
+document.addEventListener('keydown', e => { if (e.metaKey || e.ctrlKey || e.altKey || e.target.matches('input,textarea,select') || $('dialog[open]')) return; if (e.key.toLowerCase() === 'n') { e.preventDefault(); openOrder(); } if (e.key === '/') { e.preventDefault(); navigate('orders'); $('#search').focus(); } });
+$('.brand').addEventListener('click', e => { e.preventDefault(); navigate('today'); });
+async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
+start();
+</script>
+<script>
+document.addEventListener('mousedown', function(e) {
+  var target = e.target.closest('button, .button');
+  if (!target) return;
+  var rect = target.getBoundingClientRect();
+  var ripple = document.createElement('span');
+  ripple.className = 'water-ripple';
+  ripple.style.left = (e.clientX - rect.left) + 'px';
+  ripple.style.top = (e.clientY - rect.top) + 'px';
+  target.appendChild(ripple);
+  setTimeout(function() { ripple.remove(); }, 600);
+});
+</script>
+</body>
+</html>
