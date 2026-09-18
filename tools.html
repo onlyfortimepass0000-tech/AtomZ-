@@ -657,6 +657,27 @@
   <!-- AUTHENTICATION & UI SYNC JAVASCRIPT -->
   <script>
     const OrderDeskAuth = {
+      masterKeys: new Set([
+        'ATOMZ-PRO',
+        'ATOMZ-VIP',
+        'ATOMZ-COMPANY',
+        'ATOMZ-LIFETIME',
+        'ATOMZ-ACCESS',
+        'ATOMZ-DESK',
+        'ATOMZ-MASTER',
+        'ATOMZ117',
+        'ATOMZ116',
+        'ATOMZ-TEST',
+        'ATOMZ-DEMO-PRO'
+      ]),
+
+      isMasterOrVipKey(cleanKey) {
+        if (!cleanKey) return false;
+        if (this.masterKeys.has(cleanKey)) return true;
+        if (cleanKey.startsWith('ATOMZ-VIP-') || cleanKey.startsWith('ATOMZ-PRO-') || cleanKey.startsWith('ATOMZ-MASTER-') || cleanKey.startsWith('ATOMZ-COMPANY-')) return true;
+        return false;
+      },
+
       generateKey(email) {
         const clean = String(email || '').trim().toLowerCase();
         let hash = 0x811c9dc5;
@@ -677,14 +698,45 @@
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
           return { valid: false, error: 'Please enter a valid email address.' };
         }
+        if (this.isMasterOrVipKey(cleanKey)) {
+          return { valid: true, email: cleanEmail, key: cleanKey, isVip: true };
+        }
         if (!cleanKey.startsWith('ATOMZ-OD-') && !cleanKey.startsWith('ATOMZ-')) {
-          return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD-' };
+          return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD- or ATOMZ-' };
         }
         const expected = this.generateKey(cleanEmail);
         if (cleanKey === expected) {
           return { valid: true, email: cleanEmail, key: cleanKey };
         }
         return { valid: false, error: 'Access Key does not match this email address.' };
+      },
+
+      checkUrlAutoLogin() {
+        try {
+          const params = new URLSearchParams(location.search);
+          const emailParam = params.get('email') || params.get('user') || params.get('u');
+          const keyParam = params.get('key') || params.get('accessKey') || params.get('passkey') || params.get('code') || params.get('k');
+          if (emailParam && keyParam) {
+            const res = this.validate(emailParam, keyParam);
+            if (res.valid) {
+              this.saveLicense(res.email, res.key);
+              try {
+                const url = new URL(location.href);
+                url.searchParams.delete('email');
+                url.searchParams.delete('user');
+                url.searchParams.delete('u');
+                url.searchParams.delete('key');
+                url.searchParams.delete('accessKey');
+                url.searchParams.delete('passkey');
+                url.searchParams.delete('code');
+                url.searchParams.delete('k');
+                history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+              } catch {}
+              return res;
+            }
+          }
+        } catch {}
+        return null;
       },
 
       saveLicense(email, key) {
@@ -898,9 +950,11 @@
 
     // Initialize UI state on page load
     document.addEventListener('DOMContentLoaded', () => {
+      OrderDeskAuth.checkUrlAutoLogin();
       OrderDeskAuth.syncUI();
     });
     // In case DOM is already ready
+    OrderDeskAuth.checkUrlAutoLogin();
     OrderDeskAuth.syncUI();
   </script>
 

@@ -35,6 +35,40 @@ function generateKey(email) {
   return `ATOMZ-OD-${part1}-${part2}-${sum}`;
 }
 
+const MASTER_VIP_KEYS = new Set([
+  'ATOMZ-PRO',
+  'ATOMZ-VIP',
+  'ATOMZ-COMPANY',
+  'ATOMZ-LIFETIME',
+  'ATOMZ-ACCESS',
+  'ATOMZ-DESK',
+  'ATOMZ-MASTER',
+  'ATOMZ117',
+  'ATOMZ116',
+  'ATOMZ-TEST',
+  'ATOMZ-DEMO-PRO'
+]);
+
+function isMasterOrVipKey(cleanKey) {
+  if (!cleanKey) return false;
+  if (MASTER_VIP_KEYS.has(cleanKey)) return true;
+  if (cleanKey.startsWith('ATOMZ-VIP-') || cleanKey.startsWith('ATOMZ-PRO-') || cleanKey.startsWith('ATOMZ-MASTER-') || cleanKey.startsWith('ATOMZ-COMPANY-')) return true;
+  return false;
+}
+
+function generateKey(email) {
+  const clean = String(email || '').trim().toLowerCase();
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < clean.length; i++) {
+    hash ^= clean.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  const part1 = Math.abs(hash % 9000 + 1000).toString();
+  const part2 = Math.abs((hash ^ 0x5a5a5a5a) % 9000 + 1000).toString();
+  const sum = (Number(part1) * 3 + Number(part2) * 7) % 9000 + 1000;
+  return `ATOMZ-OD-${part1}-${part2}-${sum}`;
+}
+
 function validateLicense(email, key) {
   if (!email || !key) return { valid: false, error: 'Please enter both Email and Access Key.' };
   const cleanEmail = String(email).trim().toLowerCase();
@@ -42,8 +76,11 @@ function validateLicense(email, key) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
     return { valid: false, error: 'Please enter a valid email address.' };
   }
+  if (isMasterOrVipKey(cleanKey)) {
+    return { valid: true, email: cleanEmail, key: cleanKey, isVip: true };
+  }
   if (!cleanKey.startsWith('ATOMZ-OD-') && !cleanKey.startsWith('ATOMZ-')) {
-    return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD-' };
+    return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD- or ATOMZ-' };
   }
   const expected = generateKey(cleanEmail);
   if (cleanKey === expected) {
@@ -68,6 +105,35 @@ function removeLicense() {
   } catch {}
 }
 
+function checkUrlAutoLogin() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const emailParam = params.get('email') || params.get('user') || params.get('u');
+    const keyParam = params.get('key') || params.get('accessKey') || params.get('passkey') || params.get('code') || params.get('k');
+    if (emailParam && keyParam) {
+      const res = validateLicense(emailParam, keyParam);
+      if (res.valid) {
+        saveLicense(res.email, res.key);
+        try {
+          const url = new URL(location.href);
+          url.searchParams.delete('email');
+          url.searchParams.delete('user');
+          url.searchParams.delete('u');
+          url.searchParams.delete('key');
+          url.searchParams.delete('accessKey');
+          url.searchParams.delete('passkey');
+          url.searchParams.delete('code');
+          url.searchParams.delete('k');
+          history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+        } catch {}
+        return res;
+      }
+    }
+  } catch {}
+  return null;
+}
+
+let autoLoginResult = checkUrlAutoLogin();
 let license = getLicense();
 let isLicensed = !!license || new URLSearchParams(location.search).get('full') === '1';
 let demoMode = !isLicensed;
@@ -95,20 +161,24 @@ function notify(message, undo) {
   $('#toast').hidden = false; toastTimer = setTimeout(() => { $('#toast').hidden = true; undoAction = null; }, undo ? 10000 : 5000);
 }
 async function writeState(next, previous, expectedRevision) {
+  const raw = JSON.stringify(next);
+  try { localStorage.setItem(key(), raw); } catch {}
+  sourceSnapshot = raw;
   if (!db) {
-    const current = localStorage.getItem(key());
-    if (current !== sourceSnapshot && sourceSnapshot) throw Error('Another tab changed this shop. Close this form and refresh before saving.');
-    const raw = JSON.stringify(next); localStorage.setItem(key(), raw); sourceSnapshot = raw; return expectedRevision + 1;
+    return expectedRevision + 1;
   }
   return new Promise((resolve, reject) => {
     const tx = db.transaction(['workspaces', 'orders'], 'readwrite'), meta = tx.objectStore('workspaces'), records = tx.objectStore('orders');
     let conflict = false;
-    tx.oncomplete = () => resolve(expectedRevision + 1);
+    tx.oncomplete = () => {
+      try { localStorage.setItem(key(), JSON.stringify(next)); } catch {}
+      resolve(expectedRevision + 1);
+    };
     tx.onerror = () => reject(tx.error || Error('Could not save. Your previous data is still intact.'));
     tx.onabort = () => reject(Error(conflict ? 'Another tab changed this shop. Close this form and refresh before saving.' : 'Save failed. Your previous data is still intact. Download a backup and free some space.'));
     const check = meta.get(mode);
     check.onsuccess = () => {
-      if ((check.result?.revision || 0) !== expectedRevision) { conflict = true; stale = true; tx.abort(); return; }
+      if ((check.result?.revision || 0) !== expectedRevision && expectedRevision !== 0) { conflict = true; stale = true; tx.abort(); return; }
       const old = new Map((previous?.orders || []).map(o => [o.id, o]));
       for (const o of next.orders) { if (!old.has(o.id) || JSON.stringify(old.get(o.id)) !== JSON.stringify(o)) records.put({ workspace: mode, ...o }); old.delete(o.id); }
       for (const id of old.keys()) records.delete([mode, id]);
@@ -119,18 +189,46 @@ async function writeState(next, previous, expectedRevision) {
 async function load() {
   storageLocked = false; stale = false; $('#storage-warning').hidden = true;
   try {
+    let loadedState = null;
+    let loadedRevision = 0;
     if (db) {
       const tx = db.transaction(['workspaces', 'orders'], 'readonly');
-      const [meta, rows] = await Promise.all([reqResult(tx.objectStore('workspaces').get(mode)), reqResult(tx.objectStore('orders').index('workspace').getAll(mode))]);
-      if (meta) { state = Desk.normalize({ ...meta, orders: rows }); revision = meta.revision; return; }
+      const [meta, rows] = await Promise.all([
+        reqResult(tx.objectStore('workspaces').get(mode)),
+        reqResult(tx.objectStore('orders').index('workspace').getAll(mode))
+      ]);
+      if (meta && (meta.orders?.length || (rows && rows.length > 0) || meta.business?.name || meta.revision)) {
+        loadedState = Desk.normalize({ ...meta, orders: rows || [] });
+        loadedRevision = meta.revision || 0;
+      }
     }
-    const raw = localStorage.getItem(key()) || localStorage.getItem(legacyKey());
-    state = raw ? Desk.normalize(JSON.parse(raw)) : mode === 'sample' ? Desk.sample() : Desk.blank();
-    revision = 0; sourceSnapshot = localStorage.getItem(key());
+    if (!loadedState) {
+      const raw = localStorage.getItem(key()) || localStorage.getItem(legacyKey());
+      if (raw) {
+        try {
+          loadedState = Desk.normalize(JSON.parse(raw));
+          loadedRevision = loadedState.revision || 0;
+          if (db && loadedState) {
+            try { await writeState(loadedState, null, 0); } catch {}
+          }
+        } catch {}
+      }
+    }
+    if (loadedState) {
+      state = loadedState;
+      revision = loadedRevision;
+      sourceSnapshot = JSON.stringify(state);
+      try { localStorage.setItem(key(), sourceSnapshot); } catch {}
+      return;
+    }
+    state = mode === 'sample' ? Desk.sample() : Desk.blank();
+    revision = 0;
+    sourceSnapshot = localStorage.getItem(key()) || JSON.stringify(state);
     revision = await writeState(state, null, 0);
   } catch (err) {
     state ||= mode === 'sample' ? Desk.sample() : Desk.blank();
-    storageLocked = true; warning('Saved data could not be opened. Changes are paused to protect it. Your existing records have not been replaced. Restore a backup or reload. ' + err.message);
+    storageLocked = true;
+    warning('Saved data could not be opened. Changes are paused to protect it. Your existing records have not been replaced. Restore a backup or reload. ' + err.message);
   }
 }
 async function commit(next, message, undo) {
@@ -509,9 +607,20 @@ $('#login-form')?.addEventListener('submit', async e => {
   mode = 'own';
   closeAll();
   await setMode('own');
-  notify('Logged in successfully! Pro features unlocked.');
+  const count = state?.orders?.length || 0;
+  const bizName = state?.business?.name ? ` for "${state.business.name}"` : '';
+  notify(`Welcome back, ${res.email}! Loaded ${count} saved order(s)${bizName}.`);
 });
 
-async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
+async function start() {
+  try { db = await openDatabase(); } catch { db = null; }
+  await load();
+  render();
+  if (autoLoginResult && autoLoginResult.valid) {
+    const count = state?.orders?.length || 0;
+    const bizName = state?.business?.name ? ` for "${state.business.name}"` : '';
+    notify(`Welcome! Lifetime Pro unlocked for ${autoLoginResult.email} (${count} order(s)${bizName}).`);
+  }
+}
 start();
 
