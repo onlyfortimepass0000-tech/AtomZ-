@@ -177,7 +177,7 @@ const tourSteps = [
   { view:'orders', selector:'.nav [data-nav="orders"]', title:'Every order, searchable', text:'Open any order to update its stage, record a payment, create a quote or prepare a follow-up.' },
   { view:'overview', selector:'.nav [data-nav="overview"]', title:'Your numbers', text:'See collected payments, outstanding money and completed order value at a glance.' },
   { view:'settings', selector:'.nav [data-nav="settings"]', title:'Your data', text:'Back up your orders here. Paid users can also export to Google Sheets or choose to share a data pack with ATOMZ.' },
-  { view:'today', selector:'.add-top', title:'New order', text:'Add an enquiry in seconds. The desk tracks the deposit, balance, delivery date and next follow-up.' }
+  { view:'today', selector:'.add-top', mobileSelector:'.mobile-add', title:'New order', text:'Add an enquiry in seconds. The desk tracks the deposit, balance, delivery date and next follow-up.' }
 ];
 function clearTourFocus() { $$('.tour-focus').forEach(element => element.classList.remove('tour-focus')); }
 function showTour(step = 0) {
@@ -185,7 +185,7 @@ function showTour(step = 0) {
   const current = tourSteps[tourStep];
   if (view !== current.view) { view = current.view; render(); }
   requestAnimationFrame(() => {
-    clearTourFocus(); const target = $(current.selector); target?.classList.add('tour-focus');
+    clearTourFocus(); const selector = window.matchMedia('(max-width: 600px)').matches && current.mobileSelector ? current.mobileSelector : current.selector; const target = $(selector); target?.classList.add('tour-focus');
     $('#tour-count').textContent = `${tourStep + 1} of ${tourSteps.length}`;
     $('#tour-title').textContent = current.title; $('#tour-text').textContent = current.text;
     $('#tour').hidden = false; $('#tour-card [data-action="tour-next"]').textContent = tourStep === tourSteps.length - 1 ? 'Unlock ₹299' : 'Next';

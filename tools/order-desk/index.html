@@ -367,7 +367,7 @@ main {
 .access-request input { width: 100%; margin-top: 6px; }
 .tour-button { white-space: nowrap; }
 .tour-focus { position: relative; z-index: 20; outline: 3px solid var(--orange); outline-offset: 4px; border-radius: 10px; box-shadow: 0 0 0 9999px rgba(22,26,35,.22); }
-#tour { position: fixed; z-index: 30; inset: 0; pointer-events: none; }
+#tour { position: fixed; z-index: 70; inset: 0; pointer-events: none; }
 #tour-card { pointer-events: auto; position: fixed; left: max(16px, env(safe-area-inset-left)); right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); margin: auto; max-width: 440px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: 0 18px 50px rgba(15,18,25,.25); }
 #tour-count { color: var(--orange); font-size: .8rem; font-weight: 700; }
 #tour-card h2 { margin: 8px 0; font-size: 1.2rem; }
@@ -576,6 +576,9 @@ dialog form { margin: 0; }
   .nav-icon svg { width: 22px; height: 22px; }
 
   .mobile-add { display: flex; position: fixed; z-index: 40; right: 18px; bottom: calc(80px + env(safe-area-inset-bottom)); border-radius: 14px; min-height: 48px; box-shadow: 0 6px 20px rgba(232,89,12,0.45); padding: 12px 18px; }
+  #tour-card { bottom: calc(88px + env(safe-area-inset-bottom)); max-height: calc(100dvh - 108px - env(safe-area-inset-bottom)); overflow-y: auto; padding-bottom: max(20px, env(safe-area-inset-bottom)); }
+  .tour-actions { position: sticky; bottom: 0; padding-top: 14px; padding-bottom: 2px; background: var(--surface); }
+  .tour-actions .button { min-height: 44px; }
   main { padding: 16px 18px 160px; }
 
   .demo-line { font-size: .75rem; margin-bottom: 16px; gap: 8px; }
@@ -975,7 +978,7 @@ const tourSteps = [
   { view:'orders', selector:'.nav [data-nav="orders"]', title:'Every order, searchable', text:'Open any order to update its stage, record a payment, create a quote or prepare a follow-up.' },
   { view:'overview', selector:'.nav [data-nav="overview"]', title:'Your numbers', text:'See collected payments, outstanding money and completed order value at a glance.' },
   { view:'settings', selector:'.nav [data-nav="settings"]', title:'Your data', text:'Back up your orders here. Paid users can also export to Google Sheets or choose to share a data pack with ATOMZ.' },
-  { view:'today', selector:'.add-top', title:'New order', text:'Add an enquiry in seconds. The desk tracks the deposit, balance, delivery date and next follow-up.' }
+  { view:'today', selector:'.add-top', mobileSelector:'.mobile-add', title:'New order', text:'Add an enquiry in seconds. The desk tracks the deposit, balance, delivery date and next follow-up.' }
 ];
 function clearTourFocus() { $$('.tour-focus').forEach(element => element.classList.remove('tour-focus')); }
 function showTour(step = 0) {
@@ -983,7 +986,7 @@ function showTour(step = 0) {
   const current = tourSteps[tourStep];
   if (view !== current.view) { view = current.view; render(); }
   requestAnimationFrame(() => {
-    clearTourFocus(); const target = $(current.selector); target?.classList.add('tour-focus');
+    clearTourFocus(); const selector = window.matchMedia('(max-width: 600px)').matches && current.mobileSelector ? current.mobileSelector : current.selector; const target = $(selector); target?.classList.add('tour-focus');
     $('#tour-count').textContent = `${tourStep + 1} of ${tourSteps.length}`;
     $('#tour-title').textContent = current.title; $('#tour-text').textContent = current.text;
     $('#tour').hidden = false; $('#tour-card [data-action="tour-next"]').textContent = tourStep === tourSteps.length - 1 ? 'Unlock ₹299' : 'Next';
