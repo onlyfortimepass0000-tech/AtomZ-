@@ -11,9 +11,67 @@ const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] 
 $$('[data-icon]').forEach(e => e.innerHTML = icon(e.dataset.icon));
 let state, db, mode = 'sample', revision = 0, view = 'today', filter = 'active', query = '', dayFilter = '', page = 0, taskTab = 'deliveries', taskExpanded = false, selectedId = '', pendingConfirm, toastTimer, undoAction, busy = false, stale = false, storageLocked = false, sourceSnapshot = '', tourStep = 0;
 const PAGE_SIZE = 30;
-// Public links open as a safe, sample-only product tour. The paid build can use ?full=1.
-const demoMode = new URLSearchParams(location.search).get('full') !== '1';
-try { mode = localStorage.getItem('atomz-orderdesk-mode') === 'own' ? 'own' : 'sample'; } catch {}
+
+function getLicense() {
+  try {
+    const raw = localStorage.getItem('atomz_orderdesk_license');
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (data && data.email && data.key) return data;
+  } catch {}
+  return null;
+}
+
+function generateKey(email) {
+  const clean = String(email || '').trim().toLowerCase();
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < clean.length; i++) {
+    hash ^= clean.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  const part1 = Math.abs(hash % 9000 + 1000).toString();
+  const part2 = Math.abs((hash ^ 0x5a5a5a5a) % 9000 + 1000).toString();
+  const sum = (Number(part1) * 3 + Number(part2) * 7) % 9000 + 1000;
+  return `ATOMZ-OD-${part1}-${part2}-${sum}`;
+}
+
+function validateLicense(email, key) {
+  if (!email || !key) return { valid: false, error: 'Please enter both Email and Access Key.' };
+  const cleanEmail = String(email).trim().toLowerCase();
+  const cleanKey = String(key).trim().toUpperCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    return { valid: false, error: 'Please enter a valid email address.' };
+  }
+  if (!cleanKey.startsWith('ATOMZ-OD-') && !cleanKey.startsWith('ATOMZ-')) {
+    return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD-' };
+  }
+  const expected = generateKey(cleanEmail);
+  if (cleanKey === expected) {
+    return { valid: true, email: cleanEmail, key: cleanKey };
+  }
+  return { valid: false, error: 'Access Key does not match this email address.' };
+}
+
+function saveLicense(email, key) {
+  const data = { email: String(email).trim().toLowerCase(), key: String(key).trim().toUpperCase(), valid: true, activatedAt: new Date().toISOString(), plan: 'lifetime_pro' };
+  try {
+    localStorage.setItem('atomz_orderdesk_license', JSON.stringify(data));
+    localStorage.setItem('atomz-orderdesk-mode', 'own');
+  } catch {}
+  return data;
+}
+
+function removeLicense() {
+  try {
+    localStorage.removeItem('atomz_orderdesk_license');
+    localStorage.setItem('atomz-orderdesk-mode', 'sample');
+  } catch {}
+}
+
+let license = getLicense();
+let isLicensed = !!license || new URLSearchParams(location.search).get('full') === '1';
+let demoMode = !isLicensed;
+try { mode = isLicensed ? 'own' : (localStorage.getItem('atomz-orderdesk-mode') === 'own' ? 'own' : 'sample'); } catch {}
 if (demoMode) mode = 'sample';
 const legacyKey = () => 'atomz-orderdesk-v1-' + mode;
 const key = () => 'atomz-orderdesk-v2-' + mode;
@@ -104,12 +162,44 @@ function navigate(next) { view = next; render(); window.scrollTo({ top: 0 }); }
 function goOrders(nextFilter, day = '') { filter = nextFilter; dayFilter = day; query = ''; page = 0; navigate('orders'); }
 function render() {
   if (!state) return;
-  const shopName = $('#shop-name'); if (document.activeElement !== shopName) shopName.value = state.business.name; shopName.readOnly = demoMode; $('#sample-pill').hidden = mode !== 'sample'; $('#demo-line').hidden = mode !== 'sample';
-  $$('.add-top,.mobile-add').forEach(button => { button.textContent = demoMode ? 'Unlock ₹299' : '+ New order'; button.dataset.action = demoMode ? 'purchase' : 'new'; });
+  license = getLicense();
+  isLicensed = !!license || new URLSearchParams(location.search).get('full') === '1';
+  demoMode = !isLicensed;
+
+  const shopName = $('#shop-name');
+  if (document.activeElement !== shopName) shopName.value = state.business.name;
+  shopName.readOnly = demoMode;
+  $('#sample-pill').hidden = mode !== 'sample';
+  $('#demo-line').hidden = mode !== 'sample';
+
+  const authTopBtn = $('#top-auth-btn');
+  if (authTopBtn) {
+    if (isLicensed) {
+      authTopBtn.innerHTML = `<span class="pro-pill">✓ Pro</span>`;
+      authTopBtn.dataset.action = 'account';
+      authTopBtn.title = `Licensed to ${license?.email || 'User'}`;
+    } else {
+      authTopBtn.textContent = 'Log in';
+      authTopBtn.dataset.action = 'login';
+      authTopBtn.title = 'Log in with Access Key';
+    }
+  }
+
+  $$('.add-top,.mobile-add').forEach(button => {
+    button.textContent = demoMode ? 'Unlock ₹299' : '+ New order';
+    button.dataset.action = demoMode ? 'purchase' : 'new';
+  });
   const s = Desk.summary(state), count = s.deliveries.length + s.followups.length;
-  $('#today-count').textContent = count; $('#today-count').hidden = count === 0;
-  $$('.nav [data-nav]').forEach(b => { b.classList.toggle('active', b.dataset.nav === view); b.setAttribute('aria-current', b.dataset.nav === view ? 'page' : 'false'); });
-  if (view === 'today') renderToday(s); else if (view === 'orders') renderOrders(); else if (view === 'overview') renderOverview(s); else renderSettings();
+  $('#today-count').textContent = count;
+  $('#today-count').hidden = count === 0;
+  $$('.nav [data-nav]').forEach(b => {
+    b.classList.toggle('active', b.dataset.nav === view);
+    b.setAttribute('aria-current', b.dataset.nav === view ? 'page' : 'false');
+  });
+  if (view === 'today') renderToday(s);
+  else if (view === 'orders') renderOrders();
+  else if (view === 'overview') renderOverview(s);
+  else renderSettings();
 }
 function statusTag(o) { return `<span class="status ${o.status}">${stages[o.status]}</span>`; }
 function initials(name) { return esc(name.split(/\s+/).filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase()); }
@@ -158,9 +248,10 @@ function renderOverview(s) {
 }
 function renderSettings() {
   const size = Desk.size(state); let last; try { last = localStorage.getItem('atomz-orderdesk-backup-' + mode); } catch {}
-  const unlock = `<section class="panel"><h2>Ready for your real orders?</h2><p>Use your own shop, save real customer details and keep every order in one place.</p><div class="actions"><button class="button primary" data-action="purchase">Get Order Desk · ₹299</button></div></section>`;
+  const unlock = `<section class="panel"><h2>Ready for your real orders?</h2><p>Use your own shop, save real customer details and keep every order in one place.</p><div class="actions"><button class="button primary" data-action="purchase">Get Order Desk · ₹299</button><button class="button" data-action="login">Log in with Access Key</button></div></section>`;
+  const licenseCard = isLicensed ? `<section class="panel"><h2>Lifetime Pro License Active</h2><p>Licensed to <strong>${esc(license?.email || 'User')}</strong> · Local-First Storage Active.</p><div class="actions"><button class="button" data-action="account">View Access Key</button><button class="button quiet" data-action="logout" style="color:var(--red)">Log Out / Switch License</button></div></section>` : '';
   const dataOptions = `<section class="panel"><h2>Data &amp; insights</h2><p>Keep a Google Sheets backup or choose to share a data pack with ATOMZ for a custom Sheet and insights.</p><div class="actions"><button class="button" data-action="data-options">Data options</button></div></section>`;
-  $('#content').innerHTML = `<div class="heading"><div><h1>Settings</h1><p>${demoMode ? 'Demo data only. Your details are never saved here.' : 'Your shop. Your data.'}</p></div></div><div class="settings-stack">${demoMode ? unlock : ''}${!demoMode ? dataOptions : ''}<section class="panel"><h2>Saved on this device</h2><p>Your orders stay in this browser. Back up to a file to keep a copy or move them to another device.</p><div class="storage-meter"><span style="width:${Math.max(1, size / Desk.MAX_BYTES * 100)}%"></span></div><div class="storage-label"><span>${state.orders.length.toLocaleString()} / 10,000 orders</span><span>${bytesLabel(size)} / 12 MB of record data</span></div><div class="actions"><button class="button primary" data-action="backup">Download backup</button><button class="button" data-action="restore">Restore</button><button class="button" data-action="csv">Export CSV</button></div><p class="hint">${last ? 'Last backup download: ' + new Date(Number(last)).toLocaleString('en-IN') : 'No backup downloaded yet.'}</p><details><summary>How storage works</summary><div class="storage-details">Only text, dates and amounts are saved; no photos or chat histories. Existing orders are saved individually when possible. Clearing browser data removes this copy. Private browsing is temporary. Different browsers, devices and website addresses do not sync.<br><br>The limit above measures record data, not the browser database’s disk overhead. Backups contain customer details; keep them private.</div><div class="actions"><button class="button" data-action="protect">Request persistent storage</button><button class="button" data-action="offline">Download offline app</button></div><p class="hint" id="persist-result">Browser protection is best effort. A downloaded backup is still needed.</p></details></section><section class="panel"><h2>Shop details</h2><form id="business-form"><div class="fields" style="margin-top:20px"><div class="field"><label for="business-name">Shop name</label><input id="business-name" name="name" value="${esc(state.business.name)}" maxlength="100" required></div><div class="field"><label for="business-handle">Instagram handle</label><input id="business-handle" name="handle" value="${esc(state.business.handle)}" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" autocapitalize="none"></div><div class="field full"><label for="business-terms">Terms on your quotes</label><textarea id="business-terms" name="terms" maxlength="2000" rows="3">${esc(state.business.terms)}</textarea></div></div><div class="actions"><button class="button">Save shop details</button></div></form></section><section class="panel"><h2>${demoMode ? 'Explore the sample shop' : mode === 'sample' ? 'Try your own shop' : 'Explore the sample shop'}</h2><p>${demoMode ? 'Open orders, quotes, payment tracking and follow-ups with fictional data.' : 'Sample orders and your own orders are kept separately.'}</p><div class="actions"><button class="button" data-action="${demoMode ? 'demo-guide' : 'switch'}">${demoMode ? 'How the demo works' : mode === 'sample' ? 'Use my own orders' : 'View sample shop'}</button>${mode === 'sample' ? '<button class="button quiet" data-action="reset-sample">Reload sample shop</button>' : ''}</div></section></div>`;
+  $('#content').innerHTML = `<div class="heading"><div><h1>Settings</h1><p>${demoMode ? 'Demo data only. Your details are never saved here.' : 'Your shop. Your data.'}</p></div></div><div class="settings-stack">${demoMode ? unlock : licenseCard}${!demoMode ? dataOptions : ''}<section class="panel"><h2>Saved on this device</h2><p>Your orders stay in this browser. Back up to a file to keep a copy or move them to another device.</p><div class="storage-meter"><span style="width:${Math.max(1, size / Desk.MAX_BYTES * 100)}%"></span></div><div class="storage-label"><span>${state.orders.length.toLocaleString()} / 10,000 orders</span><span>${bytesLabel(size)} / 12 MB of record data</span></div><div class="actions"><button class="button primary" data-action="backup">Download backup</button><button class="button" data-action="restore">Restore</button><button class="button" data-action="csv">Export CSV</button></div><p class="hint">${last ? 'Last backup download: ' + new Date(Number(last)).toLocaleString('en-IN') : 'No backup downloaded yet.'}</p><details><summary>How storage works</summary><div class="storage-details">Only text, dates and amounts are saved; no photos or chat histories. Existing orders are saved individually when possible. Clearing browser data removes this copy. Private browsing is temporary. Different browsers, devices and website addresses do not sync.<br><br>The limit above measures record data, not the browser database’s disk overhead. Backups contain customer details; keep them private.</div><div class="actions"><button class="button" data-action="protect">Request persistent storage</button><button class="button" data-action="offline">Download offline app</button></div><p class="hint" id="persist-result">Browser protection is best effort. A downloaded backup is still needed.</p></details></section><section class="panel"><h2>Shop details</h2><form id="business-form"><div class="fields" style="margin-top:20px"><div class="field"><label for="business-name">Shop name</label><input id="business-name" name="name" value="${esc(state.business.name)}" maxlength="100" required></div><div class="field"><label for="business-handle">Instagram handle</label><input id="business-handle" name="handle" value="${esc(state.business.handle)}" maxlength="31" pattern="@?[A-Za-z0-9_.]{1,30}" autocapitalize="none"></div><div class="field full"><label for="business-terms">Terms on your quotes</label><textarea id="business-terms" name="terms" maxlength="2000" rows="3">${esc(state.business.terms)}</textarea></div></div><div class="actions"><button class="button">Save shop details</button></div></form></section><section class="panel"><h2>${demoMode ? 'Explore the sample shop' : mode === 'sample' ? 'Try your own shop' : 'Explore the sample shop'}</h2><p>${demoMode ? 'Open orders, quotes, payment tracking and follow-ups with fictional data.' : 'Sample orders and your own orders are kept separately.'}</p><div class="actions"><button class="button" data-action="${demoMode ? 'demo-guide' : 'switch'}">${demoMode ? 'How the demo works' : mode === 'sample' ? 'Use my own orders' : 'View sample shop'}</button>${mode === 'sample' ? '<button class="button quiet" data-action="reset-sample">Reload sample shop</button>' : ''}</div></section></div>`;
   const storagePanel = [...$('#content').querySelectorAll('.panel')].find(panel => panel.querySelector('h2')?.textContent === 'Saved on this device');
   storagePanel?.insertAdjacentHTML('beforeend', `<section class="sheet-backup"><div><h3>Google Sheets backup</h3><p>Keep an organised copy in a Sheet you control.</p></div><button class="button" data-action="sheet-export">Save to Google Sheets</button></section>`);
   $('#business-form').addEventListener('submit', async e => { e.preventDefault(); const f = new FormData(e.currentTarget); await commit({ ...state, business: { name: String(f.get('name')).trim(), handle: String(f.get('handle')).trim().replace(/^@/, ''), terms: String(f.get('terms')).trim() } }, 'Shop details saved.'); });
@@ -172,6 +263,21 @@ function openDetail(id) {
   $('#detail-dialog').showModal();
 }
 function closeAll() { $$('dialog[open]').forEach(d => d.close()); }
+function showLogin() { closeAll(); $('#desk-login-error').textContent = ''; $('#login-dialog').showModal(); }
+function showAccount() {
+  closeAll();
+  const lic = getLicense();
+  if (!lic) { showLogin(); return; }
+  $('#desk-acc-email').textContent = lic.email;
+  $('#desk-acc-key').textContent = lic.key;
+  $('#account-dialog').showModal();
+}
+function showCredentials(email, key) {
+  closeAll();
+  $('#desk-cred-email').textContent = email;
+  $('#desk-cred-key').textContent = key;
+  $('#credentials-dialog').showModal();
+}
 const tourSteps = [
   { view:'today', selector:'.nav [data-nav="today"]', title:'Today', text:'Start here. See deliveries, follow-ups and unpaid balances that need attention.' },
   { view:'orders', selector:'.nav [data-nav="orders"]', title:'Every order, searchable', text:'Open any order to update its stage, record a payment, create a quote or prepare a follow-up.' },
@@ -301,6 +407,31 @@ document.addEventListener('click', async e => {
       case 'tour-next': if (tourStep === tourSteps.length - 1) { endTour(); showPurchase(); } else showTour(tourStep + 1); break;
       case 'tour-close': endTour(); break;
       case 'purchase': showPurchase(); break;
+      case 'login': showLogin(); break;
+      case 'account': showAccount(); break;
+      case 'logout':
+        removeLicense();
+        isLicensed = false;
+        demoMode = true;
+        mode = 'sample';
+        closeAll();
+        await setMode('sample');
+        notify('Logged out. Switched to sample demo.');
+        break;
+      case 'copy-cred-key':
+        await copy($('#desk-cred-key').textContent);
+        $('#desk-cred-copy-btn').textContent = 'Copied!';
+        setTimeout(() => { const btn = $('#desk-cred-copy-btn'); if (btn) btn.textContent = 'Copy'; }, 2500);
+        break;
+      case 'copy-acc-key':
+        await copy($('#desk-acc-key').textContent);
+        $('#desk-acc-copy-btn').textContent = 'Copied!';
+        setTimeout(() => { const btn = $('#desk-acc-copy-btn'); if (btn) btn.textContent = 'Copy'; }, 2500);
+        break;
+      case 'start-desk':
+        closeAll();
+        navigate('today');
+        break;
       case 'data-options': showDataOptions(); break;
       case 'sheet-export': download(Desk.csv(state), `atomz-orders-${dateKey()}.csv`, 'text/csv;charset=utf-8'); window.open('https://sheets.new','_blank','noopener'); notify('CSV downloaded. Import it into the new Google Sheet.'); break;
       case 'share-data': await shareData(); break;
@@ -349,5 +480,38 @@ $('#shop-name').addEventListener('change', async event => {
   if (demoMode || !name || name === state.business.name) { event.currentTarget.value = state.business.name; return; }
   await commit({ ...state, business: { ...state.business, name } }, 'Business name saved.');
 });
+
+$('#purchase-form')?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = $('#desk-purchase-email').value.trim();
+  if (!email) return;
+  const key = generateKey(email);
+  saveLicense(email, key);
+  isLicensed = true;
+  demoMode = false;
+  mode = 'own';
+  await setMode('own');
+  showCredentials(email, key);
+});
+
+$('#login-form')?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = $('#desk-login-email').value.trim();
+  const key = $('#desk-login-key').value.trim();
+  const res = validateLicense(email, key);
+  if (!res.valid) {
+    $('#desk-login-error').textContent = res.error;
+    return;
+  }
+  saveLicense(res.email, res.key);
+  isLicensed = true;
+  demoMode = false;
+  mode = 'own';
+  closeAll();
+  await setMode('own');
+  notify('Logged in successfully! Pro features unlocked.');
+});
+
 async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
 start();
+

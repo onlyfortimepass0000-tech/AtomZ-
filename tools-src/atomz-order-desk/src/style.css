@@ -673,3 +673,15 @@ dialog form { margin: 0; }
 .sheet-backup h3 { margin: 0 0 4px; font-size: .95rem; }
 .sheet-backup p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.4; }
 @media (max-width: 520px) { .sheet-backup { align-items: flex-start; flex-direction: column; } .sheet-backup .button { width: 100%; } }
+
+/* License & Credentials styling */
+.credentials-box { background: var(--soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin: 12px 0; }
+.credentials-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
+.credentials-key-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
+.credentials-code { font-family: monospace; font-weight: 700; font-size: 0.95rem; color: var(--orange-deep); background: #ffffff; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); flex: 1; user-select: all; word-break: break-all; }
+.instructions-card { background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin: 12px 0; font-size: 0.8rem; line-height: 1.5; color: var(--ink); }
+.instructions-card ul { margin: 6px 0 0; padding-left: 18px; }
+.instructions-card li { margin-bottom: 4px; }
+.pro-pill { background: rgba(26,107,74,0.12); color: var(--green); border: 1px solid rgba(26,107,74,0.3); font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; }
+.auth-top { margin-right: 6px; }
+

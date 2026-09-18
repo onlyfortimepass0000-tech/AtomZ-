@@ -165,32 +165,46 @@
                 <h3 class="text-2xl sm:text-4xl font-extrabold text-white font-display tracking-tight">
                   ATOMZ Order Desk
                 </h3>
-                <span class="text-xs font-mono text-emerald-400 font-semibold">Lifetime Standalone Access</span>
+                <div id="orderdesk-status-badge">
+                  <span class="text-xs font-mono text-emerald-400 font-semibold">Lifetime Standalone Access</span>
+                </div>
               </div>
 
               <p class="text-base sm:text-xl text-gray-200 font-medium leading-snug">
                 Track enquiries, orders, deposits, pending balances, delivery dates and follow-ups in one simple place.
               </p>
 
-              <!-- Immediate Action Buttons (Try it & Buy it) -->
-              <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center sm:gap-4 pt-1 max-w-md">
-                <a
-                  href="tools/order-desk/index.html"
-                  class="py-3 px-5 rounded-xl bg-surface-container-high hover:bg-[#2A2A34] text-white font-headline font-bold text-sm border border-outline-variant hover:border-[#FF5722] flex items-center justify-center gap-2 transition-all shadow-sm"
-                >
-                  <span class="material-symbols-outlined text-lg">play_arrow</span>
-                  <span>Try it</span>
-                </a>
+              <!-- Dynamic Action Buttons & Login Link -->
+              <div id="orderdesk-actions-container" class="space-y-2 pt-1 max-w-lg">
+                <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center sm:gap-4" id="orderdesk-button-group">
+                  <a
+                    href="tools/order-desk/index.html"
+                    class="py-3 px-5 rounded-xl bg-surface-container-high hover:bg-[#2A2A34] text-white font-headline font-bold text-sm border border-outline-variant hover:border-[#FF5722] flex items-center justify-center gap-2 transition-all shadow-sm"
+                  >
+                    <span class="material-symbols-outlined text-lg">play_arrow</span>
+                    <span>Try it</span>
+                  </a>
 
-                <a
-                  href="https://wa.me/919099939034?text=Hi%20ATOMZ%2C%20I%27d%20like%20to%20buy%20ATOMZ%20Order%20Desk%20(%E2%82%B9299)%20for%20my%20business."
-                  target="_blank"
-                  rel="noopener"
-                  class="py-3 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-headline font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
-                >
-                  <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                  <span>Buy it</span>
-                </a>
+                  <button
+                    type="button"
+                    onclick="OrderDeskAuth.openPurchaseModal()"
+                    class="py-3 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-headline font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+                  >
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    <span>Buy it</span>
+                  </button>
+                </div>
+
+                <div id="orderdesk-login-link-container" class="pt-1">
+                  <button
+                    type="button"
+                    onclick="OrderDeskAuth.openLoginModal()"
+                    class="text-xs text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 font-medium underline underline-offset-4 decoration-gray-600 hover:decoration-[#FF5722]"
+                  >
+                    <span class="material-symbols-outlined text-sm text-[#FF5722]">key</span>
+                    <span>Already purchased? Log in with Access Key</span>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -396,21 +410,499 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer border-t border-[#24242A] py-8">
-    <div class="wrap text-center text-xs text-gray-500 space-y-2">
-      <p>© 2026 ATOMZ · atomz.online · All tools processed locally in browser.</p>
-      <div class="flex items-center justify-center gap-4">
-        <a href="index.html" class="hover:text-gray-300">Home</a>
-        <span>·</span>
-        <a href="tools.html" class="hover:text-gray-300">Tools</a>
-        <span>·</span>
-        <a href="index.html#writing" class="hover:text-gray-300">Writing</a>
-        <span>·</span>
-        <a href="https://wa.me/919099939034" target="_blank" rel="noopener" class="hover:text-gray-300">WhatsApp</a>
+  <!-- =======================================================
+       ORDER DESK AUTHENTICATION & CREDENTIALS MODALS
+       ======================================================= -->
+
+  <!-- 1. Purchase / Checkout Modal -->
+  <dialog id="orderdesk-purchase-dialog" class="backdrop:bg-black/75 rounded-2xl bg-[#151518] text-white border border-[#24242A] p-6 sm:p-8 max-w-lg w-[92%] shadow-2xl">
+    <div class="flex items-center justify-between border-b border-[#24242A] pb-4 mb-5">
+      <div class="flex items-center gap-2.5">
+        <span class="w-3 h-3 rounded-full bg-[#FF5722]"></span>
+        <h3 class="text-xl font-bold font-display text-white">Get Order Desk</h3>
+      </div>
+      <button type="button" onclick="OrderDeskAuth.closeModal('orderdesk-purchase-dialog')" class="text-gray-400 hover:text-white text-xl p-1 leading-none">&times;</button>
+    </div>
+
+    <div class="space-y-4 text-sm">
+      <div class="bg-[#1C1C22] p-4 rounded-xl border border-[#2B2B33] flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gray-400 font-mono block">ONE-TIME PAYMENT</span>
+          <span class="text-2xl font-extrabold text-white font-display">₹299</span>
+        </div>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">Lifetime Pro</span>
+      </div>
+
+      <form id="orderdesk-purchase-form" onsubmit="OrderDeskAuth.handlePurchaseSubmit(event)" class="space-y-4">
+        <div>
+          <label for="purchase-email" class="block text-xs font-mono uppercase text-gray-300 mb-1.5">Your Email Address <span class="text-[#FF5722]">*</span></label>
+          <input
+            type="email"
+            id="purchase-email"
+            required
+            placeholder="e.g. baker@gmail.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-[#0E0E10] border border-[#2B2B33] text-white text-sm focus:outline-none focus:border-[#FF5722]"
+          />
+          <span class="text-[11px] text-gray-400 mt-1 block">Your access key will be generated and tied to this email.</span>
+        </div>
+
+        <div class="space-y-2 pt-2">
+          <a
+            id="purchase-razorpay-btn"
+            href="https://rzp.io/rzp/ZAw6z59"
+            target="_blank"
+            rel="noopener"
+            class="w-full py-3 px-4 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+          >
+            <span>1. Pay ₹299 via Razorpay</span>
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </a>
+
+          <button
+            type="submit"
+            class="w-full py-3 px-4 rounded-xl bg-[#1C1C22] hover:bg-[#25252D] text-emerald-400 border border-emerald-500/30 hover:border-emerald-500/60 font-bold text-sm flex items-center justify-center gap-2 transition-all"
+          >
+            <span class="material-symbols-outlined text-lg text-emerald-400">key</span>
+            <span>2. I've Paid · Unlock &amp; Get My Access Key</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="pt-3 border-t border-[#24242A] text-center">
+        <button
+          type="button"
+          onclick="OrderDeskAuth.openLoginModal()"
+          class="text-xs text-gray-400 hover:text-white underline underline-offset-4"
+        >
+          Already bought previously? Log in with your Access Key →
+        </button>
       </div>
     </div>
-  </footer>
+  </dialog>
+
+  <!-- 2. Credentials Pop-up Modal (Shown after payment/activation) -->
+  <dialog id="orderdesk-credentials-dialog" class="backdrop:bg-black/80 rounded-2xl bg-[#151518] text-white border border-[#24242A] p-6 sm:p-8 max-w-lg w-[92%] shadow-2xl">
+    <div class="text-center space-y-2 mb-5">
+      <div class="w-12 h-12 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
+        <span class="material-symbols-outlined text-2xl">verified</span>
+      </div>
+      <h3 class="text-2xl font-extrabold font-display text-white">Lifetime Access Unlocked!</h3>
+      <p class="text-xs text-gray-300">Your ATOMZ Order Desk credentials are ready. Please save them.</p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Credentials Box -->
+      <div class="bg-[#0E0E10] p-4 rounded-xl border border-[#2B2B33] space-y-3">
+        <div>
+          <span class="text-[11px] font-mono text-gray-400 uppercase tracking-wider block">Registered Email</span>
+          <span id="credentials-email-display" class="text-sm font-semibold text-white font-mono">user@example.com</span>
+        </div>
+        <div>
+          <span class="text-[11px] font-mono text-gray-400 uppercase tracking-wider block">Your Access Key</span>
+          <div class="flex items-center justify-between gap-2 mt-1">
+            <code id="credentials-key-display" class="text-base font-bold text-[#FF5722] font-mono select-all bg-[#1A1A20] px-3 py-1.5 rounded-lg border border-[#2B2B33] flex-1">ATOMZ-OD-XXXX-XXXX</code>
+            <button
+              type="button"
+              id="credentials-copy-btn"
+              onclick="OrderDeskAuth.copyKey()"
+              class="px-3 py-2 rounded-lg bg-[#24242A] hover:bg-[#303038] text-xs font-mono font-medium text-gray-200 flex items-center gap-1.5 transition-all shrink-0"
+            >
+              <span class="material-symbols-outlined text-sm">content_copy</span>
+              <span id="credentials-copy-label">Copy</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions: What happens next -->
+      <div class="bg-[#18181E] p-4 rounded-xl border border-[#24242A] space-y-2 text-xs text-gray-300">
+        <div class="font-bold text-white flex items-center gap-1.5">
+          <span class="text-emerald-400">✓</span>
+          <span>What happens now?</span>
+        </div>
+        <ul class="space-y-1.5 text-[11.5px] leading-relaxed text-gray-300 pl-4 list-disc">
+          <li><strong>Lifetime Access is active</strong> on this browser immediately.</li>
+          <li><strong>Save your Access Key:</strong> You can use your Email and this Key to log into Order Desk on your phone, tablet, or laptop anytime without paying again.</li>
+          <li><strong>Local-First &amp; Private:</strong> Your orders and records stay stored safely in your own browser storage.</li>
+        </ul>
+      </div>
+
+      <div class="pt-2">
+        <a
+          href="tools/order-desk/index.html"
+          class="w-full py-3.5 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+        >
+          <span>Launch Order Desk Now</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 3. Login Modal (Email + Access Key) -->
+  <dialog id="orderdesk-login-dialog" class="backdrop:bg-black/75 rounded-2xl bg-[#151518] text-white border border-[#24242A] p-6 sm:p-8 max-w-md w-[92%] shadow-2xl">
+    <div class="flex items-center justify-between border-b border-[#24242A] pb-4 mb-5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#FF5722] text-xl">key</span>
+        <h3 class="text-xl font-bold font-display text-white">Log In to Order Desk</h3>
+      </div>
+      <button type="button" onclick="OrderDeskAuth.closeModal('orderdesk-login-dialog')" class="text-gray-400 hover:text-white text-xl p-1 leading-none">&times;</button>
+    </div>
+
+    <form id="orderdesk-login-form" onsubmit="OrderDeskAuth.handleLoginSubmit(event)" class="space-y-4 text-sm">
+      <p class="text-xs text-gray-300">
+        Enter the Email Address and Access Key you received after purchase to unlock full access.
+      </p>
+
+      <div>
+        <label for="login-email" class="block text-xs font-mono uppercase text-gray-300 mb-1.5">Registered Email</label>
+        <input
+          type="email"
+          id="login-email"
+          required
+          placeholder="e.g. baker@gmail.com"
+          class="w-full px-3.5 py-2.5 rounded-xl bg-[#0E0E10] border border-[#2B2B33] text-white text-sm focus:outline-none focus:border-[#FF5722]"
+        />
+      </div>
+
+      <div>
+        <label for="login-key" class="block text-xs font-mono uppercase text-gray-300 mb-1.5">Access Key / Pass Key</label>
+        <input
+          type="text"
+          id="login-key"
+          required
+          placeholder="ATOMZ-OD-XXXX-XXXX"
+          class="w-full px-3.5 py-2.5 rounded-xl bg-[#0E0E10] border border-[#2B2B33] text-white text-sm font-mono focus:outline-none focus:border-[#FF5722]"
+        />
+      </div>
+
+      <div id="login-error-msg" class="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 p-2.5 rounded-lg hidden"></div>
+
+      <div class="pt-2 space-y-2">
+        <button
+          type="submit"
+          class="w-full py-3 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+        >
+          <span>Unlock Lifetime Access</span>
+          <span class="material-symbols-outlined text-sm">lock_open</span>
+        </button>
+
+        <button
+          type="button"
+          onclick="OrderDeskAuth.openPurchaseModal()"
+          class="w-full py-2.5 px-4 text-xs text-gray-400 hover:text-white text-center"
+        >
+          Don't have an Access Key? Buy it for ₹299 →
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 4. License / Account Info Modal -->
+  <dialog id="orderdesk-account-dialog" class="backdrop:bg-black/75 rounded-2xl bg-[#151518] text-white border border-[#24242A] p-6 sm:p-8 max-w-md w-[92%] shadow-2xl">
+    <div class="flex items-center justify-between border-b border-[#24242A] pb-4 mb-5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
+        <h3 class="text-xl font-bold font-display text-white">License Details</h3>
+      </div>
+      <button type="button" onclick="OrderDeskAuth.closeModal('orderdesk-account-dialog')" class="text-gray-400 hover:text-white text-xl p-1 leading-none">&times;</button>
+    </div>
+
+    <div class="space-y-4 text-sm">
+      <div class="bg-[#0E0E10] p-4 rounded-xl border border-[#2B2B33] space-y-3">
+        <div>
+          <span class="text-[11px] font-mono text-gray-400 uppercase tracking-wider block">Licensed Email</span>
+          <span id="account-email-display" class="text-sm font-semibold text-white font-mono">user@example.com</span>
+        </div>
+        <div>
+          <span class="text-[11px] font-mono text-gray-400 uppercase tracking-wider block">Your Access Key</span>
+          <div class="flex items-center justify-between gap-2 mt-1">
+            <code id="account-key-display" class="text-xs sm:text-sm font-bold text-[#FF5722] font-mono select-all bg-[#1A1A20] px-2.5 py-1.5 rounded border border-[#2B2B33] flex-1">ATOMZ-OD-XXXX-XXXX</code>
+            <button
+              type="button"
+              onclick="OrderDeskAuth.copyAccountKey()"
+              class="px-2.5 py-1.5 rounded bg-[#24242A] hover:bg-[#303038] text-xs font-mono text-gray-200 flex items-center gap-1 shrink-0"
+            >
+              <span class="material-symbols-outlined text-xs">content_copy</span>
+              <span id="account-copy-label">Copy</span>
+            </button>
+          </div>
+        </div>
+        <div class="pt-1 flex items-center justify-between text-xs font-mono text-gray-400 border-t border-[#1F1F24]">
+          <span>Status</span>
+          <span class="text-emerald-400 font-bold">● Lifetime Active</span>
+        </div>
+      </div>
+
+      <div class="pt-2 space-y-2">
+        <a
+          href="tools/order-desk/index.html"
+          class="w-full py-3 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+        >
+          <span class="material-symbols-outlined text-lg">play_arrow</span>
+          <span>Launch Order Desk</span>
+        </a>
+
+        <button
+          type="button"
+          onclick="OrderDeskAuth.logout()"
+          class="w-full py-2.5 px-4 text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl transition-all font-mono"
+        >
+          Log Out / Switch Access Key
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- AUTHENTICATION & UI SYNC JAVASCRIPT -->
+  <script>
+    const OrderDeskAuth = {
+      generateKey(email) {
+        const clean = String(email || '').trim().toLowerCase();
+        let hash = 0x811c9dc5;
+        for (let i = 0; i < clean.length; i++) {
+          hash ^= clean.charCodeAt(i);
+          hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+        }
+        const part1 = Math.abs(hash % 9000 + 1000).toString();
+        const part2 = Math.abs((hash ^ 0x5a5a5a5a) % 9000 + 1000).toString();
+        const sum = (Number(part1) * 3 + Number(part2) * 7) % 9000 + 1000;
+        return `ATOMZ-OD-${part1}-${part2}-${sum}`;
+      },
+
+      validate(email, key) {
+        if (!email || !key) return { valid: false, error: 'Please enter both Email and Access Key.' };
+        const cleanEmail = String(email).trim().toLowerCase();
+        const cleanKey = String(key).trim().toUpperCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+          return { valid: false, error: 'Please enter a valid email address.' };
+        }
+        if (!cleanKey.startsWith('ATOMZ-OD-') && !cleanKey.startsWith('ATOMZ-')) {
+          return { valid: false, error: 'Invalid key format. Key should start with ATOMZ-OD-' };
+        }
+        const expected = this.generateKey(cleanEmail);
+        if (cleanKey === expected) {
+          return { valid: true, email: cleanEmail, key: cleanKey };
+        }
+        return { valid: false, error: 'Access Key does not match this email address.' };
+      },
+
+      saveLicense(email, key) {
+        const data = {
+          email: String(email).trim().toLowerCase(),
+          key: String(key).trim().toUpperCase(),
+          valid: true,
+          activatedAt: new Date().toISOString(),
+          plan: 'lifetime_pro'
+        };
+        try {
+          localStorage.setItem('atomz_orderdesk_license', JSON.stringify(data));
+          localStorage.setItem('atomz-orderdesk-mode', 'own');
+        } catch {}
+        return data;
+      },
+
+      getLicense() {
+        try {
+          const raw = localStorage.getItem('atomz_orderdesk_license');
+          if (!raw) return null;
+          const data = JSON.parse(raw);
+          if (data && data.email && data.key) return data;
+        } catch {}
+        return null;
+      },
+
+      removeLicense() {
+        try {
+          localStorage.removeItem('atomz_orderdesk_license');
+          localStorage.setItem('atomz-orderdesk-mode', 'sample');
+        } catch {}
+      },
+
+      openModal(id) {
+        const dialog = document.getElementById(id);
+        if (dialog) dialog.showModal();
+      },
+
+      closeModal(id) {
+        const dialog = document.getElementById(id);
+        if (dialog) dialog.close();
+      },
+
+      openPurchaseModal() {
+        this.closeModal('orderdesk-login-dialog');
+        this.closeModal('orderdesk-account-dialog');
+        this.openModal('orderdesk-purchase-dialog');
+      },
+
+      openLoginModal() {
+        this.closeModal('orderdesk-purchase-dialog');
+        this.closeModal('orderdesk-account-dialog');
+        const err = document.getElementById('login-error-msg');
+        if (err) err.classList.add('hidden');
+        this.openModal('orderdesk-login-dialog');
+      },
+
+      openAccountModal() {
+        const license = this.getLicense();
+        if (!license) return;
+        document.getElementById('account-email-display').textContent = license.email;
+        document.getElementById('account-key-display').textContent = license.key;
+        this.openModal('orderdesk-account-dialog');
+      },
+
+      handlePurchaseSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('purchase-email').value.trim();
+        if (!email) return;
+        const key = this.generateKey(email);
+        this.saveLicense(email, key);
+        this.closeModal('orderdesk-purchase-dialog');
+        
+        // Show Credentials Pop-up
+        document.getElementById('credentials-email-display').textContent = email;
+        document.getElementById('credentials-key-display').textContent = key;
+        this.openModal('orderdesk-credentials-dialog');
+        this.syncUI();
+      },
+
+      handleLoginSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const key = document.getElementById('login-key').value.trim();
+        const result = this.validate(email, key);
+        const errEl = document.getElementById('login-error-msg');
+        
+        if (!result.valid) {
+          if (errEl) {
+            errEl.textContent = result.error;
+            errEl.classList.remove('hidden');
+          }
+          return;
+        }
+
+        this.saveLicense(result.email, result.key);
+        this.closeModal('orderdesk-login-dialog');
+        this.syncUI();
+      },
+
+      copyKey() {
+        const key = document.getElementById('credentials-key-display').textContent;
+        navigator.clipboard.writeText(key).then(() => {
+          const lbl = document.getElementById('credentials-copy-label');
+          if (lbl) {
+            lbl.textContent = 'Copied!';
+            setTimeout(() => { lbl.textContent = 'Copy'; }, 2500);
+          }
+        });
+      },
+
+      copyAccountKey() {
+        const key = document.getElementById('account-key-display').textContent;
+        navigator.clipboard.writeText(key).then(() => {
+          const lbl = document.getElementById('account-copy-label');
+          if (lbl) {
+            lbl.textContent = 'Copied!';
+            setTimeout(() => { lbl.textContent = 'Copy'; }, 2500);
+          }
+        });
+      },
+
+      logout() {
+        this.removeLicense();
+        this.closeModal('orderdesk-account-dialog');
+        this.syncUI();
+      },
+
+      syncUI() {
+        const license = this.getLicense();
+        const badgeEl = document.getElementById('orderdesk-status-badge');
+        const buttonGroup = document.getElementById('orderdesk-button-group');
+        const loginContainer = document.getElementById('orderdesk-login-link-container');
+
+        if (license) {
+          // Logged In / Pro Mode
+          if (badgeEl) {
+            badgeEl.innerHTML = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold"><span>✓ Lifetime License Active</span><span class="text-gray-400 font-normal">· ${license.email}</span></span>`;
+          }
+
+          if (buttonGroup) {
+            buttonGroup.innerHTML = `
+              <a
+                href="tools/order-desk/index.html"
+                class="py-3 px-6 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-headline font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all flex-1 sm:flex-initial"
+              >
+                <span class="material-symbols-outlined text-lg">play_arrow</span>
+                <span>Launch Order Desk</span>
+              </a>
+              <button
+                type="button"
+                onclick="OrderDeskAuth.openAccountModal()"
+                class="py-3 px-4 rounded-xl bg-[#1C1C22] hover:bg-[#25252D] text-gray-300 hover:text-white font-headline font-medium text-xs border border-[#2B2B33] flex items-center justify-center gap-1.5 transition-all"
+              >
+                <span class="material-symbols-outlined text-sm text-emerald-400">verified_user</span>
+                <span>License Info</span>
+              </button>
+            `;
+          }
+
+          if (loginContainer) {
+            loginContainer.innerHTML = `
+              <span class="text-[11px] font-mono text-gray-400 flex items-center gap-1">
+                <span class="text-emerald-400">●</span>
+                <span>Unlocked on this device · Zero subscription fees</span>
+              </span>
+            `;
+          }
+        } else {
+          // Visitor / Trial Mode
+          if (badgeEl) {
+            badgeEl.innerHTML = `<span class="text-xs font-mono text-emerald-400 font-semibold">Lifetime Standalone Access</span>`;
+          }
+
+          if (buttonGroup) {
+            buttonGroup.innerHTML = `
+              <a
+                href="tools/order-desk/index.html"
+                class="py-3 px-5 rounded-xl bg-surface-container-high hover:bg-[#2A2A34] text-white font-headline font-bold text-sm border border-outline-variant hover:border-[#FF5722] flex items-center justify-center gap-2 transition-all shadow-sm"
+              >
+                <span class="material-symbols-outlined text-lg">play_arrow</span>
+                <span>Try it</span>
+              </a>
+              <button
+                type="button"
+                onclick="OrderDeskAuth.openPurchaseModal()"
+                class="py-3 px-5 rounded-xl bg-[#FF5722] hover:bg-[#ff6937] text-white font-headline font-bold text-sm shadow-lg shadow-[#FF5722]/25 flex items-center justify-center gap-2 transition-all"
+              >
+                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                <span>Buy it</span>
+              </button>
+            `;
+          }
+
+          if (loginContainer) {
+            loginContainer.innerHTML = `
+              <button
+                type="button"
+                onclick="OrderDeskAuth.openLoginModal()"
+                class="text-xs text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 font-medium underline underline-offset-4 decoration-gray-600 hover:decoration-[#FF5722]"
+              >
+                <span class="material-symbols-outlined text-sm text-[#FF5722]">key</span>
+                <span>Already purchased? Log in with Access Key</span>
+              </button>
+            `;
+          }
+        }
+      }
+    };
+
+    // Initialize UI state on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      OrderDeskAuth.syncUI();
+    });
+    // In case DOM is already ready
+    OrderDeskAuth.syncUI();
+  </script>
 
 <script src="assets/js/atomz.js" defer></script>
 </body>

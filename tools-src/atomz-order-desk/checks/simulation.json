@@ -6,8 +6,8 @@
   "largeStore": {
     "orders": 10000,
     "recordBytes": 3195051,
-    "validateMs": 43,
-    "summaryAndSearchMs": 26
+    "validateMs": 77,
+    "summaryAndSearchMs": 31
   },
   "interactionCounts": {
     "newOrder": 6,
