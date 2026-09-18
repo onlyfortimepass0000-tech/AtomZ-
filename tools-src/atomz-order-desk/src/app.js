@@ -104,7 +104,7 @@ function navigate(next) { view = next; render(); window.scrollTo({ top: 0 }); }
 function goOrders(nextFilter, day = '') { filter = nextFilter; dayFilter = day; query = ''; page = 0; navigate('orders'); }
 function render() {
   if (!state) return;
-  $('#shop-name').textContent = state.business.name; $('#sample-pill').hidden = mode !== 'sample'; $('#demo-line').hidden = mode !== 'sample';
+  const shopName = $('#shop-name'); if (document.activeElement !== shopName) shopName.value = state.business.name; shopName.readOnly = demoMode; $('#sample-pill').hidden = mode !== 'sample'; $('#demo-line').hidden = mode !== 'sample';
   $$('.add-top,.mobile-add').forEach(button => { button.textContent = demoMode ? 'Unlock ₹299' : '+ New order'; button.dataset.action = demoMode ? 'purchase' : 'new'; });
   const s = Desk.summary(state), count = s.deliveries.length + s.followups.length;
   $('#today-count').textContent = count; $('#today-count').hidden = count === 0;
@@ -304,8 +304,6 @@ document.addEventListener('click', async e => {
       case 'data-options': showDataOptions(); break;
       case 'sheet-export': download(Desk.csv(state), `atomz-orders-${dateKey()}.csv`, 'text/csv;charset=utf-8'); window.open('https://sheets.new','_blank','noopener'); notify('CSV downloaded. Import it into the new Google Sheet.'); break;
       case 'share-data': await shareData(); break;
-      case 'copy-upi': await copy(b.dataset.upi); notify('UPI ID copied.'); break;
-      case 'payment-done': b.hidden = true; $('#access-request-form').hidden = false; $('#access-request-form input[name="email"]').focus(); break;
       case 'detail': openDetail(id); break;
       case 'edit': openOrder(id); break;
       case 'duplicate': openOrder(id, true); break;
@@ -346,13 +344,10 @@ document.addEventListener('click', async e => {
 $$('dialog').forEach(dialog => dialog.addEventListener('close', async () => { if (stale && !$('dialog[open]') && !busy) { await load(); render(); } }));
 document.addEventListener('keydown', e => { if (e.metaKey || e.ctrlKey || e.altKey || e.target.matches('input,textarea,select') || $('dialog[open]')) return; if (e.key.toLowerCase() === 'n') { e.preventDefault(); demoMode ? showGuide() : openOrder(); } if (e.key === '/') { e.preventDefault(); navigate('orders'); $('#search').focus(); } });
 $('.brand').addEventListener('click', e => { e.preventDefault(); navigate('today'); });
-async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
-$('#access-request-form').addEventListener('submit', event => {
-  event.preventDefault();
-  const form = new FormData(event.currentTarget), email = String(form.get('email')).trim(), keyName = String(form.get('keyName')).trim();
-  const reference = 'OD-' + crypto.randomUUID().replaceAll('-', '').slice(0, 10).toUpperCase();
-  localStorage.setItem('atomz-orderdesk-access-request', JSON.stringify({ reference, email, keyName, createdAt:new Date().toISOString() }));
-  $('#access-request-result').textContent = `Checking payment for ${keyName}. Giving you access shortly—please keep this page open.`;
-  event.currentTarget.querySelectorAll('input,button').forEach(element => element.disabled = true);
+$('#shop-name').addEventListener('change', async event => {
+  const name = event.currentTarget.value.trim();
+  if (demoMode || !name || name === state.business.name) { event.currentTarget.value = state.business.name; return; }
+  await commit({ ...state, business: { ...state.business, name } }, 'Business name saved.');
 });
+async function start() { try { db = await openDatabase(); } catch { db = null; } await load(); render(); }
 start();

@@ -15,12 +15,10 @@ const output = html
 // Write to local dist
 await fs.mkdir(path.join(__dirname, 'dist'), { recursive: true });
 await fs.writeFile(path.join(__dirname, 'dist', 'index.html'), output);
-await fs.copyFile(path.join(__dirname, 'src', 'GooglePay_QR.png'), path.join(__dirname, 'dist', 'GooglePay_QR.png'));
 
 // Write to website tools directory
 const targetDir = path.join(__dirname, '..', '..', 'tools', 'order-desk');
 await fs.mkdir(targetDir, { recursive: true });
 await fs.writeFile(path.join(targetDir, 'index.html'), output);
-await fs.copyFile(path.join(__dirname, 'src', 'GooglePay_QR.png'), path.join(targetDir, 'GooglePay_QR.png'));
 
 console.log(`Built standalone Order Desk: ${Buffer.byteLength(output).toLocaleString()} bytes.`);
