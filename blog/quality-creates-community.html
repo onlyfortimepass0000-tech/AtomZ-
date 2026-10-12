@@ -40,6 +40,17 @@
     [data-theme="dark"] .research-body th {
       background: rgba(255, 255, 255, 0.03);
     }
+    /* Phones: these tables are wider than the screen, so let each one scroll sideways on its own
+       instead of stretching the whole page. */
+    @media (max-width: 640px) {
+      .research-body table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.85rem;
+      }
+      .research-body th, .research-body td { padding: 10px 12px; }
+    }
   </style>
 </head>
 <body>

@@ -542,6 +542,7 @@ dialog form { margin: 0; }
   .brand-mark { width: 34px; height: 34px; border-radius: 9px; font-size: 1.55rem; }
   .brand small { font-size: .625rem; }
   .shop { font-size: .8125rem; gap: 6px; }
+  .shop input { font-size: 16px; padding: 10px 1px; } /* 16px prevents iOS focus-zoom; taller tap target */
   .sample-pill { font-size: .6875rem; padding: 4px 7px; }
   .add-top { display: none; }
 
@@ -561,10 +562,10 @@ dialog form { margin: 0; }
   .nav button[data-nav] {
     flex-direction: column; gap: 4px; padding: 6px 8px;
     border-bottom: none; border-radius: 10px;
-    min-width: 56px; min-height: 48px; font-size: .72rem;
+    min-width: 56px; min-height: 48px; font-size: .75rem;
   }
   .nav button[data-nav].active { color: var(--orange); border-bottom: none; background: rgba(232,89,12,0.07); }
-  .nav button[data-nav] .count { position: absolute; top: 2px; right: 4px; height: 15px; min-width: 15px; font-size: .6rem; border-radius: 5px; }
+  .nav button[data-nav] .count { position: absolute; top: 2px; right: 4px; height: 16px; min-width: 16px; font-size: .6875rem; border-radius: 5px; }
   .nav-icon svg { width: 22px; height: 22px; }
 
   .mobile-add { display: flex; position: fixed; z-index: 40; right: 18px; bottom: calc(80px + env(safe-area-inset-bottom)); border-radius: 14px; min-height: 48px; box-shadow: 0 6px 20px rgba(232,89,12,0.45); padding: 12px 18px; }
