@@ -108,31 +108,38 @@ server.listen(PORT, async () => {
     const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await mobilePage.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle' });
 
-    // Check 3: Mobile top bar compact button
-    const mobileTopBarZen = await mobilePage.$('.nav__right .nav__zen-mobile-btn');
-    const isVisibleMobile = mobileTopBarZen ? await mobileTopBarZen.isVisible() : false;
-    const mobileTopBarText = mobileTopBarZen ? (await mobileTopBarZen.innerText()).trim() : '';
-    console.log(`Check 3 - Mobile Top Bar Button visible: ${isVisibleMobile}, Text: "${mobileTopBarText}"`);
-    if (isVisibleMobile && mobileTopBarText.includes('ATOM ZEN')) {
-      results.push('Check 3 PASSED: Mobile top bar has visible, compact ATOM ZEN button.');
+    // Check 3: Mobile top bar clean spacing (no logo overlap) & hamburger menu entry
+    const mobileLogo = await mobilePage.$('.site-header .brand');
+    const mobileMenuBtn = await mobilePage.$('.mobile-menu-btn');
+    const isLogoVisible = mobileLogo ? await mobileLogo.isVisible() : false;
+    const isMenuVisible = mobileMenuBtn ? await mobileMenuBtn.isVisible() : false;
+    
+    // Check bounding boxes to guarantee zero collision / overlap
+    const logoBox = mobileLogo ? await mobileLogo.boundingBox() : null;
+    const menuBox = mobileMenuBtn ? await mobileMenuBtn.boundingBox() : null;
+    const noOverlap = logoBox && menuBox && (logoBox.x + logoBox.width < menuBox.x);
+
+    console.log(`Check 3 - Mobile Logo visible: ${isLogoVisible}, Menu visible: ${isMenuVisible}, Zero overlap: ${noOverlap}`);
+    if (isLogoVisible && isMenuVisible && noOverlap) {
+      results.push('Check 3 PASSED: Mobile top bar has clean spacing with zero logo overlap.');
     } else {
-      errors.push('Check 3 FAILED: Mobile top bar ATOM ZEN button not visible or missing.');
+      errors.push('Check 3 FAILED: Mobile top bar elements overlap or not visible.');
     }
 
     // Capture mobile top bar screenshot
     await mobilePage.screenshot({ path: path.join(screenshotsDir, 'atom-zen-home-mobile.png') });
     await mobilePage.screenshot({ path: path.join(artifactDir, 'atom-zen-home-mobile.png') });
 
-    // Test mobile hamburger menu
-    const menuBtn = await mobilePage.$('.mobile-menu-btn');
-    if (menuBtn) {
-      await menuBtn.click();
+    // Test mobile hamburger menu (three bars on the right)
+    if (mobileMenuBtn) {
+      await mobileMenuBtn.click();
       await mobilePage.waitForTimeout(400); // allow transition
       const mobileDropdownZen = await mobilePage.$('#mobileNavDropdown a[href*="atom-zen"]');
       const isDropdownZenVisible = mobileDropdownZen ? await mobileDropdownZen.isVisible() : false;
-      console.log(`Check 3b - Mobile Dropdown ATOM ZEN visible: ${isDropdownZenVisible}`);
-      if (isDropdownZenVisible) {
-        results.push('Check 3b PASSED: Mobile navigation dropdown contains ATOM ZEN item.');
+      const dropdownZenText = mobileDropdownZen ? (await mobileDropdownZen.innerText()).trim().replace(/\s+/g, ' ') : '';
+      console.log(`Check 3b - Mobile Dropdown ATOM ZEN visible: ${isDropdownZenVisible}, Text: "${dropdownZenText}"`);
+      if (isDropdownZenVisible && dropdownZenText.includes('ATOM ZEN')) {
+        results.push('Check 3b PASSED: Inside three-bars menu, ATOM ZEN entry is prominently displayed.');
       } else {
         errors.push('Check 3b FAILED: Mobile navigation dropdown missing ATOM ZEN item.');
       }
