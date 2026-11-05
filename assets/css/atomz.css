@@ -636,7 +636,7 @@ html {
 }
 
 .site-header[data-mobile-menu-open="true"] .mobile-nav-dropdown {
-  max-height: 500px;
+  max-height: 650px;
   opacity: 1;
   pointer-events: auto;
   padding: 8px 14px 16px;
@@ -2995,6 +2995,133 @@ a[href*="horizon-preview.html"]:hover,
   .research-table th,
   .research-table td { padding: 12px 14px; }
   .research-table-wrapper { -webkit-overflow-scrolling: touch; }
+}
+
+/* --------------------------------------------------------------------------
+   19. ATOM ZEN INTEGRATION STYLES
+   -------------------------------------------------------------------------- */
+
+.nav__zen-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(255, 113, 59, 0.09);
+  border: 1px solid rgba(255, 113, 59, 0.45);
+  padding: 4px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.nav__zen-link:hover {
+  background: rgba(255, 113, 59, 0.18);
+  border-color: #ff713b;
+  box-shadow: 0 0 18px rgba(255, 113, 59, 0.45);
+  transform: translateY(-1px);
+}
+.nav__zen-link-title {
+  font-family: 'Space Grotesk', 'Sora', var(--font-display), sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav__zen-link-desc {
+  font-family: var(--font-mono, monospace);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #ff713b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.nav__zen-mobile-btn {
+  display: none;
+}
+@media (max-width: 819px) {
+  .nav__zen-mobile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    font-family: var(--font-display, sans-serif);
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background: rgba(255, 113, 59, 0.14);
+    border: 1px solid rgba(255, 113, 59, 0.55);
+    border-radius: 999px;
+    text-decoration: none;
+    line-height: 1;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .nav__zen-mobile-btn:hover,
+  .nav__zen-mobile-btn:active {
+    background: rgba(255, 113, 59, 0.28);
+    border-color: #ff713b;
+    box-shadow: 0 0 10px rgba(255, 113, 59, 0.5);
+  }
+  .nav__zen-mobile-btn .zen-dot-sm {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ff713b;
+    box-shadow: 0 0 5px #ff713b;
+    display: inline-block;
+  }
+}
+
+.btn--zen {
+  background: linear-gradient(135deg, rgba(255, 113, 59, 0.16) 0%, rgba(255, 113, 59, 0.06) 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #ff713b !important;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(255, 113, 59, 0.22);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+.btn--zen:hover {
+  background: linear-gradient(135deg, rgba(255, 113, 59, 0.32) 0%, rgba(255, 113, 59, 0.16) 100%) !important;
+  border-color: #ff8554 !important;
+  box-shadow: 0 0 28px rgba(255, 113, 59, 0.65), 0 8px 24px rgba(255, 60, 0, 0.35) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+.hero__zen-note {
+  width: 100%;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--muted, #a0a0a0);
+  margin-top: 8px;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero__zen-note .zen-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff713b;
+  box-shadow: 0 0 8px #ff713b;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.hero__zen-note strong {
+  color: #ff713b;
+  font-weight: 700;
 }
 
 /* Ensure no horizontal scrollbar or document overflow across any viewport */
