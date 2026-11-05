@@ -127,6 +127,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
   <link rel="stylesheet" href="assets/css/atomz.css" />
+  <link rel="stylesheet" href="assets/css/atom-zen-explainer.css" />
 </head>
 <body>
   <!-- Ambient slow-moving background animation & scroll-interactive kinetic motion element -->
@@ -343,6 +344,7 @@
             </div>
             <p class="hero__zen-note">
               <span class="zen-dot"></span> <strong>ATOM ZEN:</strong> Choose your services. Build your own combination.
+              <a href="#zen-explainer" class="zen-explainer-peek" style="margin-left: 10px; color: #ff713b; text-decoration: underline; font-size: 11px; font-weight: 600;">See how it works ↓</a>
             </p>
           </div>
         </div>
@@ -366,7 +368,458 @@
       </div>
     </section>
 
-    <!-- Organic Curved Section Divider 1: Hero into Services -->
+    <!-- ======================================================= ATOM ZEN ANIMATED EXPLAINER -->
+    <section class="section zen-explainer-section" id="zen-explainer" aria-labelledby="zen-explainer-title">
+      <div class="wrap">
+        
+        <!-- Section Header -->
+        <div class="zen-exp__head" data-reveal>
+          <div class="zen-exp__eyebrow">
+            <span class="dot"></span> HOW IT WORKS · ATOM ZEN
+          </div>
+          <h2 id="zen-explainer-title" class="zen-exp__title">
+            TIRED OF CONFUSING PACKAGES? <br />
+            <span class="highlight">BUILD WHAT YOU ACTUALLY NEED.</span>
+          </h2>
+          <p class="zen-exp__subtitle">
+            Choosing services from a growth agency can feel confusing: rigid tiers, unclear inclusions, scattered prices, and uncertainty about what will actually move the needle. ATOM ZEN lets you choose your starting point, add specific services, set quantities, and balance priorities with total transparency.
+          </p>
+        </div>
+
+        <!-- Interactive Explainer Stage Frame -->
+        <div class="zen-exp__frame" data-reveal>
+          
+          <!-- Frame Topbar: Brand, Stepper Tabs, and Playback Controls -->
+          <div class="zen-exp__toolbar">
+            <div class="zen-exp__brand-mark">
+              <span class="brand-dot"></span>
+              <span>ATOM ZEN</span>
+              <small>VISUAL STORY</small>
+            </div>
+
+            <!-- Scene Stepper Tabs (Clickable to scrub between scenes) -->
+            <nav class="zen-exp__tabs" aria-label="Explainer scenes">
+              <button class="zen-exp__tab is-active" type="button" aria-selected="true">01. The Problem</button>
+              <button class="zen-exp__tab" type="button" aria-selected="false">02. Meet ATOM ZEN</button>
+              <button class="zen-exp__tab" type="button" aria-selected="false">03. Assemble</button>
+              <button class="zen-exp__tab" type="button" aria-selected="false">04. Balance</button>
+              <button class="zen-exp__tab" type="button" aria-selected="false">05. Your Build</button>
+            </nav>
+
+            <!-- Actions -->
+            <div class="zen-exp__actions">
+              <button class="zen-exp__ctrl-btn" id="zenPlayBtn" type="button" aria-label="Pause visual explainer">
+                <span aria-hidden="true">⏸</span> Pause
+              </button>
+              <button class="zen-exp__ctrl-btn" id="zenReplayBtn" type="button" aria-label="Replay visual explainer">
+                <span aria-hidden="true">↺</span> Replay
+              </button>
+              <a class="zen-exp__cta-link" href="atom-zen/">
+                <span>Open ATOM ZEN</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Main Stage Viewport -->
+          <div class="zen-exp__stage" role="region" aria-label="ATOM ZEN interactive presentation">
+
+            <!-- ================= SCENE 1: Where do you even start? (The Problem) ================= -->
+            <div class="zen-exp__scene is-active" id="scene1" aria-hidden="false">
+              <div class="zen-exp__banner">
+                <span class="zen-exp__banner-badge">SCENE 01 · THE PROBLEM</span>
+                <h3 class="zen-exp__banner-title">“Where do you even start?”</h3>
+                <p class="zen-exp__banner-desc">Too many packages. Still unsure what you actually need.</p>
+              </div>
+
+              <div class="s1-wrap">
+                <!-- Connective Lines SVG -->
+                <svg class="s1-lines-svg" viewBox="0 0 760 380" fill="none">
+                  <path class="s1-tangle-line" d="M220 80 Q 300 140 380 190" />
+                  <path class="s1-tangle-line" d="M380 190 Q 450 110 540 80" />
+                  <path class="s1-tangle-line" d="M380 190 Q 520 220 580 160" />
+                  <path class="s1-tangle-line" d="M380 190 Q 460 280 520 310" />
+                  <path class="s1-tangle-line" d="M380 190 Q 280 280 200 310" />
+                  <path class="s1-tangle-line" d="M380 190 Q 240 220 180 160" />
+                </svg>
+
+                <!-- Central Customer Marker -->
+                <div class="s1-center-marker">
+                  <div class="s1-beacon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+                  </div>
+                  <span class="s1-beacon-label">YOU</span>
+                </div>
+
+                <!-- Animated Cursor -->
+                <div class="s1-cursor" id="s1Cursor">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff" stroke="#ff713b" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+                </div>
+
+                <!-- 6 Surrounding Agency Service Cards -->
+                <div class="s1-service-card s1-card--reels">
+                  <div class="s1-service-icon">▷</div>
+                  <div class="s1-service-info"><strong>Reels</strong><span>Short-form video</span></div>
+                </div>
+                <div class="s1-service-card s1-card--website">
+                  <div class="s1-service-icon">⌘</div>
+                  <div class="s1-service-info"><strong>Website</strong><span>Brand storefront</span></div>
+                </div>
+                <div class="s1-service-card s1-card--ads">
+                  <div class="s1-service-icon">↗</div>
+                  <div class="s1-service-info"><strong>Advertising</strong><span>Paid Meta &amp; Google</span></div>
+                </div>
+                <div class="s1-service-card s1-card--strategy">
+                  <div class="s1-service-icon">☵</div>
+                  <div class="s1-service-info"><strong>Strategy</strong><span>Content roadmap</span></div>
+                </div>
+                <div class="s1-service-card s1-card--photo">
+                  <div class="s1-service-icon">◎</div>
+                  <div class="s1-service-info"><strong>Photography</strong><span>Product catalogue</span></div>
+                </div>
+                <div class="s1-service-card s1-card--analytics">
+                  <div class="s1-service-icon">☲</div>
+                  <div class="s1-service-info"><strong>Analytics</strong><span>Audience metrics</span></div>
+                </div>
+
+                <!-- Overlapping Confusing Package Cards -->
+                <div class="s1-pkg-card s1-pkg--starter">
+                  <h4>Starter Tier</h4>
+                  <div class="price">₹15,000 / mo</div>
+                  <ul>
+                    <li>4 generic reels</li>
+                    <li>Basic feed posting</li>
+                    <li>Monthly review call</li>
+                  </ul>
+                </div>
+
+                <div class="s1-pkg-card s1-pkg--growth">
+                  <h4>Growth Bundle</h4>
+                  <div class="price">₹45,000 / mo</div>
+                  <ul>
+                    <li>12 reels + captions</li>
+                    <li>Strategy document</li>
+                    <li>Ad account setup</li>
+                  </ul>
+                </div>
+
+                <div class="s1-pkg-card s1-pkg--premium">
+                  <h4>Enterprise VIP</h4>
+                  <div class="price">₹95,000 / mo</div>
+                  <ul>
+                    <li>All-in retainer</li>
+                    <li>Full website revamp</li>
+                    <li>24/7 Slack channel</li>
+                  </ul>
+                </div>
+
+                <!-- Floating Question Chips -->
+                <div class="s1-question-chip s1-q--1">“Is this included?”</div>
+                <div class="s1-question-chip s1-q--2">“Do I need all of this?”</div>
+                <div class="s1-question-chip s1-q--3">“What will it cost?”</div>
+              </div>
+            </div>
+
+            <!-- ================= SCENE 2: Start with what you need (Meet ATOM ZEN) ================= -->
+            <div class="zen-exp__scene" id="scene2" aria-hidden="true">
+              <div class="zen-exp__banner">
+                <span class="zen-exp__banner-badge">SCENE 02 · CLARITY</span>
+                <h3 class="zen-exp__banner-title">“Start with what you need.”</h3>
+                <p class="zen-exp__banner-desc">Meet ATOM ZEN. Build a package around you, not around agency bundles.</p>
+              </div>
+
+              <div class="s2-wrap">
+                <!-- Core 1: Content Creation -->
+                <div class="s2-core-card s2-core--content">
+                  <span class="s2-core-pill">CORE 01 · CONTENT</span>
+                  <div class="s2-core-visual">
+                    <div class="s2-core-orb">▷</div>
+                  </div>
+                  <h4 class="s2-core-title">Content Creation</h4>
+                  <p class="s2-core-desc">Make something worth watching. Reels, videos, photography and scripts.</p>
+                  <div class="s2-core-footer">
+                    <span>From ₹3,000</span>
+                    <span class="s2-core-btn">Select Core →</span>
+                  </div>
+                </div>
+
+                <!-- Core 2: Marketing & Growth -->
+                <div class="s2-core-card s2-core--marketing">
+                  <span class="s2-core-pill">CORE 02 · DIRECTION</span>
+                  <div class="s2-core-visual">
+                    <div class="s2-core-orb">↗</div>
+                  </div>
+                  <h4 class="s2-core-title">Marketing &amp; Growth</h4>
+                  <p class="s2-core-desc">Give your ideas direction. Campaigns, paid ads, audience research and strategy.</p>
+                  <div class="s2-core-footer">
+                    <span>From ₹2,000</span>
+                    <span class="s2-core-btn">Select Core →</span>
+                  </div>
+                </div>
+
+                <!-- Core 3: Digital Assets -->
+                <div class="s2-core-card s2-core--digital">
+                  <span class="s2-core-pill">CORE 03 · SYSTEMS</span>
+                  <div class="s2-core-visual">
+                    <div class="s2-core-orb">⌘</div>
+                  </div>
+                  <h4 class="s2-core-title">Digital Assets</h4>
+                  <p class="s2-core-desc">Build useful digital tools. Modern websites, landing pages and interactive assets.</p>
+                  <div class="s2-core-footer">
+                    <span>From ₹6,000</span>
+                    <span class="s2-core-btn">Select Core →</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= SCENE 3: Show the Selection Flow (Assemble) ================= -->
+            <div class="zen-exp__scene" id="scene3" aria-hidden="true">
+              <div class="zen-exp__banner">
+                <span class="zen-exp__banner-badge">SCENE 03 · SELECTION FLOW</span>
+                <h3 class="zen-exp__banner-title" id="s3BannerTitle">1. Choose a starting point.</h3>
+                <p class="zen-exp__banner-desc">Add what you need, set your quantities, and combine services from any category.</p>
+              </div>
+
+              <div class="s3-wrap">
+                <!-- Left Catalogue Drawer -->
+                <div class="s3-catalogue">
+                  <div class="s3-cat-header">
+                    <span>Catalogue</span>
+                    <span>24 Services</span>
+                  </div>
+                  <div class="s3-cat-tabs">
+                    <span class="s3-cat-tab is-active">Content</span>
+                    <span class="s3-cat-tab">Marketing</span>
+                    <span class="s3-cat-tab">Digital</span>
+                  </div>
+                  <div class="s3-cat-list">
+                    <div class="s3-cat-item is-selected">
+                      <span>▷ Reels (Short-form)</span>
+                      <small>From ₹1,300</small>
+                    </div>
+                    <div class="s3-cat-item">
+                      <span>▷ Promotional Video</span>
+                      <small>From ₹2,000</small>
+                    </div>
+                    <div class="s3-cat-item">
+                      <span>◎ Product Shoot</span>
+                      <small>From ₹3,000</small>
+                    </div>
+                    <div class="s3-cat-item is-selected">
+                      <span>⌘ Landing Page</span>
+                      <small>From ₹8,000</small>
+                    </div>
+                    <div class="s3-cat-item">
+                      <span>↗ Meta Advertising</span>
+                      <small>From ₹4,000</small>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Central Assembly Stage with Orbit & Satellites -->
+                <div class="s3-stage-center">
+                  <!-- Orbit Track -->
+                  <div class="s3-orbit-track"></div>
+
+                  <!-- Central Main Core -->
+                  <div class="s3-main-core">
+                    <span class="core-icon">▷</span>
+                    <strong>Content Creation</strong>
+                    <span>Starting Core</span>
+                  </div>
+
+                  <!-- Satellite 1: Reels with ×3 badge -->
+                  <div class="s3-satellite s3-satellite--reels">
+                    <strong>Reels</strong>
+                    <span>3 Pieces</span>
+                    <div class="s3-qty-badge is-visible" id="s3ReelsBadge">×3</div>
+                  </div>
+
+                  <!-- Satellite 2: Landing Page (From Digital Assets) -->
+                  <div class="s3-satellite s3-satellite--landing" id="s3LandingSat">
+                    <strong>Landing Page</strong>
+                    <span>Digital Asset</span>
+                  </div>
+
+                  <!-- Floating Stepper Tooltip -->
+                  <div class="s3-stepper-tooltip">
+                    <span>Quantity:</span>
+                    <strong><span id="s3StepperValue">3</span> Reels</strong>
+                    <span style="color:#ff713b; font-weight:700;">+</span>
+                  </div>
+
+                  <!-- Cross-category reassurance tag -->
+                  <div class="s3-cross-tag">
+                    ✓ Cross-category unlocked: Content + Digital combined seamlessly
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= SCENE 4: Show the Three Trade-offs (Balance) ================= -->
+            <div class="zen-exp__scene" id="scene4" aria-hidden="true">
+              <div class="zen-exp__banner">
+                <span class="zen-exp__banner-badge">SCENE 04 · TRADE-OFFS</span>
+                <h3 class="zen-exp__banner-title">“Find your balance.”</h3>
+                <p class="zen-exp__banner-desc">Adjust delivery time, investment, and production detail to match your exact goals.</p>
+              </div>
+
+              <div class="s4-wrap">
+                <!-- Left Live Estimate Card -->
+                <div class="s4-build-preview">
+                  <div class="s4-estimate-card">
+                    <div class="s4-est-label">Illustrative Estimate</div>
+                    <div class="s4-est-price" id="s4EstPrice">₹11,000</div>
+                    <div class="s4-est-metrics">
+                      <div>Timeline: <strong id="s4EstDays">10 workdays</strong></div>
+                      <div>Detail: <strong id="s4EstDetail">Enhanced</strong></div>
+                    </div>
+                  </div>
+                  <p class="s4-disclaimer-note">
+                    Illustrative estimate based on selected services and priorities. Final scope, timeline and pricing confirmed by ATOMZ before kickoff.
+                  </p>
+                </div>
+
+                <!-- Right Trade-off Sliders Panel -->
+                <div class="s4-sliders-panel">
+                  <!-- Trade-off 1: Time -->
+                  <div class="s4-slider-row">
+                    <div class="s4-slider-top">
+                      <span class="s4-slider-title">Time <small>(Delivery speed)</small></span>
+                      <span class="s4-slider-val" id="s4TimeVal">10 days</span>
+                    </div>
+                    <div class="s4-bar-track">
+                      <div class="s4-bar-fill s4-bar-fill--time" id="s4TimeFill" style="width: 55%;"></div>
+                    </div>
+                    <span class="s4-tradeoff-caption">↳ More time lowers estimate; faster delivery shortens timeline.</span>
+                  </div>
+
+                  <!-- Trade-off 2: Money -->
+                  <div class="s4-slider-row">
+                    <div class="s4-slider-top">
+                      <span class="s4-slider-title">Money <small>(Spend &amp; Priority)</small></span>
+                      <span class="s4-slider-val" id="s4MoneyVal">Balanced</span>
+                    </div>
+                    <div class="s4-bar-track">
+                      <div class="s4-bar-fill s4-bar-fill--money" id="s4MoneyFill" style="width: 60%;"></div>
+                    </div>
+                    <span class="s4-tradeoff-caption">↳ Switch between standard delivery and priority rush allocations.</span>
+                  </div>
+
+                  <!-- Trade-off 3: Quality -->
+                  <div class="s4-slider-row">
+                    <div class="s4-slider-top">
+                      <span class="s4-slider-title">Quality <small>(Production detail)</small></span>
+                      <span class="s4-slider-val" id="s4QualityVal">Enhanced (q=2)</span>
+                    </div>
+                    <div class="s4-bar-track">
+                      <div class="s4-bar-fill s4-bar-fill--quality" id="s4QualityFill" style="width: 80%;"></div>
+                    </div>
+                    <span class="s4-tradeoff-caption">↳ Standard (q=1) · Enhanced (q=2) · Advanced (q=3).</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= SCENE 5: The Result (Your Build) ================= -->
+            <div class="zen-exp__scene" id="scene5" aria-hidden="true">
+              <div class="zen-exp__banner">
+                <span class="zen-exp__banner-badge">SCENE 05 · YOUR PACKAGE</span>
+                <h3 class="zen-exp__banner-title">“Your services. Your priorities. One clear package.”</h3>
+                <p class="zen-exp__banner-desc">No generic agency retainers. No unused deliverables. Just your tailored scope.</p>
+              </div>
+
+              <div class="s5-wrap">
+                <!-- Final Organized Package Card -->
+                <div class="s5-package-card">
+                  <div class="s5-card-header">
+                    <div>
+                      <span class="s5-badge">ATOM ZEN SPECIFICATION</span>
+                      <h4 style="margin: 6px 0 0; font-family:'Sora',sans-serif; font-size:18px; color:#fff;">Creator Launch Combination</h4>
+                    </div>
+                    <div class="s5-price-tag">₹11,000 <small style="font-size:12px; color:#888; font-weight:400;">(Est.)</small></div>
+                  </div>
+
+                  <div class="s5-items-grid">
+                    <div class="s5-item-row">
+                      <div class="s5-item-icon">▷</div>
+                      <div class="s5-item-text">
+                        <strong>3× Custom Reels</strong>
+                        <span>Hooks, scripting guidelines, editing &amp; audio</span>
+                      </div>
+                    </div>
+                    <div class="s5-item-row">
+                      <div class="s5-item-icon">⌘</div>
+                      <div class="s5-item-text">
+                        <strong>1× High-Converting Landing Page</strong>
+                        <span>Fast-loading offer page, mobile-ready layout</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="s5-specs-bar">
+                    <div>Timeline: <strong>10 Workdays</strong></div>
+                    <div>Core: <strong>Content Creation</strong></div>
+                    <div>Production: <strong>Enhanced Detail</strong></div>
+                  </div>
+                </div>
+
+                <!-- Final Prominent Action Button -->
+                <div class="s5-actions-group">
+                  <a class="s5-main-cta" href="atom-zen/">
+                    <span>Build with ATOM ZEN</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                  <button class="s5-replay-btn" id="zenReplayBtnS5" type="button">
+                    <span aria-hidden="true">↺</span> Replay story
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Timeline Scrubber -->
+          <div class="zen-exp__timeline">
+            <div class="zen-exp__timeline-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Explainer playback progress">
+              <div class="zen-exp__timeline-fill" id="zenTimelineProgress"></div>
+            </div>
+            <div class="zen-exp__timeline-time" id="zenTimelineTime">00:00 / 00:28</div>
+          </div>
+        </div>
+
+        <!-- Accessible Static Alternative & Text Summary -->
+        <div class="zen-exp__accessible-summary">
+          <h3>How ATOM ZEN Works (In 4 Simple Steps)</h3>
+          <div class="zen-exp__steps-grid">
+            <div class="zen-exp__step-col">
+              <span class="zen-exp__step-num">STEP 01</span>
+              <strong>Choose a starting point</strong>
+              <p>Select your foundational core from Content Creation, Marketing &amp; Growth, or Digital Assets.</p>
+            </div>
+            <div class="zen-exp__step-col">
+              <span class="zen-exp__step-num">STEP 02</span>
+              <strong>Add what you need</strong>
+              <p>Attach specific deliverables (Reels, Ads, Landing pages) with total freedom to cross categories.</p>
+            </div>
+            <div class="zen-exp__step-col">
+              <span class="zen-exp__step-num">STEP 03</span>
+              <strong>Set your quantities</strong>
+              <p>Dial in exact counts with immediate transparent price and delivery updates.</p>
+            </div>
+            <div class="zen-exp__step-col">
+              <span class="zen-exp__step-num">STEP 04</span>
+              <strong>Find your balance</strong>
+              <p>Explore trade-offs between delivery speed, budget allocation, and production detail.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Organic Curved Section Divider 1: Explainer into Services -->
     <div class="curved-divider curved-divider--to-services" aria-hidden="true">
       <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
         <path d="M0,0 C380,95 1060,95 1440,0 L1440,120 L0,120 Z" fill="currentColor"></path>
@@ -696,5 +1149,6 @@
   </footer>
 
   <script src="assets/js/atomz.js" defer></script>
+  <script src="assets/js/atom-zen-explainer.js" defer></script>
 </body>
 </html>
