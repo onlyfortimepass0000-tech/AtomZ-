@@ -975,6 +975,296 @@ dialog{background:#1a211c;border-color:#4b6653;color:#d8e7db;padding:28px;border
   }
 }
 
+
+/* =====================================================
+   DEVICE-TILT 3D DEPTH SYSTEM
+   ===================================================== */
+:root {
+  --tilt-x: 0;
+  --tilt-y: 0;
+  --tilt-rot-x: 0;
+  --tilt-rot-y: 0;
+}
+
+/* Perspective stages */
+.exp-stage,
+.selection,
+.rdv-preview,
+#stage,
+.bodyoption,
+[data-tilt-scene] {
+  perspective: 1000px;
+}
+
+/* Three depth levels */
+[data-depth="background"] {
+  transform: translate3d(calc(var(--tilt-x, 0) * 3px), calc(var(--tilt-y, 0) * 3px), 0);
+  will-change: transform;
+}
+
+[data-depth="middle"] {
+  transform: translate3d(calc(var(--tilt-x, 0) * 6px), calc(var(--tilt-y, 0) * 6px), 0);
+  will-change: transform;
+}
+
+[data-depth="foreground"] {
+  transform: translate3d(calc(var(--tilt-x, 0) * 10px), calc(var(--tilt-y, 0) * 10px), 0);
+  will-change: transform;
+}
+
+/* Tilt card rotations (max rotateX/Y: +/-2.5 deg) */
+[data-tilt-card] {
+  transform: perspective(1000px)
+             rotateX(calc(var(--tilt-rot-x, 0) * -2.5deg))
+             rotateY(calc(var(--tilt-rot-y, 0) * 2.5deg));
+  transform-style: preserve-3d;
+}
+
+[data-tilt-card][data-depth="middle"] {
+  transform: perspective(1000px)
+             translate3d(calc(var(--tilt-x, 0) * 6px), calc(var(--tilt-y, 0) * 6px), 0)
+             rotateX(calc(var(--tilt-rot-x, 0) * -2.5deg))
+             rotateY(calc(var(--tilt-rot-y, 0) * 2.5deg));
+}
+
+[data-tilt-card][data-depth="foreground"] {
+  transform: perspective(1000px)
+             translate3d(calc(var(--tilt-x, 0) * 10px), calc(var(--tilt-y, 0) * 10px), 0)
+             rotateX(calc(var(--tilt-rot-x, 0) * -2.5deg))
+             rotateY(calc(var(--tilt-rot-y, 0) * 2.5deg));
+}
+
+/* Explainer nested middle wrappers for collision-free GSAP */
+.exp-card-tilt-wrap {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+.exp-tile-tilt-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+/* Selection card nested elements */
+.bodyoption-bg {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(var(--c), 0.12), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Restaurant preview depth styling */
+.rdv-preview-card {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.rdv-preview-decor {
+  position: absolute;
+  inset: -8px;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(103, 217, 204, 0.08), transparent 70%);
+  border: 1px dashed rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+.rdv-preview-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+.rdv-preview-garnish {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 13px;
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Disabled and Reduced Motion overrides */
+.tilt-disabled [data-depth="background"],
+.tilt-disabled [data-depth="middle"],
+.tilt-disabled [data-depth="foreground"],
+.tilt-disabled [data-tilt-card] {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-depth="background"],
+  [data-depth="middle"],
+  [data-depth="foreground"],
+  [data-tilt-card] {
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+/* Floating Tilt Controls UI */
+.zen-tilt-control {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 85;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(17, 19, 22, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  padding: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  font-family: var(--mono);
+  user-select: none;
+  transition: border-color 0.25s, box-shadow 0.25s, bottom 0.3s;
+}
+
+.zen-tilt-control:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.65);
+}
+
+.zen-tilt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  height: 38px;
+  min-height: 38px;
+  background: transparent;
+  color: #dce4e8;
+  font-size: 9px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  border-radius: 22px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.zen-tilt-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.zen-tilt-btn:focus-visible,
+.zen-tilt-subbtn:focus-visible,
+.zen-tilt-nav-btn:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.zen-tilt-icon {
+  font-size: 13px;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.zen-tilt-active-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 4px;
+}
+
+.zen-tilt-active-group.hidden {
+  display: none !important;
+}
+
+.zen-tilt-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #8da0b0;
+  padding: 0 6px 0 4px;
+}
+
+.zen-tilt-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.zen-tilt-subbtn {
+  padding: 7px 12px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  color: #cbd7e0;
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.zen-tilt-subbtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #fff;
+}
+
+.zen-tilt-subbtn.tilt-disable:hover {
+  background: rgba(255, 113, 59, 0.15);
+  border-color: rgba(255, 113, 59, 0.4);
+  color: #ffaa88;
+}
+
+.zen-tilt-nav-btn {
+  letter-spacing: 0.8px;
+}
+.zen-tilt-nav-btn.active {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+@media (max-width: 600px) {
+  .zen-tilt-nav-btn {
+    display: none !important;
+  }
+}
+@media (max-width: 760px) {
+  .zen-tilt-control {
+    max-width: calc(100vw - 32px);
+    bottom: 20px;
+    right: 16px;
+    padding: 3px;
+  }
+  body.mobile-builder .zen-tilt-control {
+    bottom: 82px;
+  }
+  .zen-tilt-btn {
+    height: 44px;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 9px;
+  }
+  .zen-tilt-subbtn {
+    height: 44px;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 8px;
+  }
+}
+
 </style><!-- Plus Jakarta Sans — font software licensed under the SIL Open Font License 1.1.
 Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)
 
@@ -1073,7 +1363,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 --><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
 </head><body>
-<div class="ambientline"></div><header><div class="header-left"><a class="brand" href="../index.html" aria-label="ATOMZ home" style="text-decoration:none;color:inherit;"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#ff713b" stroke-width="2"><circle cx="20" cy="20" r="18"/><path d="M20 7v26M7 20h26M11 11l18 18M11 29l18-18"/></g></svg>ATOM <b>ZEN</b><small>By ATOMZ</small></a><a href="../index.html" class="zen-back-btn" aria-label="Back to main website"><span class="zen-back-arrow">←</span> <span class="zen-back-label-desktop">Back to website</span><span class="zen-back-label-mobile">Back</span></a></div><nav class="nav"><button class="help" id="help">How it works ↗</button><button class="pill exp-nav-btn" id="nav-explainer-btn">Explainer ▷</button><button id="sound" aria-pressed="false"><span class="soundbars"><i></i><i></i><i></i><i></i></span> Sound off</button><button class="pill reviewnav hidden" id="navreview">Review build ↗</button></nav></header>
+<div class="ambientline"></div><header><div class="header-left"><a class="brand" href="../index.html" aria-label="ATOMZ home" style="text-decoration:none;color:inherit;"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#ff713b" stroke-width="2"><circle cx="20" cy="20" r="18"/><path d="M20 7v26M7 20h26M11 11l18 18M11 29l18-18"/></g></svg>ATOM <b>ZEN</b><small>By ATOMZ</small></a><a href="../index.html" class="zen-back-btn" aria-label="Back to main website"><span class="zen-back-arrow">←</span> <span class="zen-back-label-desktop">Back to website</span><span class="zen-back-label-mobile">Back</span></a></div><nav class="nav"><button class="help" id="help">How it works ↗</button><button class="pill exp-nav-btn" id="nav-explainer-btn">Explainer ▷</button><button class="pill zen-tilt-nav-btn" id="tilt-nav-btn" aria-pressed="false">Tilt ⟡</button><button id="sound" aria-pressed="false"><span class="soundbars"><i></i><i></i><i></i><i></i></span> Sound off</button><button class="pill reviewnav hidden" id="navreview">Review build ↗</button></nav></header>
 
 
 <section id="explainer-view" class="explainer-view" aria-label="ATOMZEN product explainer">
@@ -1083,16 +1373,18 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <p class="exp-subtext" id="exp-subtext"></p>
   </div>
   
-  <div class="exp-stage" id="exp-stage" aria-hidden="true">
+  <div class="exp-stage" id="exp-stage" aria-hidden="true" data-tilt-scene>
     <div id="exp-cards-layer" class="exp-cards-layer"></div>
-    <svg id="exp-svg" class="exp-svg" aria-hidden="true"></svg>
-    <div id="exp-labels" class="exp-labels"></div>
+    <svg id="exp-svg" class="exp-svg" data-depth="background" aria-hidden="true"></svg>
+    <div id="exp-labels" class="exp-labels" data-depth="foreground"></div>
     <div id="exp-tray" class="exp-tray" aria-label="Your selection tray">
-      <div class="exp-tray-label">
-        <span>Your selection</span>
-        <span id="exp-tray-status">Ready</span>
+      <div class="exp-tray-tilt-wrap" data-depth="middle" data-tilt-card>
+        <div class="exp-tray-label">
+          <span>Your selection</span>
+          <span id="exp-tray-status">Ready</span>
+        </div>
+        <div id="exp-tray-slots" class="exp-tray-slots"></div>
       </div>
-      <div id="exp-tray-slots" class="exp-tray-slots"></div>
     </div>
     <div id="exp-tiles" class="exp-tiles"></div>
   </div>
@@ -1162,7 +1454,18 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </div>
 <main id="builder" class="builder hidden"><aside class="library" aria-label="Choose pieces"><div class="libheading"><div class="mono muted" style="font-size:8px">Add to your idea</div><h2 tabindex="-1">Your pieces</h2><p>Drag a piece in, or click to choose a quantity.</p></div><div class="filterrow" id="filters"></div><input id="search" class="search" aria-label="Search attachments" placeholder="Find an attachment…"><div class="catalog" id="catalog"></div><div class="libfoot">ALL CATEGORIES CAN CONNECT.<br>SELECT ANY ATTACHED PIECE TO EDIT IT.</div></aside>
 <section class="stage" id="stage" aria-label="Assembly workspace"><div class="stageheader"><span>Your creation</span><button id="changebase">Change starting point ↗</button></div><div class="stage-title"><h2 id="stageTitle"></h2><p id="stageDescription"></p></div><div class="stagemotion"><button id="motion" aria-label="Pause motion">Ⅱ</button><button id="minuszoom" aria-label="Zoom out">−</button><button id="pluszoom" aria-label="Zoom in">＋</button></div><div class="scene" id="scene"><div class="ambience"></div><div class="halo"></div><div class="assembly" id="assembly"><svg class="wires" id="wires" aria-hidden="true"></svg><button class="core" id="core" aria-label="Edit main body"></button><div class="coretag" id="coretag"></div><div id="attached"></div></div></div><div class="buildcounter" id="buildcounter"></div><div class="mobile-build-actions mobile-only"><button class="mobile-add" data-mobile-go="pieces">Add pieces <span>＋</span></button><button id="mobile-edit-build">Edit build <span id="mobile-piece-count">1</span></button></div><div class="stagebottom"><div class="msg"><h3 id="message">Ready when you are.</h3><p id="messagesub" aria-live="polite">Add a piece from the left. You can always undo it.</p></div><div class="history"><button id="undo" aria-label="Undo">↶</button><button id="redo" aria-label="Redo">↷</button><button id="reset" aria-label="Remove all attachments">⟲</button></div></div></section>
-<aside class="right"><section class="dashboard" aria-label="Adjust time money and quality"><div class="dashboardhead"><span tabindex="-1">Find your balance</span><button id="rules">How it works</button></div><div class="control"><div class="controlhead"><label for="timebar">Time</label><strong id="timevalue"></strong></div><input class="range" id="timebar" type="range" min="3" max="45" step="1" style="--rangeColor:#78b6ca"><div class="rangeends"><span>Faster</span><span>More flexible</span></div></div><div class="control"><div class="controlhead"><label for="moneybar">Money</label><strong id="moneyvalue"></strong></div><input class="range" id="moneybar" type="range" min="1000" max="20000" step="50" style="--rangeColor:#ff8756"><div class="rangeends"><span>Lower budget</span><span>Higher budget</span></div><div class="allocation" aria-label="Use extra money for"><button data-spend="speed" class="active">Faster delivery</button><button data-spend="quality">More detail</button></div></div><div class="control"><div class="controlhead"><label for="qualitybar">Quality</label><strong id="qualityvalue"></strong></div><input class="range" id="qualitybar" type="range" min="1" max="3" step="0.01" style="--rangeColor:#ba9cda"><div class="rangeends"><span>Standard</span><span>More detail</span></div></div><p class="tradefeedback" id="tradefeedback">Move any bar. The others adjust with it.</p><div class="modeltag">Demo estimate · <button id="modeldetails">Pricing details</button></div><div class="modeltag" id="pending" style="margin-top:7px"></div></section><section class="details" id="details"></section><div class="reviewfoot"><button class="primary" id="review">Review my build <span>↗</span></button><div class="tiny">Final price and delivery need ATOMZ approval.<br>No order or payment is placed.</div></div></aside></main><div id="mobile-dock" class="mobile-only mobile-dock" aria-hidden="true"><div class="mobile-estimate" aria-label="Current demo estimate"><div><span>Demo estimate</span><strong id="mobile-money">—</strong></div><div><span>Workdays</span><strong id="mobile-days">—</strong></div><div><span>Quality</span><strong id="mobile-quality">—</strong></div></div><nav class="mobile-tabs" aria-label="Build navigation"><button data-mobile-go="build" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></svg><span>Build</span><b id="mobile-build-count" class="hidden"></b></button><button data-mobile-go="pieces" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M12 8v8M8 12h8"/></svg><span>Add pieces</span></button><button data-mobile-go="balance" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5m6 0h5M4 17h9m6 0h1"/><circle cx="12" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg><span>Balance</span></button></nav></div><dialog id="modal"></dialog><script>
+<aside class="right"><section class="dashboard" aria-label="Adjust time money and quality"><div class="dashboardhead"><span tabindex="-1">Find your balance</span><button id="rules">How it works</button></div><div class="control"><div class="controlhead"><label for="timebar">Time</label><strong id="timevalue"></strong></div><input class="range" id="timebar" type="range" min="3" max="45" step="1" style="--rangeColor:#78b6ca"><div class="rangeends"><span>Faster</span><span>More flexible</span></div></div><div class="control"><div class="controlhead"><label for="moneybar">Money</label><strong id="moneyvalue"></strong></div><input class="range" id="moneybar" type="range" min="1000" max="20000" step="50" style="--rangeColor:#ff8756"><div class="rangeends"><span>Lower budget</span><span>Higher budget</span></div><div class="allocation" aria-label="Use extra money for"><button data-spend="speed" class="active">Faster delivery</button><button data-spend="quality">More detail</button></div></div><div class="control"><div class="controlhead"><label for="qualitybar">Quality</label><strong id="qualityvalue"></strong></div><input class="range" id="qualitybar" type="range" min="1" max="3" step="0.01" style="--rangeColor:#ba9cda"><div class="rangeends"><span>Standard</span><span>More detail</span></div></div><p class="tradefeedback" id="tradefeedback">Move any bar. The others adjust with it.</p><div class="modeltag">Demo estimate · <button id="modeldetails">Pricing details</button></div><div class="modeltag" id="pending" style="margin-top:7px"></div></section><section class="details" id="details"></section><div class="reviewfoot"><button class="primary" id="review">Review my build <span>↗</span></button><div class="tiny">Final price and delivery need ATOMZ approval.<br>No order or payment is placed.</div></div></aside></main><div id="mobile-dock" class="mobile-only mobile-dock" aria-hidden="true"><div class="mobile-estimate" aria-label="Current demo estimate"><div><span>Demo estimate</span><strong id="mobile-money">—</strong></div><div><span>Workdays</span><strong id="mobile-days">—</strong></div><div><span>Quality</span><strong id="mobile-quality">—</strong></div></div><nav class="mobile-tabs" aria-label="Build navigation"><button data-mobile-go="build" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></svg><span>Build</span><b id="mobile-build-count" class="hidden"></b></button><button data-mobile-go="pieces" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M12 8v8M8 12h8"/></svg><span>Add pieces</span></button><button data-mobile-go="balance" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5m6 0h5M4 17h9m6 0h1"/><circle cx="12" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg><span>Balance</span></button></nav></div><div id="zen-tilt-control" class="zen-tilt-control" role="region" aria-label="3D Depth Controls">
+  <button id="tilt-enable-btn" class="zen-tilt-btn zen-tilt-enable" aria-pressed="false" aria-label="Enable tilt effect">
+    <span class="zen-tilt-icon" aria-hidden="true">&#10977;</span>
+    <span class="zen-tilt-text">Enable tilt effect</span>
+  </button>
+  <div id="zen-tilt-active-group" class="zen-tilt-active-group hidden">
+    <span class="zen-tilt-status"><span class="zen-tilt-dot" aria-hidden="true"></span> Tilt active</span>
+    <button id="tilt-recenter-btn" class="zen-tilt-subbtn" aria-label="Re-centre tilt">Re-centre</button>
+    <button id="tilt-disable-btn" class="zen-tilt-subbtn tilt-disable" aria-label="Disable tilt">Disable tilt</button>
+  </div>
+</div>
+<dialog id="modal"></dialog><script>
 'use strict';const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const categories=[{id:'content',name:'Content Creation',body:'Content body',piece:'reels',color:'#b5e9d9',rgb:'181,233,217',caption:'Make something worth watching.',desc:'Reels, videos, posts and photography.',start:'3 reels / ₹3,000',symbol:'▷'},{id:'marketing',name:'Marketing & Growth',body:'Marketing body',piece:'planning',color:'#f4c2a4',rgb:'244,194,164',caption:'Give your ideas a direction.',desc:'Campaigns, advertising, research and strategy.',start:'Campaign planning / from ₹2,000',symbol:'↗'},{id:'digital',name:'Digital Assets',body:'Digital body',piece:'landing',color:'#d9c7f5',rgb:'217,199,245',caption:'Build a useful digital experience.',desc:'Websites, interactive tools and custom assets.',start:'Landing page / from ₹6,000',symbol:'⌘'}];
 const items=[['reels','Reels','content',1300,4500,1300,7,'reel','Short-form videos. Standard editing is included. Shooting and scripting scope need confirmation.'],['promo','Promotional video','content',2000,8000,2000,7,'video','Introduce your offer with a focused promotional video.'],['demo','Product demo video','content',2000,8000,2000,7,'video','Show how your product works, step by step.'],['posts','Instagram posts','content',500,1000,600,4,'post','A branded static design with one clear message.'],['carousel','Carousels','content',1000,2000,1000,5,'carousel','Explain a subject through a set of connected slides.'],['script','Scripts & hooks','content',300,700,400,3,'script','A strong opening, speaking lines and a clear call to action.'],['photo','Product photography','content',3000,8000,3000,7,'shoot','A defined product shoot. Products, hours, location and travel need scoping.'],['editing','Standalone video editing','content',900,3000,900,5,'video','Edit a separate supplied video. Existing reel edits are not charged twice.'],['motion','Motion graphics','content',1000,5000,1000,6,'upgrade','A defined animation upgrade for a selected video.'],['ads','Meta advertising','marketing',4000,12000,4000,7,'campaign','Plan and manage paid advertising. Media spend is separate.'],['planning','Campaign planning','marketing',2000,7000,3000,5,'campaign','Turn your objective into a clear campaign plan.'],['strategy','Content strategy','marketing',1500,6000,1500,5,'project','Decide what to communicate and how each piece connects.'],['research','Audience research','marketing',1000,4000,1000,5,'project','Investigate the people you want to reach and what matters to them.'],['audit','Brand / marketing audit','marketing',1000,3500,1000,4,'audit','Review an agreed set of brand and marketing materials.'],['analytics','Analytics & reporting','marketing',1000,4000,1000,5,'package','Define what to measure and report from available data.'],['conversion','Conversion improvements','marketing',null,null,0,0,'project','Scope improvements to a specific customer journey.'],['landing','Landing page','digital',6000,18000,8000,10,'page','One focused page that explains an offer and captures interest.'],['website','Business website','digital',15000,45000,15000,20,'website','A website with agreed pages, content and integrations.'],['lead','Enquiry tool','digital',1500,6000,1500,5,'setup','Collect structured enquiries using a form or simple tool.'],['finder','Product Finder','digital',12000,40000,12000,20,'setup','A planned tool to help customers explore a catalogue.'],['zen','ATOM ZEN Kit Builder','digital',null,null,0,0,'deployment','A proposed assembly experience for a specific catalogue.'],['software','Custom software','digital',null,null,0,0,'project','A business tool with technical requirements agreed first.'],['automation','Workflow automation','digital',null,null,0,0,'setup','Connect a defined workflow and approved data sources.'],['experience','Interactive experience','digital',null,null,0,0,'project','A custom digital interaction with a useful, defined function.'],['psych','Psychological Experience Layer','digital',null,null,0,0,'enhancement','A planned enhancement for useful, satisfying product exploration and assembly.']].map(([id,name,cat,lo,hi,rate,days,unit,desc],i)=>({id,name,cat,lo,hi,rate,days,unit,desc,shape:i%3}));
@@ -1196,7 +1499,7 @@ function sculpture(type,icon='',mini=false){
 function pieceIcon(id,type){let paths={reels:'M142 125L194 158L142 191Z',promo:'M142 125L194 158L142 191Z',demo:'M131 130H190V185H131ZM151 145L174 158L151 172Z',posts:'M131 130H190V188H131ZM143 145H177M143 158H171M143 172H179',carousel:'M124 137H179V190H124ZM140 122H195V175',script:'M132 184L141 161L181 121L195 135L155 176Z',photo:'M125 140H195V184H125ZM145 140L150 128H173L179 140M147 163A13 13 0 1 0 173 163A13 13 0 1 0 147 163',ads:'M128 171L153 146L169 160L194 128M173 127H195V149',planning:'M133 128H188V190H133ZM146 143H175M146 157H175M146 172H164',analytics:'M133 183V158M158 183V135M183 183V119',website:'M126 129H195V188H126ZM126 144H195M138 137H139M147 137H148',landing:'M126 129H195V188H126ZM126 144H195M138 137H139M147 137H148'};let path=paths[id]||(type==='content'?'M133 138H189V183H133M146 123V137M176 123V137':type==='marketing'?'M130 178L154 150L174 161L192 132M176 132H192V148':'M142 136L122 158L142 180M178 136L198 158L178 180M166 126L154 191');return `<path d="${path}" stroke="#223d3b" stroke-opacity=".72" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`}
 function coreArt(type,small=false){return sculpture(type,'',false)}
 function partArt(p){return sculpture(p.cat,p.id,true)}
-function renderChoices(){$('#selection').innerHTML=categories.map((c,i)=>`<button class="bodyoption" data-body="${c.id}" style="--c:${c.rgb}" aria-label="Choose ${c.name}"><span class="serial">BODY / 0${i+1}</span><div class="obj"><div class="art">${coreArt(c.id)}</div></div><div class="optioncopy"><div class="category">${c.name}</div><h2>${c.name}</h2><p>${c.desc}</p><div class="optionbottom"><strong>${c.start}</strong><span>↗</span></div></div></button>`).join('');$$('[data-body]').forEach(el=>{el.onclick=()=>chooseBody(el.dataset.body,el);el.onpointermove=e=>{if(reduce)return;let r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--hoverx',x*13+'px');el.style.setProperty('--hovery',y*10+'px');el.style.setProperty('--hoverrx',-y*13+'deg');el.style.setProperty('--hoverry',x*18+'deg')};el.onpointerleave=()=>{['--hoverx','--hovery','--hoverrx','--hoverry'].forEach(v=>el.style.removeProperty(v))}})}
+function renderChoices(){$('#selection').innerHTML=categories.map((c,i)=>`<button class="bodyoption" data-body="${c.id}" data-tilt-card style="--c:${c.rgb}" aria-label="Choose ${c.name}"><div class="bodyoption-bg" data-depth="background" aria-hidden="true"></div><span class="serial" data-depth="foreground">BODY / 0${i+1}</span><div class="obj" data-depth="middle"><div class="art">${coreArt(c.id)}</div></div><div class="optioncopy"><div class="category">${c.name}</div><h2>${c.name}</h2><p>${c.desc}</p><div class="optionbottom"><strong>${c.start}</strong><span>↗</span></div></div></button>`).join('');$$('[data-body]').forEach(el=>{el.onclick=()=>chooseBody(el.dataset.body,el);el.onpointermove=e=>{if(reduce)return;let r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--hoverx',x*13+'px');el.style.setProperty('--hovery',y*10+'px');el.style.setProperty('--hoverrx',-y*13+'deg');el.style.setProperty('--hoverry',x*18+'deg')};el.onpointerleave=()=>{['--hoverx','--hovery','--hoverrx','--hoverry'].forEach(v=>el.style.removeProperty(v))}})}
 function chooseBody(id,el){mobileView='build';let art=el.querySelector('.art'),from=art.getBoundingClientRect(),graphic=art.innerHTML;if(!state.base){state.category=id;state.base=cat(id).piece;selected=state.base;state.days=model().work;}else{checkpoint();let next=cat(id).piece,old=state.base;state.attached=state.attached.filter(x=>x!==next);if(old!==next&&!state.attached.includes(old))state.attached.push(old);state.base=next;state.category=id;selected=next;}save();$('#choose').classList.add('hidden');$('#builder').classList.remove('hidden');$('#navreview').classList.remove('hidden');renderBuilder();if(!reduce){let to=$('#core').getBoundingClientRect(),fly=document.createElement('div');fly.className='transitionbody';fly.innerHTML=graphic;fly.style.cssText=`left:${to.left}px;top:${to.top}px;width:${to.width}px;height:${to.height}px`;document.body.append(fly);$('#core').style.opacity=0;fly.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width}) rotate(-8deg)`},{transform:'translate(0,0) scale(1) rotate(0)'}],{duration:800,easing:'cubic-bezier(.16,1,.3,1)'}).onfinish=()=>{fly.remove();$('#core').style.opacity=1;}}soundTick();message(cat(id).name+' is your starting point.','Choose a piece from the left. Mix any category.')}
 function enterSaved(){if(!saved)return;mobileView='build';state=saved;selected=state.base;$('#choose').classList.add('hidden');$('#builder').classList.remove('hidden');$('#navreview').classList.remove('hidden');renderBuilder()}
 function positions(i,n){let mobile=innerWidth<600,scale=isPhone()?Math.min(.66,(innerWidth-104)/434):innerWidth<1100?.85:1;let preset=[[-152,-73],[151,-73],[-151,55],[151,55],[-68,-155],[70,-155],[-70,156],[70,156]];let p=i<8?preset[i]:[Math.cos((i-8)/Math.max(n-8,8)*Math.PI*2)*217,Math.sin((i-8)/Math.max(n-8,8)*Math.PI*2)*205];return [p[0]*scale,p[1]*scale]}
@@ -1338,12 +1641,13 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
       outer.setAttribute('data-pos-x', pos.x);
       outer.setAttribute('data-pos-y', pos.y);
 
-      outer.innerHTML = '<div class="exp-card-inner" style="transform: rotate(' + pos.r + 'deg);">'
+      outer.innerHTML = '<div class="exp-card-tilt-wrap" data-depth="middle" data-tilt-card>'
+        + '<div class="exp-card-inner" style="transform: rotate(' + pos.r + 'deg);">'
         + '<div class="exp-card-content">'
-        + '<div class="exp-card-badge">' + cardData.badge + '</div>'
+        + '<div class="exp-card-badge" data-depth="foreground">' + cardData.badge + '</div>'
         + '<div class="exp-card-title">' + cardData.title + '</div>'
         + '<div class="exp-card-meta">' + cardData.meta + '</div>'
-        + '</div></div>';
+        + '</div></div></div>';
 
       cardsLayer.appendChild(outer);
     });
@@ -1369,9 +1673,11 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
         var tile = document.createElement('div');
         tile.className = 'exp-tile';
         tile.id = 'exp-tile-' + i;
-        tile.innerHTML = '<div class="exp-tile-symbol" style="color:' + s.color + '">' + s.symbol + '</div>'
+        tile.innerHTML = '<div class="exp-tile-tilt-wrap" data-depth="middle" data-tilt-card>'
+          + '<div class="exp-tile-symbol" data-depth="foreground" style="color:' + s.color + '">' + s.symbol + '</div>'
           + '<div class="exp-tile-name">' + s.name + '</div>'
-          + '<div class="exp-tile-desc">' + s.cat + '</div>';
+          + '<div class="exp-tile-desc">' + s.cat + '</div>'
+          + '</div>';
         tilesEl.appendChild(tile);
       });
     }
@@ -1921,14 +2227,19 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
     var drinkItem = rdvState.drink ? restaurantMenuData.drinks.find(function(d) { return d.id === rdvState.drink; }) : null;
     var canView = Boolean(foodItem || drinkItem);
 
-    var html = '<div class="rdv-preview-title">Your combination</div>';
+    var html = '<div class="rdv-preview-card" data-tilt-card>'
+      + '<div class="rdv-preview-decor" data-depth="background" aria-hidden="true"></div>'
+      + '<div class="rdv-preview-title">Your combination</div>';
 
     if (!canView) {
       html += '<div class="rdv-preview-empty">Select a sample dish or drink from the menu to see your combination assemble here.</div>';
     } else {
       if (foodItem) {
         html += '<div class="rdv-preview-line">'
+          + '<div class="rdv-preview-icon-wrap" data-depth="middle">'
           + '<div class="rdv-preview-icon">' + foodItem.icon + '</div>'
+          + '<div class="rdv-preview-garnish" data-depth="foreground">&#127807;</div>'
+          + '</div>'
           + '<div class="rdv-preview-info">'
           + '<div class="rdv-preview-name">' + foodItem.name + '</div>'
           + '<div class="rdv-preview-detail">' + (rdvState.customisation || 'No extra customisation') + '</div>'
@@ -1936,7 +2247,10 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
       }
       if (drinkItem) {
         html += '<div class="rdv-preview-line">'
+          + '<div class="rdv-preview-icon-wrap" data-depth="middle">'
           + '<div class="rdv-preview-icon">&#9749;</div>'
+          + '<div class="rdv-preview-garnish" data-depth="foreground">&#10024;</div>'
+          + '</div>'
           + '<div class="rdv-preview-info">'
           + '<div class="rdv-preview-name">' + drinkItem.name + '</div>'
           + '<div class="rdv-preview-detail">' + (rdvState.drinkOption || 'Standard preparation') + '</div>'
@@ -1947,6 +2261,7 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
     html += '<button class="rdv-cta-btn" id="rdv-cta"' + (canView ? '' : ' disabled') + '>'
       + '<span>View my combination</span><span>&rarr;</span></button>';
     html += '<div class="rdv-note">' + restaurantMenuData.note + '</div>';
+    html += '</div>';
 
     preview.innerHTML = html;
 
@@ -2026,9 +2341,469 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
   // ══════════════════════════════════════════════════════
   // BOOTSTRAP
   // ══════════════════════════════════════════════════════
+
+  // ══════════════════════════════════════════════════════
+  // ATOMZEN DEVICE-TILT 3D DEPTH ENGINE
+  // ══════════════════════════════════════════════════════
+
+  /**
+   * Wraps an angular difference into range [-180, 180] deg
+   * to eliminate wraparound sudden jump anomalies.
+   */
+  function normalizeAngleDiff(deg) {
+    var d = deg % 360;
+    if (d > 180) d -= 360;
+    else if (d < -180) d += 360;
+    return d;
+  }
+
+  /**
+   * Maps device orientation (beta, gamma) relative to a neutral calibrated
+   * position and screen orientation angle to normalized output [-1, 1].
+   *
+   * @param {number} beta - DeviceOrientation beta (-180 to 180)
+   * @param {number} gamma - DeviceOrientation gamma (-90 to 90)
+   * @param {number} neutralBeta - Calibrated neutral beta
+   * @param {number} neutralGamma - Calibrated neutral gamma
+   * @param {number} screenAngle - Screen orientation angle (0, 90, 180, 270)
+   * @returns {{x: number, y: number}} Normalized tilt [-1, 1]
+   */
+  function mapTiltToNormalized(beta, gamma, neutralBeta, neutralGamma, screenAngle) {
+    if (beta === null || gamma === null || isNaN(beta) || isNaN(gamma)) {
+      return { x: 0, y: 0 };
+    }
+
+    var deltaBeta = normalizeAngleDiff(beta - neutralBeta);
+    var deltaGamma = normalizeAngleDiff(gamma - neutralGamma);
+
+    var rawX = 0;
+    var rawY = 0;
+    var angle = ((screenAngle % 360) + 360) % 360;
+
+    if (angle === 90) {
+      // Landscape rotated 90 deg clockwise
+      rawX = -deltaBeta;
+      rawY = deltaGamma;
+    } else if (angle === 180) {
+      // Inverted portrait
+      rawX = -deltaGamma;
+      rawY = -deltaBeta;
+    } else if (angle === 270) {
+      // Landscape rotated 90 deg counter-clockwise
+      rawX = deltaBeta;
+      rawY = -deltaGamma;
+    } else {
+      // Portrait (0 deg)
+      rawX = deltaGamma;
+      rawY = deltaBeta;
+    }
+
+    var DEAD_ZONE = 0.75; // 0.75 deg dead zone to suppress jitter
+    var MAX_RANGE = 15.0; // +/-15 deg relative tilt maps to full [-1, 1]
+
+    function scaleAngle(v) {
+      var abs = Math.abs(v);
+      if (abs <= DEAD_ZONE) return 0;
+      var norm = (abs - DEAD_ZONE) / (MAX_RANGE - DEAD_ZONE);
+      if (norm > 1) norm = 1;
+      return Math.sign(v) * norm;
+    }
+
+    var normX = scaleAngle(rawX);
+    var normY = scaleAngle(rawY);
+
+    return {
+      x: Math.max(-1, Math.min(1, normX)),
+      y: Math.max(-1, Math.min(1, normY))
+    };
+  }
+
+  // Tilt Engine State
+  var tiltState = {
+    enabled: false,
+    hasSensorReading: false,
+    calibrated: false,
+    neutralBeta: 0,
+    neutralGamma: 0,
+    lastRawBeta: 0,
+    lastRawGamma: 0,
+    targetX: 0,
+    targetY: 0,
+    currentX: 0,
+    currentY: 0,
+    rafId: null,
+    lastTimestamp: 0,
+    isLoopRunning: false,
+    isVisibleOnScreen: true,
+    isSettled: true,
+    permissionDenied: false
+  };
+
+  function applyTiltTransforms(x, y) {
+    var root = document.documentElement;
+    root.style.setProperty('--tilt-x', x.toFixed(4));
+    root.style.setProperty('--tilt-y', y.toFixed(4));
+    root.style.setProperty('--tilt-rot-x', y.toFixed(4));
+    root.style.setProperty('--tilt-rot-y', x.toFixed(4));
+  }
+
+  function tickTiltLoop(timestamp) {
+    if (!tiltState.lastTimestamp) tiltState.lastTimestamp = timestamp;
+    var dt = (timestamp - tiltState.lastTimestamp) / 1000;
+    tiltState.lastTimestamp = timestamp;
+
+    if (dt > 0.1) dt = 0.1;
+    if (dt < 0.001) dt = 0.001;
+
+    // Time-based exponential smoothing: smoothing = 1 - exp(-deltaTime / 0.12)
+    var smoothing = 1 - Math.exp(-dt / 0.12);
+
+    tiltState.currentX += (tiltState.targetX - tiltState.currentX) * smoothing;
+    tiltState.currentY += (tiltState.targetY - tiltState.currentY) * smoothing;
+
+    var diffX = Math.abs(tiltState.targetX - tiltState.currentX);
+    var diffY = Math.abs(tiltState.targetY - tiltState.currentY);
+
+    applyTiltTransforms(tiltState.currentX, tiltState.currentY);
+
+    // Stop loop when values have settled and target is 0
+    if (diffX < 0.0005 && diffY < 0.0005 && Math.abs(tiltState.targetX) < 0.0005 && Math.abs(tiltState.targetY) < 0.0005) {
+      tiltState.currentX = 0;
+      tiltState.currentY = 0;
+      applyTiltTransforms(0, 0);
+      tiltState.isSettled = true;
+      tiltState.isLoopRunning = false;
+      tiltState.rafId = null;
+      return;
+    }
+
+    if (!document.hidden && tiltState.isVisibleOnScreen && tiltState.enabled) {
+      tiltState.rafId = requestAnimationFrame(tickTiltLoop);
+    } else {
+      tiltState.isLoopRunning = false;
+      tiltState.rafId = null;
+    }
+  }
+
+  function startTiltLoop() {
+    tiltState.isSettled = false;
+    if (!tiltState.isLoopRunning && tiltState.enabled && !document.hidden && tiltState.isVisibleOnScreen) {
+      tiltState.isLoopRunning = true;
+      tiltState.lastTimestamp = performance.now();
+      tiltState.rafId = requestAnimationFrame(tickTiltLoop);
+    }
+  }
+
+  function getScreenOrientationAngle() {
+    if (window.screen && screen.orientation && typeof screen.orientation.angle === 'number') {
+      return screen.orientation.angle;
+    }
+    if (typeof window.orientation === 'number') {
+      return window.orientation;
+    }
+    return 0;
+  }
+
+  function onDeviceOrientationEvent(e) {
+    if (e.beta === null || e.gamma === null) return;
+    tiltState.hasSensorReading = true;
+    tiltState.lastRawBeta = e.beta;
+    tiltState.lastRawGamma = e.gamma;
+
+    if (!tiltState.calibrated) {
+      tiltState.neutralBeta = e.beta;
+      tiltState.neutralGamma = e.gamma;
+      tiltState.calibrated = true;
+    }
+
+    var angle = getScreenOrientationAngle();
+    var mapped = mapTiltToNormalized(e.beta, e.gamma, tiltState.neutralBeta, tiltState.neutralGamma, angle);
+    tiltState.targetX = mapped.x;
+    tiltState.targetY = mapped.y;
+
+    startTiltLoop();
+  }
+
+  function recalibrateOrientation() {
+    tiltState.calibrated = false;
+    tiltState.targetX = 0;
+    tiltState.targetY = 0;
+    startTiltLoop();
+  }
+
+  function recenterTilt() {
+    if (tiltState.hasSensorReading) {
+      tiltState.neutralBeta = tiltState.lastRawBeta;
+      tiltState.neutralGamma = tiltState.lastRawGamma;
+      tiltState.calibrated = true;
+    } else {
+      tiltState.calibrated = false;
+    }
+    tiltState.targetX = 0;
+    tiltState.targetY = 0;
+    startTiltLoop();
+  }
+
+  function enableTilt() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    tiltState.enabled = true;
+    document.documentElement.classList.remove('tilt-disabled');
+
+    try {
+      localStorage.setItem('atomzen_tilt_pref', 'enabled');
+    } catch(e) {}
+
+    updateTiltUIState();
+
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', onDeviceOrientationEvent, { passive: true });
+    }
+
+    if (window.screen && screen.orientation && screen.orientation.addEventListener) {
+      screen.orientation.addEventListener('change', recalibrateOrientation);
+    } else {
+      window.addEventListener('orientationchange', recalibrateOrientation);
+    }
+
+    startTiltLoop();
+  }
+
+  function disableTilt() {
+    tiltState.enabled = false;
+    tiltState.targetX = 0;
+    tiltState.targetY = 0;
+    document.documentElement.classList.add('tilt-disabled');
+
+    try {
+      localStorage.setItem('atomzen_tilt_pref', 'disabled');
+    } catch(e) {}
+
+    if (window.DeviceOrientationEvent) {
+      window.removeEventListener('deviceorientation', onDeviceOrientationEvent);
+    }
+
+    updateTiltUIState();
+    startTiltLoop();
+  }
+
+  function handlePermissionDenied() {
+    tiltState.permissionDenied = true;
+    disableTilt();
+  }
+
+  function requestTiltPermissionAndEnable() {
+    var hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      return DeviceOrientationEvent.requestPermission().then(function(res) {
+        if (res === 'granted') {
+          enableTilt();
+        } else if (res === 'denied') {
+          tiltState.permissionDenied = true;
+          if (hasFinePointer) {
+            enableTilt();
+          } else {
+            disableTilt();
+          }
+        } else {
+          // 'prompt' / 'default' (e.g. desktop mock / standard)
+          enableTilt();
+        }
+      }).catch(function() {
+        if (hasFinePointer) {
+          enableTilt();
+        } else {
+          disableTilt();
+        }
+      });
+    } else {
+      enableTilt();
+      return Promise.resolve();
+    }
+  }
+
+  function updateTiltUIState() {
+    var enableBtn = el('tilt-enable-btn');
+    var activeGrp = el('zen-tilt-active-group');
+    var navBtn = el('tilt-nav-btn');
+
+    if (tiltState.enabled) {
+      if (enableBtn) enableBtn.classList.add('hidden');
+      if (activeGrp) activeGrp.classList.remove('hidden');
+      if (navBtn) {
+        navBtn.classList.add('active');
+        navBtn.setAttribute('aria-pressed', 'true');
+        navBtn.textContent = 'Tilt ON ⟡';
+      }
+    } else {
+      if (enableBtn) enableBtn.classList.remove('hidden');
+      if (activeGrp) activeGrp.classList.add('hidden');
+      if (navBtn) {
+        navBtn.classList.remove('active');
+        navBtn.setAttribute('aria-pressed', 'false');
+        navBtn.textContent = 'Tilt ⟡';
+      }
+    }
+  }
+
+  // Desktop Fine-Pointer Parallax
+  function setupDesktopPointerTilt() {
+    var hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var sections = ['#exp-stage', '#choose', '#restaurant-demo-view', '#stage'];
+
+    sections.forEach(function(sel) {
+      var sec = el(sel.replace('#', '')) || qs(sel);
+      if (!sec) return;
+
+      var cachedRect = null;
+
+      sec.addEventListener('pointerenter', function(e) {
+        if (e.pointerType === 'touch') return;
+        cachedRect = sec.getBoundingClientRect();
+      });
+
+      sec.addEventListener('pointermove', function(e) {
+        if (e.pointerType === 'touch') return;
+        if (!tiltState.enabled || tiltState.hasSensorReading || !hasFinePointer) return;
+
+        if (!cachedRect) cachedRect = sec.getBoundingClientRect();
+        if (cachedRect.width === 0 || cachedRect.height === 0) return;
+
+        var relX = (e.clientX - cachedRect.left) / cachedRect.width - 0.5;
+        var relY = (e.clientY - cachedRect.top) / cachedRect.height - 0.5;
+
+        tiltState.targetX = Math.max(-1, Math.min(1, relX * 2));
+        tiltState.targetY = Math.max(-1, Math.min(1, relY * 2));
+
+        startTiltLoop();
+      });
+
+      sec.addEventListener('pointerleave', function(e) {
+        if (e.pointerType === 'touch') return;
+        cachedRect = null;
+        tiltState.targetX = 0;
+        tiltState.targetY = 0;
+        startTiltLoop();
+      });
+    });
+
+    window.addEventListener('resize', function() {
+      hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    });
+  }
+
+  // Lifecycle observers
+  function setupTiltLifecycle() {
+    if ('IntersectionObserver' in window) {
+      var visibleCount = 0;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            visibleCount++;
+          } else {
+            visibleCount = Math.max(0, visibleCount - 1);
+          }
+        });
+        tiltState.isVisibleOnScreen = visibleCount > 0;
+        if (tiltState.isVisibleOnScreen && !tiltState.isSettled && tiltState.enabled && !document.hidden) {
+          startTiltLoop();
+        }
+      }, { threshold: 0.05 });
+
+      ['#explainer-view', '#choose', '#restaurant-demo-view', '#builder'].forEach(function(sel) {
+        var node = el(sel.replace('#', '')) || qs(sel);
+        if (node) obs.observe(node);
+      });
+    }
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        if (tiltState.rafId) {
+          cancelAnimationFrame(tiltState.rafId);
+          tiltState.rafId = null;
+          tiltState.isLoopRunning = false;
+        }
+      } else {
+        if (tiltState.enabled && tiltState.isVisibleOnScreen && !tiltState.isSettled) {
+          startTiltLoop();
+        }
+      }
+    });
+
+    var reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceMotionMQ.addEventListener) {
+      reduceMotionMQ.addEventListener('change', function(e) {
+        if (e.matches) {
+          disableTilt();
+        }
+      });
+    }
+  }
+
+  function initTiltModule() {
+    var enableBtn = el('tilt-enable-btn');
+    var disableBtn = el('tilt-disable-btn');
+    var recenterBtn = el('tilt-recenter-btn');
+    var navBtn = el('tilt-nav-btn');
+
+    if (enableBtn) {
+      enableBtn.addEventListener('click', requestTiltPermissionAndEnable);
+    }
+    if (disableBtn) {
+      disableBtn.addEventListener('click', disableTilt);
+    }
+    if (recenterBtn) {
+      recenterBtn.addEventListener('click', recenterTilt);
+    }
+    if (navBtn) {
+      navBtn.addEventListener('click', function() {
+        if (tiltState.enabled) disableTilt();
+        else requestTiltPermissionAndEnable();
+      });
+    }
+
+    setupDesktopPointerTilt();
+    setupTiltLifecycle();
+
+    var pref = null;
+    try {
+      pref = localStorage.getItem('atomzen_tilt_pref');
+    } catch(e) {}
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion && pref !== 'disabled') {
+      var hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (hasFinePointer || pref === 'enabled') {
+        enableTilt();
+      }
+    } else {
+      disableTilt();
+    }
+  }
+
+  // Public Test & Inspection API
+  window.atomzenTilt = {
+    normalizeAngleDiff: normalizeAngleDiff,
+    mapTiltToNormalized: mapTiltToNormalized,
+    recenter: recenterTilt,
+    enable: enableTilt,
+    disable: disableTilt,
+    requestPermissionAndEnable: requestTiltPermissionAndEnable,
+    getState: function() { return tiltState; },
+    simulateSensor: function(beta, gamma, screenAngle) {
+      onDeviceOrientationEvent({ beta: beta, gamma: gamma });
+    },
+    tick: tickTiltLoop
+  };
+
   function initAll() {
     initExplainerModule();
     initRestaurantDemoModule();
+    initTiltModule();
   }
 
   if (document.readyState === 'loading') {
