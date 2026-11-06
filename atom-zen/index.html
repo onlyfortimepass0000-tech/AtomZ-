@@ -45,6 +45,936 @@ dialog{background:#1a211c;border-color:#4b6653;color:#d8e7db;padding:28px;border
   .zen-back-label-mobile{display:inline}
 }
 
+
+
+
+
+/* ===================================================
+   ATOMZEN EXPLAINER + RESTAURANT DEMO — Production CSS
+   =================================================== */
+
+/* ---------- Explainer Section ---------- */
+.explainer-view {
+  position: relative;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 44px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 700px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.explainer-view.hidden { display: none !important; }
+
+.exp-headline-area {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto 24px;
+  position: relative;
+  z-index: 10;
+}
+.exp-eyebrow {
+  font: 9px/1 var(--mono);
+  letter-spacing: 2.2px;
+  color: var(--orange);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.exp-eyebrow i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 10px #ff713b99;
+}
+.exp-headline {
+  font-size: clamp(28px, 4.4vw, 46px);
+  font-weight: 500;
+  letter-spacing: -1.8px;
+  line-height: 1.1;
+  margin: 0 0 12px;
+  color: var(--text);
+  min-height: 52px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.exp-subtext {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto;
+  min-height: 22px;
+  transition: opacity 0.35s ease;
+}
+
+/* Stage: isolated canvas */
+.exp-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 480px;
+  margin: 0 auto;
+  overflow: visible;
+  perspective: 1100px;
+}
+
+/* Three-layer card architecture */
+.exp-cards-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.exp-card-outer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 136px;
+  margin-left: -100px;
+  margin-top: -68px;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+.exp-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+}
+.exp-card-content {
+  width: 100%;
+  height: 100%;
+  background: #14191f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+}
+.exp-card-badge {
+  font: 8px var(--mono);
+  letter-spacing: 1.4px;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+.exp-card-title {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  color: #f2f0eb;
+  line-height: 1.3;
+}
+.exp-card-meta {
+  font: 8px var(--mono);
+  color: #7b8793;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 6px;
+}
+
+/* Question labels & SVG connector lines */
+.exp-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 6;
+}
+.exp-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+}
+.exp-label {
+  position: absolute;
+  font: 11px/1.2 var(--mono);
+  color: var(--accent);
+  background: rgba(13, 24, 25, 0.88);
+  border: 1px solid rgba(103, 217, 204, 0.4);
+  border-radius: 20px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  letter-spacing: 0.6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transform: translateY(6px);
+  opacity: 0;
+  pointer-events: auto;
+}
+
+/* Selection Tray */
+.exp-tray {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 580px;
+  max-width: 94vw;
+  background: rgba(18, 24, 30, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 8;
+  opacity: 0;
+  box-sizing: border-box;
+}
+.exp-tray-label {
+  font: 8px var(--mono);
+  letter-spacing: 1.6px;
+  color: #8fa0b0;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.exp-tray-label span:last-child {
+  color: var(--accent);
+}
+.exp-tray-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.exp-tray-slot {
+  height: 56px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font: 8px var(--mono);
+  color: #556677;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.35s ease;
+  padding: 4px 8px;
+  text-align: center;
+  background: rgba(10, 14, 18, 0.4);
+}
+.exp-tray-slot.filled {
+  border-style: solid;
+  border-color: rgba(103, 217, 204, 0.35);
+  background: #17242c;
+  color: var(--text);
+}
+.exp-tray-slot-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: #f2f0eb;
+  line-height: 1.25;
+}
+.exp-tray-slot-cat {
+  font: 7px var(--mono);
+  color: var(--accent);
+  margin-top: 3px;
+}
+.exp-tray-check {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  font-size: 9px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Service tiles */
+.exp-tiles {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  z-index: 7;
+  width: auto;
+  pointer-events: none;
+}
+.exp-tile {
+  width: 175px;
+  height: 84px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  background: #151b22;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+.exp-tile.selected-tile {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(103, 217, 204, 0.3), 0 10px 28px rgba(0,0,0,0.5);
+}
+.exp-tile-symbol {
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.exp-tile-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f2f0eb;
+  letter-spacing: -0.2px;
+}
+.exp-tile-desc {
+  font: 8px var(--mono);
+  color: #7b8895;
+  margin-top: 3px;
+}
+
+/* Controls */
+.exp-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  z-index: 10;
+}
+.exp-btn-primary {
+  background: var(--orange);
+  color: #110e0c;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, background 0.2s;
+  min-height: 44px;
+}
+.exp-btn-primary:hover {
+  background: #ff8555;
+  transform: translateY(-1px);
+}
+.exp-btn-secondary {
+  background: #171d24;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d8e2eb;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+.exp-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Progress dots */
+.exp-progress {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  z-index: 10;
+}
+.exp-dot {
+  width: 24px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+.exp-dot.active {
+  background: var(--orange);
+}
+
+/* Final frame overlay */
+.exp-final {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 11, 13, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  transition: opacity 0.5s ease;
+}
+.exp-final.hidden { display: none !important; }
+.exp-final-cta {
+  text-align: center;
+  max-width: 500px;
+  padding: 32px 24px;
+}
+.exp-final-cta h3 {
+  font-size: clamp(30px, 4.5vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.4px;
+  margin: 0 0 12px;
+  color: var(--text);
+}
+.exp-final-cta p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+.exp-final-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ---------- Restaurant Demo Trigger (Inside #choose) ---------- */
+.restaurant-trigger {
+  padding: 0 38px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.restaurant-demo-btn {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(25, 34, 38, 0.8), rgba(18, 24, 28, 0.9));
+  border: 1px solid rgba(103, 217, 204, 0.35);
+  border-radius: 10px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  transition: all 0.25s ease;
+  min-height: 52px;
+  box-sizing: border-box;
+}
+.restaurant-demo-btn:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(30, 42, 48, 0.9), rgba(22, 30, 35, 0.95));
+  box-shadow: 0 8px 30px rgba(103, 217, 204, 0.12);
+  transform: translateY(-1px);
+}
+.rdv-trigger-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rdv-trigger-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f2f0eb;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  letter-spacing: -0.2px;
+}
+.rdv-trigger-pill {
+  font: 8px var(--mono);
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: rgba(103, 217, 204, 0.12);
+  border: 1px solid rgba(103, 217, 204, 0.3);
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.restaurant-demo-sub {
+  font-size: 11px;
+  color: #83919c;
+  line-height: 1.4;
+}
+.rdv-trigger-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: transform 0.25s;
+}
+.restaurant-demo-btn:hover .rdv-trigger-arrow {
+  transform: translateX(3px);
+  border-color: var(--accent);
+}
+
+/* ---------- Restaurant Demo View ---------- */
+.restaurant-demo-view {
+  background: var(--bg);
+  min-height: calc(100vh - 81px);
+  padding: 32px 38px 48px;
+  animation: enter 0.5s ease both;
+  box-sizing: border-box;
+}
+.restaurant-demo-view.hidden { display: none !important; }
+
+.rdv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  gap: 20px;
+}
+.rdv-back {
+  font: 10px var(--mono);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #92a0ad;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 16px;
+  border-radius: 20px;
+  transition: all 0.2s;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.rdv-back:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+.rdv-title {
+  text-align: right;
+}
+.rdv-eyebrow {
+  font: 8px var(--mono);
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.rdv-title h2 {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.rdv-title p {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+  max-width: 380px;
+}
+
+.rdv-content {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  align-items: start;
+}
+.rdv-left {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.rdv-section-label {
+  font: 9px var(--mono);
+  letter-spacing: 1.6px;
+  color: #8c9caa;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rdv-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.rdv-tile {
+  background: #11151a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: left;
+  transition: all 0.25s ease;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.rdv-tile:hover {
+  background: #182028;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+.rdv-tile.rdv-selected {
+  border-color: var(--accent);
+  background: #152226;
+  box-shadow: 0 0 20px rgba(103, 217, 204, 0.15);
+}
+.rdv-tile-icon {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.rdv-tile-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f2f0eb;
+  margin-bottom: 5px;
+  letter-spacing: -0.2px;
+}
+.rdv-tile-desc {
+  font: 8px var(--mono);
+  color: #728290;
+  line-height: 1.6;
+}
+.rdv-tile-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  color: transparent;
+  transition: all 0.2s;
+}
+.rdv-tile.rdv-selected .rdv-tile-check {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d1a18;
+}
+
+/* Customisation tags */
+.rdv-custom-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #11151a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+}
+.rdv-custom-opt {
+  font: 9px var(--mono);
+  letter-spacing: 0.5px;
+  color: #92a2b0;
+  background: #182028;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 36px;
+}
+.rdv-custom-opt:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.rdv-custom-opt.rdv-opt-selected {
+  background: var(--accent);
+  color: #0b1718;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Drink options row */
+.rdv-drink-options {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.rdv-drink-opt {
+  font: 8px var(--mono);
+  color: #7b8d9c;
+  background: #101820;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.rdv-drink-opt.rdv-opt-selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(103, 217, 204, 0.1);
+}
+
+/* Preview Card */
+.rdv-preview {
+  background: #11151a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 22px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  box-sizing: border-box;
+}
+.rdv-preview-title {
+  font: 9px var(--mono);
+  letter-spacing: 1.8px;
+  color: #8c9caa;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+.rdv-preview-empty {
+  font-size: 11px;
+  color: #637380;
+  line-height: 1.7;
+  padding: 28px 0;
+  text-align: center;
+}
+.rdv-preview-line {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.rdv-preview-icon {
+  font-size: 18px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.rdv-preview-info {
+  flex: 1;
+}
+.rdv-preview-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f2f0eb;
+}
+.rdv-preview-detail {
+  font: 8px var(--mono);
+  color: #8192a0;
+  margin-top: 2px;
+}
+.rdv-cta-btn {
+  width: 100%;
+  background: var(--orange);
+  color: #150f0c;
+  padding: 13px 18px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+.rdv-cta-btn:hover:not(:disabled) {
+  background: #ff8555;
+  transform: translateY(-1px);
+}
+.rdv-cta-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.rdv-note {
+  font: 7px/1.6 var(--mono);
+  color: #657582;
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* Summary Modal */
+.rdv-summary {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 12, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: grid;
+  place-items: center;
+  z-index: 150;
+  padding: 20px;
+}
+.rdv-summary.hidden { display: none !important; }
+.rdv-summary-card {
+  background: #131920;
+  border: 1px solid rgba(103, 217, 204, 0.3);
+  border-radius: 14px;
+  padding: 28px 32px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+.rdv-summary-card h3 {
+  font-size: 22px;
+  letter-spacing: -0.8px;
+  font-weight: 400;
+  margin: 0 0 6px;
+  color: #f2f0eb;
+}
+.rdv-summary-sub {
+  font: 8px var(--mono);
+  color: var(--accent);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.rdv-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.rdv-summary-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #17212a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.rdv-summary-emoji {
+  font-size: 20px;
+  color: var(--accent);
+}
+.rdv-summary-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f2f0eb;
+}
+.rdv-summary-text span {
+  display: block;
+  font: 8px var(--mono);
+  color: #8fa0b0;
+  margin-top: 2px;
+}
+.rdv-summary-notice {
+  background: rgba(255, 113, 59, 0.08);
+  border-left: 2px solid var(--orange);
+  padding: 10px 12px;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #d1b8ab;
+  margin-bottom: 22px;
+}
+.rdv-summary-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- Responsiveness (<= 600px) ---------- */
+@media (max-width: 600px) {
+  .explainer-view {
+    padding: 32px 18px 28px;
+    min-height: auto;
+  }
+  .exp-headline {
+    font-size: 28px;
+    letter-spacing: -1px;
+    min-height: auto;
+  }
+  .exp-subtext {
+    font-size: 12px;
+  }
+  .exp-stage {
+    height: 430px;
+  }
+  .exp-tray {
+    width: 100%;
+    padding: 12px;
+    bottom: 4px;
+  }
+  .exp-tray-slots {
+    gap: 6px;
+  }
+  .exp-tray-slot {
+    height: 48px;
+    padding: 2px 4px;
+  }
+  .exp-tray-slot-name {
+    font-size: 9px;
+  }
+  .exp-tiles {
+    top: 20px;
+    gap: 8px;
+    width: 95%;
+  }
+  .exp-tile {
+    width: 32%;
+    height: 72px;
+    padding: 8px;
+  }
+  .exp-tile-name {
+    font-size: 10px;
+  }
+  .exp-card-outer {
+    width: 175px;
+    height: 120px;
+    margin-left: -87px;
+    margin-top: -60px;
+  }
+  .exp-card-title {
+    font-size: 13px;
+  }
+
+  .restaurant-trigger {
+    padding: 0 17px 18px;
+  }
+  .restaurant-demo-btn {
+    padding: 14px 16px;
+  }
+  .rdv-trigger-title {
+    font-size: 13px;
+  }
+  .restaurant-demo-view {
+    padding: 24px 17px 32px;
+  }
+  .rdv-header {
+    flex-direction: column-reverse;
+    gap: 14px;
+  }
+  .rdv-title {
+    text-align: left;
+  }
+  .rdv-content {
+    grid-template-columns: 1fr;
+  }
+  .rdv-tiles {
+    grid-template-columns: 1fr;
+  }
+  .rdv-preview {
+    position: static;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .exp-card-outer, .exp-tray, .exp-tile, .exp-stage, .exp-label, .restaurant-demo-btn {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 </style><!-- Plus Jakarta Sans — font software licensed under the SIL Open Font License 1.1.
 Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)
 
@@ -140,9 +1070,96 @@ DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 
---></head><body>
-<div class="ambientline"></div><header><div class="header-left"><a class="brand" href="../index.html" aria-label="ATOMZ home" style="text-decoration:none;color:inherit;"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#ff713b" stroke-width="2"><circle cx="20" cy="20" r="18"/><path d="M20 7v26M7 20h26M11 11l18 18M11 29l18-18"/></g></svg>ATOM <b>ZEN</b><small>By ATOMZ</small></a><a href="../index.html" class="zen-back-btn" aria-label="Back to main website"><span class="zen-back-arrow">←</span> <span class="zen-back-label-desktop">Back to website</span><span class="zen-back-label-mobile">Back</span></a></div><nav class="nav"><button class="help" id="help">How it works ↗</button><button id="sound" aria-pressed="false"><span class="soundbars"><i></i><i></i><i></i><i></i></span> Sound off</button><button class="pill reviewnav hidden" id="navreview">Review build ↗</button></nav></header>
-<section id="choose"><div class="intro"><div><div class="kicker"><i></i> Choose your starting point</div><h1>A few pieces.<br><span>All your own.</span></h1></div><div><p>Start with one of three ideas.<br>Make it yours with the pieces you need.</p><button id="resume" class="resume hidden">Continue my saved creation ↗</button></div></div><div class="selection" id="selection"></div><div class="selectionfoot"><span><b>01</b> CHOOSE YOUR BODY &nbsp; / &nbsp; <b>02</b> ATTACH YOUR PIECES &nbsp; / &nbsp; <b>03</b> FIND YOUR BALANCE</span><span>ATOM ZEN · AN ATOMZ PROTOTYPE</span></div></section>
+--><script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+</head><body>
+<div class="ambientline"></div><header><div class="header-left"><a class="brand" href="../index.html" aria-label="ATOMZ home" style="text-decoration:none;color:inherit;"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#ff713b" stroke-width="2"><circle cx="20" cy="20" r="18"/><path d="M20 7v26M7 20h26M11 11l18 18M11 29l18-18"/></g></svg>ATOM <b>ZEN</b><small>By ATOMZ</small></a><a href="../index.html" class="zen-back-btn" aria-label="Back to main website"><span class="zen-back-arrow">←</span> <span class="zen-back-label-desktop">Back to website</span><span class="zen-back-label-mobile">Back</span></a></div><nav class="nav"><button class="help" id="help">How it works ↗</button><button class="pill exp-nav-btn" id="nav-explainer-btn">Explainer ▷</button><button id="sound" aria-pressed="false"><span class="soundbars"><i></i><i></i><i></i><i></i></span> Sound off</button><button class="pill reviewnav hidden" id="navreview">Review build ↗</button></nav></header>
+
+
+<section id="explainer-view" class="explainer-view" aria-label="ATOMZEN product explainer">
+  <div class="exp-headline-area">
+    <div class="exp-eyebrow"><i></i> ATOMZEN &middot; BY ATOMZ</div>
+    <h2 class="exp-headline" id="exp-headline">Growing your business shouldn't start with confusion.</h2>
+    <p class="exp-subtext" id="exp-subtext"></p>
+  </div>
+  
+  <div class="exp-stage" id="exp-stage" aria-hidden="true">
+    <div id="exp-cards-layer" class="exp-cards-layer"></div>
+    <svg id="exp-svg" class="exp-svg" aria-hidden="true"></svg>
+    <div id="exp-labels" class="exp-labels"></div>
+    <div id="exp-tray" class="exp-tray" aria-label="Your selection tray">
+      <div class="exp-tray-label">
+        <span>Your selection</span>
+        <span id="exp-tray-status">Ready</span>
+      </div>
+      <div id="exp-tray-slots" class="exp-tray-slots"></div>
+    </div>
+    <div id="exp-tiles" class="exp-tiles"></div>
+  </div>
+  
+  <div class="exp-progress" id="exp-progress" aria-hidden="true"></div>
+  
+  <div class="exp-controls">
+    <button class="exp-btn-primary" id="exp-play-btn" aria-label="Play explanation animation">&#9654; Play explanation</button>
+    <button class="exp-btn-secondary" id="exp-open-btn" aria-label="Open ATOMZEN configurator">Open ATOMZEN &rarr;</button>
+  </div>
+  
+  <div id="exp-final" class="exp-final hidden" role="dialog" aria-label="Explanation complete">
+    <div class="exp-final-cta">
+      <h3>Your business. Your combination.</h3>
+      <p>Build your personalised service selection with ATOMZEN.</p>
+      <div class="exp-final-buttons">
+        <button class="exp-btn-primary" id="exp-final-open-btn">Open ATOMZEN &rarr;</button>
+        <button class="exp-btn-secondary" id="exp-replay-btn">&#8635; Replay</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="choose"><div class="intro"><div><div class="kicker"><i></i> Choose your starting point</div><h1>A few pieces.<br><span>All your own.</span></h1></div><div><p>Start with one of three ideas.<br>Make it yours with the pieces you need.</p><button id="resume" class="resume hidden">Continue my saved creation ↗</button></div></div>
+
+<div id="restaurant-demo-trigger" class="restaurant-trigger">
+  <button class="restaurant-demo-btn" id="open-restaurant-demo" aria-label="Try the restaurant demo">
+    <div class="rdv-trigger-text">
+      <div class="rdv-trigger-title">
+        <span>Try the restaurant demo</span>
+        <span class="rdv-trigger-pill">Concept</span>
+      </div>
+      <div class="restaurant-demo-sub">See how this could work for your restaurant.</div>
+    </div>
+    <span class="rdv-trigger-arrow" aria-hidden="true">&rarr;</span>
+  </button>
+</div>
+
+<div class="selection" id="selection"></div><div class="selectionfoot"><span><b>01</b> CHOOSE YOUR BODY &nbsp; / &nbsp; <b>02</b> ATTACH YOUR PIECES &nbsp; / &nbsp; <b>03</b> FIND YOUR BALANCE</span><span>ATOM ZEN · AN ATOMZ PROTOTYPE</span></div></section>
+
+<section id="restaurant-demo-view" class="restaurant-demo-view hidden" aria-label="Restaurant concept demonstration">
+  <div class="rdv-header">
+    <button class="rdv-back" id="rdv-back" aria-label="Back to options">&larr; Back to options</button>
+    <div class="rdv-title">
+      <div class="rdv-eyebrow">Interactive concept demo</div>
+      <h2 tabindex="-1" id="rdv-heading">Imagine this for your restaurant.</h2>
+      <p>A customised food offering with a non-alcoholic drinks bar &#8212; including mocktails and matcha.</p>
+    </div>
+  </div>
+  <div id="rdv-content" class="rdv-content"></div>
+  <div id="rdv-summary" class="rdv-summary hidden" role="dialog" aria-modal="true" aria-labelledby="rdv-summary-title">
+    <div class="rdv-summary-card">
+      <h3 id="rdv-summary-title">Your Assembled Combination</h3>
+      <div class="rdv-summary-sub">Personalised food & drink selection</div>
+      <div id="rdv-summary-items" class="rdv-summary-items"></div>
+      <div class="rdv-summary-notice" id="rdv-summary-note">Sample combination &#8212; availability would need to be confirmed with the restaurant.</div>
+      <div class="rdv-summary-actions">
+        <button class="rdv-cta-btn" id="rdv-summary-restart" style="margin-top:0;">Start again</button>
+        <button class="rdv-back" id="rdv-summary-close" style="flex:1;justify-content:center;">Edit choices</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</div>
 <main id="builder" class="builder hidden"><aside class="library" aria-label="Choose pieces"><div class="libheading"><div class="mono muted" style="font-size:8px">Add to your idea</div><h2 tabindex="-1">Your pieces</h2><p>Drag a piece in, or click to choose a quantity.</p></div><div class="filterrow" id="filters"></div><input id="search" class="search" aria-label="Search attachments" placeholder="Find an attachment…"><div class="catalog" id="catalog"></div><div class="libfoot">ALL CATEGORIES CAN CONNECT.<br>SELECT ANY ATTACHED PIECE TO EDIT IT.</div></aside>
 <section class="stage" id="stage" aria-label="Assembly workspace"><div class="stageheader"><span>Your creation</span><button id="changebase">Change starting point ↗</button></div><div class="stage-title"><h2 id="stageTitle"></h2><p id="stageDescription"></p></div><div class="stagemotion"><button id="motion" aria-label="Pause motion">Ⅱ</button><button id="minuszoom" aria-label="Zoom out">−</button><button id="pluszoom" aria-label="Zoom in">＋</button></div><div class="scene" id="scene"><div class="ambience"></div><div class="halo"></div><div class="assembly" id="assembly"><svg class="wires" id="wires" aria-hidden="true"></svg><button class="core" id="core" aria-label="Edit main body"></button><div class="coretag" id="coretag"></div><div id="attached"></div></div></div><div class="buildcounter" id="buildcounter"></div><div class="mobile-build-actions mobile-only"><button class="mobile-add" data-mobile-go="pieces">Add pieces <span>＋</span></button><button id="mobile-edit-build">Edit build <span id="mobile-piece-count">1</span></button></div><div class="stagebottom"><div class="msg"><h3 id="message">Ready when you are.</h3><p id="messagesub" aria-live="polite">Add a piece from the left. You can always undo it.</p></div><div class="history"><button id="undo" aria-label="Undo">↶</button><button id="redo" aria-label="Redo">↷</button><button id="reset" aria-label="Remove all attachments">⟲</button></div></div></section>
 <aside class="right"><section class="dashboard" aria-label="Adjust time money and quality"><div class="dashboardhead"><span tabindex="-1">Find your balance</span><button id="rules">How it works</button></div><div class="control"><div class="controlhead"><label for="timebar">Time</label><strong id="timevalue"></strong></div><input class="range" id="timebar" type="range" min="3" max="45" step="1" style="--rangeColor:#78b6ca"><div class="rangeends"><span>Faster</span><span>More flexible</span></div></div><div class="control"><div class="controlhead"><label for="moneybar">Money</label><strong id="moneyvalue"></strong></div><input class="range" id="moneybar" type="range" min="1000" max="20000" step="50" style="--rangeColor:#ff8756"><div class="rangeends"><span>Lower budget</span><span>Higher budget</span></div><div class="allocation" aria-label="Use extra money for"><button data-spend="speed" class="active">Faster delivery</button><button data-spend="quality">More detail</button></div></div><div class="control"><div class="controlhead"><label for="qualitybar">Quality</label><strong id="qualityvalue"></strong></div><input class="range" id="qualitybar" type="range" min="1" max="3" step="0.01" style="--rangeColor:#ba9cda"><div class="rangeends"><span>Standard</span><span>More detail</span></div></div><p class="tradefeedback" id="tradefeedback">Move any bar. The others adjust with it.</p><div class="modeltag">Demo estimate · <button id="modeldetails">Pricing details</button></div><div class="modeltag" id="pending" style="margin-top:7px"></div></section><section class="details" id="details"></section><div class="reviewfoot"><button class="primary" id="review">Review my build <span>↗</span></button><div class="tiny">Final price and delivery need ATOMZ approval.<br>No order or payment is placed.</div></div></aside></main><div id="mobile-dock" class="mobile-only mobile-dock" aria-hidden="true"><div class="mobile-estimate" aria-label="Current demo estimate"><div><span>Demo estimate</span><strong id="mobile-money">—</strong></div><div><span>Workdays</span><strong id="mobile-days">—</strong></div><div><span>Quality</span><strong id="mobile-quality">—</strong></div></div><nav class="mobile-tabs" aria-label="Build navigation"><button data-mobile-go="build" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></svg><span>Build</span><b id="mobile-build-count" class="hidden"></b></button><button data-mobile-go="pieces" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M12 8v8M8 12h8"/></svg><span>Add pieces</span></button><button data-mobile-go="balance" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5m6 0h5M4 17h9m6 0h1"/><circle cx="12" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></svg><span>Balance</span></button></nav></div><dialog id="modal"></dialog><script>
@@ -239,4 +1256,787 @@ $$('[data-mobile-go]').forEach(el=>el.onclick=()=>setMobileView(el.dataset.mobil
 $('#mobile-edit-build').onclick=()=>{filter='inbuild';query='';$('#search').value='';mobileView='pieces';renderBuilder()};
 
 $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').classList.add('hidden');$('#choose').classList.remove('hidden');$('#navreview').classList.add('hidden');saved=state;$('#resume').classList.remove('hidden');renderChoices();syncMobileUI()};$('#core').onclick=()=>inspect(state.base);$('#core').onpointermove=e=>{if(reduce||!motion)return;let r=$('#core').getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;$('#core').style.setProperty('--cx',x*11+'px');$('#core').style.setProperty('--cy',y*8+'px');$('#core').style.setProperty('--cr',x*5+'deg')};$('#core').onpointerleave=()=>{['--cx','--cy','--cr'].forEach(v=>$('#core').style.removeProperty(v))};$('#rules').onclick=$('#modeldetails').onclick=showRules;$('#review').onclick=$('#navreview').onclick=review;$('#search').oninput=e=>{query=e.target.value.toLowerCase();renderCatalog()};$('#undo').onclick=()=>{if(!history.length)return;future.push(JSON.stringify(state));state=JSON.parse(history.pop());selected=state.base;save();renderBuilder();message('Change undone.','Your earlier creation has been restored.')};$('#redo').onclick=()=>{if(!future.length)return;history.push(JSON.stringify(state));state=JSON.parse(future.pop());selected=state.base;save();renderBuilder();message('Change restored.','Your piece is back in place.')};$('#reset').onclick=()=>{change(()=>state.attached=[]);selected=state.base;renderBuilder();message('Just your main body.','Undo to restore your attachments.')};$('#sound').onclick=()=>{sound=!sound;$('#sound').classList.toggle('soundon',sound);$('#sound').setAttribute('aria-pressed',sound);$('#sound').lastChild.textContent=sound?' Sound on':' Sound off';soundTick()};$('#help').onclick=()=>modal('Build it your way.','<p>1. Choose one of the three main bodies.<br><br>2. Add attachments from the left. Drag them onto your creation, or click an item and use the quantity and Add to my build controls underneath it.<br><br>3. Move the Time, Money and Quality bars on the right. Each adjustment changes the others according to the demo rules.<br><br>4. Select any attached piece to edit its quantity or remove it.<br><br>5. Review your creation and download its specification. You can undo any change.</p>');$('#modal').onclick=e=>{if(e.target===$('#modal'))$('#modal').close()};$('#motion').onclick=()=>{motion=!motion;$('#motion').textContent=motion?'Ⅱ':'▷';$('#assembly').style.animationPlayState=motion?'running':'paused';$('#motion').setAttribute('aria-label',motion?'Pause motion':'Resume motion');$('#assembly').style.setProperty('--rx','0deg');$('#assembly').style.setProperty('--ry','0deg')};$('#pluszoom').onclick=()=>{zoom=Math.min(1.25,zoom+.1);$('#assembly').style.setProperty('--zoom',zoom)};$('#minuszoom').onclick=()=>{zoom=Math.max(.7,zoom-.1);$('#assembly').style.setProperty('--zoom',zoom)};$('#scene').onpointermove=e=>{if(!motion||reduce)return;let r=$('#scene').getBoundingClientRect();$('#assembly').style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*10+'deg');$('#assembly').style.setProperty('--rx',-((e.clientY-r.top)/r.height-.5)*7+'deg')};$('#scene').onpointerleave=()=>{$('#assembly').style.setProperty('--rx','0deg');$('#assembly').style.setProperty('--ry','0deg')};window.addEventListener('resize',()=>{if(!isPhone()&&filter==='inbuild')filter='all';if(state.base)renderBuilder();else syncMobileUI()});renderChoices();syncMobileUI();
-</script></body></html>
+
+
+</script>
+<script>
+
+</script>
+
+<script>
+
+/* =====================================================
+   ATOMZEN EXPLAINER + RESTAURANT DEMO — Complete JS
+   ===================================================== */
+(function() {
+  'use strict';
+  if (window._atomzenProductionInit) return;
+  window._atomzenProductionInit = true;
+
+  function el(id) { return document.getElementById(id); }
+  function qs(sel, ctx) { return (ctx || document).querySelector(sel); }
+  var isMobile = function() { return window.innerWidth <= 600; };
+
+  // ══════════════════════════════════════════════════════
+  // EXPLAINER MODULE
+  // ══════════════════════════════════════════════════════
+  
+  var PROPOSAL_CARDS = [
+    { title: "Content package",      badge: "Proposal 01", meta: "Short-form video retainer" },
+    { title: "Website project",      badge: "Proposal 02", meta: "Custom site build scope" },
+    { title: "Ad management",        badge: "Proposal 03", meta: "Paid acquisition retainer" },
+    { title: "Brand refresh",        badge: "Proposal 04", meta: "Visual identity package" },
+    { title: "Monthly retainer",     badge: "Proposal 05", meta: "Ongoing agency services" },
+    { title: "What do I actually need?", badge: "Question", meta: "Where does it fit?" }
+  ];
+
+  var DESKTOP_POSITIONS = [
+    { x: -240, y: -70,  r: -7 },
+    { x: -75,  y: -125, r: 4 },
+    { x: 105,  y: -75,  r: -5 },
+    { x: 235,  y: -35,  r: 8 },
+    { x: -160, y: 80,   r: 3 },
+    { x: 95,   y: 75,   r: -6 }
+  ];
+
+  var MOBILE_POSITIONS = [
+    { x: -15, y: -90, r: -4 },
+    { x: 15,  y: 0,   r: 3 },
+    { x: 0,   y: 90,  r: -2 }
+  ];
+
+  var SERVICE_TILES = [
+    { id: 'content',   name: 'Content Creation', symbol: '▷', cat: 'Reels, videos, posts', color: '#b5e9d9' },
+    { id: 'marketing', name: 'Marketing & Growth', symbol: '↗', cat: 'Campaigns, ads, strategy', color: '#f4c2a4' },
+    { id: 'digital',   name: 'Digital Assets',    symbol: '⌘', cat: 'Websites & interactive tools', color: '#d9c7f5' }
+  ];
+
+  var SCENES = [
+    { headline: "Growing your business shouldn't start with confusion.", sub: "Agency proposals pile up with competing scopes, overlapping promises, and no clear starting point." },
+    { headline: "Different packages. Different promises. No clear fit.", sub: "You end up comparing fixed bundles that don't match what your business actually needs." },
+    { headline: "Start with what you need.", sub: "Not with someone else's pre-made package." },
+    { headline: "Meet ATOMZEN.", sub: "Choose the services that fit your business." },
+    { headline: "Pick what you need. Bring it together.", sub: "Select each piece, assemble your custom combination, and balance time, budget and quality." },
+    { headline: "Your business. Your combination.", sub: "Build your selection with ATOMZEN." }
+  ];
+
+  function buildExplainerDOM() {
+    var cardsLayer = el('exp-cards-layer');
+    if (!cardsLayer) return;
+    cardsLayer.innerHTML = '';
+
+    var isMob = isMobile();
+    var cardsToRender = isMob ? [0, 1, 5] : [0, 1, 2, 3, 4, 5];
+
+    cardsToRender.forEach(function(cardIdx, renderIdx) {
+      var cardData = PROPOSAL_CARDS[cardIdx];
+      var pos = isMob ? MOBILE_POSITIONS[renderIdx] : DESKTOP_POSITIONS[cardIdx];
+
+      var outer = document.createElement('div');
+      outer.className = 'exp-card-outer';
+      outer.id = 'exp-card-' + cardIdx;
+      outer.setAttribute('data-pos-x', pos.x);
+      outer.setAttribute('data-pos-y', pos.y);
+
+      outer.innerHTML = '<div class="exp-card-inner" style="transform: rotate(' + pos.r + 'deg);">'
+        + '<div class="exp-card-content">'
+        + '<div class="exp-card-badge">' + cardData.badge + '</div>'
+        + '<div class="exp-card-title">' + cardData.title + '</div>'
+        + '<div class="exp-card-meta">' + cardData.meta + '</div>'
+        + '</div></div>';
+
+      cardsLayer.appendChild(outer);
+    });
+
+    // Tray slots
+    var traySlots = el('exp-tray-slots');
+    if (traySlots) {
+      traySlots.innerHTML = '';
+      SERVICE_TILES.forEach(function(s, i) {
+        var slot = document.createElement('div');
+        slot.className = 'exp-tray-slot';
+        slot.id = 'exp-slot-' + i;
+        slot.innerHTML = '<span>SLOT ' + (i + 1) + '</span>';
+        traySlots.appendChild(slot);
+      });
+    }
+
+    // Service tiles
+    var tilesEl = el('exp-tiles');
+    if (tilesEl) {
+      tilesEl.innerHTML = '';
+      SERVICE_TILES.forEach(function(s, i) {
+        var tile = document.createElement('div');
+        tile.className = 'exp-tile';
+        tile.id = 'exp-tile-' + i;
+        tile.innerHTML = '<div class="exp-tile-symbol" style="color:' + s.color + '">' + s.symbol + '</div>'
+          + '<div class="exp-tile-name">' + s.name + '</div>'
+          + '<div class="exp-tile-desc">' + s.cat + '</div>';
+        tilesEl.appendChild(tile);
+      });
+    }
+
+    // Progress bar dots
+    var progressEl = el('exp-progress');
+    if (progressEl) {
+      progressEl.innerHTML = '';
+      SCENES.forEach(function(_, idx) {
+        var dot = document.createElement('div');
+        dot.className = 'exp-dot' + (idx === 0 ? ' active' : '');
+        dot.id = 'exp-dot-' + idx;
+        progressEl.appendChild(dot);
+      });
+    }
+  }
+
+  function setSceneDot(idx) {
+    for (var d = 0; d < SCENES.length; d++) {
+      var dot = el('exp-dot-' + d);
+      if (dot) dot.classList.toggle('active', d === idx);
+    }
+  }
+
+  function setExplainerHeadlineDirect(sceneIdx) {
+    var h = el('exp-headline');
+    var s = el('exp-subtext');
+    if (h && SCENES[sceneIdx]) {
+      h.textContent = SCENES[sceneIdx].headline;
+      if (s) s.textContent = SCENES[sceneIdx].sub;
+    }
+    setSceneDot(sceneIdx);
+  }
+
+  var expTimeline = null;
+  var expPlaybackState = 'idle'; // idle | playing | paused | done
+  window.expTL = null;
+  window._currentExpScene = -1;
+
+  function resetExplainerVisuals() {
+    setExplainerHeadlineDirect(0);
+    el('exp-final').classList.add('hidden');
+    el('exp-tray').style.opacity = '0';
+    el('exp-tray-status').textContent = 'Ready';
+    el('exp-svg').innerHTML = '';
+    el('exp-labels').innerHTML = '';
+
+    var isMob = isMobile();
+    var cards = isMob ? [0, 1, 5] : [0, 1, 2, 3, 4, 5];
+
+    cards.forEach(function(i) {
+      var card = el('exp-card-' + i);
+      if (card) {
+        var posX = parseFloat(card.getAttribute('data-pos-x')) || 0;
+        var posY = parseFloat(card.getAttribute('data-pos-y')) || 0;
+        gsap.set(card, { x: posX, y: posY, scale: 1, opacity: 1 });
+      }
+    });
+
+    SERVICE_TILES.forEach(function(_, i) {
+      var tile = el('exp-tile-' + i);
+      if (tile) {
+        tile.classList.remove('selected-tile');
+        gsap.set(tile, { opacity: 0, y: 0, scale: 1 });
+      }
+      var slot = el('exp-slot-' + i);
+      if (slot) {
+        slot.className = 'exp-tray-slot';
+        slot.innerHTML = '<span>SLOT ' + (i + 1) + '</span>';
+      }
+    });
+
+    setSceneDot(0);
+  }
+
+  function constructTimeline() {
+    if (expTimeline) { expTimeline.kill(); }
+
+    expTimeline = gsap.timeline({
+      paused: true,
+      onComplete: function() {
+        expPlaybackState = 'done';
+        el('exp-play-btn').innerHTML = '&#8635; Replay';
+        el('exp-final').classList.remove('hidden');
+      }
+    });
+
+    // onUpdate synchronization so seeking/scrubbing always displays the exact right scene!
+    expTimeline.eventCallback("onUpdate", function() {
+      var t = expTimeline.time();
+      var sceneIdx = 0;
+      if (t >= 18.0) sceneIdx = 5;
+      else if (t >= 12.0) sceneIdx = 4;
+      else if (t >= 9.0) sceneIdx = 3;
+      else if (t >= 7.0) sceneIdx = 2;
+      else if (t >= 4.0) sceneIdx = 1;
+      else sceneIdx = 0;
+
+      if (window._currentExpScene !== sceneIdx) {
+        window._currentExpScene = sceneIdx;
+        setExplainerHeadlineDirect(sceneIdx);
+        if (sceneIdx === 1) renderSceneBLabels();
+      }
+    });
+
+    window.expTL = expTimeline;
+    var tl = expTimeline;
+    var isMob = isMobile();
+
+    // ── SCENE A (0.0–4.0s): The Confusion ───────────────
+    tl.addLabel('sceneA', 0);
+
+    var cardIndices = isMob ? [0, 1, 5] : [0, 1, 2, 3, 4, 5];
+    cardIndices.forEach(function(i, seq) {
+      var card = el('exp-card-' + i);
+      if (card) {
+        var posX = parseFloat(card.getAttribute('data-pos-x')) || 0;
+        var posY = parseFloat(card.getAttribute('data-pos-y')) || 0;
+        tl.fromTo(card, 
+          { x: posX, y: posY + 24, scale: 0.96, opacity: 0 },
+          { x: posX, y: posY, scale: 1.0, opacity: 1, duration: 1.1, ease: 'back.out(1.15)' },
+          0.2 + seq * 0.08
+        );
+      }
+    });
+
+    if (!isMob) {
+      tl.to('#exp-card-0', { x: '-=8', y: '+=6', duration: 0.7, ease: 'power2.inOut' }, 2.0);
+      tl.to('#exp-card-3', { x: '+=10', y: '-=8', duration: 0.7, ease: 'power2.inOut' }, 2.0);
+      tl.to('#exp-card-1', { x: '+=6', y: '-=4', duration: 0.6, ease: 'power2.inOut' }, 3.0);
+      tl.to('#exp-card-4', { x: '-=6', y: '+=6', duration: 0.6, ease: 'power2.inOut' }, 3.0);
+    } else {
+      tl.to('#exp-card-0', { x: '-=5', y: '+=4', duration: 0.6, ease: 'power2.inOut' }, 2.0);
+      tl.to('#exp-card-1', { x: '+=5', y: '-=4', duration: 0.6, ease: 'power2.inOut' }, 3.0);
+    }
+
+    // ── SCENE B (4.0–7.0s): Identify the Problem ────────
+    tl.addLabel('sceneB', 4.0);
+
+    // ── SCENE C (7.0–9.0s): The Turning Point ───────────
+    tl.addLabel('sceneC', 7.0);
+
+    tl.to('#exp-stage', { scale: 0.985, duration: 0.18, ease: 'power1.in' }, 7.0);
+    tl.to('#exp-stage', { scale: 1.05, y: -10, duration: 0.42, ease: 'power2.out' }, 7.18);
+    tl.to('#exp-stage', { scale: 1.0, y: 0, duration: 0.4, ease: 'power3.out' }, 7.6);
+
+    tl.to('#exp-labels', { opacity: 0, duration: 0.35 }, 7.0);
+    tl.to('#exp-svg', { opacity: 0, duration: 0.35 }, 7.0);
+
+    if (!isMob) {
+      tl.to('#exp-card-0', { x: '-=90', y: '-=40', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.1);
+      tl.to('#exp-card-1', { y: '-=100', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.15);
+      tl.to('#exp-card-2', { x: '+=100', y: '-=50', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.15);
+      tl.to('#exp-card-3', { x: '+=110', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.2);
+      tl.to('#exp-card-4', { x: '-=100', y: '+=60', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.1);
+      tl.to('#exp-card-5', { y: '+=90', opacity: 0, duration: 0.7, ease: 'power2.in' }, 7.2);
+    } else {
+      tl.to('#exp-card-0', { y: '-=70', opacity: 0, duration: 0.6, ease: 'power2.in' }, 7.1);
+      tl.to('#exp-card-1', { x: '+=70', opacity: 0, duration: 0.6, ease: 'power2.in' }, 7.15);
+      tl.to('#exp-card-5', { y: '+=70', opacity: 0, duration: 0.6, ease: 'power2.in' }, 7.2);
+    }
+
+    tl.fromTo('#exp-tray',
+      { opacity: 0, scale: 0.96 },
+      { opacity: 1, scale: 1.0, duration: 0.65, ease: 'back.out(1.2)' },
+      7.65
+    );
+
+    // ── SCENE D (9.0–12.0s): Introduce ATOMZEN ──────────
+    tl.addLabel('sceneD', 9.0);
+
+    SERVICE_TILES.forEach(function(_, i) {
+      tl.fromTo('#exp-tile-' + i,
+        { opacity: 0, y: 18, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1.0, duration: 0.55, ease: 'back.out(1.4)' },
+        9.2 + i * 0.16
+      );
+    });
+
+    // ── SCENE E (12.0–18.0s): Show the Assembly ─────────
+    tl.addLabel('sceneE', 12.0);
+    tl.call(function() {
+      el('exp-tray-status').textContent = 'Assembling...';
+    }, null, 12.0);
+
+    function animateTileToSlot(tileIdx, slotIdx, timeStart) {
+      tl.call(function() {
+        var tile = el('exp-tile-' + tileIdx);
+        if (tile) tile.classList.add('selected-tile');
+      }, null, timeStart);
+      tl.to('#exp-tile-' + tileIdx, { y: -8, duration: 0.25, ease: 'power2.out' }, timeStart);
+
+      tl.to('#exp-tile-' + tileIdx, {
+        opacity: 0,
+        scale: 0.85,
+        y: 40,
+        duration: 0.45,
+        ease: 'power2.in'
+      }, timeStart + 0.45);
+
+      tl.call(function() {
+        var slot = el('exp-slot-' + slotIdx);
+        if (!slot) return;
+        var service = SERVICE_TILES[tileIdx];
+        slot.classList.add('filled');
+        slot.innerHTML = '<span class="exp-tray-slot-name">' + service.name + '</span>'
+          + '<span class="exp-tray-slot-cat">' + service.cat.split(',')[0] + '</span>'
+          + '<span class="exp-tray-check">&check;</span>';
+        gsap.fromTo(slot, { scale: 0.94 }, { scale: 1.02, duration: 0.22, ease: 'power2.out', onComplete: function() {
+          gsap.to(slot, { scale: 1.0, duration: 0.18 });
+        }});
+      }, null, timeStart + 0.85);
+    }
+
+    animateTileToSlot(0, 0, 12.0);
+    animateTileToSlot(1, 1, 13.6);
+    animateTileToSlot(2, 2, 15.2);
+
+    tl.call(function() {
+      el('exp-tray-status').textContent = '3 Services Selected';
+    }, null, 16.6);
+
+    // ── SCENE F (18.0–22.0s): Final Frame ───────────────
+    tl.addLabel('sceneF', 18.0);
+
+    tl.to('#exp-final', {
+      duration: 0.1,
+      onStart: function() {
+        el('exp-final').classList.remove('hidden');
+        gsap.fromTo('#exp-final', { opacity: 0 }, { opacity: 1, duration: 0.65, ease: 'power2.out' });
+      }
+    }, 18.4);
+
+    // Hold Scene F until 22.0s as specified in storyboard (18.0 - 22.0s)
+    tl.to({}, { duration: 3.6 }, 18.4);
+
+    return tl;
+  }
+
+  function renderSceneBLabels() {
+    var labelsEl = el('exp-labels');
+    var svgEl = el('exp-svg');
+    if (!labelsEl || !svgEl) return;
+    labelsEl.innerHTML = '';
+    svgEl.innerHTML = '';
+    labelsEl.style.opacity = '1';
+    svgEl.style.opacity = '1';
+
+    var isMob = isMobile();
+    var questions = [
+      { text: "What's included?", targetCard: 0, pos: isMob ? { left: '8%', top: '12%' } : { left: '10%', top: '22%' } },
+      { text: "What matters?",     targetCard: 1, pos: isMob ? { right: '8%', top: '45%' } : { left: '68%', top: '18%' } },
+      { text: "Where do I start?", targetCard: isMob ? 5 : 4, pos: isMob ? { left: '12%', top: '78%' } : { left: '18%', top: '72%' } }
+    ];
+
+    questions.forEach(function(q, idx) {
+      var label = document.createElement('div');
+      label.className = 'exp-label';
+      label.textContent = q.text;
+      if (q.pos.left) label.style.left = q.pos.left;
+      if (q.pos.right) label.style.right = q.pos.right;
+      label.style.top = q.pos.top;
+      labelsEl.appendChild(label);
+
+      gsap.to(label, { opacity: 1, y: 0, duration: 0.4, delay: idx * 0.18, ease: 'power2.out' });
+
+      setTimeout(function() {
+        var card = el('exp-card-' + q.targetCard);
+        var stage = el('exp-stage');
+        if (!card || !stage || !svgEl) return;
+
+        var stageR = stage.getBoundingClientRect();
+        var lblR = label.getBoundingClientRect();
+        var cardR = card.getBoundingClientRect();
+
+        var x1 = lblR.left - stageR.left + lblR.width / 2;
+        var y1 = lblR.top - stageR.top + lblR.height / 2;
+        var x2 = cardR.left - stageR.left + cardR.width / 2;
+        var y2 = cardR.top - stageR.top + cardR.height / 2;
+
+        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        var len = Math.hypot(x2 - x1, y2 - y1);
+        line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+        line.setAttribute('stroke', '#67d9cc');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('stroke-opacity', '0.5');
+        line.setAttribute('stroke-dasharray', len);
+        line.setAttribute('stroke-dashoffset', len);
+        svgEl.appendChild(line);
+
+        gsap.to(line, {
+          attr: { 'stroke-dashoffset': 0 },
+          duration: 0.55,
+          delay: idx * 0.18,
+          ease: 'power2.out'
+        });
+      }, 50);
+    });
+  }
+
+  function initExplainerModule() {
+    buildExplainerDOM();
+    setExplainerHeadlineDirect(0);
+
+    var playBtn = el('exp-play-btn');
+    var openBtn = el('exp-open-btn');
+    var finalOpenBtn = el('exp-final-open-btn');
+    var replayBtn = el('exp-replay-btn');
+    var explainerView = el('explainer-view');
+    var chooseSection = el('choose');
+    var navExplainerBtn = el('nav-explainer-btn');
+
+    function openBuilderSelection() {
+      if (explainerView) explainerView.classList.add('hidden');
+      if (chooseSection) {
+        chooseSection.style.display = '';
+        chooseSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openBuilderSelection);
+    if (finalOpenBtn) finalOpenBtn.addEventListener('click', openBuilderSelection);
+
+    if (navExplainerBtn) {
+      navExplainerBtn.addEventListener('click', function() {
+        if (explainerView) {
+          explainerView.classList.remove('hidden');
+          explainerView.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    function startOrResumePlayback() {
+      if (expPlaybackState === 'idle') {
+        constructTimeline();
+        expTimeline.play();
+        expPlaybackState = 'playing';
+        playBtn.innerHTML = '&#10074;&#10074; Pause';
+      } else if (expPlaybackState === 'playing') {
+        expTimeline.pause();
+        expPlaybackState = 'paused';
+        playBtn.innerHTML = '&#9654; Resume';
+      } else if (expPlaybackState === 'paused') {
+        expTimeline.resume();
+        expPlaybackState = 'playing';
+        playBtn.innerHTML = '&#10074;&#10074; Pause';
+      } else if (expPlaybackState === 'done') {
+        el('exp-final').classList.add('hidden');
+        expPlaybackState = 'idle';
+        resetExplainerVisuals();
+        constructTimeline();
+        expTimeline.play();
+        expPlaybackState = 'playing';
+        playBtn.innerHTML = '&#10074;&#10074; Pause';
+      }
+    }
+
+    if (playBtn) playBtn.addEventListener('click', startOrResumePlayback);
+
+    if (replayBtn) {
+      replayBtn.addEventListener('click', function() {
+        el('exp-final').classList.add('hidden');
+        expPlaybackState = 'idle';
+        resetExplainerVisuals();
+        constructTimeline();
+        expTimeline.play();
+        expPlaybackState = 'playing';
+        playBtn.innerHTML = '&#10074;&#10074; Pause';
+      });
+    }
+
+    // Prefers-reduced-motion check
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      SERVICE_TILES.forEach(function(_, i) {
+        var tile = el('exp-tile-' + i);
+        if (tile) tile.style.opacity = '1';
+        var slot = el('exp-slot-' + i);
+        if (slot) {
+          slot.classList.add('filled');
+          slot.innerHTML = '<span class="exp-tray-slot-name">' + SERVICE_TILES[i].name + '</span>';
+        }
+      });
+      var tray = el('exp-tray');
+      if (tray) { tray.style.opacity = '1'; }
+    }
+  }
+
+  // ══════════════════════════════════════════════════════
+  // RESTAURANT DEMO MODULE (Mandatory Update)
+  // ══════════════════════════════════════════════════════
+  var restaurantMenuData = {
+    name: 'Concept Restaurant Demo',
+    note: 'Sample combination — availability would need to be confirmed with the restaurant.',
+    food: [
+      { id: 'bowl',  name: 'Nourish Bowl',  desc: 'Warm grains, seasonal greens, charred veg and house herb vinaigrette.', icon: '&#9673;' },
+      { id: 'wrap',  name: 'Loaded Wrap',   desc: 'Fresh garden crunch, protein and avocado in a pressed wholewheat wrap.', icon: '&#9681;' },
+      { id: 'plate', name: 'Small Plates',  desc: 'A curated tasting trio of bites, dips, and warm flatbreads.',        icon: '&#9680;' }
+    ],
+    customisations: {
+      bowl:  ['Base: Warm Quinoa', 'Base: Spiced Brown Rice', 'Base: Crisp Greens'],
+      wrap:  ['Add: Hass Avocado', 'Add: Smoked Hummus', 'Add: Roasted Peppers'],
+      plate: ['Style: Mediterranean Mezze', 'Style: Tokyo Garden Bites', 'Style: Levant Herb Dips']
+    },
+    drinks: [
+      { id: 'matcha',    name: 'Matcha',           desc: 'Ceremonial grade Uji matcha, cold-whisked or warm.', options: ['Oat milk', 'Almond milk', 'Straight water'] },
+      { id: 'mocktail',  name: 'House Mocktail',   desc: 'Botanical distillate, fresh citrus, aromatic herbs.', options: ['Citrus & Rosemary', 'Wild Berry Shrub', 'Elderflower & Basil'] },
+      { id: 'sparkling', name: 'Sparkling Water',  desc: 'Chilled mineral water infused with garden botanicals.', options: ['Cucumber & Mint', 'Grapefruit Twist', 'Pure Sparkling'] }
+    ]
+  };
+
+  var rdvState = {
+    food: null,
+    customisation: null,
+    drink: null,
+    drinkOption: null
+  };
+
+  function resetRestaurantState() {
+    rdvState.food = null;
+    rdvState.customisation = null;
+    rdvState.drink = null;
+    rdvState.drinkOption = null;
+  }
+
+  function renderRestaurantDemo() {
+    var content = el('rdv-content');
+    if (!content) return;
+
+    content.innerHTML = '<div class="rdv-left" id="rdv-left"></div>'
+      + '<div class="rdv-preview" id="rdv-preview"></div>';
+
+    renderRestaurantChoices();
+    renderRestaurantPreview();
+  }
+
+  function renderRestaurantChoices() {
+    var left = el('rdv-left');
+    if (!left) return;
+    left.innerHTML = '';
+
+    // Step 01: Food
+    var foodSec = document.createElement('div');
+    foodSec.innerHTML = '<div class="rdv-section-label"><span>01</span> Choose your food</div>'
+      + '<div class="rdv-tiles" id="rdv-food-tiles"></div>';
+    left.appendChild(foodSec);
+
+    var foodTiles = qs('#rdv-food-tiles', foodSec);
+    restaurantMenuData.food.forEach(function(item) {
+      var btn = document.createElement('button');
+      var isSel = rdvState.food === item.id;
+      btn.className = 'rdv-tile' + (isSel ? ' rdv-selected' : '');
+      btn.setAttribute('aria-pressed', isSel ? 'true' : 'false');
+      btn.innerHTML = '<div class="rdv-tile-icon">' + item.icon + '</div>'
+        + '<div class="rdv-tile-name">' + item.name + '</div>'
+        + '<div class="rdv-tile-desc">' + item.desc + '</div>'
+        + '<div class="rdv-tile-check">&check;</div>';
+      btn.addEventListener('click', function() {
+        rdvState.food = item.id;
+        rdvState.customisation = null;
+        renderRestaurantChoices();
+        renderRestaurantPreview();
+      });
+      foodTiles.appendChild(btn);
+    });
+
+    // Step 02: Customisation (shown if food selected)
+    if (rdvState.food) {
+      var opts = restaurantMenuData.customisations[rdvState.food] || [];
+      var custSec = document.createElement('div');
+      custSec.innerHTML = '<div class="rdv-section-label"><span>02</span> Customise it</div>'
+        + '<div class="rdv-custom-opts" id="rdv-custom-opts"></div>';
+      left.appendChild(custSec);
+
+      var custContainer = qs('#rdv-custom-opts', custSec);
+      opts.forEach(function(opt) {
+        var optBtn = document.createElement('button');
+        var isOptSel = rdvState.customisation === opt;
+        optBtn.className = 'rdv-custom-opt' + (isOptSel ? ' rdv-opt-selected' : '');
+        optBtn.setAttribute('aria-pressed', isOptSel ? 'true' : 'false');
+        optBtn.textContent = opt;
+        optBtn.addEventListener('click', function() {
+          rdvState.customisation = opt;
+          renderRestaurantChoices();
+          renderRestaurantPreview();
+        });
+        custContainer.appendChild(optBtn);
+      });
+    }
+
+    // Step 03: Drinks Bar
+    var drinkStep = rdvState.food ? '03' : '02';
+    var drinkSec = document.createElement('div');
+    drinkSec.innerHTML = '<div class="rdv-section-label"><span>' + drinkStep + '</span> Non-alcoholic drinks bar</div>'
+      + '<div class="rdv-tiles" id="rdv-drink-tiles"></div>';
+    left.appendChild(drinkSec);
+
+    var drinkTiles = qs('#rdv-drink-tiles', drinkSec);
+    restaurantMenuData.drinks.forEach(function(drink) {
+      var wrapper = document.createElement('div');
+      var isDrinkSel = rdvState.drink === drink.id;
+
+      var btn = document.createElement('button');
+      btn.className = 'rdv-tile' + (isDrinkSel ? ' rdv-selected' : '');
+      btn.setAttribute('aria-pressed', isDrinkSel ? 'true' : 'false');
+      btn.innerHTML = '<div class="rdv-tile-icon">&#9749;</div>'
+        + '<div class="rdv-tile-name">' + drink.name + '</div>'
+        + '<div class="rdv-tile-desc">' + drink.desc + '</div>'
+        + '<div class="rdv-tile-check">&check;</div>';
+
+      btn.addEventListener('click', function() {
+        rdvState.drink = drink.id;
+        rdvState.drinkOption = drink.options[0];
+        renderRestaurantChoices();
+        renderRestaurantPreview();
+      });
+      wrapper.appendChild(btn);
+
+      // Sub-options if selected
+      if (isDrinkSel) {
+        var subDiv = document.createElement('div');
+        subDiv.className = 'rdv-drink-options';
+        drink.options.forEach(function(subOpt) {
+          var subBtn = document.createElement('button');
+          var isSubSel = rdvState.drinkOption === subOpt;
+          subBtn.className = 'rdv-drink-opt' + (isSubSel ? ' rdv-opt-selected' : '');
+          subBtn.textContent = subOpt;
+          subBtn.addEventListener('click', function() {
+            rdvState.drinkOption = subOpt;
+            renderRestaurantChoices();
+            renderRestaurantPreview();
+          });
+          subDiv.appendChild(subBtn);
+        });
+        wrapper.appendChild(subDiv);
+      }
+
+      drinkTiles.appendChild(wrapper);
+    });
+  }
+
+  function renderRestaurantPreview() {
+    var preview = el('rdv-preview');
+    if (!preview) return;
+
+    var foodItem = rdvState.food ? restaurantMenuData.food.find(function(f) { return f.id === rdvState.food; }) : null;
+    var drinkItem = rdvState.drink ? restaurantMenuData.drinks.find(function(d) { return d.id === rdvState.drink; }) : null;
+    var canView = Boolean(foodItem || drinkItem);
+
+    var html = '<div class="rdv-preview-title">Your combination</div>';
+
+    if (!canView) {
+      html += '<div class="rdv-preview-empty">Select a sample dish or drink from the menu to see your combination assemble here.</div>';
+    } else {
+      if (foodItem) {
+        html += '<div class="rdv-preview-line">'
+          + '<div class="rdv-preview-icon">' + foodItem.icon + '</div>'
+          + '<div class="rdv-preview-info">'
+          + '<div class="rdv-preview-name">' + foodItem.name + '</div>'
+          + '<div class="rdv-preview-detail">' + (rdvState.customisation || 'No extra customisation') + '</div>'
+          + '</div></div>';
+      }
+      if (drinkItem) {
+        html += '<div class="rdv-preview-line">'
+          + '<div class="rdv-preview-icon">&#9749;</div>'
+          + '<div class="rdv-preview-info">'
+          + '<div class="rdv-preview-name">' + drinkItem.name + '</div>'
+          + '<div class="rdv-preview-detail">' + (rdvState.drinkOption || 'Standard preparation') + '</div>'
+          + '</div></div>';
+      }
+    }
+
+    html += '<button class="rdv-cta-btn" id="rdv-cta"' + (canView ? '' : ' disabled') + '>'
+      + '<span>View my combination</span><span>&rarr;</span></button>';
+    html += '<div class="rdv-note">' + restaurantMenuData.note + '</div>';
+
+    preview.innerHTML = html;
+
+    var cta = el('rdv-cta');
+    if (cta && canView) {
+      cta.addEventListener('click', showRestaurantSummary);
+    }
+  }
+
+  function showRestaurantSummary() {
+    var foodItem = restaurantMenuData.food.find(function(f) { return f.id === rdvState.food; });
+    var drinkItem = restaurantMenuData.drinks.find(function(d) { return d.id === rdvState.drink; });
+
+    var itemsContainer = el('rdv-summary-items');
+    if (!itemsContainer) return;
+    itemsContainer.innerHTML = '';
+
+    if (foodItem) {
+      var fi = document.createElement('div');
+      fi.className = 'rdv-summary-item';
+      fi.innerHTML = '<div class="rdv-summary-emoji">' + foodItem.icon + '</div>'
+        + '<div class="rdv-summary-text"><strong>' + foodItem.name + '</strong>'
+        + '<span>' + (rdvState.customisation || 'Standard preparation') + '</span></div>';
+      itemsContainer.appendChild(fi);
+    }
+
+    if (drinkItem) {
+      var di = document.createElement('div');
+      di.className = 'rdv-summary-item';
+      di.innerHTML = '<div class="rdv-summary-emoji">&#9749;</div>'
+        + '<div class="rdv-summary-text"><strong>' + drinkItem.name + '</strong>'
+        + '<span>' + (rdvState.drinkOption || 'Standard preparation') + '</span></div>';
+      itemsContainer.appendChild(di);
+    }
+
+    var summaryModal = el('rdv-summary');
+    if (summaryModal) {
+      summaryModal.classList.remove('hidden');
+      var closeBtn = el('rdv-summary-close');
+      if (closeBtn) closeBtn.onclick = function() { summaryModal.classList.add('hidden'); };
+      var restartBtn = el('rdv-summary-restart');
+      if (restartBtn) restartBtn.onclick = function() {
+        summaryModal.classList.add('hidden');
+        resetRestaurantState();
+        renderRestaurantDemo();
+      };
+    }
+  }
+
+  function initRestaurantDemoModule() {
+    var openBtn = el('open-restaurant-demo');
+    var demoView = el('restaurant-demo-view');
+    var chooseSection = el('choose');
+    var backBtn = el('rdv-back');
+
+    if (!openBtn || !demoView) return;
+
+    openBtn.addEventListener('click', function() {
+      if (chooseSection) chooseSection.style.display = 'none';
+      demoView.classList.remove('hidden');
+      resetRestaurantState();
+      renderRestaurantDemo();
+      var heading = el('rdv-heading');
+      if (heading) heading.focus();
+    });
+
+    if (backBtn) {
+      backBtn.addEventListener('click', function() {
+        demoView.classList.add('hidden');
+        el('rdv-summary') && el('rdv-summary').classList.add('hidden');
+        if (chooseSection) chooseSection.style.display = '';
+        openBtn.focus();
+      });
+    }
+  }
+
+  // ══════════════════════════════════════════════════════
+  // BOOTSTRAP
+  // ══════════════════════════════════════════════════════
+  function initAll() {
+    initExplainerModule();
+    initRestaurantDemoModule();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+})();
+
+</script>
+</body></html>

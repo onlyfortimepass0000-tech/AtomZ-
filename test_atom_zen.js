@@ -213,7 +213,7 @@ server.listen(PORT, async () => {
     }
 
     // Test clicking "Add pieces" tab
-    await zenPhone.click('button[data-mobile-go="pieces"]');
+    await zenPhone.click('.mobile-tabs button[data-mobile-go="pieces"]');
     await zenPhone.waitForTimeout(300);
     const libraryVisible = await zenPhone.$eval('.library', el => window.getComputedStyle(el).display !== 'none');
     console.log(`Library view active on "Add pieces" tab: ${libraryVisible}`);
@@ -224,7 +224,7 @@ server.listen(PORT, async () => {
     }
 
     // Test clicking "Balance" tab
-    await zenPhone.click('button[data-mobile-go="balance"]');
+    await zenPhone.click('.mobile-tabs button[data-mobile-go="balance"]');
     await zenPhone.waitForTimeout(300);
     const rightVisible = await zenPhone.$eval('.right', el => window.getComputedStyle(el).display !== 'none');
     console.log(`Right view active on "Balance" tab: ${rightVisible}`);
@@ -235,7 +235,7 @@ server.listen(PORT, async () => {
     }
 
     // Return to "Build" tab
-    await zenPhone.click('button[data-mobile-go="build"]');
+    await zenPhone.click('.mobile-tabs button[data-mobile-go="build"]');
     await zenPhone.waitForTimeout(300);
 
     // Capture phone builder screenshots
