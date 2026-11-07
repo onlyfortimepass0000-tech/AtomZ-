@@ -731,4 +731,30 @@ if (document.readyState === 'loading') {
   
   // Initial compute
   updateAmbientMotion();
+
+  // Performance optimization: Pause animations when tab is hidden or element is offscreen
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      document.body.classList.add("is-page-hidden");
+    } else {
+      document.body.classList.remove("is-page-hidden");
+    }
+  });
+
+  if ("IntersectionObserver" in window) {
+    var animObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("is-offscreen");
+        } else {
+          entry.target.classList.add("is-offscreen");
+        }
+      });
+    }, { rootMargin: "60px" });
+
+    var animTargets = document.querySelectorAll(".ticker__track, .atom, .ambient-bg, .atom-kinetic");
+    animTargets.forEach(function (target) {
+      animObserver.observe(target);
+    });
+  }
 })();

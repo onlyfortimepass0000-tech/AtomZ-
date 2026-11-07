@@ -1369,8 +1369,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <section id="explainer-view" class="explainer-view" aria-label="ATOMZEN product explainer">
   <div class="exp-headline-area">
     <div class="exp-eyebrow"><i></i> ATOMZEN &middot; BY ATOMZ</div>
-    <h2 class="exp-headline" id="exp-headline">Growing your business shouldn't start with confusion.</h2>
-    <p class="exp-subtext" id="exp-subtext"></p>
+    <h2 class="exp-headline" id="exp-headline">Tired of confusing packages? Build what you actually need.</h2>
+    <p class="exp-subtext" id="exp-subtext">Choosing services from a growth agency can feel confusing: rigid tiers, unclear inclusions, and scattered prices. ATOM ZEN lets you choose your starting point, add specific services, set quantities, and balance time, budget and quality.</p>
   </div>
   
   <div class="exp-stage" id="exp-stage" aria-hidden="true" data-tilt-scene>
@@ -1393,7 +1393,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   
   <div class="exp-controls">
     <button class="exp-btn-primary" id="exp-play-btn" aria-label="Play explanation animation">&#9654; Play explanation</button>
-    <button class="exp-btn-secondary" id="exp-open-btn" aria-label="Open ATOMZEN configurator">Open ATOMZEN &rarr;</button>
+    <button class="exp-btn-secondary" id="exp-open-btn" aria-label="Start building">Start building &rarr;</button>
   </div>
   
   <div id="exp-final" class="exp-final hidden" role="dialog" aria-label="Explanation complete">
@@ -1401,7 +1401,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <h3>Your business. Your combination.</h3>
       <p>Build your personalised service selection with ATOMZEN.</p>
       <div class="exp-final-buttons">
-        <button class="exp-btn-primary" id="exp-final-open-btn">Open ATOMZEN &rarr;</button>
+        <button class="exp-btn-primary" id="exp-final-open-btn">Start building &rarr;</button>
         <button class="exp-btn-secondary" id="exp-replay-btn">&#8635; Replay</button>
       </div>
     </div>
@@ -1615,7 +1615,7 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
   ];
 
   var SCENES = [
-    { headline: "Growing your business shouldn't start with confusion.", sub: "Agency proposals pile up with competing scopes, overlapping promises, and no clear starting point." },
+    { headline: "Tired of confusing packages? Build what you actually need.", sub: "Choosing services from a growth agency can feel confusing: rigid tiers, unclear inclusions, and scattered prices. ATOM ZEN lets you choose your starting point, add specific services, set quantities, and balance time, budget and quality." },
     { headline: "Different packages. Different promises. No clear fit.", sub: "You end up comparing fixed bundles that don't match what your business actually needs." },
     { headline: "Start with what you need.", sub: "Not with someone else's pre-made package." },
     { headline: "Meet ATOMZEN.", sub: "Choose the services that fit your business." },
@@ -1993,7 +1993,10 @@ $('#resume').onclick=enterSaved;$('#changebase').onclick=()=>{$('#builder').clas
 
     function openBuilderSelection() {
       if (explainerView) explainerView.classList.add('hidden');
-      if (chooseSection) {
+      var builderSection = el('builder');
+      if (builderSection && !builderSection.classList.contains('hidden')) {
+        builderSection.scrollIntoView({ behavior: 'smooth' });
+      } else if (chooseSection) {
         chooseSection.style.display = '';
         chooseSection.scrollIntoView({ behavior: 'smooth' });
       }

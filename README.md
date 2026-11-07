@@ -21,8 +21,6 @@ index.html                          Home (hero, services, how-we-work, free mont
 blog/                               Individual post pages
   attention-is-not-a-business.html
   quality-creates-community.html
-  why-we-dont-sell-social-media-management.html
-  build-relentlessly-compound-consistently.html
 assets/css/atomz.css                All styling — token-driven
 assets/js/atomz.js                  Theme, reveals, and the compounding rail (progressive enhancement)
 favicon.svg  robots.txt  sitemap.xml
@@ -86,7 +84,7 @@ WhatsApp-first. Update the numbers in the `wa.me/…` and `tel:…` links if the
 change:
 
 - Aryan Thakkar — Founder — `+91 90999 39034`
-- Rajdeep Malladeb — Co-founder — `+91 81088 70798`
+- Rajdeep Malladeb — Founder — `+91 81088 70798`
 
 ## Accessibility & performance
 
