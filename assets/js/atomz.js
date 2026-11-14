@@ -757,4 +757,111 @@ if (document.readyState === 'loading') {
       animObserver.observe(target);
     });
   }
+
+  /* ---- Hero Logo Transformation Animation ------------------------------- */
+  var heroMotif = document.getElementById("heroSculptedMotif");
+  if (heroMotif) {
+    if (reduceMotion) {
+      heroMotif.classList.add("is-transformed");
+    } else {
+      // Hold for 0.8s (800ms), then smoothly morph (1.8s) into new ribbon logo
+      setTimeout(function () {
+        heroMotif.classList.add("is-transformed");
+      }, 800);
+    }
+  }
+
+  /* ---- Business Inquiry Form -------------------------------------------- */
+  var inquiryForm = document.getElementById("businessInquiryForm");
+  if (inquiryForm) {
+    var submitBtn = document.getElementById("inqSubmitBtn");
+    var successMsg = document.getElementById("inqSuccessMsg");
+
+    inquiryForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var nameInput = document.getElementById("inqName");
+      var businessInput = document.getElementById("inqBusiness");
+      var typeSelect = document.getElementById("inqType");
+      var phoneInput = document.getElementById("inqPhone");
+      var consentCheckbox = document.getElementById("inqConsent");
+      var helpCheckboxes = inquiryForm.querySelectorAll('input[name="helpWith"]:checked');
+
+      // Validation
+      var name = (nameInput ? nameInput.value : "").trim();
+      var business = (businessInput ? businessInput.value : "").trim();
+      var bType = (typeSelect ? typeSelect.value : "").trim();
+      var phone = (phoneInput ? phoneInput.value : "").trim();
+      var consent = consentCheckbox ? consentCheckbox.checked : false;
+
+      if (!name) {
+        alert("Please enter your name.");
+        if (nameInput) nameInput.focus();
+        return;
+      }
+      if (!business) {
+        alert("Please enter your business name.");
+        if (businessInput) businessInput.focus();
+        return;
+      }
+      if (!bType) {
+        alert("Please select your business type.");
+        if (typeSelect) typeSelect.focus();
+        return;
+      }
+      if (!phone) {
+        alert("Please enter your WhatsApp phone number.");
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+      if (helpCheckboxes.length === 0) {
+        alert("Please select at least one area you'd like help with.");
+        return;
+      }
+      if (!consent) {
+        alert("Please check the consent box to proceed.");
+        if (consentCheckbox) consentCheckbox.focus();
+        return;
+      }
+
+      var helpList = [];
+      helpCheckboxes.forEach(function (cb) {
+        helpList.push(cb.value);
+      });
+
+      // Prevent double submission
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
+        submitBtn.innerHTML = "<span>Opening WhatsApp...</span>";
+      }
+
+      // Format WhatsApp message
+      var msg = "Hi ATOMZ, I'd like to discuss a project for my business:\n" +
+        "• Name: " + name + "\n" +
+        "• Business: " + business + "\n" +
+        "• Type: " + bType + "\n" +
+        "• Help needed: " + helpList.join(", ") + "\n" +
+        "• WhatsApp: " + phone;
+
+      var waUrl = "https://wa.me/919099939034?text=" + encodeURIComponent(msg);
+
+      // Open in new tab/window
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
+      // Show confirmation
+      if (successMsg) {
+        successMsg.style.display = "block";
+        successMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      setTimeout(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = "1";
+          submitBtn.innerHTML = "<span>Send inquiry via WhatsApp</span>";
+        }
+      }, 3000);
+    });
+  }
 })();

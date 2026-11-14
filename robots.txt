@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /horizon*.html
+Disallow: /aroha*.html
 
 Sitemap: https://atomz.online/sitemap.xml
