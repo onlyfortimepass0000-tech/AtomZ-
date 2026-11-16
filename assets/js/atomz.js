@@ -108,6 +108,22 @@
       revealEls.forEach(function (el) { el.classList.add("is-visible"); });
     }
 
+    /* ---- 3b. Scroll-reveal (.reveal -> .in) ----------------------------- */
+    var customReveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && customReveals.length) {
+      var cro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            cro.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      customReveals.forEach(function (el) { cro.observe(el); });
+    } else {
+      customReveals.forEach(function (el) { el.classList.add("in"); });
+    }
+
     /* ---- 4. Section-number highlight for steps ------------------------- */
     var steps = document.querySelectorAll(".step");
     if ("IntersectionObserver" in window && steps.length) {
