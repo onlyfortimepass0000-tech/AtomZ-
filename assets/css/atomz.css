@@ -3641,6 +3641,7 @@ a[href*="horizon-preview.html"]:hover,
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  min-height: 44px;
   transition: color 0.2s ease;
 }
 
