@@ -505,13 +505,52 @@ html {
 .nav__links {
   display: none;
   align-items: center;
-  gap: var(--s-4);
+  gap: 12px;
   font-size: var(--step--1);
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
-/* Vertically Masked Roll-Over Hover Effect on Desktop Nav Links */
+/* Nav links in identical style with no label clipping */
+.nav-link {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.nav-link:hover {
+  color: var(--fg);
+  background-color: var(--surface-hover);
+}
+
+/* Lower-weight Client Portal link */
+.nav-portal-link {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.72;
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.nav-portal-link:hover {
+  opacity: 1;
+  color: var(--fg);
+}
+
+/* Vertically Masked Roll-Over Hover Effect (preserved for legacy usage) */
 .nav-roll-link {
   text-decoration: none;
   color: var(--muted);
@@ -668,25 +707,27 @@ html {
 .mobile-nav-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .mobile-nav-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  min-height: 48px;
+  padding: 12px 16px;
   border-radius: 12px;
   text-decoration: none;
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: var(--step-0);
   font-weight: 600;
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
   transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 .mobile-nav-item:hover,
 .mobile-nav-item:active {
-  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
   color: var(--accent);
 }
 .mobile-nav-item__text {
@@ -708,17 +749,74 @@ html {
   transform: translateX(3px);
   color: var(--accent);
 }
-.mobile-nav-item__badge {
-  font-size: 0.7rem;
-  font-family: var(--font-mono);
+.mobile-nav-item--portal {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+.mobile-nav-item--cta {
+  background: var(--accent);
+  color: #FFFFFF !important;
   font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  justify-content: center;
+  gap: 8px;
+}
+.mobile-nav-item--cta:hover {
+  background: var(--accent-hover);
+  color: #FFFFFF !important;
 }
 
-@media (max-width: 819px) {
+/* Sticky Bottom WhatsApp Bar on Phones */
+.sticky-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 10px 16px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--hairline);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.sticky-bottom-bar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(255, 77, 46, 0.35);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.sticky-bottom-bar__btn:hover {
+  background: var(--accent-hover);
+}
+.sticky-bottom-bar__btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 74px;
+  }
+  .sticky-bottom-bar {
+    display: block;
+  }
+  .nav__cta {
+    display: none !important;
+  }
   .site-header {
     width: calc(100% - 24px);
     top: 10px;
@@ -738,30 +836,25 @@ html {
   }
   .theme-toggle,
   .mobile-menu-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
   .theme-toggle svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
   .mobile-menu-icon {
-    width: 16px;
-    height: 12px;
+    width: 18px;
+    height: 14px;
   }
   .nav__right {
-    gap: 6px;
-  }
-  .nav__cta {
-    height: 40px;
-    min-height: 40px;
-    padding: 0 0.9em;
-    font-size: 0.78rem;
-    gap: 0.4em;
+    gap: 8px;
   }
 }
 
-@media (min-width: 820px) {
+@media (min-width: 769px) {
   .nav__links { display: flex; }
   .nav__cta .btn__label-full { display: inline; }
   .nav__cta .btn__label-short { display: none; }
