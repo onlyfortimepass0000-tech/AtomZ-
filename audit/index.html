@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operational Efficiency Audit — ATOMZ</title>
+  <meta name="description" content="Identify the friction points silently draining your micro-business. Free 2-minute diagnostic for founders and operators." />
+  <meta name="theme-color" content="#F5F5F0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://atomz.online/audit/" />
+
+  <!-- Fonts: preconnect + swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" />
+  <link rel="stylesheet" href="/assets/css/atomz.css" />
+  <script src="/assets/js/theme.js"></script>
+
+  <style>
+    /* =========================================================
+       AUDIT PAGE SPECIFIC STYLES
+       ========================================================= */
+    .audit-page {
+      padding: clamp(32px, 6vw, 64px) 0 clamp(48px, 8vw, 96px);
+      min-height: calc(100vh - 200px);
+    }
+
+    .audit-card {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg, 20px);
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    [data-theme="dark"] .audit-card {
+      box-shadow: 0 24px 48px -15px rgba(0, 0, 0, 0.65);
+    }
+
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--zen-orange));
+    }
+
+    .audit-header {
+      text-align: center;
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+
+    .audit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(255, 77, 46, 0.1);
+      border: 1px solid rgba(255, 77, 46, 0.25);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .audit-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--fg);
+      margin: 0 0 12px;
+    }
+
+    .audit-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      color: var(--muted);
+      margin: 0;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    /* Form Segments */
+    .audit-segment {
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .audit-segment:last-of-type {
+      border-bottom: none;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+    }
+
+    .audit-segment__title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--zen-orange);
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .audit-segment__title-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(255, 113, 59, 0.15);
+      color: var(--zen-orange);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Questions & Range inputs */
+    .audit-question {
+      margin-bottom: 20px;
+      background: var(--band-bg, rgba(125, 125, 125, 0.04));
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--hairline);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* In light theme, a subtle grey tint for question cards */
+    :root:not([data-theme="dark"]) .audit-question {
+      background: rgba(0, 0, 0, 0.03);
+    }
+    [data-theme="dark"] .audit-question {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .audit-question:focus-within {
+      border-color: rgba(255, 77, 46, 0.4);
+    }
+
+    .audit-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .audit-question label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--fg);
+      margin: 0;
+      flex: 1;
+    }
+
+    .audit-val-badge {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(255, 77, 46, 0.12);
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .rating-scale {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .rating-scale__endpoint {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    /* Styled Range Slider */
+    input[type="range"].score-input {
+      flex-grow: 1;
+      appearance: none;
+      -webkit-appearance: none;
+      background: rgba(0, 0, 0, 0.1);
+      height: 6px;
+      border-radius: 999px;
+      outline: none;
+      transition: background 0.2s ease;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    [data-theme="dark"] input[type="range"].score-input {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    input[type="range"].score-input::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: grab;
+      border: 2px solid var(--surface);
+      box-shadow: 0 2px 8px rgba(255, 77, 46, 0.4);
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    input[type="range"].score-input::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: var(--accent-hover);
+    }
+
+    input[type="range"].score-input::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: grab;
+      border: 2px solid var(--surface);
+      box-shadow: 0 2px 8px rgba(255, 77, 46, 0.4);
+    }
+
+    /* Submit Button */
+    .audit-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--zen-orange) 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 16px 24px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border-radius: var(--radius, 12px);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px -5px rgba(255, 77, 46, 0.35);
+      margin-top: 10px;
+    }
+
+    .audit-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -5px rgba(255, 77, 46, 0.45);
+      opacity: 0.96;
+    }
+
+    .audit-submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Results Section */
+    #results {
+      margin-top: 36px;
+      padding: clamp(20px, 4vw, 32px);
+      background: rgba(255, 77, 46, 0.06);
+      border: 1px solid rgba(255, 77, 46, 0.25);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius, 12px);
+      display: none;
+      animation: fadeInResults 0.4s ease forwards;
+    }
+
+    @keyframes fadeInResults {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .results-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    #resultTitle {
+      font-family: var(--font-display);
+      color: var(--fg);
+      font-size: clamp(1.25rem, 3vw, 1.55rem);
+      font-weight: 800;
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+    }
+
+    #resultText {
+      font-family: var(--font-sans);
+      color: var(--fg);
+      opacity: 0.88;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin: 0 0 24px;
+    }
+
+    #resultText strong {
+      color: var(--fg);
+      opacity: 1;
+    }
+
+    /* Score Meter Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 20px 0 24px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+    }
+
+    .score-meter-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .score-meter-label {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .score-meter-value {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .score-meter-bar {
+      height: 4px;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    [data-theme="dark"] .score-meter-bar {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .score-meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--zen-orange));
+      border-radius: 999px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* WhatsApp Action in Results */
+    .results-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .results-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      background: #25D366;
+      color: #0A0B0D;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .results-wa-btn:hover {
+      background: #20BA56;
+      transform: translateY(-2px);
+    }
+
+    .results-reset-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 18px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--hairline);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .results-reset-btn:hover {
+      color: var(--fg);
+      border-color: var(--accent);
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+      .audit-card {
+        padding: 20px 16px;
+      }
+      .audit-question {
+        padding: 14px 12px;
+      }
+      .rating-scale__endpoint {
+        font-size: 0.72rem;
+      }
+      .results-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .results-wa-btn, .results-reset-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ======================================================= HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="ATOMZ home"><img src="/assets/images/logo.png" alt="ATOMZ Logo" width="612" height="428" decoding="async" class="brand__logo" />ATOM<span class="brand__z">Z</span></a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/#work" class="nav-link">Work</a>
+        <a href="/atom-zen/" class="nav-link">ATOM ZEN</a>
+        <a href="/audit/" class="nav-link" aria-current="page" style="color: var(--fg); background: var(--surface-hover);">Audit</a>
+        <a href="/writing/" class="nav-link">Writing</a>
+        <a href="/horizon-preview.html" class="nav-portal-link">Client Portal</a>
+      </nav>
+
+      <div class="nav__right">
+        <button class="theme-toggle" type="button" aria-label="Toggle dark theme" aria-pressed="false">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a class="btn nav__cta" href="https://wa.me/919099939034" target="_blank" rel="noopener">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+          <span class="btn__label-full">Talk on WhatsApp</span>
+        </a>
+        <button class="mobile-menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNavDropdown">
+          <span class="mobile-menu-icon" aria-hidden="true">
+            <span class="line line--1"></span>
+            <span class="line line--2"></span>
+            <span class="line line--3"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu (Hidden on Desktop) -->
+    <div class="mobile-nav-dropdown" id="mobileNavDropdown" aria-hidden="true">
+      <nav class="mobile-nav-list" aria-label="Mobile navigation">
+        <a href="/#work" class="mobile-nav-item">
+          <span class="mobile-nav-item__text">Work</span>
+          <span class="mobile-nav-item__arrow">→</span>
+        </a>
+        <a href="/atom-zen/" class="mobile-nav-item">
+          <span class="mobile-nav-item__text">ATOM ZEN</span>
+          <span class="mobile-nav-item__badge" style="background: rgba(255,113,59,0.15); color: #FF713B;">Configurator</span>
+        </a>
+        <a href="/audit/" class="mobile-nav-item">
+          <span class="mobile-nav-item__text">Audit</span>
+          <span class="mobile-nav-item__badge" style="background: rgba(255,77,46,0.15); color: #FF4D2E;">Free Tool</span>
+        </a>
+        <a href="/writing/" class="mobile-nav-item">
+          <span class="mobile-nav-item__text">Writing &amp; Research</span>
+          <span class="mobile-nav-item__arrow">→</span>
+        </a>
+        <a href="/horizon-preview.html" class="mobile-nav-item mobile-nav-item--horizon">
+          <div>
+            <span class="mobile-nav-item__text">Client Portal</span>
+            <span class="mobile-nav-item__sub">Horizon Preview</span>
+          </div>
+          <span class="mobile-nav-item__arrow">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================================================= MAIN AUDIT CONTAINER -->
+  <main id="main" class="audit-page">
+    <div class="wrap">
+      <div class="audit-card">
+        <header class="audit-header">
+          <div class="audit-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            Operational Diagnostic
+          </div>
+          <h1 class="audit-title">Operational Efficiency Audit</h1>
+          <p class="audit-subtitle">Identify the friction points silently draining your micro-business.</p>
+        </header>
+
+        <form id="auditForm">
+          <!-- Segment 1: Revenue Leakage -->
+          <div class="audit-segment">
+            <h2 class="audit-segment__title">
+              <span class="audit-segment__title-num">1</span>
+              <span>Revenue Leakage</span>
+            </h2>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="rev1">How often do manual errors or slow responses directly cause lost sales?</label>
+                <span class="audit-val-badge" id="rev1-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Rarely (1)</span>
+                <input type="range" class="score-input" id="rev1" name="rev1" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Constantly (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="rev2">How much potential revenue is delayed due to disjointed client handoffs?</label>
+                <span class="audit-val-badge" id="rev2-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Minimal (1)</span>
+                <input type="range" class="score-input" id="rev2" name="rev2" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Severe (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="rev3">Rate the frequency of missed follow-ups resulting in customer churn.</label>
+                <span class="audit-val-badge" id="rev3-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Never (1)</span>
+                <input type="range" class="score-input" id="rev3" name="rev3" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Daily (5)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segment 2: Key-Person Dependency -->
+          <div class="audit-segment">
+            <h2 class="audit-segment__title">
+              <span class="audit-segment__title-num">2</span>
+              <span>Key-Person Dependency</span>
+            </h2>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="key1">How severely would operations halt if your most critical employee was absent for a week?</label>
+                <span class="audit-val-badge" id="key1-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Unaffected (1)</span>
+                <input type="range" class="score-input" id="key1" name="key1" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Total Halt (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="key2">How dependent is your daily delivery on tribal knowledge versus documented SOPs?</label>
+                <span class="audit-val-badge" id="key2-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Fully Documented (1)</span>
+                <input type="range" class="score-input" id="key2" name="key2" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Solely in Heads (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="key3">Rate the difficulty of onboarding a new hire to full productivity.</label>
+                <span class="audit-val-badge" id="key3-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Seamless (1)</span>
+                <input type="range" class="score-input" id="key3" name="key3" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Months of Chaos (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="key4">How often are you personally pulled into routine firefighting?</label>
+                <span class="audit-val-badge" id="key4-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Never (1)</span>
+                <input type="range" class="score-input" id="key4" name="key4" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Daily (5)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segment 3: System Fragmentation -->
+          <div class="audit-segment">
+            <h2 class="audit-segment__title">
+              <span class="audit-segment__title-num">3</span>
+              <span>System Fragmentation</span>
+            </h2>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="sys1">Rate the friction of manually moving data between your disconnected software tools.</label>
+                <span class="audit-val-badge" id="sys1-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">No Friction (1)</span>
+                <input type="range" class="score-input" id="sys1" name="sys1" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Constant Manual Entry (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="sys2">How often do team members waste time searching for information across different apps?</label>
+                <span class="audit-val-badge" id="sys2-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Rarely (1)</span>
+                <input type="range" class="score-input" id="sys2" name="sys2" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Hourly (5)</span>
+              </div>
+            </div>
+
+            <div class="audit-question">
+              <div class="audit-label-row">
+                <label for="sys3">How much do you estimate you overspend on overlapping software subscriptions?</label>
+                <span class="audit-val-badge" id="sys3-val">1 / 5</span>
+              </div>
+              <div class="rating-scale">
+                <span class="rating-scale__endpoint">Optimized (1)</span>
+                <input type="range" class="score-input" id="sys3" name="sys3" min="1" max="5" value="1" oninput="updateValBadge(this)">
+                <span class="rating-scale__endpoint">Heavy Waste (5)</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="audit-submit-btn" onclick="calculateAudit()">
+            <span>Generate My Audit Report</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+
+        <!-- Results Block -->
+        <div id="results">
+          <div class="results-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M22 12A10 10 0 1 1 2 12a10 10 0 0 1 20 0Z"/></svg>
+            Audit Assessment
+          </div>
+          <h2 id="resultTitle">Your Operational Health Analysis</h2>
+
+          <!-- Visual Score Cards -->
+          <div class="results-grid">
+            <div class="score-meter-card">
+              <span class="score-meter-label">Revenue Leakage</span>
+              <span class="score-meter-value" id="revScoreVal">0 / 15</span>
+              <div class="score-meter-bar"><div class="score-meter-fill" id="revScoreBar" style="width: 0%;"></div></div>
+            </div>
+            <div class="score-meter-card">
+              <span class="score-meter-label">Key-Person Dependency</span>
+              <span class="score-meter-value" id="keyScoreVal">0 / 20</span>
+              <div class="score-meter-bar"><div class="score-meter-fill" id="keyScoreBar" style="width: 0%;"></div></div>
+            </div>
+            <div class="score-meter-card">
+              <span class="score-meter-label">System Fragmentation</span>
+              <span class="score-meter-value" id="sysScoreVal">0 / 15</span>
+              <div class="score-meter-bar"><div class="score-meter-fill" id="sysScoreBar" style="width: 0%;"></div></div>
+            </div>
+          </div>
+
+          <p id="resultText"></p>
+
+          <div class="results-actions">
+            <a id="waAuditLink" class="results-wa-btn" href="https://wa.me/919099939034" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+              <span>Deploy Fix on WhatsApp</span>
+            </a>
+            <button type="button" class="results-reset-btn" onclick="resetAudit()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span>Retake Audit</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================================================= FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div>
+          <div class="footer__mark"><img src="/assets/images/logo.png" alt="ATOMZ Logo" width="612" height="428" decoding="async" loading="lazy" class="footer__logo" />ATOM<span class="brand__z">Z</span></div>
+          <p class="footer__promise">We make growth inevitable.</p>
+        </div>
+        <div>
+          <p class="footer__philosophy">Build relentlessly.<br /><span class="accent">Compound consistently.</span></p>
+          <p class="footer__acr" aria-hidden="true">A · T · O · M · Z</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> ATOMZ · atomz.online</span>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="/#work">Work</a>
+          <a href="/audit/">Audit</a>
+          <a href="/writing/">Writing</a>
+          <a href="/horizon-preview.html">Client Portal</a>
+          <a href="https://instagram.com/at261062" target="_blank" rel="noopener">Instagram (@at261062)</a>
+          <a href="https://instagram.com/raj117m" target="_blank" rel="noopener">Instagram (@raj117m)</a>
+          <a href="https://wa.me/919099939034" target="_blank" rel="noopener">WhatsApp</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky Bottom WhatsApp Bar on Phones (<=768px) -->
+  <aside class="sticky-bottom-bar" aria-label="Quick contact">
+    <a class="sticky-bottom-bar__btn" href="https://wa.me/919099939034" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+      <span>WhatsApp us</span>
+    </a>
+  </aside>
+
+  <script>
+    function updateValBadge(input) {
+      const badge = document.getElementById(input.id + '-val');
+      if (badge) {
+        badge.innerText = input.value + ' / 5';
+      }
+    }
+
+    function calculateAudit() {
+      const inputs = document.querySelectorAll('.score-input');
+      let revScore = 0;
+      let keyScore = 0;
+      let sysScore = 0;
+
+      inputs.forEach(input => {
+        const value = parseInt(input.value, 10);
+        const name = input.name;
+        if (name.startsWith('rev')) revScore += value;
+        if (name.startsWith('key')) keyScore += value;
+        if (name.startsWith('sys')) sysScore += value;
+      });
+
+      // Update Meter Cards
+      document.getElementById('revScoreVal').innerText = revScore + ' / 15';
+      document.getElementById('keyScoreVal').innerText = keyScore + ' / 20';
+      document.getElementById('sysScoreVal').innerText = sysScore + ' / 15';
+
+      document.getElementById('revScoreBar').style.width = Math.round((revScore / 15) * 100) + '%';
+      document.getElementById('keyScoreBar').style.width = Math.round((keyScore / 20) * 100) + '%';
+      document.getElementById('sysScoreBar').style.width = Math.round((sysScore / 15) * 100) + '%';
+
+      // Determine highest bottleneck
+      const scores = [
+        { name: 'Revenue Leakage', score: revScore, max: 15, fix: 'implementing automated lead routing and standardized client onboarding workflows to eliminate drop-offs.' },
+        { name: 'Key-Person Dependency', score: keyScore, max: 20, fix: 'building an interactive SOP repository and custom AI training assistants to institutionalize knowledge.' },
+        { name: 'System Fragmentation', score: sysScore, max: 15, fix: 'deploying a custom all-in-one operating system to unify your data and eliminate manual tool switching.' }
+      ];
+
+      scores.sort((a, b) => b.score - a.score);
+      const highest = scores[0];
+
+      const resultTitle = document.getElementById('resultTitle');
+      const resultText = document.getElementById('resultText');
+      const resultsDiv = document.getElementById('results');
+
+      resultTitle.innerText = `Primary Vulnerability Detected: ${highest.name}`;
+      resultText.innerHTML = `Your score indicates that your biggest operational bottleneck is <strong>${highest.name.toLowerCase()}</strong>. This is actively suppressing your profit margins and trapping you in daily operations. The immediate cure is ${highest.fix} <br><br><strong>Next Step:</strong> Reply to this audit with your results to schedule a custom architecture session to deploy this fix.`;
+
+      // Update pre-filled WhatsApp link
+      const waText = encodeURIComponent(`Hi ATOMZ, I just completed the Operational Efficiency Audit on atomz.online.\n\nMy Primary Bottleneck: ${highest.name}\nScores:\n- Revenue Leakage: ${revScore}/15\n- Key-Person Dependency: ${keyScore}/20\n- System Fragmentation: ${sysScore}/15\n\nI'd like to schedule an architecture session to deploy a fix.`);
+      const waBtn = document.getElementById('waAuditLink');
+      if (waBtn) {
+        waBtn.href = `https://wa.me/919099939034?text=${waText}`;
+      }
+
+      resultsDiv.style.display = 'block';
+      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resetAudit() {
+      const form = document.getElementById('auditForm');
+      if (form) form.reset();
+      const inputs = document.querySelectorAll('.score-input');
+      inputs.forEach(input => updateValBadge(input));
+      const resultsDiv = document.getElementById('results');
+      if (resultsDiv) resultsDiv.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+  <script src="/assets/js/atomz.js" defer></script>
+</body>
+</html>
