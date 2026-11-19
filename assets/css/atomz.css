@@ -19,6 +19,7 @@
   --accent:       #FF4D2E;   /* single hero accent                   */
   --accent-light: #FF6644;   /* sculpted motif highlight edge        */
   --accent-dark:  #C83214;   /* sculpted motif underside shadow      */
+  --zen-orange:   #FF713B;   /* vibrant secondary orange             */
   --gold:         #F2B705;   /* secondary accent, used sparingly     */
   --grey-spec:    #8A8A8E;   /* warm grey as specified (decorative)  */
 
@@ -35,6 +36,7 @@
   /* --- Semantic tokens (components use ONLY these) ------------------------ */
   --bg:           var(--paper);
   --fg:           var(--ink);
+  --fg-dim:       #4A4A50;
   --surface:      var(--paper-2);
   --surface-fg:   var(--ink);
   --band-bg:      var(--band);
@@ -115,6 +117,7 @@
 [data-theme="dark"] {
   --bg:           #0E0E10;
   --fg:           #F5F5F0;
+  --fg-dim:       #D1CEC7;
   --surface:      #17171C;
   --surface-fg:   #F5F5F0;
   --band-bg:      #060608;
@@ -3195,7 +3198,7 @@ a[href*="horizon-preview.html"]:hover,
    ========================================================================== */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: var(--s-5);
 }
@@ -3209,23 +3212,13 @@ a[href*="horizon-preview.html"]:hover,
   flex-direction: column;
   gap: 16px;
   transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  grid-column: span 1;
 }
 
 .bento-card:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 77, 46, 0.4);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-}
-
-.bento-card:nth-child(1),
-.bento-card:nth-child(2),
-.bento-card:nth-child(3) {
-  grid-column: span 2;
-}
-
-.bento-card:nth-child(4),
-.bento-card:nth-child(5) {
-  grid-column: span 3;
 }
 
 .bento-card__icon {
@@ -3261,31 +3254,13 @@ a[href*="horizon-preview.html"]:hover,
   margin: 0;
 }
 
-@media (max-width: 960px) {
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .bento-card:nth-child(1),
-  .bento-card:nth-child(2),
-  .bento-card:nth-child(3),
-  .bento-card:nth-child(4) {
-    grid-column: span 1;
-  }
-  .bento-card:nth-child(5) {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .bento-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  .bento-card:nth-child(n) {
-    grid-column: span 1;
-  }
   .bento-card {
-    padding: 20px;
+    padding: 22px;
   }
 }
 
@@ -3708,6 +3683,75 @@ a[href*="horizon-preview.html"]:hover,
   }
   .work-card__body {
     padding: 16px;
+  }
+}
+
+/* Dedicated Work Showcase Page (/work/) */
+.work-page-hero {
+  padding-top: calc(var(--s-8) + 30px);
+  padding-bottom: var(--s-5);
+}
+
+.work-card__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.work-grid-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+  margin-top: var(--s-5);
+}
+
+.work-cta-band {
+  margin-top: var(--s-8);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  padding: clamp(32px, 6vw, 56px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.work-cta-band h2 {
+  font-family: 'Anton', sans-serif !important;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--fg);
+}
+
+.work-cta-band p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--fg-dim);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.work-cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .work-grid-page {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 

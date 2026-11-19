@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://atomz.online/</loc><priority>1.0</priority></url>
+  <url><loc>https://atomz.online/work/</loc><priority>0.9</priority></url>
   <url><loc>https://atomz.online/atom-zen/</loc><priority>0.9</priority></url>
   <url><loc>https://atomz.online/audit/</loc><priority>0.9</priority></url>
   <url><loc>https://atomz.online/writing/</loc><priority>0.9</priority></url>
