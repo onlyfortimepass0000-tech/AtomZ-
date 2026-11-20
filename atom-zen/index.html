@@ -171,6 +171,86 @@
       margin: 0;
     }
 
+    /* Grow with us Direct Payment Card */
+    .zen-card--grow {
+      text-decoration: none;
+      border: 2px solid var(--zen-orange);
+      background: linear-gradient(145deg, rgba(255, 113, 59, 0.12) 0%, var(--surface) 100%);
+      box-shadow: 0 4px 20px rgba(255, 113, 59, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .zen-card--grow:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(255, 77, 46, 0.25);
+    }
+
+    .zen-card__icon--rupee {
+      background: var(--zen-orange) !important;
+      color: #FFFFFF !important;
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .zen-card__badge-rupee {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 113, 59, 0.18);
+      color: var(--zen-orange);
+      border: 1px solid rgba(255, 113, 59, 0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .zen-card__kicker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .zen-card__price {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--zen-orange);
+    }
+
+    .zen-card__cta-wrap {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .zen-card__cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(255, 77, 46, 0.3);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .zen-card--grow:hover .zen-card__cta-btn {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
     /* Step 2: Detail Questions */
     .zen-questions-list {
       display: flex;
@@ -589,6 +669,28 @@
         </div>
 
         <div class="zen-cards-grid">
+          <!-- 0. Grow with us (One-time ₹299 Payment) -->
+          <a href="https://rzp.io/rzp/ZAw6z59" class="zen-card zen-card--grow" id="growWithUsBtn" role="button" aria-label="Grow with us - Payment to start growth with ATOMZ (₹299)">
+            <div class="zen-card__top">
+              <div class="zen-card__icon zen-card__icon--rupee">
+                <span>₹</span>
+              </div>
+              <span class="zen-card__badge-rupee">₹299 · Instant Pay ↗</span>
+            </div>
+            <div class="zen-card__kicker">Payment to start growth with ATOMZ</div>
+            <h3 class="zen-card__name">
+              <span>Grow with us ₹</span>
+              <span class="zen-card__price">₹299</span>
+            </h3>
+            <p class="zen-card__desc">Payment to start growth with ATOMZ. Direct one-time payment of ₹299 to initiate your onboarding and growth execution immediately.</p>
+            <div class="zen-card__cta-wrap">
+              <span class="zen-card__cta-btn">
+                <span>Pay ₹299 to Start Growth</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+          </a>
+
           <!-- 1. Digital tools -->
           <div class="zen-card" data-service="Digital tools" role="checkbox" aria-checked="false" tabindex="0">
             <div class="zen-card__top">
@@ -757,6 +859,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43l-.48-.01c-.16 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
             <span>Send this to ATOMZ on WhatsApp</span>
           </a>
+          <div style="margin-top: 14px; text-align: center;">
+            <a href="https://rzp.io/rzp/ZAw6z59" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; color: var(--zen-orange); text-decoration: none; padding: 10px 20px; border-radius: 999px; border: 1px solid rgba(255, 113, 59, 0.35); background: rgba(255, 113, 59, 0.08); transition: all 0.2s ease;">
+              <span>Or pay ₹299 directly to start growth with ATOMZ ↗</span>
+            </a>
+          </div>
         </div>
 
         <div class="zen-actions">
@@ -938,8 +1045,24 @@
         playTone(step === 3 ? 660 : 440, 'triangle', 0.15);
       }
 
-      // Step 1: Card Selection
-      var cards = document.querySelectorAll('.zen-card');
+      // Grow With Us Direct Payment Handler
+      var growCard = document.getElementById('growWithUsBtn');
+      if (growCard) {
+        growCard.addEventListener('click', function (e) {
+          e.preventDefault();
+          playTone(520, 'sine', 0.1);
+          window.location.href = 'https://rzp.io/rzp/ZAw6z59';
+        });
+        growCard.addEventListener('keydown', function (e) {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            window.location.href = 'https://rzp.io/rzp/ZAw6z59';
+          }
+        });
+      }
+
+      // Step 1: Card Selection (Custom offerings)
+      var cards = document.querySelectorAll('.zen-card:not(.zen-card--grow)');
       cards.forEach(function (card) {
         card.addEventListener('click', function () {
           var service = card.getAttribute('data-service');

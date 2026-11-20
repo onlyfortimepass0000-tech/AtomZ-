@@ -3468,6 +3468,86 @@ a[href*="horizon-preview.html"]:hover,
   }
 }
 
+/* ATOM ZEN: Grow with us Direct Payment Option */
+.zen-card--grow {
+  text-decoration: none;
+  border: 2px solid var(--zen-orange);
+  background: linear-gradient(145deg, rgba(255, 113, 59, 0.12) 0%, var(--surface) 100%);
+  box-shadow: 0 4px 20px rgba(255, 113, 59, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zen-card--grow:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(255, 77, 46, 0.25);
+}
+
+.zen-card__icon--rupee {
+  background: var(--zen-orange) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.zen-card__badge-rupee {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 113, 59, 0.18);
+  color: var(--zen-orange);
+  border: 1px solid rgba(255, 113, 59, 0.4);
+  letter-spacing: 0.04em;
+}
+
+.zen-card__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.zen-card__price {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--zen-orange);
+}
+
+.zen-card__cta-wrap {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.zen-card__cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 77, 46, 0.3);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.zen-card--grow:hover .zen-card__cta-btn {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
 /* ==========================================================================
    WORK SHOWCASE (#work)
    ========================================================================== */
