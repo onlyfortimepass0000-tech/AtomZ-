@@ -171,84 +171,141 @@
       margin: 0;
     }
 
-    /* Grow with us Direct Payment Card */
-    .zen-card--grow {
-      text-decoration: none;
+    /* Top Direct Fast-Track: Grow with us (Above load bar) */
+    .zen-grow-banner-wrap {
+      margin-bottom: 28px;
+    }
+
+    .zen-grow-top-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 22px;
+      border-radius: 16px;
       border: 2px solid var(--zen-orange);
-      background: linear-gradient(145deg, rgba(255, 113, 59, 0.12) 0%, var(--surface) 100%);
-      box-shadow: 0 4px 20px rgba(255, 113, 59, 0.12);
+      background: linear-gradient(135deg, rgba(255, 113, 59, 0.14) 0%, rgba(255, 77, 46, 0.05) 50%, var(--surface) 100%);
+      box-shadow: 0 8px 24px rgba(255, 113, 59, 0.15);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .zen-grow-top-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(255, 77, 46, 0.28);
+    }
+
+    .zen-grow-top-btn__left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .zen-grow-top-btn__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 1.45rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255, 77, 46, 0.35);
+    }
+
+    .zen-grow-top-btn__text {
       display: flex;
       flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .zen-grow-top-btn__heading {
+      display: flex;
+      align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .zen-card--grow:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(255, 77, 46, 0.25);
-    }
-
-    .zen-card__icon--rupee {
-      background: var(--zen-orange) !important;
-      color: #FFFFFF !important;
-      font-family: var(--font-mono);
-      font-size: 1.35rem;
+    .zen-grow-top-btn__name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
       font-weight: 800;
+      color: var(--fg);
     }
 
-    .zen-card__badge-rupee {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(255, 113, 59, 0.18);
-      color: var(--zen-orange);
-      border: 1px solid rgba(255, 113, 59, 0.4);
-      letter-spacing: 0.04em;
-    }
-
-    .zen-card__kicker {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .zen-card__price {
+    .zen-grow-top-btn__price {
       font-family: var(--font-mono);
       font-size: 1.15rem;
       font-weight: 800;
       color: var(--zen-orange);
     }
 
-    .zen-card__cta-wrap {
-      margin-top: auto;
-      padding-top: 8px;
+    .zen-grow-top-btn__badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 113, 59, 0.2);
+      color: var(--zen-orange);
+      border: 1px solid rgba(255, 113, 59, 0.35);
     }
 
-    .zen-card__cta-btn {
-      display: flex;
+    .zen-grow-top-btn__sub {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: var(--fg-dim);
+      line-height: 1.4;
+    }
+
+    .zen-grow-top-btn__action {
+      flex-shrink: 0;
+    }
+
+    .zen-grow-top-btn__action-pill {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 10px;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
       background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
       color: #FFFFFF;
       font-family: var(--font-display);
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(255, 77, 46, 0.3);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 4px 16px rgba(255, 77, 46, 0.35);
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .zen-card--grow:hover .zen-card__cta-btn {
-      opacity: 0.95;
+    .zen-grow-top-btn:hover .zen-grow-top-btn__action-pill {
       transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 77, 46, 0.45);
+    }
+
+    @media (max-width: 768px) {
+      .zen-grow-top-btn {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+      }
+      .zen-grow-top-btn__action-pill {
+        width: 100%;
+        box-sizing: border-box;
+      }
     }
 
     /* Step 2: Detail Questions */
@@ -642,6 +699,29 @@
   <main id="main" class="zen-page">
     <div class="zen-container">
       
+      <!-- Direct Payment Button: Grow with us (Above load bar and all content) -->
+      <div class="zen-grow-banner-wrap">
+        <a href="https://rzp.io/rzp/ZAw6z59" class="zen-grow-top-btn" id="growWithUsTopBtn" role="button" aria-label="Grow with us - Payment to start growth with ATOMZ (₹299)">
+          <div class="zen-grow-top-btn__left">
+            <div class="zen-grow-top-btn__icon" aria-hidden="true">₹</div>
+            <div class="zen-grow-top-btn__text">
+              <div class="zen-grow-top-btn__heading">
+                <span class="zen-grow-top-btn__name">Grow with us ₹</span>
+                <span class="zen-grow-top-btn__price">₹299</span>
+                <span class="zen-grow-top-btn__badge">Direct Payment</span>
+              </div>
+              <div class="zen-grow-top-btn__sub">Payment to start growth with ATOMZ · Instant checkout, skip configuration</div>
+            </div>
+          </div>
+          <div class="zen-grow-top-btn__action">
+            <span class="zen-grow-top-btn__action-pill">
+              <span>Pay ₹299 with Razorpay</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+
       <!-- Progress Bar -->
       <div class="zen-progress-wrap">
         <div class="zen-progress-info">
@@ -669,28 +749,6 @@
         </div>
 
         <div class="zen-cards-grid">
-          <!-- 0. Grow with us (One-time ₹299 Payment) -->
-          <a href="https://rzp.io/rzp/ZAw6z59" class="zen-card zen-card--grow" id="growWithUsBtn" role="button" aria-label="Grow with us - Payment to start growth with ATOMZ (₹299)">
-            <div class="zen-card__top">
-              <div class="zen-card__icon zen-card__icon--rupee">
-                <span>₹</span>
-              </div>
-              <span class="zen-card__badge-rupee">₹299 · Instant Pay ↗</span>
-            </div>
-            <div class="zen-card__kicker">Payment to start growth with ATOMZ</div>
-            <h3 class="zen-card__name">
-              <span>Grow with us ₹</span>
-              <span class="zen-card__price">₹299</span>
-            </h3>
-            <p class="zen-card__desc">Payment to start growth with ATOMZ. Direct one-time payment of ₹299 to initiate your onboarding and growth execution immediately.</p>
-            <div class="zen-card__cta-wrap">
-              <span class="zen-card__cta-btn">
-                <span>Pay ₹299 to Start Growth</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </span>
-            </div>
-          </a>
-
           <!-- 1. Digital tools -->
           <div class="zen-card" data-service="Digital tools" role="checkbox" aria-checked="false" tabindex="0">
             <div class="zen-card__top">
@@ -1045,15 +1103,15 @@
         playTone(step === 3 ? 660 : 440, 'triangle', 0.15);
       }
 
-      // Grow With Us Direct Payment Handler
-      var growCard = document.getElementById('growWithUsBtn');
-      if (growCard) {
-        growCard.addEventListener('click', function (e) {
+      // Grow With Us Direct Payment Handler (Top button above load bar)
+      var growTopBtn = document.getElementById('growWithUsTopBtn');
+      if (growTopBtn) {
+        growTopBtn.addEventListener('click', function (e) {
           e.preventDefault();
           playTone(520, 'sine', 0.1);
           window.location.href = 'https://rzp.io/rzp/ZAw6z59';
         });
-        growCard.addEventListener('keydown', function (e) {
+        growTopBtn.addEventListener('keydown', function (e) {
           if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
             window.location.href = 'https://rzp.io/rzp/ZAw6z59';
@@ -1062,7 +1120,7 @@
       }
 
       // Step 1: Card Selection (Custom offerings)
-      var cards = document.querySelectorAll('.zen-card:not(.zen-card--grow)');
+      var cards = document.querySelectorAll('.zen-card');
       cards.forEach(function (card) {
         card.addEventListener('click', function () {
           var service = card.getAttribute('data-service');

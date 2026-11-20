@@ -3468,6 +3468,143 @@ a[href*="horizon-preview.html"]:hover,
   }
 }
 
+/* ATOM ZEN: Grow with us Top Direct Payment Banner (Above Load Bar) */
+.zen-grow-banner-wrap {
+  margin-bottom: 28px;
+}
+
+.zen-grow-top-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 22px;
+  border-radius: 16px;
+  border: 2px solid var(--zen-orange);
+  background: linear-gradient(135deg, rgba(255, 113, 59, 0.14) 0%, rgba(255, 77, 46, 0.05) 50%, var(--surface) 100%);
+  box-shadow: 0 8px 24px rgba(255, 113, 59, 0.15);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.zen-grow-top-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(255, 77, 46, 0.28);
+}
+
+.zen-grow-top-btn__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.zen-grow-top-btn__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255, 77, 46, 0.35);
+}
+
+.zen-grow-top-btn__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.zen-grow-top-btn__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.zen-grow-top-btn__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--fg);
+}
+
+.zen-grow-top-btn__price {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--zen-orange);
+}
+
+.zen-grow-top-btn__badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 113, 59, 0.2);
+  color: var(--zen-orange);
+  border: 1px solid rgba(255, 113, 59, 0.35);
+}
+
+.zen-grow-top-btn__sub {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--fg-dim);
+  line-height: 1.4;
+}
+
+.zen-grow-top-btn__action {
+  flex-shrink: 0;
+}
+
+.zen-grow-top-btn__action-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FF4D2E 0%, #FF713B 100%);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(255, 77, 46, 0.35);
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.zen-grow-top-btn:hover .zen-grow-top-btn__action-pill {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 77, 46, 0.45);
+}
+
+@media (max-width: 768px) {
+  .zen-grow-top-btn {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+  }
+  .zen-grow-top-btn__action-pill {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 /* ATOM ZEN: Grow with us Direct Payment Option */
 .zen-card--grow {
   text-decoration: none;
